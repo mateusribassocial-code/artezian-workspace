@@ -1,14 +1,60 @@
-# Claude Code OS — Kit Ratos de IA
+# Artezian Real Estate Atelie — Claude Code OS
 
-Este repositório é o kit de boas-vindas do curso Claude Code OS.
+## O que é esse workspace
 
-Se você acabou de clonar esse repositório:
-1. Rode `/setup` pra configurar o sistema pro seu negócio (uns 5 minutos)
-2. Depois rode `/mapear` pra criar skills personalizadas pro que você faz no dia a dia
+Workspace de operações da Artezian. Aqui ficam as três linhas de negócio: venda de studios para investidores, gestão de locação por temporada e consultoria de CRM para equipes comerciais.
+
+**Estrutura de pastas:**
+- `_contexto/` — memória do sistema (não apagar)
+- `investidores/` — leads, propostas de studios, simulações de ROI
+- `locacao/` — imóveis cadastrados, atendimento, temporadas
+- `consultoria/` — clientes de CRM, propostas, materiais de treinamento
+- `conteudo/` — posts, carrosseis, roteiros, anúncios
+- `operacoes/` — relatórios internos, análises, processos
+- `operacoes/CRM_datacrazy/` — integração com o CRM Datacrazy (investidores e locação)
+- `dados/` — arquivos para análise (CSV, PDF, planilhas)
+- `tarefas.md` — lista de tarefas corrente
+- `templates/skills/` — templates de skills prontos pra personalizar com /mapear
+- `templates/ferramentas/catalogo.md` — APIs e ferramentas disponíveis pra usar em skills
+
+## Sobre o negócio
+
+Artezian Real Estate Atelie — operação imobiliária em Porto Seguro e região (Coroa Vermelha, Arraial D'Ajuda, Taperapuan).
+Equipe: Mateus (responsável técnico) e João (criação de conteúdo, Superhost Airbnb, 95k seguidores).
+
+## Três linhas de negócio
+
+1. **Venda de studios** — para investidores de BH, ES e brasileiros nos EUA. Foco em ROI, renda passiva e gestão completa pela Artezian.
+2. **Locação por temporada** — via site artezian.com.br e atendimento direto no WhatsApp. Alta demanda orgânica pelo Instagram (@ojoaomendonca).
+3. **Consultoria de CRM** — implantação e treinamento comercial para equipes de empresas da região.
+
+## Clientes e contexto
+
+- Investidores: perfil financeiro, buscam retorno mensal e operação sem trabalho
+- Hóspedes: demandam agilidade no atendimento via WhatsApp e Instagram
+- Empresas (consultoria): PMEs da região buscando organizar processo comercial
+
+## Tom de voz — duas linhas
+
+**Linha 1 — Comunicação externa** (copies, anúncios, redes sociais, propostas de investimento):
+Descontraída, direta, provocadora, focada em ROI. Estilo João Mendonça — fala como parceiro, não como vendedor. Usa gírias com moderação ("papo reto" apenas quando natural), emojis estratégicos. Nunca usa "cabeça de bagre".
+
+**Linha 2 — Comunicação interna / consultoria** (relatórios, análises, planilhas, apresentações de CRM):
+Consultiva, analítica, profissional. Organizada, com dados e raciocínio claro. Sem informalidade excessiva.
+
+## Ferramentas conectadas
+
+- [x] Datacrazy (CRM principal)
+- [x] Stays (PMS — gestão de reservas, API aberta)
+- [x] WhatsApp API Oficial
+- [x] Meta Ads
+- [x] Google Drive + Google Sheets
+- [ ] Gmail MCP
+- [ ] Google Calendar MCP
+- [ ] Facebook Ads MCP
+- [ ] N8N (automações)
 
 ---
-
-<!-- Este arquivo será atualizado pelo /setup com o contexto do seu negócio. -->
 
 ## Contexto do negócio
 
@@ -48,14 +94,12 @@ Quando o usuário corrigir algo, melhorar uma resposta ou dar uma instrução qu
 
 Se sim, identificar onde faz mais sentido salvar:
 
-- **Sobre o negócio** (quem são os clientes, como funciona a empresa, serviços, mercado) → adicionar em `_contexto/empresa.md`
-- **Sobre preferências e estilo** (tom de voz, formato de resposta, o que evitar, como estruturar textos) → adicionar em `_contexto/preferencias.md`
-- **Sobre prioridades e foco atual** (projetos em andamento, metas do momento, prazos importantes, o que é prioridade agora) → adicionar em `_contexto/estrategia.md`
-- **Regra de comportamento nessa pasta** (onde salvar arquivos, como nomear, fluxos específicos) → adicionar no próprio `CLAUDE.md`
+- **Sobre o negócio** → `_contexto/empresa.md`
+- **Sobre preferências e estilo** → `_contexto/preferencias.md`
+- **Sobre prioridades e foco atual** → `_contexto/estrategia.md`
+- **Regra de comportamento nessa pasta** → `CLAUDE.md`
 
 Salvar com uma linha nova clara, sem reformatar o arquivo inteiro. Confirmar o que foi salvo mostrando a linha adicionada.
-
-Não perguntar se a correção for óbvia de contexto imediato (ex: "na verdade o arquivo se chama X"). Só perguntar quando a informação tiver valor duradouro.
 
 ---
 
@@ -65,33 +109,15 @@ Ao terminar uma tarefa que mudou algo relevante no projeto (novo cliente, nova s
 
 > "Isso mudou algo no teu contexto. Quer que eu atualize os arquivos de memória?"
 
-Se sim, identificar o que precisa atualizar:
-
-- **Novo cliente, serviço, ferramenta, equipe** → `_contexto/empresa.md`
-- **Mudança de prioridade ou foco** → `_contexto/estrategia.md`
-- **Correção de tom ou estilo** → `_contexto/preferencias.md`
-- **Nova pasta, regra de organização, skill criada** → `CLAUDE.md`
-- **Mudança visual (cores, fontes, logo)** → `marca/design-guide.md`
-
-Mostrar o que vai mudar antes de salvar. Não reformatar o arquivo inteiro, só adicionar ou editar a linha relevante.
-
-**Quando NÃO perguntar:**
-- Tarefas pontuais que não mudam o contexto (ex: escrever um email, criar um post avulso)
-- Perguntas simples ou conversas sem ação
-- Mudanças que já foram salvas pelo bloco "Aprender com correções"
-
-**Dica:** se não sabe se algo mudou, rode `/atualizar` pra uma varredura completa.
-
 ---
 
 ## Criação de skills
 
 Quando o usuário pedir pra criar uma nova skill:
 
-1. Verificar se existe um template relevante em `templates/skills/`. Se existir, usar como base e adaptar pro contexto do usuário
+1. Verificar se existe um template relevante em `templates/skills/`
 2. Perguntar: "Essa skill é específica pra esse projeto ou vai ser útil em qualquer projeto?"
-   - Específica desse negócio → salvar em `.claude/skills/nome-da-skill/SKILL.md` (local)
-   - Útil em qualquer projeto → salvar em `~/.claude/skills/nome-da-skill/SKILL.md` (global)
-3. Ler `_contexto/empresa.md` e `_contexto/preferencias.md` pra calibrar o conteúdo da skill ao contexto do negócio
-4. Se a skill precisar de arquivos de apoio (templates, referências, exemplos), criar dentro da pasta da skill
-5. Seguir o fluxo da skill-creator nativa do Claude Code
+   - Específica → `.claude/skills/nome-da-skill/SKILL.md`
+   - Global → `~/.claude/skills/nome-da-skill/SKILL.md`
+3. Ler `_contexto/empresa.md` e `_contexto/preferencias.md` pra calibrar ao contexto
+4. Seguir o fluxo da skill-creator nativa do Claude Code

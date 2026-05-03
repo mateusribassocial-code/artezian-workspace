@@ -68,6 +68,8 @@ Usar essas informações como base pra qualquer resposta ou decisão. Ao sugerir
 
 Para qualquer tarefa visual (carrossel, proposta, slide, landing page), consultar `marca/design-guide.md` como referência de estilo.
 
+Para qualquer copy, mensagem de WhatsApp, roteiro de vídeo ou anúncio no estilo João Mendonça, consultar `marca/voz-joao.md` — padrão de voz baseado em conversas reais.
+
 Não é necessário listar o que foi lido nem confirmar a leitura. Apenas usar o contexto naturalmente.
 
 ---

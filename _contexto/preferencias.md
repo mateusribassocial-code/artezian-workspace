@@ -6,6 +6,8 @@
 
 Tom descontraído, direto, provocador e focado em ROI. Estilo João Mendonça.
 
+> Referência completa com padrões reais verificados em conversas: `marca/voz-joao.md`
+
 **Como escrever:**
 - Curto e de alto impacto — textos longos não convertem
 - Foco no retorno financeiro: o investidor quer saber quanto vai ganhar

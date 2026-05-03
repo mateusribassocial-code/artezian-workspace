@@ -1,0 +1,74 @@
+{
+  "name": "Artezian — Chatbot Locação (Claude + Datacrazy)",
+  "description": "Recebe dados do lead qualificado no Datacrazy, chama Claude API com base de imóveis, envia proposta personalizada e move lead no funil.",
+  "flow": [
+    {
+      "step": 1,
+      "module": "webhooks:CustomWebHook",
+      "name": "Receber dados do Datacrazy",
+      "notes": "Datacrazy envia os dados coletados na qualificação para este webhook. Campos esperados: conversationId, leadName, dates, guests, budget, email"
+    },
+    {
+      "step": 2,
+      "module": "http:ActionSendData",
+      "name": "Chamar Claude API",
+      "url": "https://api.anthropic.com/v1/messages",
+      "method": "POST",
+      "headers": {
+        "x-api-key": "{{ANTHROPIC_API_KEY}}",
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json"
+      },
+      "body": {
+        "model": "claude-sonnet-4-6",
+        "max_tokens": 1024,
+        "system": "{{SYSTEM_PROMPT_COM_BASE_DE_IMOVEIS}}",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Lead qualificado:\n- Nome: {{1.leadName}}\n- Datas: {{1.dates}}\n- Pessoas: {{1.guests}}\n- Orçamento de diária: {{1.budget}}\n- E-mail: {{1.email}}\n\nGere uma proposta personalizada com os imóveis que se encaixam no perfil."
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "module": "http:ActionSendData",
+      "name": "Enviar proposta via Datacrazy",
+      "url": "https://api.g1.datacrazy.io/api/v1/conversations/{{1.conversationId}}/messages",
+      "method": "POST",
+      "headers": {
+        "Authorization": "Bearer {{DATACRAZY_API_TOKEN}}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "body": "{{2.content[0].text}}"
+      }
+    },
+    {
+      "step": 4,
+      "module": "http:ActionSendData",
+      "name": "Mover lead para Sondagem [Preço Enviado]",
+      "url": "https://api.g1.datacrazy.io/api/v1/leads/{{1.leadId}}/stage",
+      "method": "PATCH",
+      "headers": {
+        "Authorization": "Bearer {{DATACRAZY_API_TOKEN}}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "stageId": "62f8f9ac-cdf2-44cb-980f-63e8d62d539b",
+        "pipelineId": "92e366a3-ef53-444c-a0a2-e4b5c7d4857c"
+      },
+      "notes": "Etapa: Sondagem [Preço Enviado] — pipeline Funil de Reserva [Comercial]"
+    }
+  ],
+  "variables": {
+    "ANTHROPIC_API_KEY": "Chave da API Anthropic — configurar em Make.com > Connections",
+    "DATACRAZY_API_TOKEN": "dc_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "DATACRAZY_INSTANCE_LOCACAO": "690b442c3abdeb21b97b9045",
+    "PIPELINE_RESERVA_ID": "92e366a3-ef53-444c-a0a2-e4b5c7d4857c",
+    "STAGE_PRECO_ENVIADO": "62f8f9ac-cdf2-44cb-980f-63e8d62d539b",
+    "STAGE_QUALIFICADO": "770dc379-ea84-46f5-8751-2a12d1e151b3",
+    "STAGE_DESQUALIFICADO": "14f17c67-fd43-4519-97ca-1450338322d1"
+  }
+}

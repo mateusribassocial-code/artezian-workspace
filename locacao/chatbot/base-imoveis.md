@@ -1,51 +1,7 @@
 # Base de Imóveis — Artezian Real Estate
 
-> Arquivo de referência para o chatbot de locação. Última atualização: 2026-05-03.
-
----
-
-## APARTAMENTOS INDIVIDUAIS — TAPERAPUÃ / PORTO SEGURO
-
-### Apartamento da Josi
-- **Link:** https://www.artezian.com.br/pt/apartment/DT04J
-- **Localização:** Praia de Taperapuã, Porto Seguro
-- **Capacidade:** até 9 pessoas
-- **Quartos:** 2 suítes + 1 sofá-cama
-- **Camas:** 2 camas de casal + 1 sofá-cama
-- **Diárias:** Baixa R$500 | Alta R$1.100 | Feriados R$750
-- **Destaques:** 2 suítes, área de ducha externa, banheiro térreo, mobiliado
-
----
-
-### Apartamento da Joyce
-- **Link:** https://www.artezian.com.br/pt/apartment/HA03J
-- **Localização:** Taperapuã, Porto Seguro
-- **Capacidade:** até 9 pessoas
-- **Quartos:** 2 suítes + 1 quarto + sofá-cama
-- **Diárias:** Baixa R$650 | Alta R$1.200 | Feriados R$850
-- **Taxa de limpeza:** R$200
-- **Destaques:** Cozinha completa, churrasqueira privativa, ar-condicionado em todos os quartos
-
----
-
-### Apartamento do Reinaldo
-- **Link:** https://www.artezian.com.br/pt/apartment/FL10J
-- **Localização:** Rua dos Ipês, Taperapuã, Porto Seguro
-- **Capacidade:** até 10 pessoas
-- **Quartos:** 3 suítes (1 térreo) + ar-condicionado
-- **Camas:** 2 camas de casal + 6 camas de solteiro
-- **Diárias:** Baixa R$750 | Alta R$1.600 | Feriados R$1.200
-- **Destaques:** Cozinha completa, churrasqueira privativa, bem localizado em Taperapuã
-
----
-
-### Apartamento do Zé
-- **Link:** https://www.artezian.com.br/pt/apartment/GC01J
-- **Localização:** Praia do Mutá, Santa Cruz Cabrália
-- **Capacidade:** até 10 pessoas
-- **Quartos:** 3 suítes (1 térreo) + ar-condicionado
-- **Diárias:** Baixa R$750 | Alta R$1.600 | Feriados R$1.200
-- **Destaques:** Cozinha completa, churrasqueira privativa, vista pro mar, perto dos recifes de coral
+> Sincronizado com a API da Stays. Última atualização: 2026-05-05.
+> Preços mantidos manualmente — atualizar conforme temporada.
 
 ---
 
@@ -54,88 +10,179 @@
 > Condomínio com piscina adulto e infantil, sauna, churrasqueira coletiva, segurança 24h, restaurantes e acesso à praia de Taperapuã. Beach clubs próximos: Axé Moi, Tôa Tôa, Cabana Malibu, Boa Beach.
 
 ### Studio do João
+- **ID:** DS03J
 - **Link:** https://www.artezian.com.br/pt/apartment/DS03J
+- **Video:** https://www.youtube.com/watch?v=bcQ10tzSVzM
+- **Localização:** Taperapuã, Porto Seguro (400m da praia)
 - **Capacidade:** até 5 pessoas
-- **Camas:** 1 King + 2 solteiros + sofá-cama
+- **Quartos:** 1 suíte | **Camas:** 1 king + 2 solteiros + sofá-cama | **Banheiros:** 1
 - **Diárias:** Baixa R$250 | Alta R$600 | Feriados R$400
-- **Destaques:** Ar-condicionado, vaga de garagem, dentro do condomínio Mont Carmelo
+- **Destaques:** Ar-condicionado, cozinha equipada, vaga de garagem, acesso ao condomínio Mont Carmelo
+
 
 ---
 
 ### Flat da Mari
+- **ID:** DS04J
 - **Link:** https://www.artezian.com.br/pt/apartment/DS04J
+- **Video:** https://www.youtube.com/watch?v=TiEYINlPgyY
+- **Localização:** Taperapuã, Porto Seguro (400m da praia)
 - **Capacidade:** até 5 pessoas
-- **Quartos:** 1 suíte
-- **Camas:** 1 King + 2 solteiros + sofá-cama
+- **Quartos:** 1 suíte | **Camas:** 1 king + 2 solteiros + sofá-cama | **Banheiros:** 2
 - **Diárias:** Baixa R$250 | Alta R$600 | Feriados R$400
 - **Taxa de limpeza:** R$200
-- **Destaques:** Suíte, cozinha, ar-condicionado, dentro do Mont Carmelo
+- **Destaques:** Térreo próximo à piscina e churrasqueira, ar-condicionado, cozinha equipada, Mont Carmelo
 
 ---
 
 ### Apartamento do Emanoel
+- **ID:** DS05J
 - **Link:** https://www.artezian.com.br/pt/apartment/DS05J
+- **Video:** https://www.youtube.com/shorts/ZhV-y6uEDoI
+- **Localização:** Taperapuã, Porto Seguro (400m da praia)
 - **Capacidade:** até 8 pessoas
-- **Quartos:** 2 suítes
-- **Camas:** 1 King + 2 solteiros
+- **Quartos:** 2 suítes | **Camas:** 2 casal + 4 solteiros + sofá-cama | **Banheiros:** 3
 - **Diárias:** Baixa R$250 | Alta R$600 | Feriados R$400
-- **Destaques:** 2 suítes, cozinha completa, ar-condicionado, vaga de garagem, Mont Carmelo
+- **Destaques:** Churrasqueira individual, ar-condicionado, cozinha equipada, vaga de garagem, Mont Carmelo
+
+---
+
+## APARTAMENTOS AVULSOS — TAPERAPUÃ / PORTO SEGURO
+
+### Apartamento da Isa
+- **ID:** DS06J
+- **Link:** https://www.artezian.com.br/pt/apartment/DS06J
+- **Video:** https://www.youtube.com/watch?v=WzCzDBHpds4
+- **Localização:** Taperapuã, Porto Seguro (400m da praia)
+- **Capacidade:** até 5 pessoas
+- **Quartos:** 1 suíte | **Camas:** 1 king + 2 solteiros + sofá-cama | **Banheiros:** 2
+- **Diárias:** Baixa R$250 | Alta R$600 | Feriados R$400
+- **Destaques:** Térreo, próximo à piscina e churrasqueiras, ar-condicionado, cozinha equipada
+
+---
+
+### Apartamento da Josi
+- **ID:** DT04J
+- **Link:** https://www.artezian.com.br/pt/apartment/DT04J
+- **Video:** https://www.youtube.com/watch?v=RKqMnJd4_f8
+- **Localização:** Taperapuã, Porto Seguro (100m da praia)
+- **Capacidade:** até 8 pessoas
+- **Quartos:** 2 suítes | **Camas:** 1 king + 2 solteiros + sofá-cama | **Banheiros:** 3
+- **Diárias:** Baixa R$500 | Alta R$1.100 | Feriados R$750
+- **Destaques:** Vista incrível no condomínio, ar-condicionado, cozinha equipada
+
+---
+
+### Apartamento do Reinaldo (Taperapuã)
+- **ID:** FL10J
+- **Link:** https://www.artezian.com.br/pt/apartment/FL10J
+- **Video:** https://www.youtube.com/watch?v=xjnOGp2ELQQ
+- **Localização:** Taperapuã, Porto Seguro
+- **Capacidade:** até 10 pessoas
+- **Quartos:** 3 suítes (1 no térreo) | **Camas:** 2 casal + 6 solteiros | **Banheiros:** 3
+- **Diárias:** Baixa R$750 | Alta R$1.600 | Feriados R$1.200
+- **Destaques:** Churrasqueira privativa, vista para a piscina, cozinha equipada, próximo às barracas
+
+---
+
+### Flat da Joyce
+- **ID:** HA03J
+- **Link:** https://www.artezian.com.br/pt/apartment/HA03J
+- **Video:** https://youtube.com/shorts/RUPRqGTvTjM
+- **Localização:** Taperapuã, Porto Seguro
+- **Capacidade:** até 8 pessoas
+- **Quartos:** 3 (1 no térreo) | **Camas:** 2 casal + 4 solteiros | **Banheiros:** 4
+- **Diárias:** Baixa R$650 | Alta R$1.200 | Feriados R$850
+- **Taxa de limpeza:** R$200
+- **Destaques:** Churrasqueira privativa, ar-condicionado em todos os quartos, vaga de garagem, próximo ao Bartuque Beach e Boa Beach
+
+---
+
+## APARTAMENTOS — ARRAIAL D'AJUDA / COROA VERMELHA
+
+### Apartamento do Reinaldo (Coroa Vermelha)
+- **ID:** GC01J
+- **Link:** https://www.artezian.com.br/pt/apartment/GC01J
+- **Localização:** Coroa Vermelha, Santa Cruz Cabrália
+- **Capacidade:** até 12 pessoas
+- **Quartos:** 3 suítes | **Camas:** 2 casal + 6 solteiros + extras | **Banheiros:** 3
+- **Diárias:** Baixa R$750 | Alta R$1.600 | Feriados R$1.200
+- **Destaques:** Churrasqueira privativa, ar-condicionado em todos os ambientes, vista para o mar, perto dos recifes de coral
+
+---
+
+### Apartamento da Jessilene
+- **ID:** HA02J
+- **Link:** https://www.artezian.com.br/pt/apartment/HA02J
+- **Video:** https://www.youtube.com/watch?v=yldiuX6TMn0
+- **Localização:** Arraial D'Ajuda, Porto Seguro
+- **Capacidade:** até 12 pessoas
+- **Quartos:** 3 suítes (1 no térreo) | **Camas:** 3 casal + 3 solteiros | **Banheiros:** 4
+- **Diárias:** Baixa R$750 | Alta R$1.400 | Feriados R$1.100
+- **Destaques:** Churrasqueira privativa, banheiro social no térreo, vaga de garagem, próximo à Praia do Parracho e Mirante dos Corais
 
 ---
 
 ## CASAS
 
+### Casa do Tremura
+- **ID:** GF02J
+- **Link:** https://www.artezian.com.br/pt/apartment/GF02J
+- **Video:** https://youtu.be/CNCtmX10Bko
+- **Localização:** Taperapuã, Porto Seguro (300m da praia)
+- **Capacidade:** até 27 pessoas
+- **Quartos:** 6 (4 suítes, 2 quartos) | **Camas:** 5 casal + 6 solteiros | **Banheiros:** 4
+- **Diárias:** Baixa R$1.600 | Alta R$3.000 | Feriados R$2.500
+- **Destaques:** Piscina, área gourmet com churrasqueira, suítes amplas — melhor custo-benefício entre as casas
+
+---
+
 ### Casa da Laureana
+- **ID:** GF04J
 - **Link:** https://www.artezian.com.br/pt/apartment/GF04J
-- **Localização:** Arraial D'Ajuda (800m da praia)
+- **Video:** https://www.youtube.com/watch?v=Uirc8KLGs0g
+- **Localização:** Arraial D'Ajuda (acesso à praia de carro)
 - **Capacidade:** até 13 pessoas
-- **Quartos:** 4 suítes (1 master com vista pro mar)
+- **Quartos:** 4 suítes (1 master com vista pro mar) | **Camas:** 9 | **Banheiros:** 4
 - **Diárias:** Baixa R$1.800 | Alta R$3.000 | Feriados R$2.500
 - **Taxa de limpeza:** R$250 | **Caução:** R$2.000
-- **Destaques:** Vista pro mar, limpeza diária, 800m da praia, suíte master premium
+- **Destaques:** Vista mar completa, piscina privativa, área gourmet externa, limpeza diária, suíte master premium
 
 ---
 
 ### Casa da Moana
+- **ID:** GF06J
 - **Link:** https://www.artezian.com.br/pt/apartment/GF06J
-- **Localização:** Taperapuã, Porto Seguro
-- **Capacidade:** até 11 pessoas
-- **Quartos:** 5 quartos com ar-condicionado
-- **Camas:** 5 camas de casal + 6 solteiros
+- **Video:** https://www.youtube.com/watch?v=xDgFD3-_jYc
+- **Localização:** Taperapuã, Porto Seguro (5 min da praia)
+- **Capacidade:** até 21 pessoas
+- **Quartos:** 5 suítes (3 no térreo) | **Camas:** 5 casal + 6 solteiros | **Banheiros:** 4
 - **Diárias:** Baixa R$1.500 | Alta R$3.000 | Feriados R$2.500
-- **Destaques:** Piscina, área gourmet, lareira, Taperapuã
-
----
-
-### Casa do Euller
-- **Link:** https://www.artezian.com.br/pt/apartment/GG06J
-- **Localização:** Alameda Sucupira, Taperapuã (1,5km da praia)
-- **Capacidade:** até 40 pessoas
-- **Quartos:** 9 quartos com ar-condicionado
-- **Camas:** 9 camas de casal + 19 solteiros
-- **Diárias:** Baixa R$2.500 | Alta R$3.500 | Feriados R$3.500
-- **Destaques:** Piscina grande, área de jogos, ideal para grupos grandes e eventos
+- **Destaques:** Piscina com guarda-sol e espreguiçadeiras, área gourmet, próximo ao Axé Moi e Beat Beach
 
 ---
 
 ### Casa do John
+- **ID:** GG08J
 - **Link:** https://www.artezian.com.br/pt/apartment/GG08J
-- **Localização:** Rua Travessa Lambari, Taperapuã (600m da praia)
-- **Capacidade:** até 15 pessoas
-- **Quartos:** 5 quartos com ar-condicionado
-- **Camas:** 3 camas de casal + 12 beliches
+- **Video:** https://www.youtube.com/watch?v=sKs-Fo-NQIw
+- **Localização:** Taperapuã, Porto Seguro (600m da praia)
+- **Capacidade:** até 31 pessoas
+- **Quartos:** 6 | **Camas:** 12 beliches + 4 casal | **Banheiros:** 4
 - **Diárias:** Baixa R$1.800 | Alta R$2.700 | Feriados R$2.200
-- **Destaques:** Piscina, área gourmet, 600m da praia de Taperapuã
+- **Destaques:** Piscina, área de festas, churrasqueira, freezer externo, próximo à Orla Center e Dengo Bar
 
 ---
 
-### Casa do Tremura
-- **Link:** https://www.artezian.com.br/pt/apartment/GF02J
-- **Localização:** Rua Piratinga, Taperapuã (300m da praia)
-- **Capacidade:** até 17 pessoas
-- **Quartos:** 6 quartos (4 suítes), 4 quartos no térreo
-- **Diárias:** Baixa R$1.600 | Alta R$3.000 | Feriados R$2.500
-- **Destaques:** Piscina, área gourmet, 300m da praia — melhor custo-benefício entre as casas
+### Casa do Euller
+- **ID:** GG06J
+- **Link:** https://www.artezian.com.br/pt/apartment/GG06J
+- **Video:** https://www.youtube.com/watch?v=VpjgSYfPblw
+- **Localização:** Taperapuã, Porto Seguro
+- **Capacidade:** até 58 pessoas
+- **Quartos:** 9 | **Camas:** 9 casal + 19 solteiros | **Banheiros:** 9
+- **Diárias:** Baixa R$2.500 | Alta R$3.500 | Feriados R$3.500
+- **Destaques:** Maior casa do catálogo, piscina grande, área de jogos, cozinha externa com churrasqueira, ideal para grupos e eventos
 
 ---
 
@@ -143,29 +190,69 @@
 
 | Perfil | Imóveis recomendados |
 |--------|----------------------|
-| Casal ou mini lua de mel | Studio do João, Flat da Mari |
-| Família pequena (até 5) | Studio do João, Flat da Mari, Apartamento do Emanoel |
-| Família média (até 9) | Apartamento da Josi, Apartamento da Joyce |
-| Grupo de amigos (10-15) | Apto Reinaldo, Apto do Zé, Casa do John |
-| Grupo grande (15-40) | Casa do Tremura, Casa do Euller |
-| Luxo / Vista pro mar | Casa da Laureana, Apartamento do Zé |
-| Melhor custo-benefício | Studio do João, Flat da Mari, Apartamento do Emanoel (Mont Carmelo) |
+| Casal ou mini lua de mel | Studio do João, Flat da Mari, Apto da Isa |
+| Família pequena (até 5) | Studio do João, Flat da Mari, Apto da Isa |
+| Família média (até 8) | Apto da Josi, Flat da Joyce, Apto do Emanoel |
+| Grupo médio (até 12) | Apto do Reinaldo (Taperapuã ou Coroa Vermelha), Apto da Jessilene |
+| Grupo grande (até 22) | Casa do Tremura, Casa da Moana |
+| Grupo grande (até 31) | Casa do John |
+| Grupos enormes (até 58) | Casa do Euller |
+| Luxo / Vista pro mar | Casa da Laureana, Apto do Reinaldo (Coroa Vermelha) |
+| Arraial D'Ajuda | Casa da Laureana, Apto da Jessilene |
+| Melhor custo-benefício | Studio do João, Flat da Mari, Apto da Isa, Apto do Emanoel (Mont Carmelo) |
 
 ---
 
 ## FORMAS DE PAGAMENTO
 
 - **Pix:** 30-50% de entrada, restante na chegada
-- **Cartão de crédito:** até 6x com 13% de juros
-- **Transferência bancária:** combinado direto
+- **À Vista** 10% OFF à vista
 
 ---
 
-## PERÍODOS
+## PERÍODOS E FERIADOS
 
 - **Baixa temporada:** fora de feriados e férias escolares
 - **Alta temporada:** férias de julho, janeiro/fevereiro, Carnaval
 - **Feriados:** Natal, Réveillon, Semana Santa, feriados prolongados
+
+### Calendário de Alta Temporada e Feriados 2026
+
+| Período | Entrada | Saída |
+|---------|---------|-------|
+| Alta Temporada (verão) | 05/01/2026 | 31/01/2026 |
+| Carnaval | 13/02/2026 | 22/02/2026 |
+| Semana Santa | 02/04/2026 | 05/04/2026 |
+| Tiradentes | 18/04/2026 | 22/04/2026 |
+| Dia do Trabalho | 30/04/2026 | 03/05/2026 |
+| Corpus Christi | 03/06/2026 | 07/06/2026 |
+| Férias de Julho | 07/07/2026 | 24/07/2026 |
+| Independência | 05/09/2026 | 08/09/2026 |
+| Dia das Crianças | 10/10/2026 | 18/10/2026 |
+| Finados | 31/10/2026 | 03/11/2026 |
+| Proclamação da República | 14/11/2026 | 16/11/2026 |
+| Consciência Negra | 19/11/2026 | 22/11/2026 |
+| Natal | 22/12/2026 | 26/12/2026 |
+| Réveillon | 27/12/2026 | 04/01/2027 |
+
+### Calendário de Alta Temporada e Feriados 2027
+
+| Período | Entrada | Saída |
+|---------|---------|-------|
+| Alta Temporada (verão) | 04/01/2027 | 31/01/2027 |
+| Carnaval | 05/02/2027 | 14/02/2027 |
+| Semana Santa | 25/03/2027 | 28/03/2027 |
+| Tiradentes | 19/04/2027 | 25/04/2027 |
+| Dia do Trabalho | 30/04/2027 | 02/05/2027 |
+| Corpus Christi | 26/05/2027 | 30/05/2027 |
+| Férias de Julho | 07/07/2027 | 24/07/2027 |
+| Independência | 06/09/2027 | 08/09/2027 |
+| Dia das Crianças | 09/10/2027 | 17/10/2027 |
+| Finados | 01/11/2027 | 03/11/2027 |
+| Proclamação da República | 13/11/2027 | 16/11/2027 |
+| Consciência Negra | 19/11/2027 | 21/11/2027 |
+| Natal | 22/12/2027 | 26/12/2027 |
+| Réveillon | 27/12/2027 | 04/01/2028 |
 
 ---
 

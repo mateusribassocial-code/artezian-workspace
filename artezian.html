@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artezian — Dashboard</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #21253a;
+      --border: #2e3248;
+      --accent-locacao: #4fc3f7;
+      --accent-venda: #4caf85;
+      --accent-info: #ce93d8;
+      --text: #e8eaf0;
+      --muted: #8891a8;
+      --radius: 10px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 14px;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--text);
+    }
+
+    .logo span {
+      color: var(--accent-locacao);
+    }
+
+    .header-meta {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* ── Layout ── */
+    main {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* ── Area Container ── */
+    .area {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .area-header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .area-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .area-locacao .area-icon  { background: rgba(79, 195, 247, 0.15); }
+    .area-venda   .area-icon  { background: rgba(76, 175, 133, 0.15); }
+    .area-info    .area-icon  { background: rgba(206, 147, 216, 0.15); }
+
+    .area-locacao { border-top: 3px solid var(--accent-locacao); }
+    .area-venda   { border-top: 3px solid var(--accent-venda); }
+    .area-info    { border-top: 3px solid var(--accent-info); }
+
+    .area-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .area-locacao .area-title { color: var(--accent-locacao); }
+    .area-venda   .area-title { color: var(--accent-venda); }
+    .area-info    .area-title { color: var(--accent-info); }
+
+    .area-body {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ── Placeholder ── */
+    .placeholder {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 40px 20px;
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      text-align: center;
+      min-height: 200px;
+    }
+
+    .placeholder-icon {
+      font-size: 28px;
+      opacity: 0.4;
+    }
+
+    .placeholder p {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Artezian <span>Real Estate</span></div>
+  <div class="header-meta" id="dataHoje"></div>
+</header>
+
+<main>
+
+  <!-- LOCAÇÃO -->
+  <section class="area area-locacao">
+    <div class="area-header">
+      <div class="area-icon">🏖️</div>
+      <div>
+        <div class="area-title">Locação</div>
+      </div>
+    </div>
+    <div class="area-body">
+      <div class="placeholder">
+        <div class="placeholder-icon">🏠</div>
+        <p>Reservas, atendimento e<br>gestão de imóveis por temporada</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENDA -->
+  <section class="area area-venda">
+    <div class="area-header">
+      <div class="area-icon">📈</div>
+      <div>
+        <div class="area-title">Venda</div>
+      </div>
+    </div>
+    <div class="area-body">
+      <div class="placeholder">
+        <div class="placeholder-icon">💼</div>
+        <p>Leads, propostas e pipeline<br>de venda de studios</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFOPRODUTO -->
+  <section class="area area-info">
+    <div class="area-header">
+      <div class="area-icon">🎓</div>
+      <div>
+        <div class="area-title">Infoproduto</div>
+      </div>
+    </div>
+    <div class="area-body">
+      <div class="placeholder">
+        <div class="placeholder-icon">🎯</div>
+        <p>Conteúdo, lançamentos e<br>produtos digitais</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const hoje = new Date();
+  const opts = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+  document.getElementById('dataHoje').textContent =
+    hoje.toLocaleDateString('pt-BR', opts);
+</script>
+
+</body>
+</html>

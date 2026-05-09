@@ -248,6 +248,39 @@ header{
 .leg-dot{width:10px;height:10px;border-radius:3px}
 .vazio{border:1px dashed var(--border);border-radius:var(--radius);padding:24px;text-align:center;color:var(--muted);font-size:12px}
 
+/* ── Tabs de visão ── */
+.view-tabs{
+  display:flex;align-items:center;gap:4px;
+  padding:12px 24px 0;max-width:1400px;margin:0 auto;
+}
+.view-tab{
+  background:none;border:none;color:var(--muted);font-size:13px;font-weight:500;
+  padding:7px 16px;border-radius:7px 7px 0 0;cursor:pointer;
+  border-bottom:2px solid transparent;transition:color .15s,border-color .15s;
+}
+.view-tab.ativa{color:var(--text);border-bottom-color:var(--locacao)}
+.view-tab:hover:not(.ativa){color:var(--text)}
+.view-tab .tab-count{
+  display:inline-block;background:var(--surface2);color:var(--muted);
+  font-size:10px;padding:1px 6px;border-radius:10px;margin-left:5px;
+}
+
+/* ── Botão arquivar no card ── */
+.card-actions{
+  display:flex;gap:4px;opacity:0;transition:opacity .15s;flex-shrink:0;
+}
+.card-top:hover .card-actions{opacity:1}
+.btn-arquivar{
+  background:none;border:none;color:var(--muted);font-size:13px;
+  cursor:pointer;padding:2px 5px;border-radius:5px;transition:color .15s,background .15s;
+  line-height:1;
+}
+.btn-arquivar:hover{color:var(--text);background:var(--surface2)}
+
+/* cards arquivados ficam levemente opacos */
+.view-arquivadas .card{opacity:.75}
+.view-arquivadas .card:hover{opacity:1}
+
 @media(max-width:900px){.board{grid-template-columns:1fr}}
 </style>
 </head>
@@ -265,7 +298,16 @@ header{
   </div>
 </header>
 
-<div class="board">
+<div class="view-tabs">
+  <button class="view-tab ativa" id="tab-ativas" onclick="mudarView('ativas')">
+    Ativas <span class="tab-count" id="tab-count-ativas">0</span>
+  </button>
+  <button class="view-tab" id="tab-arquivadas" onclick="mudarView('arquivadas')">
+    Arquivadas <span class="tab-count" id="tab-count-arquivadas">0</span>
+  </button>
+</div>
+
+<div class="board" id="board">
   <div class="coluna">
     <div class="coluna-header">
       <div class="coluna-dot" style="background:var(--locacao)"></div>
@@ -291,6 +333,7 @@ header{
     <div id="cards-info"></div>
   </div>
 </div>
+
 
 <!-- Modal -->
 <div class="overlay" id="overlay">
@@ -384,10 +427,11 @@ const CORES_PALETA = ['#4fc3f7','#4caf85','#ce93d8','#f5c518','#ff9800','#e05c5c
 
 // ── Estado ────────────────────────────────────────────────────
 let tarefas         = [];
-let tagsCustom      = [];   // vindas do Firestore
-let tagsSelecionadas= [];   // no modal
+let tagsCustom      = [];
+let tagsSelecionadas= [];
 let chipsEnvolvidos = [];
 let corSelecionada  = CORES_PALETA[0];
+let viewAtual       = 'ativas'; // 'ativas' | 'arquivadas'
 
 function todasTags() {
   return [...TAGS_DEFAULT, ...tagsCustom];
@@ -415,19 +459,43 @@ function setSync(online) {
 
 // ── Render board ──────────────────────────────────────────────
 function render() {
+  const arquivadas = viewAtual === 'arquivadas';
+  const filtradas  = tarefas.filter(t => !!t.arquivada === arquivadas);
+
   const cols   = { locacao: '', venda: '', info: '' };
   const counts = { locacao: 0, venda: 0, info: 0 };
-  tarefas.forEach(t => {
+
+  filtradas.forEach(t => {
     if(cols[t.setor] === undefined) return;
     counts[t.setor]++;
     cols[t.setor] += buildCard(t);
   });
+
   ['locacao','venda','info'].forEach(s => {
     document.getElementById('cards-' + s).innerHTML =
       cols[s] || '<div class="vazio">Nenhuma tarefa</div>';
     document.getElementById('count-' + s).textContent = counts[s] || 0;
   });
+
+  // contadores das tabs
+  const totalAtivas     = tarefas.filter(t => !t.arquivada).length;
+  const totalArquivadas = tarefas.filter(t =>  t.arquivada).length;
+  document.getElementById('tab-count-ativas').textContent     = totalAtivas;
+  document.getElementById('tab-count-arquivadas').textContent = totalArquivadas;
+
+  // classe da view no board (estilo visual para arquivadas)
+  const board = document.getElementById('board');
+  board.className = 'board' + (arquivadas ? ' view-arquivadas' : '');
 }
+
+window.mudarView = (view) => {
+  viewAtual = view;
+  document.getElementById('tab-ativas').className     = 'view-tab' + (view==='ativas'     ? ' ativa' : '');
+  document.getElementById('tab-arquivadas').className = 'view-tab' + (view==='arquivadas' ? ' ativa' : '');
+  // mostra/oculta botão Nova Tarefa apenas em ativas
+  document.querySelector('.btn-nova').style.display = view === 'ativas' ? '' : 'none';
+  render();
+};
 
 function buildCard(t) {
   const prazoLabel = formatPrazo(t.prazo);
@@ -454,10 +522,15 @@ function buildCard(t) {
               onclick="event.stopPropagation();deletarLinha('${t.id}',${i})">✕</button>
     </div>`).join('');
 
+  const btnArquivar = t.arquivada
+    ? `<button class="btn-arquivar" title="Reativar" onclick="event.stopPropagation();arquivarTarefa('${t.id}',false)">↩ Reativar</button>`
+    : `<button class="btn-arquivar" title="Arquivar" onclick="event.stopPropagation();arquivarTarefa('${t.id}',true)">📦</button>`;
+
   return `
   <div class="card ${t.open ? 'open' : ''}" id="card-${t.id}">
     <div class="card-top" onclick="toggleCard('${t.id}')">
       <div class="card-titulo">${esc(t.titulo)}</div>
+      <div class="card-actions">${btnArquivar}</div>
       <div class="card-toggle">▾</div>
     </div>
     <div class="card-meta">
@@ -534,6 +607,10 @@ window.criarNovaTag = async () => {
 };
 
 // ── Ações de tarefas ─────────────────────────────────────────
+window.arquivarTarefa = async (id, arquivar) => {
+  await updateDoc(doc(db,'tarefas',id), { arquivada: arquivar });
+};
+
 window.toggleCard = async (id) => {
   const t = tarefas.find(x => x.id === id);
   if(!t) return;

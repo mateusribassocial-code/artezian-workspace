@@ -1,220 +1,543 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Artezian — Dashboard</title>
-  <style>
-    :root {
-      --bg: #0f1117;
-      --surface: #1a1d27;
-      --surface2: #21253a;
-      --border: #2e3248;
-      --accent-locacao: #4fc3f7;
-      --accent-venda: #4caf85;
-      --accent-info: #ce93d8;
-      --text: #e8eaf0;
-      --muted: #8891a8;
-      --radius: 10px;
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Artezian — Tarefas</title>
+<style>
+:root {
+  --bg:       #0f1117;
+  --surface:  #1a1d27;
+  --surface2: #21253a;
+  --border:   #2e3248;
+  --text:     #e8eaf0;
+  --muted:    #8891a8;
+  --radius:   10px;
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  --locacao: #4fc3f7;
+  --venda:   #4caf85;
+  --info:    #ce93d8;
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      font-size: 14px;
-      min-height: 100vh;
-    }
+  --done:    #4caf85;
+  --doing:   #4fc3f7;
+  --blocked: #e05c5c;
+  --pending: #2e3248;
+}
 
-    /* ── Header ── */
-    header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;min-height:100vh}
 
-    .logo {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      color: var(--text);
-    }
+/* ── Header ── */
+header{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:14px 24px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:10;
+}
+.logo{font-size:16px;font-weight:700;letter-spacing:.5px}
+.logo span{color:var(--locacao)}
+.header-right{display:flex;align-items:center;gap:12px}
+.data-hoje{color:var(--muted);font-size:12px}
 
-    .logo span {
-      color: var(--accent-locacao);
-    }
+/* ── Nova Tarefa btn ── */
+.btn-nova{
+  background:var(--locacao);color:#0f1117;border:none;
+  padding:7px 16px;border-radius:7px;font-weight:600;font-size:13px;
+  cursor:pointer;display:flex;align-items:center;gap:6px;
+  transition:opacity .15s;
+}
+.btn-nova:hover{opacity:.85}
 
-    .header-meta {
-      color: var(--muted);
-      font-size: 12px;
-    }
+/* ── Board ── */
+.board{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  padding:24px;max-width:1400px;margin:0 auto;
+  align-items:start;
+}
 
-    /* ── Layout ── */
-    main {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      padding: 24px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
+/* ── Coluna ── */
+.coluna{display:flex;flex-direction:column;gap:12px}
+.coluna-header{
+  display:flex;align-items:center;gap:8px;padding-bottom:4px;
+  border-bottom:2px solid var(--border);margin-bottom:4px;
+}
+.coluna-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.coluna-titulo{font-weight:600;font-size:14px}
+.coluna-count{
+  margin-left:auto;background:var(--surface2);color:var(--muted);
+  font-size:11px;padding:2px 8px;border-radius:20px;
+}
 
-    /* ── Area Container ── */
-    .area {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
+/* ── Card de tarefa ── */
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+}
+.card-top{
+  padding:12px 14px;display:flex;align-items:flex-start;
+  justify-content:space-between;gap:8px;cursor:pointer;
+}
+.card-top:hover{background:var(--surface2)}
+.card-titulo{font-weight:600;font-size:13px;line-height:1.4;flex:1}
+.card-toggle{color:var(--muted);font-size:11px;flex-shrink:0;margin-top:2px;transition:transform .2s}
+.card.open .card-toggle{transform:rotate(180deg)}
 
-    .area-header {
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border-bottom: 1px solid var(--border);
-    }
+.card-meta{
+  padding:0 14px 10px;display:flex;flex-wrap:wrap;gap:6px;
+  border-bottom:1px solid var(--border);
+}
+.badge{
+  font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500;
+}
+.badge-setor-locacao{background:rgba(79,195,247,.15);color:var(--locacao)}
+.badge-setor-venda  {background:rgba(76,175,133,.15);color:var(--venda)}
+.badge-setor-info   {background:rgba(206,147,216,.15);color:var(--info)}
 
-    .area-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      flex-shrink: 0;
-    }
+.badge-prazo{background:var(--surface2);color:var(--muted)}
+.badge-prazo.vence-hoje{background:rgba(245,197,24,.12);color:#f5c518}
+.badge-prazo.vencido   {background:rgba(224,92,92,.12);color:var(--blocked)}
 
-    .area-locacao .area-icon  { background: rgba(79, 195, 247, 0.15); }
-    .area-venda   .area-icon  { background: rgba(76, 175, 133, 0.15); }
-    .area-info    .area-icon  { background: rgba(206, 147, 216, 0.15); }
+.badge-envolvido{background:var(--surface2);color:var(--text);font-size:11px;padding:2px 8px;border-radius:20px}
 
-    .area-locacao { border-top: 3px solid var(--accent-locacao); }
-    .area-venda   { border-top: 3px solid var(--accent-venda); }
-    .area-info    { border-top: 3px solid var(--accent-info); }
+/* ── Linhas da tarefa ── */
+.card-body{display:none;flex-direction:column;gap:0}
+.card.open .card-body{display:flex}
 
-    .area-title {
-      font-size: 15px;
-      font-weight: 600;
-    }
+.linha{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 14px;border-bottom:1px solid var(--border);
+  cursor:pointer;transition:background .1s;
+}
+.linha:last-child{border-bottom:none}
+.linha:hover{background:var(--surface2)}
 
-    .area-locacao .area-title { color: var(--accent-locacao); }
-    .area-venda   .area-title { color: var(--accent-venda); }
-    .area-info    .area-title { color: var(--accent-info); }
+.linha-status{
+  width:14px;height:14px;border-radius:4px;flex-shrink:0;
+  border:2px solid var(--border);transition:background .15s,border-color .15s;
+}
+.linha[data-status="done"]    .linha-status{background:var(--done);border-color:var(--done)}
+.linha[data-status="doing"]   .linha-status{background:var(--doing);border-color:var(--doing)}
+.linha[data-status="blocked"] .linha-status{background:var(--blocked);border-color:var(--blocked)}
+.linha[data-status="pending"] .linha-status{background:transparent;border-color:var(--border)}
 
-    .area-body {
-      padding: 20px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+.linha-texto{
+  flex:1;font-size:13px;line-height:1.4;
+  outline:none;background:transparent;border:none;color:var(--text);
+  cursor:pointer;
+}
+.linha-texto:focus{cursor:text}
+.linha[data-status="done"] .linha-texto{text-decoration:line-through;color:var(--muted)}
 
-    /* ── Placeholder ── */
-    .placeholder {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 40px 20px;
-      border: 1px dashed var(--border);
-      border-radius: 8px;
-      color: var(--muted);
-      text-align: center;
-      min-height: 200px;
-    }
+.linha-del{
+  opacity:0;color:var(--muted);background:none;border:none;
+  cursor:pointer;font-size:14px;padding:2px;transition:opacity .15s;
+}
+.linha:hover .linha-del{opacity:1}
 
-    .placeholder-icon {
-      font-size: 28px;
-      opacity: 0.4;
-    }
+/* Adicionar linha */
+.add-linha{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 14px;color:var(--muted);cursor:pointer;font-size:12px;
+  border-top:1px dashed var(--border);background:none;border-left:none;border-right:none;border-bottom:none;
+  width:100%;text-align:left;transition:color .15s;
+}
+.add-linha:hover{color:var(--text)}
 
-    .placeholder p {
-      font-size: 12px;
-      line-height: 1.5;
-    }
+/* ── Modal ── */
+.overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);
+  z-index:100;align-items:center;justify-content:center;padding:20px;
+}
+.overlay.open{display:flex}
+.modal{
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  width:100%;max-width:520px;padding:24px;display:flex;flex-direction:column;gap:18px;
+}
+.modal-header{display:flex;justify-content:space-between;align-items:center}
+.modal-titulo{font-size:16px;font-weight:700}
+.modal-close{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer}
+.modal-close:hover{color:var(--text)}
 
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
-      main { grid-template-columns: 1fr; }
-    }
-  </style>
+.campo{display:flex;flex-direction:column;gap:6px}
+.campo label{font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+.campo input, .campo select{
+  background:var(--surface2);border:1px solid var(--border);border-radius:7px;
+  color:var(--text);padding:9px 12px;font-size:13px;outline:none;
+  transition:border-color .15s;width:100%;
+}
+.campo input:focus, .campo select:focus{border-color:var(--locacao)}
+.campo select option{background:var(--surface2)}
+
+/* chips de envolvidos */
+.chips-wrap{
+  display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+  background:var(--surface2);border:1px solid var(--border);border-radius:7px;
+  padding:6px 10px;min-height:40px;cursor:text;
+}
+.chips-wrap:focus-within{border-color:var(--locacao)}
+.chip{
+  background:var(--border);color:var(--text);border-radius:20px;
+  padding:2px 10px;font-size:12px;display:flex;align-items:center;gap:5px;
+}
+.chip-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;line-height:1;padding:0}
+.chip-del:hover{color:var(--text)}
+.chips-input{
+  background:none;border:none;outline:none;color:var(--text);font-size:13px;
+  min-width:80px;flex:1;
+}
+
+.modal-footer{display:flex;justify-content:flex-end;gap:10px}
+.btn-cancel{
+  background:none;border:1px solid var(--border);color:var(--muted);
+  padding:8px 18px;border-radius:7px;font-size:13px;cursor:pointer;
+}
+.btn-cancel:hover{color:var(--text);border-color:var(--muted)}
+.btn-salvar{
+  background:var(--locacao);color:#0f1117;border:none;
+  padding:8px 18px;border-radius:7px;font-weight:600;font-size:13px;cursor:pointer;
+}
+.btn-salvar:hover{opacity:.85}
+
+/* ── Legenda ── */
+.legenda{
+  display:flex;align-items:center;gap:16px;padding:8px 24px;
+  font-size:11px;color:var(--muted);border-top:1px solid var(--border);
+  position:fixed;bottom:0;left:0;right:0;background:var(--surface);
+}
+.leg-item{display:flex;align-items:center;gap:5px}
+.leg-dot{width:10px;height:10px;border-radius:3px}
+
+/* Vazio */
+.vazio{
+  border:1px dashed var(--border);border-radius:var(--radius);
+  padding:24px;text-align:center;color:var(--muted);font-size:12px;
+}
+
+@media(max-width:900px){.board{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
 <header>
   <div class="logo">Artezian <span>Real Estate</span></div>
-  <div class="header-meta" id="dataHoje"></div>
+  <div class="header-right">
+    <div class="data-hoje" id="dataHoje"></div>
+    <button class="btn-nova" onclick="abrirModal()">+ Nova Tarefa</button>
+  </div>
 </header>
 
-<main>
+<div class="board">
+  <div class="coluna" id="col-locacao">
+    <div class="coluna-header">
+      <div class="coluna-dot" style="background:var(--locacao)"></div>
+      <div class="coluna-titulo">Locação</div>
+      <div class="coluna-count" id="count-locacao">0</div>
+    </div>
+    <div id="cards-locacao"></div>
+  </div>
 
-  <!-- LOCAÇÃO -->
-  <section class="area area-locacao">
-    <div class="area-header">
-      <div class="area-icon">🏖️</div>
-      <div>
-        <div class="area-title">Locação</div>
-      </div>
+  <div class="coluna" id="col-venda">
+    <div class="coluna-header">
+      <div class="coluna-dot" style="background:var(--venda)"></div>
+      <div class="coluna-titulo">Venda</div>
+      <div class="coluna-count" id="count-venda">0</div>
     </div>
-    <div class="area-body">
-      <div class="placeholder">
-        <div class="placeholder-icon">🏠</div>
-        <p>Reservas, atendimento e<br>gestão de imóveis por temporada</p>
-      </div>
-    </div>
-  </section>
+    <div id="cards-venda"></div>
+  </div>
 
-  <!-- VENDA -->
-  <section class="area area-venda">
-    <div class="area-header">
-      <div class="area-icon">📈</div>
-      <div>
-        <div class="area-title">Venda</div>
-      </div>
+  <div class="coluna" id="col-info">
+    <div class="coluna-header">
+      <div class="coluna-dot" style="background:var(--info)"></div>
+      <div class="coluna-titulo">Infoproduto</div>
+      <div class="coluna-count" id="count-info">0</div>
     </div>
-    <div class="area-body">
-      <div class="placeholder">
-        <div class="placeholder-icon">💼</div>
-        <p>Leads, propostas e pipeline<br>de venda de studios</p>
-      </div>
-    </div>
-  </section>
+    <div id="cards-info"></div>
+  </div>
+</div>
 
-  <!-- INFOPRODUTO -->
-  <section class="area area-info">
-    <div class="area-header">
-      <div class="area-icon">🎓</div>
-      <div>
-        <div class="area-title">Infoproduto</div>
-      </div>
+<!-- Modal nova tarefa -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-titulo">Nova Tarefa</div>
+      <button class="modal-close" onclick="fecharModal()">✕</button>
     </div>
-    <div class="area-body">
-      <div class="placeholder">
-        <div class="placeholder-icon">🎯</div>
-        <p>Conteúdo, lançamentos e<br>produtos digitais</p>
-      </div>
-    </div>
-  </section>
 
-</main>
+    <div class="campo">
+      <label>Título</label>
+      <input type="text" id="inp-titulo" placeholder="Ex: Criar proposta de investimento"/>
+    </div>
+
+    <div class="campo">
+      <label>Setor</label>
+      <select id="inp-setor">
+        <option value="locacao">Locação</option>
+        <option value="venda">Venda</option>
+        <option value="info">Infoproduto</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label>Envolvidos</label>
+      <div class="chips-wrap" id="chips-wrap" onclick="document.getElementById('chips-input').focus()">
+        <input class="chips-input" id="chips-input" placeholder="Digite e pressione Enter"/>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label>Data de entrega</label>
+      <input type="date" id="inp-prazo"/>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-salvar" onclick="criarTarefa()">Criar Tarefa</button>
+    </div>
+  </div>
+</div>
+
+<div class="legenda">
+  <div class="leg-item"><div class="leg-dot" style="background:var(--done)"></div> Concluído</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--doing)"></div> Em andamento</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--blocked)"></div> Travado</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--border)"></div> Pendente</div>
+  <span style="margin-left:auto">Clique no status da linha para alternar • Enter para nova linha</span>
+</div>
 
 <script>
-  const hoje = new Date();
-  const opts = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-  document.getElementById('dataHoje').textContent =
-    hoje.toLocaleDateString('pt-BR', opts);
-</script>
+// ── Estado ──────────────────────────────────────────────────
+const STORAGE_KEY = 'atz_tarefas_v1';
+let tarefas = [];
+let chipsEnvolvidos = [];
 
+function salvar() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(tarefas));
+}
+
+function carregar() {
+  try { tarefas = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  catch { tarefas = []; }
+}
+
+// ── Render ──────────────────────────────────────────────────
+function render() {
+  const cols = { locacao: '', venda: '', info: '' };
+  const counts = { locacao: 0, venda: 0, info: 0 };
+
+  tarefas.forEach(t => {
+    counts[t.setor]++;
+    cols[t.setor] += buildCard(t);
+  });
+
+  ['locacao','venda','info'].forEach(s => {
+    document.getElementById('cards-' + s).innerHTML =
+      cols[s] || '<div class="vazio">Nenhuma tarefa</div>';
+    document.getElementById('count-' + s).textContent = counts[s];
+  });
+}
+
+function buildCard(t) {
+  const prazoLabel = formatPrazo(t.prazo);
+  const prazoClass = prazoClass_(t.prazo);
+  const envolvidos = (t.envolvidos || []).map(e =>
+    `<span class="badge badge-envolvido">${e}</span>`).join('');
+
+  const linhas = (t.linhas || []).map((l, i) => `
+    <div class="linha" data-status="${l.status}" data-id="${t.id}" data-idx="${i}" onclick="ciclarStatus(this)">
+      <div class="linha-status"></div>
+      <div class="linha-texto" contenteditable="true"
+        onblur="salvarTextoLinha('${t.id}',${i},this)"
+        onclick="event.stopPropagation()"
+        onkeydown="linhaKeydown(event,'${t.id}',${i})"
+      >${escHtml(l.texto)}</div>
+      <button class="linha-del" onclick="event.stopPropagation();deletarLinha('${t.id}',${i})">✕</button>
+    </div>`).join('');
+
+  const open = t.open ? 'open' : '';
+
+  return `
+  <div class="card ${open}" id="card-${t.id}">
+    <div class="card-top" onclick="toggleCard('${t.id}')">
+      <div class="card-titulo">${escHtml(t.titulo)}</div>
+      <div class="card-toggle">▾</div>
+    </div>
+    <div class="card-meta">
+      <span class="badge badge-setor-${t.setor}">${setorLabel(t.setor)}</span>
+      ${prazoLabel ? `<span class="badge badge-prazo ${prazoClass}">📅 ${prazoLabel}</span>` : ''}
+      ${envolvidos}
+    </div>
+    <div class="card-body">
+      ${linhas}
+      <button class="add-linha" onclick="adicionarLinha('${t.id}')">+ Adicionar linha</button>
+    </div>
+  </div>`;
+}
+
+// ── Helpers ──────────────────────────────────────────────────
+function escHtml(s=''){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+           .replace(/"/g,'&quot;');
+}
+function setorLabel(s){return{locacao:'Locação',venda:'Venda',info:'Infoproduto'}[s]||s}
+
+function formatPrazo(p) {
+  if (!p) return '';
+  const d = new Date(p + 'T00:00:00');
+  return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});
+}
+
+function prazoClass_(p) {
+  if (!p) return '';
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  const d = new Date(p + 'T00:00:00');
+  if (d < hoje) return 'vencido';
+  if (d.getTime() === hoje.getTime()) return 'vence-hoje';
+  return '';
+}
+
+// ── Interações ───────────────────────────────────────────────
+function toggleCard(id) {
+  const t = tarefas.find(x => x.id === id);
+  if (!t) return;
+  t.open = !t.open;
+  salvar();
+  render();
+}
+
+const CICLO = ['pending','doing','done','blocked'];
+
+function ciclarStatus(el) {
+  const id = el.dataset.id;
+  const idx = parseInt(el.dataset.idx);
+  const t = tarefas.find(x => x.id === id);
+  if (!t) return;
+  const cur = t.linhas[idx].status;
+  const next = CICLO[(CICLO.indexOf(cur) + 1) % CICLO.length];
+  t.linhas[idx].status = next;
+  salvar();
+  el.dataset.status = next;
+  // atualiza linha sem re-render completo
+  const texto = el.querySelector('.linha-texto');
+  if (next === 'done') texto.style.textDecoration = 'line-through';
+  else texto.style.textDecoration = '';
+}
+
+function salvarTextoLinha(id, idx, el) {
+  const t = tarefas.find(x => x.id === id);
+  if (!t) return;
+  t.linhas[idx].texto = el.textContent.trim();
+  salvar();
+}
+
+function linhaKeydown(e, id, idx) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    adicionarLinha(id, idx);
+  }
+}
+
+function adicionarLinha(id, afterIdx) {
+  const t = tarefas.find(x => x.id === id);
+  if (!t) return;
+  const nova = { texto: '', status: 'pending' };
+  if (afterIdx !== undefined) t.linhas.splice(afterIdx + 1, 0, nova);
+  else t.linhas.push(nova);
+  t.open = true;
+  salvar();
+  render();
+  // foca na nova linha
+  setTimeout(() => {
+    const card = document.getElementById('card-' + id);
+    const linhas = card.querySelectorAll('.linha-texto');
+    const target = afterIdx !== undefined ? linhas[afterIdx + 1] : linhas[linhas.length - 1];
+    if (target) target.focus();
+  }, 50);
+}
+
+function deletarLinha(id, idx) {
+  const t = tarefas.find(x => x.id === id);
+  if (!t) return;
+  t.linhas.splice(idx, 1);
+  salvar();
+  render();
+}
+
+// ── Modal ────────────────────────────────────────────────────
+function abrirModal() {
+  chipsEnvolvidos = [];
+  renderChips();
+  document.getElementById('inp-titulo').value = '';
+  document.getElementById('inp-prazo').value = '';
+  document.getElementById('overlay').classList.add('open');
+  setTimeout(() => document.getElementById('inp-titulo').focus(), 100);
+}
+
+function fecharModal() {
+  document.getElementById('overlay').classList.remove('open');
+}
+
+document.getElementById('overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('overlay')) fecharModal();
+});
+
+document.getElementById('chips-input').addEventListener('keydown', e => {
+  const v = e.target.value.trim();
+  if ((e.key === 'Enter' || e.key === ',') && v) {
+    e.preventDefault();
+    chipsEnvolvidos.push(v);
+    e.target.value = '';
+    renderChips();
+  } else if (e.key === 'Backspace' && !v && chipsEnvolvidos.length) {
+    chipsEnvolvidos.pop();
+    renderChips();
+  }
+});
+
+function renderChips() {
+  const wrap = document.getElementById('chips-wrap');
+  const input = document.getElementById('chips-input');
+  wrap.querySelectorAll('.chip').forEach(c => c.remove());
+  chipsEnvolvidos.forEach((nome, i) => {
+    const chip = document.createElement('span');
+    chip.className = 'chip';
+    chip.innerHTML = `${escHtml(nome)} <button class="chip-del" onclick="removerChip(${i})">✕</button>`;
+    wrap.insertBefore(chip, input);
+  });
+}
+
+function removerChip(i) {
+  chipsEnvolvidos.splice(i, 1);
+  renderChips();
+}
+
+function criarTarefa() {
+  const titulo = document.getElementById('inp-titulo').value.trim();
+  if (!titulo) { document.getElementById('inp-titulo').focus(); return; }
+  const t = {
+    id: Date.now().toString(),
+    titulo,
+    setor: document.getElementById('inp-setor').value,
+    envolvidos: [...chipsEnvolvidos],
+    prazo: document.getElementById('inp-prazo').value,
+    linhas: [],
+    open: false,
+  };
+  tarefas.unshift(t);
+  salvar();
+  render();
+  fecharModal();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') fecharModal();
+});
+
+// ── Init ─────────────────────────────────────────────────────
+carregar();
+render();
+
+const hoje = new Date();
+document.getElementById('dataHoje').textContent =
+  hoje.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});
+</script>
 </body>
 </html>

@@ -17,6 +17,7 @@
 - **Capacidade:** até 5 pessoas
 - **Quartos:** 1 suíte | **Camas:** 1 king + 2 solteiros + sofá-cama | **Banheiros:** 1
 - **Diárias:** Baixa R$250 | Alta R$600 | Feriados R$400
+- **Taxa de limpeza:** R$150
 - **Destaques:** Ar-condicionado, cozinha equipada, vaga de garagem, acesso ao condomínio Mont Carmelo
 
 
@@ -30,7 +31,7 @@
 - **Capacidade:** até 5 pessoas
 - **Quartos:** 1 suíte | **Camas:** 1 king + 2 solteiros + sofá-cama | **Banheiros:** 2
 - **Diárias:** Baixa R$250 | Alta R$600 | Feriados R$400
-- **Taxa de limpeza:** R$200
+- **Taxa de limpeza:** R$150
 - **Destaques:** Térreo próximo à piscina e churrasqueira, ar-condicionado, cozinha equipada, Mont Carmelo
 
 ---
@@ -43,6 +44,7 @@
 - **Capacidade:** até 8 pessoas
 - **Quartos:** 2 suítes | **Camas:** 2 casal + 4 solteiros + sofá-cama | **Banheiros:** 3
 - **Diárias:** Baixa R$250 | Alta R$600 | Feriados R$400
+- **Taxa de limpeza:** R$200
 - **Destaques:** Churrasqueira individual, ar-condicionado, cozinha equipada, vaga de garagem, Mont Carmelo
 
 ---
@@ -57,6 +59,7 @@
 - **Capacidade:** até 5 pessoas
 - **Quartos:** 1 suíte | **Camas:** 1 king + 2 solteiros + sofá-cama | **Banheiros:** 2
 - **Diárias:** Baixa R$250 | Alta R$600 | Feriados R$400
+- **Taxa de limpeza:** R$150
 - **Destaques:** Térreo, próximo à piscina e churrasqueiras, ar-condicionado, cozinha equipada
 
 ---
@@ -69,6 +72,7 @@
 - **Capacidade:** até 8 pessoas
 - **Quartos:** 2 suítes | **Camas:** 1 king + 2 solteiros + sofá-cama | **Banheiros:** 3
 - **Diárias:** Baixa R$500 | Alta R$1.100 | Feriados R$750
+- **Taxa de limpeza:** R$200
 - **Destaques:** Vista incrível no condomínio, ar-condicionado, cozinha equipada
 
 ---
@@ -81,6 +85,7 @@
 - **Capacidade:** até 10 pessoas
 - **Quartos:** 3 suítes (1 no térreo) | **Camas:** 2 casal + 6 solteiros | **Banheiros:** 3
 - **Diárias:** Baixa R$750 | Alta R$1.600 | Feriados R$1.200
+- **Taxa de limpeza:** R$200
 - **Destaques:** Churrasqueira privativa, vista para a piscina, cozinha equipada, próximo às barracas
 
 ---
@@ -107,6 +112,7 @@
 - **Capacidade:** até 12 pessoas
 - **Quartos:** 3 suítes | **Camas:** 2 casal + 6 solteiros + extras | **Banheiros:** 3
 - **Diárias:** Baixa R$750 | Alta R$1.600 | Feriados R$1.200
+- **Taxa de limpeza:** R$200
 - **Destaques:** Churrasqueira privativa, ar-condicionado em todos os ambientes, vista para o mar, perto dos recifes de coral
 
 ---
@@ -119,6 +125,7 @@
 - **Capacidade:** até 12 pessoas
 - **Quartos:** 3 suítes (1 no térreo) | **Camas:** 3 casal + 3 solteiros | **Banheiros:** 4
 - **Diárias:** Baixa R$750 | Alta R$1.400 | Feriados R$1.100
+- **Taxa de limpeza:** R$200
 - **Destaques:** Churrasqueira privativa, banheiro social no térreo, vaga de garagem, próximo à Praia do Parracho e Mirante dos Corais
 
 ---
@@ -200,6 +207,13 @@
 | Luxo / Vista pro mar | Casa da Laureana, Apto do Reinaldo (Coroa Vermelha) |
 | Arraial D'Ajuda | Casa da Laureana, Apto da Jessilene |
 | Melhor custo-benefício | Studio do João, Flat da Mari, Apto da Isa, Apto do Emanoel (Mont Carmelo) |
+
+---
+
+## REGRAS GERAIS
+
+- **Mínimo de diárias:** 3 noites
+- **Taxa de limpeza:** R$150 para imóveis de 1 quarto | R$200 para imóveis de 2 quartos ou mais
 
 ---
 

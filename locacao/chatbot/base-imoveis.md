@@ -140,6 +140,7 @@
 - **Capacidade:** até 27 pessoas
 - **Quartos:** 6 (4 suítes, 2 quartos) | **Camas:** 5 casal + 6 solteiros | **Banheiros:** 4
 - **Diárias:** Baixa R$1.600 | Alta R$3.000 | Feriados R$2.500
+- **Mínimo de diárias:** 3 noites
 - **Destaques:** Piscina, área gourmet com churrasqueira, suítes amplas — melhor custo-benefício entre as casas
 
 ---
@@ -153,6 +154,7 @@
 - **Quartos:** 4 suítes (1 master com vista pro mar) | **Camas:** 9 | **Banheiros:** 4
 - **Diárias:** Baixa R$1.800 | Alta R$3.000 | Feriados R$2.500
 - **Taxa de limpeza:** R$250 | **Caução:** R$2.000
+- **Mínimo de diárias:** 3 noites
 - **Destaques:** Vista mar completa, piscina privativa, área gourmet externa, limpeza diária, suíte master premium
 
 ---
@@ -165,6 +167,7 @@
 - **Capacidade:** até 21 pessoas
 - **Quartos:** 5 suítes (3 no térreo) | **Camas:** 5 casal + 6 solteiros | **Banheiros:** 4
 - **Diárias:** Baixa R$1.500 | Alta R$3.000 | Feriados R$2.500
+- **Mínimo de diárias:** 3 noites
 - **Destaques:** Piscina com guarda-sol e espreguiçadeiras, área gourmet, próximo ao Axé Moi e Beat Beach
 
 ---
@@ -177,6 +180,7 @@
 - **Capacidade:** até 31 pessoas
 - **Quartos:** 6 | **Camas:** 12 beliches + 4 casal | **Banheiros:** 4
 - **Diárias:** Baixa R$1.800 | Alta R$2.700 | Feriados R$2.200
+- **Mínimo de diárias:** 3 noites
 - **Destaques:** Piscina, área de festas, churrasqueira, freezer externo, próximo à Orla Center e Dengo Bar
 
 ---
@@ -189,6 +193,7 @@
 - **Capacidade:** até 58 pessoas
 - **Quartos:** 9 | **Camas:** 9 casal + 19 solteiros | **Banheiros:** 9
 - **Diárias:** Baixa R$2.500 | Alta R$3.500 | Feriados R$3.500
+- **Mínimo de diárias:** 3 noites
 - **Destaques:** Maior casa do catálogo, piscina grande, área de jogos, cozinha externa com churrasqueira, ideal para grupos e eventos
 
 ---

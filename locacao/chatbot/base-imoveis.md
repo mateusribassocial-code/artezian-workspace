@@ -49,6 +49,127 @@
 
 ---
 
+## CONDOMÍNIO VARANDAS DE PORTO — TAPERAPUÃ
+
+> Condomínio recém reformado com piscina, jardim, área gourmet com churrasqueira, espreguiçadeiras, mesas e cadeiras, banheiros e lavabo. Estacionamento com 3 vagas internas e 4 externas. A 500m das melhores barracas: Barraca do Gaúcho e Cabana Jubarte. Roupa de cama inclusa em todas as unidades.
+
+### VP-01 (AP01)
+- **ID:** JR01J
+- **Link:** https://www.artezian.com.br/pt/apartment/JR01J
+- **Localização:** Taperapuã, Porto Seguro (500m da praia)
+- **Capacidade:** até 3 pessoas
+- **Quartos:** 1 suíte | **Camas:** 2 | **Banheiros:** 1
+- **Diárias:** Baixa R$190 | Feriados R$320 | Janeiro R$500 | Carnaval R$580 | Carnaporto R$390 | Réveillon R$900
+- **Taxa de limpeza:** R$150
+- **Mínimo de diárias:** 3 noites
+- **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
+
+---
+
+### VP-02 (AP02)
+- **ID:** JR02J
+- **Link:** https://www.artezian.com.br/pt/apartment/JR02J
+- **Localização:** Taperapuã, Porto Seguro (500m da praia)
+- **Capacidade:** até 3 pessoas
+- **Quartos:** 1 suíte | **Camas:** 2 | **Banheiros:** 1
+- **Diárias:** Baixa R$190 | Feriados R$320 | Janeiro R$500 | Carnaval R$580 | Carnaporto R$390 | Réveillon R$900
+- **Taxa de limpeza:** R$150
+- **Mínimo de diárias:** 3 noites
+- **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
+
+---
+
+### VP-03 (AP03)
+- **ID:** JR03J
+- **Link:** https://www.artezian.com.br/pt/apartment/JR03J
+- **Localização:** Taperapuã, Porto Seguro (500m da praia)
+- **Capacidade:** até 4 pessoas
+- **Quartos:** 1 suíte | **Camas:** 2 | **Banheiros:** 1
+- **Diárias:** Baixa R$190 | Feriados R$320 | Janeiro R$500 | Carnaval R$580 | Carnaporto R$390 | Réveillon R$900
+- **Taxa de limpeza:** R$150
+- **Mínimo de diárias:** 3 noites
+- **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
+
+---
+
+### VP-04 (AP04)
+- **ID:** JR04J
+- **Link:** https://www.artezian.com.br/pt/apartment/JR04J
+- **Localização:** Taperapuã, Porto Seguro (500m da praia)
+- **Capacidade:** até 4 pessoas
+- **Quartos:** 1 suíte | **Camas:** 2 | **Banheiros:** 1
+- **Diárias:** Baixa R$190 | Feriados R$320 | Janeiro R$500 | Carnaval R$580 | Carnaporto R$390 | Réveillon R$900
+- **Taxa de limpeza:** R$150
+- **Mínimo de diárias:** 3 noites
+- **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
+
+---
+
+### VP-05 (AP05)
+- **ID:** JR05J
+- **Link:** https://www.artezian.com.br/pt/apartment/JR05J
+- **Localização:** Taperapuã, Porto Seguro (500m da praia)
+- **Capacidade:** até 5 pessoas
+- **Quartos:** 1 suíte | **Camas:** 3 | **Banheiros:** 1
+- **Diárias:** Baixa R$250 | Feriados R$400 | Janeiro R$600 | Carnaval R$580 | Carnaporto R$450 | Réveillon R$1.100
+- **Taxa de limpeza:** R$150
+- **Mínimo de diárias:** 3 noites
+- **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
+
+---
+
+### VP-06 (AP06)
+- **ID:** JR06J
+- **Link:** https://www.artezian.com.br/pt/apartment/JR06J
+- **Localização:** Taperapuã, Porto Seguro (500m da praia)
+- **Capacidade:** até 5 pessoas
+- **Quartos:** 1 suíte | **Camas:** 3 | **Banheiros:** 1
+- **Diárias:** Baixa R$250 | Feriados R$400 | Janeiro R$600 | Carnaval R$580 | Carnaporto R$450 | Réveillon R$1.100
+- **Taxa de limpeza:** R$150
+- **Mínimo de diárias:** 3 noites
+- **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
+
+---
+
+### VP-07 (AP07)
+- **ID:** JR07J
+- **Link:** https://www.artezian.com.br/pt/apartment/JR07J
+- **Localização:** Taperapuã, Porto Seguro (500m da praia)
+- **Capacidade:** até 5 pessoas
+- **Quartos:** 1 suíte | **Camas:** 3 | **Banheiros:** 1
+- **Diárias:** Baixa R$250 | Feriados R$400 | Janeiro R$600 | Carnaval R$580 | Carnaporto R$450 | Réveillon R$1.100
+- **Taxa de limpeza:** R$150
+- **Mínimo de diárias:** 3 noites
+- **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
+
+---
+
+### VP-08 (AP08)
+- **ID:** JR08J
+- **Link:** https://www.artezian.com.br/pt/apartment/JR08J
+- **Localização:** Taperapuã, Porto Seguro (500m da praia)
+- **Capacidade:** até 5 pessoas
+- **Quartos:** 1 suíte | **Camas:** 3 | **Banheiros:** 1
+- **Diárias:** Baixa R$250 | Feriados R$400 | Janeiro R$600 | Carnaval R$580 | Carnaporto R$450 | Réveillon R$1.100
+- **Taxa de limpeza:** R$150
+- **Mínimo de diárias:** 3 noites
+- **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
+
+---
+
+### VP-09 (AP09)
+- **ID:** JR09J
+- **Link:** https://www.artezian.com.br/pt/apartment/JR09J
+- **Localização:** Taperapuã, Porto Seguro (500m da praia)
+- **Capacidade:** até 8 pessoas
+- **Quartos:** 2 suítes | **Camas:** 5 | **Banheiros:** 1
+- **Diárias:** Baixa R$400 | Feriados R$600 | Janeiro R$1.000 | Carnaval R$880 | Carnaporto R$650 | Réveillon R$1.600
+- **Taxa de limpeza:** R$200
+- **Mínimo de diárias:** 3 noites
+- **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
+
+---
+
 ## APARTAMENTOS AVULSOS — TAPERAPUÃ / PORTO SEGURO
 
 ### Apartamento da Isa
@@ -164,7 +285,7 @@
 - **Link:** https://www.artezian.com.br/pt/apartment/GF06J
 - **Video:** https://www.youtube.com/watch?v=xDgFD3-_jYc
 - **Localização:** Taperapuã, Porto Seguro (5 min da praia)
-- **Capacidade:** até 21 pessoas
+- **Capacidade:** até 16 pessoas
 - **Quartos:** 5 suítes (3 no térreo) | **Camas:** 5 casal + 6 solteiros | **Banheiros:** 4
 - **Diárias:** Baixa R$1.500 | Alta R$3.000 | Feriados R$2.500
 - **Mínimo de diárias:** 3 noites
@@ -202,9 +323,9 @@
 
 | Perfil | Imóveis recomendados |
 |--------|----------------------|
-| Casal ou mini lua de mel | Studio do João, Flat da Mari, Apto da Isa |
-| Família pequena (até 5) | Studio do João, Flat da Mari, Apto da Isa |
-| Família média (até 8) | Apto da Josi, Flat da Joyce, Apto do Emanoel |
+| Casal ou mini lua de mel | Studio do João, Flat da Mari, Apto da Isa, VP-01 a VP-04 (Varandas de Porto) |
+| Família pequena (até 5) | Studio do João, Flat da Mari, Apto da Isa, VP-01 a VP-08 (Varandas de Porto) |
+| Família média (até 8) | Apto da Josi, Flat da Joyce, Apto do Emanoel, VP-09 (Varandas de Porto) |
 | Grupo médio (até 12) | Apto do Reinaldo (Taperapuã ou Coroa Vermelha), Apto da Jessilene |
 | Grupo grande (até 22) | Casa do Tremura, Casa da Moana |
 | Grupo grande (até 31) | Casa do John |

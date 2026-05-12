@@ -340,6 +340,7 @@
 
 - **Mínimo de diárias:** 3 noites
 - **Taxa de limpeza:** R$150 para imóveis de 1 quarto | R$200 para imóveis de 2 quartos ou mais
+- **Outubro (alta temporada):** aplicar acréscimo de 30% sobre a diária de baixa temporada
 
 ---
 
@@ -369,6 +370,7 @@
 | Corpus Christi | 03/06/2026 | 07/06/2026 |
 | Férias de Julho | 07/07/2026 | 24/07/2026 |
 | Independência | 05/09/2026 | 08/09/2026 |
+| Alta Temporada (outubro) | 01/10/2026 | 31/10/2026 |
 | Dia das Crianças | 10/10/2026 | 18/10/2026 |
 | Finados | 31/10/2026 | 03/11/2026 |
 | Proclamação da República | 14/11/2026 | 16/11/2026 |
@@ -389,6 +391,7 @@
 | Corpus Christi | 26/05/2027 | 30/05/2027 |
 | Férias de Julho | 07/07/2027 | 24/07/2027 |
 | Independência | 06/09/2027 | 08/09/2027 |
+| Alta Temporada (outubro) | 01/10/2027 | 31/10/2027 |
 | Dia das Crianças | 09/10/2027 | 17/10/2027 |
 | Finados | 01/11/2027 | 03/11/2027 |
 | Proclamação da República | 13/11/2027 | 16/11/2027 |

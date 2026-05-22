@@ -55,8 +55,7 @@ app.get('/api/stays/listings', async (req, res) => {
     const base = process.env.STAYS_BASE_URL;
     const auth = process.env.STAYS_AUTH_BASE64;
 
-    // Stays PMS — listar todos os listings ativos
-    const url = `${base}/v1/listings?limit=100&fields=_id,name,type,address,capacity,bedrooms,bathrooms,subtype`;
+    const url = `${base}/external/v1/content/listings`;
     const response = await fetch(url, {
       headers: {
         'Authorization': `Basic ${auth}`,
@@ -66,7 +65,7 @@ app.get('/api/stays/listings', async (req, res) => {
 
     if (!response.ok) {
       const text = await response.text();
-      return res.status(response.status).json({ error: `Stays API ${response.status}`, detail: text });
+      return res.status(response.status).json({ error: `Stays API ${response.status}`, detail: text.slice(0, 300) });
     }
 
     const data = await response.json();
@@ -84,13 +83,18 @@ app.get('/api/datacrazy/reservations', async (req, res) => {
     const [year, mon] = month.split('-');
     const lastDay = new Date(parseInt(year), parseInt(mon), 0).getDate();
     const startDate = `${year}-${mon}-01`;
-    const endDate = `${year}-${mon}-${String(lastDay).padStart(2, '0')}`;
+    const endDate   = `${year}-${mon}-${String(lastDay).padStart(2, '0')}`;
 
-    const base = process.env.DATACRAZY_BASE_URL;
+    const base  = process.env.DATACRAZY_BASE_URL;
     const token = process.env.DATACRAZY_API_KEY;
 
-    // Tenta endpoint de deals (locação) com filtro de data
-    const url = `${base}/v1/deals?startDate=${startDate}&endDate=${endDate}&limit=500`;
+    // Datacrazy — GET /api/v1/businesses com filtro de data de criação
+    const params = new URLSearchParams({
+      take: 500,
+      'filter[createdAtGreaterOrEqual]': `${startDate}T00:00:00.000Z`,
+      'filter[createdAtLessOrEqual]':   `${endDate}T23:59:59.999Z`,
+    });
+    const url = `${base}/api/v1/businesses?${params}`;
     const response = await fetch(url, {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -100,7 +104,7 @@ app.get('/api/datacrazy/reservations', async (req, res) => {
 
     if (!response.ok) {
       const text = await response.text();
-      return res.status(response.status).json({ error: `Datacrazy API ${response.status}`, detail: text });
+      return res.status(response.status).json({ error: `Datacrazy API ${response.status}`, detail: text.slice(0, 300) });
     }
 
     const data = await response.json();

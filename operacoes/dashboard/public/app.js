@@ -62,10 +62,10 @@ async function fetchStays() {
   try {
     const r = await fetch('/api/stays/listings');
     const d = await r.json();
-    // Stays retorna array ou { data: [] }
-    if (Array.isArray(d)) return d;
-    if (Array.isArray(d.data)) return d.data;
     if (d.error) { console.warn('Stays error:', d.error, d.detail); return []; }
+    // Stays retorna { value: [...] }
+    if (Array.isArray(d.value)) return d.value;
+    if (Array.isArray(d)) return d;
     return [];
   } catch (e) {
     console.error('Stays fetch failed:', e);
@@ -84,10 +84,9 @@ async function fetchReservas(month) {
     }
     hideApiStatus('dc-status');
     hideApiStatus('dc-status-locacao');
-    // Datacrazy pode retornar { deals: [] } ou array
-    if (Array.isArray(d)) return d;
-    if (Array.isArray(d.deals)) return d.deals;
+    // Datacrazy retorna { count, data: [...] }
     if (Array.isArray(d.data)) return d.data;
+    if (Array.isArray(d)) return d;
     return [];
   } catch (e) {
     console.error('Datacrazy fetch failed:', e);
@@ -187,10 +186,9 @@ function updateCustoTotal() {
 /* ── Bloco 1 — Receitas ─────────────────────────────────────────── */
 
 function calcReceitas() {
-  // Reservas: soma do valor das reservas do Datacrazy
+  // Datacrazy: campo de valor é "total" (negócios ganhos)
   const totalReservas = state.reservas.reduce((sum, r) => {
-    const v = r.value || r.totalValue || r.amount || r.revenue || 0;
-    return sum + (parseFloat(v) || 0);
+    return sum + (parseFloat(r.total || r.value || 0));
   }, 0);
 
   // Mensalidades: soma dos valorFixo de todos os parceiros
@@ -294,25 +292,26 @@ function escHtml(str) {
 /* ── Bloco 2 — Unidades (Stays) ─────────────────────────────────── */
 
 function renderUnidades() {
-  const listings = state.stays;
-  const filter   = state.unitFilter;
+  // Stays: filtra somente ativos
+  const all    = state.stays.filter(l => l.status === 'active' || !l.status);
+  const filter = state.unitFilter;
 
-  const casas = listings.filter(l => isHouse(l));
-  const apts  = listings.filter(l => !isHouse(l));
-  const cap   = listings.reduce((s, l) => s + (parseInt(l.capacity || l.maxGuests || 0)), 0);
+  const casas = all.filter(l => isHouse(l));
+  const apts  = all.filter(l => !isHouse(l));
+  const cap   = all.reduce((s, l) => s + (parseInt(l._i_maxGuests || l.capacity || 0)), 0);
 
-  document.getElementById('units-total').textContent     = listings.length || '—';
-  document.getElementById('units-casas').textContent     = casas.length || '—';
-  document.getElementById('units-apts').textContent      = apts.length || '—';
-  document.getElementById('units-capacidade').textContent = cap || '—';
+  document.getElementById('units-total').textContent      = all.length  || '—';
+  document.getElementById('units-casas').textContent      = casas.length || '—';
+  document.getElementById('units-apts').textContent       = apts.length  || '—';
+  document.getElementById('units-capacidade').textContent = cap           || '—';
 
-  const visible = filter === 'all' ? listings
+  const visible = filter === 'all' ? all
                 : filter === 'house' ? casas
                 : apts;
 
   const grid = document.getElementById('unitsGrid');
 
-  if (!listings.length) {
+  if (!all.length) {
     grid.innerHTML = '<div class="loading-state">Stays não retornou dados — verifique a conexão</div>';
     return;
   }
@@ -324,11 +323,13 @@ function renderUnidades() {
 
   grid.innerHTML = visible.map(l => {
     const type   = isHouse(l) ? 'Casa' : 'Apartamento';
-    const name   = l.name || l.title || 'Sem nome';
-    const region = l.address?.city || l.address?.neighborhood || l.city || '—';
-    const cap    = l.capacity || l.maxGuests || '—';
-    const beds   = l.bedrooms !== undefined ? `${l.bedrooms} quarto${l.bedrooms !== 1 ? 's' : ''}` : null;
-    const baths  = l.bathrooms !== undefined ? `${l.bathrooms} banheiro${l.bathrooms !== 1 ? 's' : ''}` : null;
+    // Stays retorna _mstitle.pt_BR ou internalName
+    const name   = l._mstitle?.pt_BR || l.internalName || l.id || 'Sem nome';
+    const addr   = l.address || {};
+    const region = addr.region || addr.city || '—';
+    const guests = l._i_maxGuests || '—';
+    const rooms  = l._i_rooms     || null;
+    const baths  = l._f_bathrooms || null;
 
     return `
       <div class="unit-card">
@@ -336,9 +337,9 @@ function renderUnidades() {
         <div class="unit-card-name">${escHtml(name)}</div>
         <div class="unit-card-meta">
           <span>📍 ${escHtml(region)}</span>
-          <span>👥 ${cap} pessoa${cap !== 1 ? 's' : ''}</span>
-          ${beds  ? `<span>🛏 ${beds}</span>`  : ''}
-          ${baths ? `<span>🚿 ${baths}</span>` : ''}
+          <span>👥 ${guests} pessoa${guests !== 1 ? 's' : ''}</span>
+          ${rooms ? `<span>🛏 ${rooms} quarto${rooms !== 1 ? 's' : ''}</span>` : ''}
+          ${baths ? `<span>🚿 ${baths} banheiro${baths !== 1 ? 's' : ''}</span>` : ''}
         </div>
       </div>
     `;
@@ -346,8 +347,11 @@ function renderUnidades() {
 }
 
 function isHouse(listing) {
-  const t = (listing.type || listing.subtype || '').toLowerCase();
-  return t.includes('house') || t.includes('villa') || t.includes('casa');
+  // Stays: tipo vem em _t_typeMeta._mstitle.pt_BR ("Apartamento", "Casa", etc.)
+  const typeName = (listing._t_typeMeta?._mstitle?.pt_BR || '').toLowerCase();
+  const id = (listing.id || '').toUpperCase();
+  return typeName.includes('casa') || typeName.includes('villa') || typeName.includes('house')
+      || id.startsWith('GF') || id.startsWith('GG');
 }
 
 /* ── Bloco 2 — Reservas (Datacrazy) ─────────────────────────────── */
@@ -356,32 +360,34 @@ function renderReservas() {
   const reservas = state.reservas;
   const tbody = document.getElementById('reservasBody');
 
-  const totalValor = reservas.reduce((s, r) => s + (parseFloat(r.value || r.totalValue || r.amount || r.revenue || 0)), 0);
+  // Datacrazy: campo de valor é "total"
+  const totalValor  = reservas.reduce((s, r) => s + (parseFloat(r.total || r.value || 0)), 0);
   const ticketMedio = reservas.length > 0 ? totalValor / reservas.length : 0;
 
-  document.getElementById('res-total-valor').textContent = brl(totalValor);
-  document.getElementById('res-total-qtd').textContent   = reservas.length;
+  document.getElementById('res-total-valor').textContent  = brl(totalValor);
+  document.getElementById('res-total-qtd').textContent    = reservas.length;
   document.getElementById('res-ticket-medio').textContent = brl(ticketMedio);
 
   if (!reservas.length) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Sem reservas neste período (Datacrazy)</td></tr>';
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Sem negócios neste período (Datacrazy)</td></tr>';
     return;
   }
 
   tbody.innerHTML = reservas.map(r => {
-    const hospede  = r.guestName || r.client?.name || r.name || '—';
-    const imovel   = r.listing?.name || r.propertyName || r.unit || '—';
-    const checkin  = formatDate(r.checkIn || r.startDate || r.start);
-    const checkout = formatDate(r.checkOut || r.endDate || r.end);
-    const valor    = parseFloat(r.value || r.totalValue || r.amount || r.revenue || 0);
-    const status   = mapStatus(r.status || r.state);
+    // Datacrazy: lead contém o contato, stage contém o funil
+    const nome   = r.lead?.name || r.name || '—';
+    const estagio = r.stage?.name || '—';
+    const criado  = formatDate(r.createdAt);
+    const movido  = formatDate(r.lastMovedAt);
+    const valor   = parseFloat(r.total || 0);
+    const status  = mapStatus(r.status);
 
     return `
       <tr>
-        <td>${escHtml(hospede)}</td>
-        <td>${escHtml(imovel)}</td>
-        <td>${checkin}</td>
-        <td>${checkout}</td>
+        <td>${escHtml(nome)}</td>
+        <td>${escHtml(estagio)}</td>
+        <td>${criado}</td>
+        <td>${movido}</td>
         <td><strong>${brl(valor)}</strong></td>
         <td><span class="status-pill ${status.cls}">${status.label}</span></td>
       </tr>
@@ -400,9 +406,14 @@ function formatDate(str) {
 function mapStatus(s) {
   if (!s) return { cls: '', label: '—' };
   const v = String(s).toLowerCase();
-  if (v.includes('confirm') || v.includes('active') || v.includes('ativo')) return { cls: 'confirmed', label: 'Confirmada' };
-  if (v.includes('cancel')) return { cls: 'cancelled', label: 'Cancelada' };
-  return { cls: 'pending', label: 'Pendente' };
+  // Datacrazy status: won, lost, in_process + Stays: confirmed, cancelled
+  if (v === 'won' || v.includes('ganho') || v.includes('confirm') || v.includes('active'))
+    return { cls: 'confirmed', label: v === 'won' ? 'Ganho' : 'Confirmado' };
+  if (v === 'lost' || v.includes('lost') || v.includes('cancel'))
+    return { cls: 'cancelled', label: v === 'lost' ? 'Perdido' : 'Cancelado' };
+  if (v === 'in_process' || v.includes('process') || v.includes('andamento'))
+    return { cls: 'pending', label: 'Em andamento' };
+  return { cls: 'pending', label: s };
 }
 
 /* ── Month navigation ───────────────────────────────────────────── */

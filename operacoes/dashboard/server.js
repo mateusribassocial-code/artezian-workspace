@@ -1,3 +1,6 @@
+// Para ambiente local: ignora erros de SSL (certificados corporativos)
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -107,28 +110,51 @@ app.get('/api/datacrazy/reservations', async (req, res) => {
   }
 });
 
-// Endpoint de diagnóstico para testar as APIs
+// Endpoint de diagnóstico — sonda múltiplos paths da Stays e Datacrazy
 app.get('/api/diagnostico', async (req, res) => {
-  const resultado = { stays: null, datacrazy: null };
+  const auth = `Basic ${process.env.STAYS_AUTH_BASE64}`;
+  const base = process.env.STAYS_BASE_URL; // https://artezian.stays.net
+  const apiBase = 'https://api.stays.net';
 
-  try {
-    const r = await fetch(`${process.env.STAYS_BASE_URL}/v1/listings?limit=1`, {
-      headers: { 'Authorization': `Basic ${process.env.STAYS_AUTH_BASE64}` },
-    });
-    resultado.stays = { status: r.status, ok: r.ok };
-    if (!r.ok) resultado.stays.body = await r.text();
-  } catch (e) {
-    resultado.stays = { error: e.message };
+  const staysCandidates = [
+    `${base}/v1/listings?limit=1`,
+    `${base}/api/v1/listings?limit=1`,
+    `${apiBase}/v1/listings?limit=1`,
+    `${base}/oauth2/token`,
+  ];
+
+  const resultado = { stays: {}, datacrazy: null };
+
+  for (const url of staysCandidates) {
+    try {
+      const r = await fetch(url, { headers: { Authorization: auth } });
+      const text = await r.text();
+      resultado.stays[url] = { status: r.status, snippet: text.slice(0, 200) };
+    } catch (e) {
+      resultado.stays[url] = { error: e.message };
+    }
   }
 
-  try {
-    const r = await fetch(`${process.env.DATACRAZY_BASE_URL}/v1/deals?limit=1`, {
-      headers: { 'Authorization': `Bearer ${process.env.DATACRAZY_API_KEY}` },
-    });
-    resultado.datacrazy = { status: r.status, ok: r.ok };
-    if (!r.ok) resultado.datacrazy.body = await r.text();
-  } catch (e) {
-    resultado.datacrazy = { error: e.message };
+  // Datacrazy — testa vários endpoints
+  const dcBase = process.env.DATACRAZY_BASE_URL;
+  const dcToken = process.env.DATACRAZY_API_KEY;
+  const dcCandidates = [
+    `${dcBase}/v1/deals?limit=1`,
+    `${dcBase}/deals?limit=1`,
+    `${dcBase}/v1/reservations?limit=1`,
+    `${dcBase}/v1/bookings?limit=1`,
+    `${dcBase}/v1/contacts?limit=1`,
+  ];
+
+  resultado.datacrazy = {};
+  for (const url of dcCandidates) {
+    try {
+      const r = await fetch(url, { headers: { Authorization: `Bearer ${dcToken}` } });
+      const text = await r.text();
+      resultado.datacrazy[url] = { status: r.status, snippet: text.slice(0, 200) };
+    } catch (e) {
+      resultado.datacrazy[url] = { error: e.message };
+    }
   }
 
   res.json(resultado);

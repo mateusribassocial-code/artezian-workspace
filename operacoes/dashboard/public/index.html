@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artezian — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo-wrap">
+        <span class="logo-text">ARTEZIAN</span>
+        <span class="logo-sub">Dashboard</span>
+      </div>
+      <div class="header-controls">
+        <div class="month-nav">
+          <button class="btn-icon" id="prevMonth">&#8249;</button>
+          <span class="month-label" id="monthLabel">Mai 2026</span>
+          <button class="btn-icon" id="nextMonth">&#8250;</button>
+        </div>
+        <div class="status-badge" id="statusBadge">
+          <span class="dot dot-ok"></span> APIs conectadas
+        </div>
+        <button class="btn-refresh" id="btnRefresh" title="Atualizar dados">&#8635;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- TABS -->
+  <nav class="tabs">
+    <button class="tab active" data-tab="empresa">Empresa</button>
+    <button class="tab" data-tab="locacao">Locação</button>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- ═══════════════════════════════════════════════
+         BLOCO 1 — EMPRESA
+    ════════════════════════════════════════════════ -->
+    <section class="tab-content active" id="tab-empresa">
+
+      <!-- Summary bar -->
+      <div class="summary-bar">
+        <div class="summary-card">
+          <span class="summary-label">Receita</span>
+          <span class="summary-value green" id="s-receita">R$ —</span>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Custos</span>
+          <span class="summary-value red" id="s-custos">R$ —</span>
+        </div>
+        <div class="summary-card highlight">
+          <span class="summary-label">Resultado</span>
+          <span class="summary-value" id="s-resultado">R$ —</span>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Margem</span>
+          <span class="summary-value" id="s-margem">—%</span>
+        </div>
+      </div>
+
+      <!-- Two columns -->
+      <div class="two-col">
+
+        <!-- CUSTOS -->
+        <div class="block">
+          <div class="block-header">
+            <h2 class="block-title">Custo Operacional</h2>
+            <span class="block-period" id="custo-period">Mai 2026</span>
+          </div>
+
+          <div class="cost-form">
+            <div class="cost-row">
+              <label class="cost-label">Ferramentas</label>
+              <div class="cost-input-wrap">
+                <span class="currency">R$</span>
+                <input class="cost-input" id="custo-ferramentas" type="number" min="0" step="0.01" placeholder="0,00" />
+              </div>
+            </div>
+            <div class="cost-row">
+              <label class="cost-label">Administrativo</label>
+              <div class="cost-input-wrap">
+                <span class="currency">R$</span>
+                <input class="cost-input" id="custo-administrativo" type="number" min="0" step="0.01" placeholder="0,00" />
+              </div>
+            </div>
+            <div class="cost-row">
+              <label class="cost-label">Mídia Paga</label>
+              <div class="cost-input-wrap">
+                <span class="currency">R$</span>
+                <input class="cost-input" id="custo-midia" type="number" min="0" step="0.01" placeholder="0,00" />
+              </div>
+            </div>
+            <div class="cost-total-row">
+              <span class="cost-label">Total Custos</span>
+              <span class="cost-total-value" id="custo-total">R$ 0,00</span>
+            </div>
+            <button class="btn-primary w-full" id="btnSalvarCustos">Salvar</button>
+            <p class="save-feedback" id="custo-feedback"></p>
+          </div>
+        </div>
+
+        <!-- RECEITAS -->
+        <div class="block">
+          <div class="block-header">
+            <h2 class="block-title">Receitas</h2>
+            <span class="block-period" id="receita-period">Mai 2026</span>
+          </div>
+
+          <div class="receita-list">
+            <div class="receita-row">
+              <div class="receita-info">
+                <span class="receita-name">Ganhos com Reservas</span>
+                <span class="receita-source">Datacrazy</span>
+              </div>
+              <span class="receita-value" id="receita-reservas">R$ —</span>
+            </div>
+            <div class="receita-row">
+              <div class="receita-info">
+                <span class="receita-name">Mensalidades Parceiros</span>
+                <span class="receita-source">Automático</span>
+              </div>
+              <span class="receita-value" id="receita-mensalidades">R$ —</span>
+            </div>
+            <div class="receita-row">
+              <div class="receita-info">
+                <span class="receita-name">Comissões Parceiros</span>
+                <span class="receita-source">Automático</span>
+              </div>
+              <span class="receita-value" id="receita-comissoes">R$ —</span>
+            </div>
+            <div class="receita-total-row">
+              <span class="receita-label-total">Total Receitas</span>
+              <span class="receita-value-total" id="receita-total">R$ —</span>
+            </div>
+          </div>
+
+          <div class="api-status" id="dc-status"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         BLOCO 2 — LOCAÇÃO
+    ════════════════════════════════════════════════ -->
+    <section class="tab-content" id="tab-locacao">
+
+      <!-- ── PARCEIROS ── -->
+      <div class="block">
+        <div class="block-header">
+          <h2 class="block-title">Parceiros Ativos</h2>
+          <button class="btn-outline" id="btnAddParceiro">+ Parceiro</button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table" id="parceirosTable">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Contato</th>
+                <th>Imóveis</th>
+                <th>Mensalidade</th>
+                <th>Comissão <span id="parceiro-mes-label">(Mai)</span></th>
+                <th>Total Mês</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="parceirosBody">
+              <tr class="empty-row">
+                <td colspan="7">Nenhum parceiro cadastrado</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="parceiros-totals">
+          <div class="pt-item">
+            <span>Total mensalidades</span>
+            <strong id="pt-mensalidades">R$ 0,00</strong>
+          </div>
+          <div class="pt-item">
+            <span>Total comissões (<span class="pt-mes"></span>)</span>
+            <strong id="pt-comissoes">R$ 0,00</strong>
+          </div>
+          <div class="pt-item highlight">
+            <span>Total geral</span>
+            <strong id="pt-total">R$ 0,00</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── UNIDADES ── -->
+      <div class="block">
+        <div class="block-header">
+          <h2 class="block-title">Unidades Ativas</h2>
+          <div class="unit-filters">
+            <button class="filter-btn active" data-filter="all">Todas</button>
+            <button class="filter-btn" data-filter="house">Casas</button>
+            <button class="filter-btn" data-filter="apartment">Apartamentos</button>
+          </div>
+        </div>
+
+        <div class="units-stats">
+          <div class="unit-stat">
+            <span class="unit-stat-num" id="units-total">—</span>
+            <span class="unit-stat-label">Total</span>
+          </div>
+          <div class="unit-stat">
+            <span class="unit-stat-num" id="units-casas">—</span>
+            <span class="unit-stat-label">Casas</span>
+          </div>
+          <div class="unit-stat">
+            <span class="unit-stat-num" id="units-apts">—</span>
+            <span class="unit-stat-label">Apartamentos</span>
+          </div>
+          <div class="unit-stat">
+            <span class="unit-stat-num" id="units-capacidade">—</span>
+            <span class="unit-stat-label">Cap. total</span>
+          </div>
+        </div>
+
+        <div class="units-grid" id="unitsGrid">
+          <div class="loading-state">Carregando unidades...</div>
+        </div>
+      </div>
+
+      <!-- ── GANHOS DE RESERVAS ── -->
+      <div class="block">
+        <div class="block-header">
+          <h2 class="block-title">Ganhos de Reservas</h2>
+          <span class="block-period" id="reservas-period">Mai 2026</span>
+        </div>
+
+        <div class="reservas-stats">
+          <div class="res-stat">
+            <span class="res-stat-num" id="res-total-valor">R$ —</span>
+            <span class="res-stat-label">Receita Total</span>
+          </div>
+          <div class="res-stat">
+            <span class="res-stat-num" id="res-total-qtd">—</span>
+            <span class="res-stat-label">Reservas</span>
+          </div>
+          <div class="res-stat">
+            <span class="res-stat-num" id="res-ticket-medio">R$ —</span>
+            <span class="res-stat-label">Ticket Médio</span>
+          </div>
+        </div>
+
+        <div class="api-status" id="dc-status-locacao"></div>
+
+        <div class="table-wrap">
+          <table class="data-table" id="reservasTable">
+            <thead>
+              <tr>
+                <th>Hóspede</th>
+                <th>Imóvel</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Valor</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="reservasBody">
+              <tr class="empty-row">
+                <td colspan="6">Carregando dados do Datacrazy...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════
+       MODAL — PARCEIRO
+  ════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="parceiroModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Novo Parceiro</h3>
+        <button class="btn-close" id="btnCloseModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Nome *</label>
+          <input type="text" id="p-nome" placeholder="Nome ou empresa" />
+        </div>
+        <div class="form-group">
+          <label>Contato (WhatsApp)</label>
+          <input type="text" id="p-contato" placeholder="+55 71 99999-9999" />
+        </div>
+        <div class="form-group">
+          <label>Imóveis gerenciados</label>
+          <input type="text" id="p-imoveis" placeholder="Ex: Apto 101, Casa Tapera" />
+        </div>
+        <div class="form-group">
+          <label>Mensalidade fixa (R$)</label>
+          <input type="number" id="p-mensalidade" min="0" step="0.01" placeholder="0,00" />
+        </div>
+        <div class="form-divider">Comissão — <span id="modal-mes-label">Mai 2026</span></div>
+        <div class="form-group">
+          <label>Valor de comissão neste mês (R$)</label>
+          <input type="number" id="p-comissao" min="0" step="0.01" placeholder="0,00" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" id="btnCancelModal">Cancelar</button>
+        <button class="btn-danger" id="btnDeleteParceiro" style="display:none">Excluir</button>
+        <button class="btn-primary" id="btnSalvarParceiro">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

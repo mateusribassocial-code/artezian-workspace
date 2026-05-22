@@ -186,10 +186,10 @@ function updateCustoTotal() {
 /* ── Bloco 1 — Receitas ─────────────────────────────────────────── */
 
 function calcReceitas() {
-  // Datacrazy: campo de valor é "total" (negócios ganhos)
-  const totalReservas = state.reservas.reduce((sum, r) => {
-    return sum + (parseFloat(r.total || r.value || 0));
-  }, 0);
+  // Datacrazy: soma apenas negócios com status "won"
+  const totalReservas = state.reservas
+    .filter(r => r.status === 'won')
+    .reduce((sum, r) => sum + (parseFloat(r.total || 0)), 0);
 
   // Mensalidades: soma dos valorFixo de todos os parceiros
   const totalMensalidades = state.appData.parceiros.reduce((sum, p) => {
@@ -360,12 +360,13 @@ function renderReservas() {
   const reservas = state.reservas;
   const tbody = document.getElementById('reservasBody');
 
-  // Datacrazy: campo de valor é "total"
-  const totalValor  = reservas.reduce((s, r) => s + (parseFloat(r.total || r.value || 0)), 0);
-  const ticketMedio = reservas.length > 0 ? totalValor / reservas.length : 0;
+  // Datacrazy: stats consideram apenas negócios ganhos
+  const ganhos      = reservas.filter(r => r.status === 'won');
+  const totalValor  = ganhos.reduce((s, r) => s + (parseFloat(r.total || 0)), 0);
+  const ticketMedio = ganhos.length > 0 ? totalValor / ganhos.length : 0;
 
   document.getElementById('res-total-valor').textContent  = brl(totalValor);
-  document.getElementById('res-total-qtd').textContent    = reservas.length;
+  document.getElementById('res-total-qtd').textContent    = `${ganhos.length} / ${reservas.length}`;
   document.getElementById('res-ticket-medio').textContent = brl(ticketMedio);
 
   if (!reservas.length) {

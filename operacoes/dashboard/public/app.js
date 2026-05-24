@@ -168,19 +168,49 @@ function renderAll() {
 
 /* ── Bloco 1 — Custos ───────────────────────────────────────────── */
 
+function getCustosDoMes() {
+  const raw = state.appData.custos?.[state.currentMonth];
+  if (!raw) return [];
+  // suporta formato legado (objeto simples) e novo (array)
+  if (Array.isArray(raw)) return raw;
+  const legado = [];
+  if (raw.ferramentas)   legado.push({ id: uid(), tipo: 'Ferramentas',   titulo: 'Ferramentas',   frequencia: 'Mensal', valor: raw.ferramentas });
+  if (raw.administrativo) legado.push({ id: uid(), tipo: 'Administrativo', titulo: 'Administrativo', frequencia: 'Mensal', valor: raw.administrativo });
+  if (raw.midiaPaga)     legado.push({ id: uid(), tipo: 'Mídia Paga',    titulo: 'Mídia Paga',    frequencia: 'Mensal', valor: raw.midiaPaga });
+  return legado;
+}
+
 function renderCustos() {
-  const custos = state.appData.custos?.[state.currentMonth] || {};
-  document.getElementById('custo-ferramentas').value   = custos.ferramentas   || '';
-  document.getElementById('custo-administrativo').value = custos.administrativo || '';
-  document.getElementById('custo-midia').value          = custos.midiaPaga      || '';
+  const custos = getCustosDoMes();
+  const tbody  = document.getElementById('custosBody');
+
+  if (!custos.length) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="5">Nenhum custo cadastrado neste mês</td></tr>';
+    document.getElementById('custo-total').textContent = brl(0);
+    return;
+  }
+
+  tbody.innerHTML = custos.map(c => {
+    const tipoCls = c.tipo === 'Ferramentas' ? 'ferramentas'
+                  : c.tipo === 'Administrativo' ? 'administrativo'
+                  : c.tipo === 'Mídia Paga' ? 'midia' : 'outro';
+    return `
+      <tr>
+        <td><span class="tipo-badge ${tipoCls}">${escHtml(c.tipo)}</span></td>
+        <td>${escHtml(c.titulo)}</td>
+        <td>${escHtml(c.frequencia)}</td>
+        <td><strong>${brl(c.valor)}</strong></td>
+        <td><button class="edit-btn" onclick="openEditCusto('${c.id}')">✎</button></td>
+      </tr>
+    `;
+  }).join('');
+
   updateCustoTotal();
 }
 
 function updateCustoTotal() {
-  const f = parseFloat(document.getElementById('custo-ferramentas').value)   || 0;
-  const a = parseFloat(document.getElementById('custo-administrativo').value) || 0;
-  const m = parseFloat(document.getElementById('custo-midia').value)          || 0;
-  document.getElementById('custo-total').textContent = brl(f + a + m);
+  const total = getCustosDoMes().reduce((s, c) => s + (parseFloat(c.valor) || 0), 0);
+  document.getElementById('custo-total').textContent = brl(total);
 }
 
 /* ── Bloco 1 — Receitas ─────────────────────────────────────────── */
@@ -221,10 +251,7 @@ function renderSummary() {
   const { totalReservas, totalMensalidades, totalComissoes } = calcReceitas();
   const receita = totalReservas + totalMensalidades + totalComissoes;
 
-  const c = state.appData.custos?.[state.currentMonth] || {};
-  const custo = (parseFloat(c.ferramentas) || 0)
-              + (parseFloat(c.administrativo) || 0)
-              + (parseFloat(c.midiaPaga) || 0);
+  const custo = getCustosDoMes().reduce((s, c) => s + (parseFloat(c.valor) || 0), 0);
 
   const resultado = receita - custo;
   const margem = receita > 0 ? ((resultado / receita) * 100).toFixed(1) : null;
@@ -251,9 +278,13 @@ function renderParceiros() {
   }
 
   tbody.innerHTML = parceiros.map(p => {
-    const comissao = parseFloat(p.comissoes?.[state.currentMonth]) || 0;
-    const fixo = parseFloat(p.valorFixo) || 0;
-    const total = fixo + comissao;
+    const comissao  = parseFloat(p.comissoes?.[state.currentMonth]) || 0;
+    const fixo      = parseFloat(p.valorFixo) || 0;
+    const emAberto  = parseFloat(p.valorEmAberto) || 0;
+    const total     = fixo + comissao;
+    const abertoHtml = emAberto > 0
+      ? `<strong class="emaberto-value">${brl(emAberto)}</strong>`
+      : `<span class="emaberto-zero">—</span>`;
     return `
       <tr>
         <td><strong>${escHtml(p.nome)}</strong></td>
@@ -262,6 +293,7 @@ function renderParceiros() {
         <td>${brl(fixo)}</td>
         <td>${brl(comissao)}</td>
         <td><strong>${brl(total)}</strong></td>
+        <td>${abertoHtml}</td>
         <td><button class="edit-btn" onclick="openEditParceiro('${p.id}')">✎</button></td>
       </tr>
     `;
@@ -275,10 +307,12 @@ function updateParceirosTotals() {
   const totalMensalidades = parceiros.reduce((s, p) => s + (parseFloat(p.valorFixo) || 0), 0);
   const totalComissoes    = parceiros.reduce((s, p) => s + (parseFloat(p.comissoes?.[state.currentMonth]) || 0), 0);
   const totalGeral        = totalMensalidades + totalComissoes;
+  const totalEmAberto     = parceiros.reduce((s, p) => s + (parseFloat(p.valorEmAberto) || 0), 0);
 
   document.getElementById('pt-mensalidades').textContent = brl(totalMensalidades);
   document.getElementById('pt-comissoes').textContent    = brl(totalComissoes);
   document.getElementById('pt-total').textContent        = brl(totalGeral);
+  document.getElementById('pt-emaberto').textContent     = brl(totalEmAberto);
 }
 
 function escHtml(str) {
@@ -446,32 +480,7 @@ document.querySelectorAll('.tab').forEach(btn => {
 
 document.getElementById('btnRefresh').addEventListener('click', loadAll);
 
-/* ── Cost form ──────────────────────────────────────────────────── */
-
-['custo-ferramentas', 'custo-administrativo', 'custo-midia'].forEach(id => {
-  document.getElementById(id).addEventListener('input', () => {
-    updateCustoTotal();
-    renderSummary();
-  });
-});
-
-document.getElementById('btnSalvarCustos').addEventListener('click', async () => {
-  const f = parseFloat(document.getElementById('custo-ferramentas').value)   || 0;
-  const a = parseFloat(document.getElementById('custo-administrativo').value) || 0;
-  const m = parseFloat(document.getElementById('custo-midia').value)          || 0;
-
-  if (!state.appData.custos) state.appData.custos = {};
-  state.appData.custos[state.currentMonth] = { ferramentas: f, administrativo: a, midiaPaga: m };
-
-  await saveData(state.appData);
-
-  const fb = document.getElementById('custo-feedback');
-  fb.textContent = 'Salvo!';
-  setTimeout(() => { fb.textContent = ''; }, 2000);
-
-  renderSummary();
-  renderReceitas();
-});
+/* ── Cost form — removido (agora usa modal) ─────────────────────── */
 
 /* ── Unit filters ───────────────────────────────────────────────── */
 
@@ -499,6 +508,7 @@ function openModal(id = null) {
     document.getElementById('p-imoveis').value           = p.imoveis || '';
     document.getElementById('p-mensalidade').value       = p.valorFixo || '';
     document.getElementById('p-comissao').value          = p.comissoes?.[state.currentMonth] || '';
+    document.getElementById('p-emaberto').value          = p.valorEmAberto || '';
     deleteBtn.style.display = 'inline-flex';
   } else {
     document.getElementById('modalTitle').textContent    = 'Novo Parceiro';
@@ -507,6 +517,7 @@ function openModal(id = null) {
     document.getElementById('p-imoveis').value           = '';
     document.getElementById('p-mensalidade').value       = '';
     document.getElementById('p-comissao').value          = '';
+    document.getElementById('p-emaberto').value          = '';
     deleteBtn.style.display = 'none';
   }
 
@@ -531,15 +542,17 @@ document.getElementById('btnSalvarParceiro').addEventListener('click', async () 
   const nome = document.getElementById('p-nome').value.trim();
   if (!nome) { alert('Informe o nome do parceiro'); return; }
 
-  const valorFixo  = parseFloat(document.getElementById('p-mensalidade').value) || 0;
-  const comissao   = parseFloat(document.getElementById('p-comissao').value)    || 0;
+  const valorFixo    = parseFloat(document.getElementById('p-mensalidade').value) || 0;
+  const comissao     = parseFloat(document.getElementById('p-comissao').value)    || 0;
+  const valorEmAberto = parseFloat(document.getElementById('p-emaberto').value)   || 0;
 
   if (state.editingParceiroId) {
     const p = state.appData.parceiros.find(x => x.id === state.editingParceiroId);
-    p.nome     = nome;
-    p.contato  = document.getElementById('p-contato').value.trim();
-    p.imoveis  = document.getElementById('p-imoveis').value.trim();
-    p.valorFixo = valorFixo;
+    p.nome          = nome;
+    p.contato       = document.getElementById('p-contato').value.trim();
+    p.imoveis       = document.getElementById('p-imoveis').value.trim();
+    p.valorFixo     = valorFixo;
+    p.valorEmAberto = valorEmAberto;
     if (!p.comissoes) p.comissoes = {};
     if (comissao) p.comissoes[state.currentMonth] = comissao;
   } else {
@@ -549,6 +562,7 @@ document.getElementById('btnSalvarParceiro').addEventListener('click', async () 
       contato:  document.getElementById('p-contato').value.trim(),
       imoveis:  document.getElementById('p-imoveis').value.trim(),
       valorFixo,
+      valorEmAberto,
       comissoes: comissao ? { [state.currentMonth]: comissao } : {},
     };
     state.appData.parceiros.push(newP);
@@ -568,6 +582,84 @@ document.getElementById('btnDeleteParceiro').addEventListener('click', async () 
   closeModal();
   renderParceiros();
   renderReceitas();
+  renderSummary();
+});
+
+/* ── Modal — Custo ──────────────────────────────────────────────── */
+
+let editingCustoId = null;
+
+function openCustoModal(id = null) {
+  editingCustoId = id;
+  const deleteBtn = document.getElementById('btnDeleteCusto');
+
+  if (id) {
+    const c = getCustosDoMes().find(x => x.id === id);
+    document.getElementById('custoModalTitle').textContent = 'Editar Custo';
+    document.getElementById('c-tipo').value       = c.tipo;
+    document.getElementById('c-titulo').value     = c.titulo;
+    document.getElementById('c-frequencia').value = c.frequencia;
+    document.getElementById('c-valor').value      = c.valor;
+    deleteBtn.style.display = 'inline-flex';
+  } else {
+    document.getElementById('custoModalTitle').textContent = 'Novo Custo';
+    document.getElementById('c-tipo').value       = 'Ferramentas';
+    document.getElementById('c-titulo').value     = '';
+    document.getElementById('c-frequencia').value = 'Mensal';
+    document.getElementById('c-valor').value      = '';
+    deleteBtn.style.display = 'none';
+  }
+
+  document.getElementById('custoModal').classList.add('open');
+}
+
+function closeCustoModal() {
+  document.getElementById('custoModal').classList.remove('open');
+  editingCustoId = null;
+}
+
+window.openEditCusto = function(id) { openCustoModal(id); };
+
+document.getElementById('btnAddCusto').addEventListener('click', () => openCustoModal());
+document.getElementById('btnCloseCustoModal').addEventListener('click', closeCustoModal);
+document.getElementById('btnCancelCustoModal').addEventListener('click', closeCustoModal);
+document.getElementById('custoModal').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeCustoModal();
+});
+
+document.getElementById('btnSalvarCusto').addEventListener('click', async () => {
+  const titulo = document.getElementById('c-titulo').value.trim();
+  const valor  = parseFloat(document.getElementById('c-valor').value);
+  if (!titulo) { alert('Informe o título do custo'); return; }
+  if (!valor)  { alert('Informe o valor'); return; }
+
+  const tipo       = document.getElementById('c-tipo').value;
+  const frequencia = document.getElementById('c-frequencia').value;
+
+  if (!state.appData.custos) state.appData.custos = {};
+  let lista = getCustosDoMes();
+
+  if (editingCustoId) {
+    const idx = lista.findIndex(c => c.id === editingCustoId);
+    if (idx >= 0) lista[idx] = { ...lista[idx], tipo, titulo, frequencia, valor };
+  } else {
+    lista.push({ id: uid(), tipo, titulo, frequencia, valor });
+  }
+
+  state.appData.custos[state.currentMonth] = lista;
+  await saveData(state.appData);
+  closeCustoModal();
+  renderCustos();
+  renderSummary();
+});
+
+document.getElementById('btnDeleteCusto').addEventListener('click', async () => {
+  if (!confirm('Excluir este custo?')) return;
+  let lista = getCustosDoMes().filter(c => c.id !== editingCustoId);
+  state.appData.custos[state.currentMonth] = lista;
+  await saveData(state.appData);
+  closeCustoModal();
+  renderCustos();
   renderSummary();
 });
 

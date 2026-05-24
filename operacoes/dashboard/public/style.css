@@ -760,6 +760,43 @@ body {
   margin-top: 4px;
 }
 
+.form-select {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--dark);
+  outline: none;
+  background: var(--white);
+  width: 100%;
+  cursor: pointer;
+  transition: border-color .15s;
+}
+.form-select:focus { border-color: var(--gold); }
+
+.emaberto-value {
+  color: var(--red);
+  font-weight: 700;
+}
+.emaberto-zero {
+  color: var(--light);
+}
+
+.tipo-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--bg);
+  color: var(--mid);
+}
+.tipo-badge.ferramentas   { background: #e8f0fe; color: #1a56db; }
+.tipo-badge.administrativo { background: #fef3c7; color: #92400e; }
+.tipo-badge.midia         { background: #fce7f3; color: #9d174d; }
+.tipo-badge.outro         { background: var(--bg); color: var(--mid); }
+
 /* ── Loading state ───────────────────────────────────────────── */
 .loading-state {
   grid-column: 1 / -1;

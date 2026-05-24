@@ -76,32 +76,29 @@
           </div>
 
           <div class="cost-form">
-            <div class="cost-row">
-              <label class="cost-label">Ferramentas</label>
-              <div class="cost-input-wrap">
-                <span class="currency">R$</span>
-                <input class="cost-input" id="custo-ferramentas" type="number" min="0" step="0.01" placeholder="0,00" />
-              </div>
+            <div class="table-wrap">
+              <table class="data-table" id="custosTable">
+                <thead>
+                  <tr>
+                    <th>Tipo</th>
+                    <th>Título</th>
+                    <th>Frequência</th>
+                    <th>Valor</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="custosBody">
+                  <tr class="empty-row">
+                    <td colspan="5">Nenhum custo cadastrado</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="cost-row">
-              <label class="cost-label">Administrativo</label>
-              <div class="cost-input-wrap">
-                <span class="currency">R$</span>
-                <input class="cost-input" id="custo-administrativo" type="number" min="0" step="0.01" placeholder="0,00" />
-              </div>
-            </div>
-            <div class="cost-row">
-              <label class="cost-label">Mídia Paga</label>
-              <div class="cost-input-wrap">
-                <span class="currency">R$</span>
-                <input class="cost-input" id="custo-midia" type="number" min="0" step="0.01" placeholder="0,00" />
-              </div>
-            </div>
-            <div class="cost-total-row">
+            <div class="cost-total-row" style="margin-top:12px">
               <span class="cost-label">Total Custos</span>
               <span class="cost-total-value" id="custo-total">R$ 0,00</span>
             </div>
-            <button class="btn-primary w-full" id="btnSalvarCustos">Salvar</button>
+            <button class="btn-outline w-full" id="btnAddCusto" style="margin-top:10px">+ Adicionar Custo</button>
             <p class="save-feedback" id="custo-feedback"></p>
           </div>
         </div>
@@ -169,12 +166,13 @@
                 <th>Mensalidade</th>
                 <th>Comissão <span id="parceiro-mes-label">(Mai)</span></th>
                 <th>Total Mês</th>
+                <th>Em Aberto</th>
                 <th></th>
               </tr>
             </thead>
             <tbody id="parceirosBody">
               <tr class="empty-row">
-                <td colspan="7">Nenhum parceiro cadastrado</td>
+                <td colspan="8">Nenhum parceiro cadastrado</td>
               </tr>
             </tbody>
           </table>
@@ -192,6 +190,10 @@
           <div class="pt-item highlight">
             <span>Total geral</span>
             <strong id="pt-total">R$ 0,00</strong>
+          </div>
+          <div class="pt-item" style="margin-left:auto">
+            <span>Total em aberto</span>
+            <strong id="pt-emaberto" style="color:#c0392b">R$ 0,00</strong>
           </div>
         </div>
       </div>
@@ -311,11 +313,60 @@
           <label>Valor de comissão neste mês (R$)</label>
           <input type="number" id="p-comissao" min="0" step="0.01" placeholder="0,00" />
         </div>
+        <div class="form-group">
+          <label>Valor em Aberto — comissões não recebidas (R$)</label>
+          <input type="number" id="p-emaberto" min="0" step="0.01" placeholder="0,00" />
+        </div>
       </div>
       <div class="modal-footer">
         <button class="btn-ghost" id="btnCancelModal">Cancelar</button>
         <button class="btn-danger" id="btnDeleteParceiro" style="display:none">Excluir</button>
         <button class="btn-primary" id="btnSalvarParceiro">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       MODAL — CUSTO
+  ════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="custoModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="custoModalTitle">Novo Custo</h3>
+        <button class="btn-close" id="btnCloseCustoModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Tipo *</label>
+          <select id="c-tipo" class="form-select">
+            <option value="Ferramentas">Ferramentas</option>
+            <option value="Administrativo">Administrativo</option>
+            <option value="Mídia Paga">Mídia Paga</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Título *</label>
+          <input type="text" id="c-titulo" placeholder="Ex: Notion, Contador, Meta Ads" />
+        </div>
+        <div class="form-group">
+          <label>Frequência</label>
+          <select id="c-frequencia" class="form-select">
+            <option value="Mensal">Mensal</option>
+            <option value="Anual">Anual</option>
+            <option value="Único">Único</option>
+            <option value="Semanal">Semanal</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Valor (R$) *</label>
+          <input type="number" id="c-valor" min="0" step="0.01" placeholder="0,00" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" id="btnCancelCustoModal">Cancelar</button>
+        <button class="btn-danger" id="btnDeleteCusto" style="display:none">Excluir</button>
+        <button class="btn-primary" id="btnSalvarCusto">Salvar</button>
       </div>
     </div>
   </div>

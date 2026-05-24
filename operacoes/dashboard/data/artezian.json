@@ -1,4 +1,238 @@
 {
-  "parceiros": [],
-  "custos": {}
+  "parceiros": [
+    {
+      "id": "fia0sl9fg",
+      "nome": "João",
+      "contato": "+55 73 9929-0123",
+      "imoveis": "DS03J",
+      "valorFixo": 0,
+      "valorEmAberto": 0,
+      "comissoes": {}
+    },
+    {
+      "id": "fxs3rhuge",
+      "nome": "Marilene",
+      "contato": "+55 31 7133-0396",
+      "imoveis": "DS04J",
+      "valorFixo": 0,
+      "valorEmAberto": 140,
+      "comissoes": {}
+    },
+    {
+      "id": "k4nhplbkv",
+      "nome": "Reinaldo",
+      "contato": "+1 (201) 965-1952",
+      "imoveis": "FL10J, GC01J",
+      "valorFixo": 0,
+      "valorEmAberto": 0,
+      "comissoes": {
+        "2026-05": 600
+      }
+    },
+    {
+      "id": "tmxvpoi0t",
+      "nome": "Euller - Prime Village",
+      "contato": "+55 65 9922-7225",
+      "imoveis": "GG06J",
+      "valorFixo": 0,
+      "valorEmAberto": 0,
+      "comissoes": {}
+    },
+    {
+      "id": "rs62nwozi",
+      "nome": "Tremura",
+      "contato": "+55 73 9985-5991",
+      "imoveis": "GF02J",
+      "valorFixo": 0,
+      "valorEmAberto": 800,
+      "comissoes": {
+        "2026-05": 1690
+      }
+    },
+    {
+      "id": "wnbwf75pz",
+      "nome": "Laureana",
+      "contato": "+55 31 8959-8270",
+      "imoveis": "GF04J",
+      "valorFixo": 0,
+      "valorEmAberto": 1000,
+      "comissoes": {}
+    },
+    {
+      "id": "zq3m4b369",
+      "nome": "Moana",
+      "contato": "+55 73 9813-7386",
+      "imoveis": "GF06J",
+      "valorFixo": 0,
+      "valorEmAberto": 0,
+      "comissoes": {}
+    },
+    {
+      "id": "5qow55hak",
+      "nome": "John",
+      "contato": "+55 19 99336-5455",
+      "imoveis": "GG08J",
+      "valorFixo": 0,
+      "valorEmAberto": 855,
+      "comissoes": {}
+    },
+    {
+      "id": "f71zaopvp",
+      "nome": "Emanoel",
+      "contato": "+55 31 8848-8473",
+      "imoveis": "DS05J",
+      "valorFixo": 0,
+      "valorEmAberto": 0,
+      "comissoes": {
+        "2026-05": 253
+      }
+    },
+    {
+      "id": "bzczn5njp",
+      "nome": "Jessilene",
+      "contato": "+1 (862) 215-9050",
+      "imoveis": "HA02J",
+      "valorFixo": 0,
+      "valorEmAberto": 0,
+      "comissoes": {}
+    },
+    {
+      "id": "dzmzneihw",
+      "nome": "Isa Schuster",
+      "contato": "+39 347 468 5800",
+      "imoveis": "DS06J",
+      "valorFixo": 0,
+      "valorEmAberto": 0,
+      "comissoes": {}
+    },
+    {
+      "id": "dvkyqkzfy",
+      "nome": "Joyce",
+      "contato": "",
+      "imoveis": "HA03J",
+      "valorFixo": 0,
+      "valorEmAberto": 0,
+      "comissoes": {}
+    },
+    {
+      "id": "we4te6dfz",
+      "nome": "Varandas de Porto",
+      "contato": "+55 31 9921-2680",
+      "imoveis": "JR01J, JR02J, JR03J, JR04J, JR05J, JR06J, JR07J, JR08J, JR09J",
+      "valorFixo": 2000,
+      "valorEmAberto": 0,
+      "comissoes": {
+        "2026-05": 345
+      }
+    }
+  ],
+  "custos": {
+    "2026-05": [
+      {
+        "id": "wgz2srd4y",
+        "tipo": "Ferramentas",
+        "titulo": "Stays - Reservas",
+        "frequencia": "Mensal",
+        "valor": 1350
+      },
+      {
+        "id": "eilk48ma7",
+        "tipo": "Ferramentas",
+        "titulo": "Datacrazy + CrazyIA",
+        "frequencia": "Mensal",
+        "valor": 607
+      },
+      {
+        "id": "4crl6dcby",
+        "tipo": "Ferramentas",
+        "titulo": "Claude Code",
+        "frequencia": "Mensal",
+        "valor": 106
+      },
+      {
+        "id": "lb3qo7sh6",
+        "tipo": "Ferramentas",
+        "titulo": "Linktree",
+        "frequencia": "Mensal",
+        "valor": 42
+      },
+      {
+        "id": "yh0wcb0z0",
+        "tipo": "Ferramentas",
+        "titulo": "Capcut",
+        "frequencia": "Mensal",
+        "valor": 31.24
+      },
+      {
+        "id": "5vp8afaai",
+        "tipo": "Ferramentas",
+        "titulo": "Instagram Verificado",
+        "frequencia": "Mensal",
+        "valor": 53.9
+      },
+      {
+        "id": "kqwl3izmi",
+        "tipo": "Ferramentas",
+        "titulo": "WhatsApp Verificado",
+        "frequencia": "Mensal",
+        "valor": 109
+      },
+      {
+        "id": "i08id5yqp",
+        "tipo": "Ferramentas",
+        "titulo": "Lightroom",
+        "frequencia": "Mensal",
+        "valor": 59.9
+      },
+      {
+        "id": "t0wpzvoxd",
+        "tipo": "Ferramentas",
+        "titulo": "Server Hostinger",
+        "frequencia": "Mensal",
+        "valor": 133
+      },
+      {
+        "id": "x3ne1r6bh",
+        "tipo": "Ferramentas",
+        "titulo": "Canva",
+        "frequencia": "Mensal",
+        "valor": 40
+      },
+      {
+        "id": "ep6kw9eda",
+        "tipo": "Ferramentas",
+        "titulo": "Chip Telefone",
+        "frequencia": "Mensal",
+        "valor": 90
+      },
+      {
+        "id": "1azwevxuq",
+        "tipo": "Administrativo",
+        "titulo": "Contador",
+        "frequencia": "Mensal",
+        "valor": 450
+      },
+      {
+        "id": "2wsivhr50",
+        "tipo": "Administrativo",
+        "titulo": "INSS - João",
+        "frequencia": "Mensal",
+        "valor": 170
+      },
+      {
+        "id": "4227hmggz",
+        "tipo": "Administrativo",
+        "titulo": "INSS Mateus",
+        "frequencia": "Mensal",
+        "valor": 170
+      },
+      {
+        "id": "rai2elds4",
+        "tipo": "Ferramentas",
+        "titulo": "Conta PJ",
+        "frequencia": "Mensal",
+        "valor": 250
+      }
+    ]
+  }
 }

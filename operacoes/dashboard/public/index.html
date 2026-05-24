@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -35,6 +36,7 @@
   <nav class="tabs">
     <button class="tab active" data-tab="empresa">Empresa</button>
     <button class="tab" data-tab="locacao">Locação</button>
+    <button class="tab" data-tab="historico">Histórico</button>
   </nav>
 
   <!-- MAIN CONTENT -->
@@ -62,6 +64,17 @@
         <div class="summary-card">
           <span class="summary-label">Margem</span>
           <span class="summary-value" id="s-margem">—%</span>
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div class="block chart-block">
+        <div class="block-header">
+          <h2 class="block-title">Receitas × Custos</h2>
+          <span class="block-period">Histórico mensal</span>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="receitaCustoChart"></canvas>
         </div>
       </div>
 
@@ -278,7 +291,96 @@
         </div>
       </div>
 
+      <!-- ── RELATÓRIO DO PARCEIRO ── -->
+      <div class="block" id="relatorioBlock">
+        <div class="block-header">
+          <h2 class="block-title">Relatório do Parceiro</h2>
+          <span class="block-period" id="relatorio-period"></span>
+        </div>
+
+        <div class="relatorio-controls">
+          <div class="form-group" style="flex:1">
+            <label>Parceiro</label>
+            <select id="relatorio-parceiro" class="form-select"></select>
+          </div>
+          <div class="relatorio-summary">
+            <div class="rel-stat">
+              <span class="rel-stat-num" id="rel-qtd">0</span>
+              <span class="rel-stat-label">Reservas</span>
+            </div>
+            <div class="rel-stat">
+              <span class="rel-stat-num" id="rel-total-valor">R$ 0,00</span>
+              <span class="rel-stat-label">Valor Total</span>
+            </div>
+            <div class="rel-stat highlight">
+              <span class="rel-stat-num" id="rel-total-comissao">R$ 0,00</span>
+              <span class="rel-stat-label">Total Comissão</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-wrap" style="margin-top:16px">
+          <table class="data-table" id="relatorioTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nome da Reserva</th>
+                <th>Valor Total (R$)</th>
+                <th>Comissão (R$)</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="relatorioBody">
+              <tr class="empty-row"><td colspan="5">Nenhuma reserva adicionada</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="relatorio-actions">
+          <button class="btn-outline" id="btnAddReservaRelatorio">+ Adicionar Reserva</button>
+          <button class="btn-primary" id="btnExportarPDF">&#128438; Exportar PDF</button>
+        </div>
+      </div>
+
     </section>
+
+    <!-- ═══════════════════════════════════════════════
+         BLOCO 3 — HISTÓRICO
+    ════════════════════════════════════════════════ -->
+    <section class="tab-content" id="tab-historico">
+
+      <div class="block">
+        <div class="block-header">
+          <h2 class="block-title">Histórico Mensal</h2>
+          <span class="block-period">Mai 2026 em diante</span>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table" id="historicoTable">
+            <thead>
+              <tr>
+                <th>Mês</th>
+                <th>Reservas (DC)</th>
+                <th>Mensalidades</th>
+                <th>Comissões</th>
+                <th>Receita Total</th>
+                <th>Custos</th>
+                <th>Resultado</th>
+                <th>Margem</th>
+              </tr>
+            </thead>
+            <tbody id="historicoBody">
+              <tr class="empty-row"><td colspan="8">Nenhum mês registrado ainda</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         RELATÓRIO DO PARCEIRO (dentro da aba Locação)
+         — renderizado dinamicamente por JS
+    ════════════════════════════════════════════════ -->
 
   </main>
 
@@ -370,6 +472,38 @@
       </div>
     </div>
   </div>
+
+  <!-- MODAL — RESERVA DO RELATÓRIO -->
+  <div class="modal-overlay" id="reservaRelatorioModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="reservaModalTitle">Nova Reserva</h3>
+        <button class="btn-close" id="btnCloseReservaModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Nome da Reserva *</label>
+          <input type="text" id="rr-nome" placeholder="Ex: João Silva — Check-in 10/06" />
+        </div>
+        <div class="form-group">
+          <label>Valor Total da Reserva (R$) *</label>
+          <input type="number" id="rr-valor" min="0" step="0.01" placeholder="0,00" />
+        </div>
+        <div class="form-group">
+          <label>Comissão (R$) *</label>
+          <input type="number" id="rr-comissao" min="0" step="0.01" placeholder="0,00" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" id="btnCancelReservaModal">Cancelar</button>
+        <button class="btn-danger" id="btnDeleteReserva" style="display:none">Excluir</button>
+        <button class="btn-primary" id="btnSalvarReserva">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÁREA DE IMPRESSÃO PDF -->
+  <div id="printArea" style="display:none"></div>
 
   <script src="app.js"></script>
 </body>

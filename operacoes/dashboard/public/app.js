@@ -125,6 +125,7 @@ async function loadAll() {
 
   updateStatusBadge(stays, reservas);
   renderAll();
+  await saveMonthSnapshot();
 
   btn.classList.remove('spinning');
 }
@@ -161,9 +162,12 @@ function renderAll() {
   renderCustos();
   renderReceitas();
   renderSummary();
+  renderChart();
+  renderHistorico();
   renderParceiros();
   renderUnidades();
   renderReservas();
+  initRelatorio();
 }
 
 /* ── Bloco 1 — Custos ───────────────────────────────────────────── */
@@ -364,10 +368,14 @@ function renderUnidades() {
     const guests = l._i_maxGuests || '—';
     const rooms  = l._i_rooms     || null;
     const baths  = l._f_bathrooms || null;
+    const code   = l.id || '';
 
     return `
       <div class="unit-card">
-        <div class="unit-card-type">${type}</div>
+        <div class="unit-card-header">
+          <span class="unit-card-type">${type}</span>
+          ${code ? `<span class="unit-code">${escHtml(code)}</span>` : ''}
+        </div>
         <div class="unit-card-name">${escHtml(name)}</div>
         <div class="unit-card-meta">
           <span>📍 ${escHtml(region)}</span>
@@ -661,6 +669,313 @@ document.getElementById('btnDeleteCusto').addEventListener('click', async () => 
   closeCustoModal();
   renderCustos();
   renderSummary();
+});
+
+/* ── Histórico — snapshot automático ────────────────────────────── */
+
+const HISTORICO_INICIO = '2026-05'; // não registrar meses anteriores
+
+function deveRegistrarMes(ym) {
+  return ym >= HISTORICO_INICIO;
+}
+
+async function saveMonthSnapshot() {
+  if (!deveRegistrarMes(state.currentMonth)) return;
+
+  const { totalReservas, totalMensalidades, totalComissoes } = calcReceitas();
+  const receita = totalReservas + totalMensalidades + totalComissoes;
+  const custo   = getCustosDoMes().reduce((s, c) => s + (parseFloat(c.valor) || 0), 0);
+  const resultado = receita - custo;
+  const margem    = receita > 0 ? +((resultado / receita) * 100).toFixed(1) : 0;
+
+  if (!state.appData.historico) state.appData.historico = {};
+  state.appData.historico[state.currentMonth] = {
+    savedAt:    new Date().toISOString(),
+    receita:    { reservas: totalReservas, mensalidades: totalMensalidades, comissoes: totalComissoes, total: receita },
+    custo,
+    resultado,
+    margem,
+  };
+
+  await saveData(state.appData);
+}
+
+/* ── Histórico — renderização ───────────────────────────────────── */
+
+function renderHistorico() {
+  const hist  = state.appData.historico || {};
+  const tbody = document.getElementById('historicoBody');
+
+  const meses = Object.keys(hist)
+    .filter(m => m >= HISTORICO_INICIO)
+    .sort((a, b) => b.localeCompare(a)); // mais recente primeiro
+
+  if (!meses.length) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="8">Nenhum mês registrado ainda</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = meses.map(m => {
+    const d   = hist[m];
+    const res = d.resultado >= 0
+      ? `<span class="result-positive">${brl(d.resultado)}</span>`
+      : `<span class="result-negative">${brl(d.resultado)}</span>`;
+    const margem = d.margem >= 0
+      ? `<span class="result-positive">${d.margem}%</span>`
+      : `<span class="result-negative">${d.margem}%</span>`;
+    return `
+      <tr>
+        <td><strong>${monthLabel(m)}</strong></td>
+        <td>${brl(d.receita.reservas)}</td>
+        <td>${brl(d.receita.mensalidades)}</td>
+        <td>${brl(d.receita.comissoes)}</td>
+        <td><strong>${brl(d.receita.total)}</strong></td>
+        <td>${brl(d.custo)}</td>
+        <td>${res}</td>
+        <td>${margem}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+/* ── Gráfico receita × custo ────────────────────────────────────── */
+
+let chartInstance = null;
+
+function renderChart() {
+  const hist  = state.appData.historico || {};
+  const meses = Object.keys(hist)
+    .filter(m => m >= HISTORICO_INICIO)
+    .sort();
+
+  const labels   = meses.map(m => monthLabel(m));
+  const receitas = meses.map(m => hist[m].receita.total);
+  const custos   = meses.map(m => hist[m].custo);
+
+  const ctx = document.getElementById('receitaCustoChart');
+  if (!ctx) return;
+
+  if (chartInstance) chartInstance.destroy();
+
+  chartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Receita',
+          data: receitas,
+          backgroundColor: 'rgba(45,122,79,0.75)',
+          borderColor: '#2d7a4f',
+          borderWidth: 1,
+          borderRadius: 4,
+        },
+        {
+          label: 'Custos',
+          data: custos,
+          backgroundColor: 'rgba(192,57,43,0.65)',
+          borderColor: '#c0392b',
+          borderWidth: 1,
+          borderRadius: 4,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top', labels: { font: { family: 'Montserrat', size: 12 } } },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.dataset.label}: ${brl(ctx.raw)}`,
+          },
+        },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'Montserrat', size: 12 } } },
+        y: {
+          grid: { color: '#f0f0f0' },
+          ticks: {
+            font: { family: 'Montserrat', size: 11 },
+            callback: v => `R$ ${(v / 1000).toFixed(0)}k`,
+          },
+        },
+      },
+    },
+  });
+}
+
+/* ── Unidades — código Stays ────────────────────────────────────── */
+// já incorporado no renderUnidades() via listing.id
+
+/* ── Relatório do Parceiro ──────────────────────────────────────── */
+
+let editingReservaId = null;
+
+function initRelatorio() {
+  const sel = document.getElementById('relatorio-parceiro');
+  const parceiros = state.appData.parceiros;
+
+  sel.innerHTML = parceiros.length
+    ? parceiros.map(p => `<option value="${p.id}">${escHtml(p.nome)}</option>`).join('')
+    : '<option value="">Nenhum parceiro cadastrado</option>';
+
+  document.getElementById('relatorio-period').textContent = monthLabel(state.currentMonth);
+  renderRelatorio();
+}
+
+function getRelatorioKey() {
+  const parceiroId = document.getElementById('relatorio-parceiro')?.value;
+  return parceiroId ? `${parceiroId}__${state.currentMonth}` : null;
+}
+
+function getRelatorioReservas() {
+  const key = getRelatorioKey();
+  if (!key) return [];
+  return state.appData.relatorios?.[key] || [];
+}
+
+function saveRelatorioReservas(lista) {
+  const key = getRelatorioKey();
+  if (!key) return;
+  if (!state.appData.relatorios) state.appData.relatorios = {};
+  state.appData.relatorios[key] = lista;
+}
+
+function renderRelatorio() {
+  const reservas = getRelatorioReservas();
+  const tbody = document.getElementById('relatorioBody');
+
+  const totalValor    = reservas.reduce((s, r) => s + (parseFloat(r.valor) || 0), 0);
+  const totalComissao = reservas.reduce((s, r) => s + (parseFloat(r.comissao) || 0), 0);
+
+  document.getElementById('rel-qtd').textContent           = reservas.length;
+  document.getElementById('rel-total-valor').textContent   = brl(totalValor);
+  document.getElementById('rel-total-comissao').textContent = brl(totalComissao);
+
+  if (!reservas.length) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="5">Nenhuma reserva adicionada</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = reservas.map((r, i) => `
+    <tr>
+      <td>${i + 1}</td>
+      <td>${escHtml(r.nome)}</td>
+      <td>${brl(r.valor)}</td>
+      <td>${brl(r.comissao)}</td>
+      <td><button class="edit-btn" onclick="openEditReservaRelatorio('${r.id}')">✎</button></td>
+    </tr>
+  `).join('');
+}
+
+// Modal de reserva do relatório
+function openReservaRelatorioModal(id = null) {
+  editingReservaId = id;
+  const deleteBtn = document.getElementById('btnDeleteReserva');
+
+  if (id) {
+    const r = getRelatorioReservas().find(x => x.id === id);
+    document.getElementById('reservaModalTitle').textContent = 'Editar Reserva';
+    document.getElementById('rr-nome').value     = r.nome;
+    document.getElementById('rr-valor').value    = r.valor;
+    document.getElementById('rr-comissao').value = r.comissao;
+    deleteBtn.style.display = 'inline-flex';
+  } else {
+    document.getElementById('reservaModalTitle').textContent = 'Nova Reserva';
+    document.getElementById('rr-nome').value     = '';
+    document.getElementById('rr-valor').value    = '';
+    document.getElementById('rr-comissao').value = '';
+    deleteBtn.style.display = 'none';
+  }
+
+  document.getElementById('reservaRelatorioModal').classList.add('open');
+}
+
+function closeReservaModal() {
+  document.getElementById('reservaRelatorioModal').classList.remove('open');
+  editingReservaId = null;
+}
+
+window.openEditReservaRelatorio = (id) => openReservaRelatorioModal(id);
+
+document.getElementById('btnAddReservaRelatorio').addEventListener('click', () => openReservaRelatorioModal());
+document.getElementById('btnCloseReservaModal').addEventListener('click', closeReservaModal);
+document.getElementById('btnCancelReservaModal').addEventListener('click', closeReservaModal);
+document.getElementById('reservaRelatorioModal').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeReservaModal();
+});
+
+document.getElementById('btnSalvarReserva').addEventListener('click', async () => {
+  const nome     = document.getElementById('rr-nome').value.trim();
+  const valor    = parseFloat(document.getElementById('rr-valor').value) || 0;
+  const comissao = parseFloat(document.getElementById('rr-comissao').value) || 0;
+  if (!nome) { alert('Informe o nome da reserva'); return; }
+
+  let lista = getRelatorioReservas();
+
+  if (editingReservaId) {
+    const idx = lista.findIndex(x => x.id === editingReservaId);
+    if (idx >= 0) lista[idx] = { ...lista[idx], nome, valor, comissao };
+  } else {
+    lista.push({ id: uid(), nome, valor, comissao });
+  }
+
+  saveRelatorioReservas(lista);
+  await saveData(state.appData);
+  closeReservaModal();
+  renderRelatorio();
+});
+
+document.getElementById('btnDeleteReserva').addEventListener('click', async () => {
+  if (!confirm('Excluir esta reserva?')) return;
+  const lista = getRelatorioReservas().filter(x => x.id !== editingReservaId);
+  saveRelatorioReservas(lista);
+  await saveData(state.appData);
+  closeReservaModal();
+  renderRelatorio();
+});
+
+document.getElementById('relatorio-parceiro').addEventListener('change', renderRelatorio);
+
+// Exportar PDF
+document.getElementById('btnExportarPDF').addEventListener('click', () => {
+  const parceiroId = document.getElementById('relatorio-parceiro').value;
+  const parceiro   = state.appData.parceiros.find(p => p.id === parceiroId);
+  const reservas   = getRelatorioReservas();
+  const totalValor    = reservas.reduce((s, r) => s + (parseFloat(r.valor) || 0), 0);
+  const totalComissao = reservas.reduce((s, r) => s + (parseFloat(r.comissao) || 0), 0);
+  const hoje = new Date().toLocaleDateString('pt-BR');
+
+  const rows = reservas.map((r, i) => `
+    <tr>
+      <td>${i + 1}</td>
+      <td>${escHtml(r.nome)}</td>
+      <td>${brl(r.valor)}</td>
+      <td>${brl(r.comissao)}</td>
+    </tr>
+  `).join('');
+
+  document.getElementById('printArea').innerHTML = `
+    <div class="print-header">
+      <div class="print-title">Relatório do Parceiro — ${escHtml(parceiro?.nome || '—')}</div>
+      <div class="print-sub">Período: ${monthLabel(state.currentMonth)} &nbsp;|&nbsp; Gerado em: ${hoje} &nbsp;|&nbsp; Artezian Real Estate</div>
+    </div>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Nome da Reserva</th><th>Valor Total</th><th>Comissão</th></tr>
+      </thead>
+      <tbody>${rows || '<tr><td colspan="4">Nenhuma reserva</td></tr>'}</tbody>
+    </table>
+    <div class="print-totals">
+      <div class="print-total-row"><span>Total de Reservas</span><span>${reservas.length}</span></div>
+      <div class="print-total-row"><span>Valor Total das Reservas</span><span>${brl(totalValor)}</span></div>
+      <div class="print-total-row main"><span>Total de Comissão</span><span>${brl(totalComissao)}</span></div>
+    </div>
+    <div class="print-footer">Artezian Real Estate Atelie &nbsp;·&nbsp; artezian.com.br</div>
+  `;
+
+  window.print();
 });
 
 /* ── Init ───────────────────────────────────────────────────────── */

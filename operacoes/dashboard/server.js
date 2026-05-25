@@ -1,14 +1,31 @@
-// Para ambiente local: ignora erros de SSL (certificados corporativos)
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+// Em ambiente local (dev), ignora erros de SSL corporativos
+if (process.env.NODE_ENV !== 'production') {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+}
 
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '../CRM_datacrazy/.env') });
+const express    = require('express');
+const basicAuth  = require('express-basic-auth');
+const fs         = require('fs');
+const path       = require('path');
 
-const app = express();
-const PORT = 3131;
+// Carrega .env local do dashboard (produção) ou o do CRM (dev local)
+const localEnv = path.join(__dirname, '.env');
+require('dotenv').config({ path: fs.existsSync(localEnv) ? localEnv : path.join(__dirname, '../CRM_datacrazy/.env') });
+
+const app  = express();
+const PORT = process.env.PORT || 3131;
 const DATA_FILE = path.join(__dirname, 'data', 'artezian.json');
+
+// ── Autenticação básica ───────────────────────────────────────────────────────
+
+const DASHBOARD_USER = process.env.DASHBOARD_USER || 'artezian';
+const DASHBOARD_PASS = process.env.DASHBOARD_PASS || 'artezian2024';
+
+app.use(basicAuth({
+  users: { [DASHBOARD_USER]: DASHBOARD_PASS },
+  challenge: true,
+  realm: 'Artezian Dashboard',
+}));
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));

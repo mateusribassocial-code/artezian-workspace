@@ -16,16 +16,18 @@ const app  = express();
 const PORT = process.env.PORT || 3131;
 const DATA_FILE = path.join(__dirname, 'data', 'artezian.json');
 
-// ── Autenticação básica ───────────────────────────────────────────────────────
+// ── Autenticação básica (só em produção) ─────────────────────────────────────
 
-const DASHBOARD_USER = process.env.DASHBOARD_USER || 'artezian';
-const DASHBOARD_PASS = process.env.DASHBOARD_PASS || 'artezian2024';
+if (process.env.NODE_ENV === 'production') {
+  const DASHBOARD_USER = process.env.DASHBOARD_USER || 'artezian';
+  const DASHBOARD_PASS = process.env.DASHBOARD_PASS || 'artezian2024';
 
-app.use(basicAuth({
-  users: { [DASHBOARD_USER]: DASHBOARD_PASS },
-  challenge: true,
-  realm: 'Artezian Dashboard',
-}));
+  app.use(basicAuth({
+    users: { [DASHBOARD_USER]: DASHBOARD_PASS },
+    challenge: true,
+    realm: 'Artezian Dashboard',
+  }));
+}
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));

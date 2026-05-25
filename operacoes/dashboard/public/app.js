@@ -419,20 +419,29 @@ function renderReservas() {
   }
 
   tbody.innerHTML = reservas.map(r => {
-    // Datacrazy: lead contém o contato, stage contém o funil
-    const nome   = r.lead?.name || r.name || '—';
-    const estagio = r.stage?.name || '—';
-    const criado  = formatDate(r.createdAt);
-    const movido  = formatDate(r.lastMovedAt);
-    const valor   = parseFloat(r.total || 0);
-    const status  = mapStatus(r.status);
+    const nome      = r.lead?.name || r.name || '—';
+    const estagio   = r.stage?.name || '—';
+    const criado    = formatDate(r.createdAt);
+    const valor     = parseFloat(r.total || 0);
+    const status    = mapStatus(r.status);
+    const code      = getProductCode(r);
+    const parceiro  = findParceiroPorImovel(code);
+
+    const imovelHtml = code
+      ? `<span class="unit-code" style="font-size:11px">${escHtml(code)}</span>`
+      : '<span style="color:var(--light)">—</span>';
+
+    const proprietarioHtml = parceiro
+      ? `<span class="prop-match">${escHtml(parceiro.nome)}</span>`
+      : '<span style="color:var(--light)">—</span>';
 
     return `
       <tr>
         <td>${escHtml(nome)}</td>
+        <td>${imovelHtml}</td>
+        <td>${proprietarioHtml}</td>
         <td>${escHtml(estagio)}</td>
         <td>${criado}</td>
-        <td>${movido}</td>
         <td><strong>${brl(valor)}</strong></td>
         <td><span class="status-pill ${status.cls}">${status.label}</span></td>
       </tr>
@@ -446,6 +455,18 @@ function formatDate(str) {
     const d = new Date(str);
     return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
   } catch { return str; }
+}
+
+function getProductCode(reserva) {
+  return reserva.products?.[0]?.product?.id_sku || null;
+}
+
+function findParceiroPorImovel(code) {
+  if (!code) return null;
+  const c = code.toUpperCase();
+  return state.appData.parceiros.find(p =>
+    (p.imoveis || '').toUpperCase().split(/[\s,;]+/).some(token => token === c)
+  ) || null;
 }
 
 function mapStatus(s) {

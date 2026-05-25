@@ -800,6 +800,16 @@ body {
   color: var(--light);
 }
 
+.prop-match {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--petrol);
+  background: rgba(38,70,83,.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
 .meta-receita-value {
   color: var(--petrol);
   font-weight: 600;

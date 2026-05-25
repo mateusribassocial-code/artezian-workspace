@@ -237,16 +237,15 @@
   },
   "historico": {
     "2026-05": {
-      "savedAt": "2026-05-25T11:53:18.834Z",
+      "savedAt": "2026-05-25T14:38:21.102Z",
       "receita": {
         "reservas": 1060,
         "mensalidades": 2000,
-        "comissoes": 2888,
-        "total": 5948
+        "total": 3060
       },
       "custo": 3662.04,
-      "resultado": 2285.96,
-      "margem": 38.4
+      "resultado": -602.04,
+      "margem": -19.7
     }
   }
 }

@@ -34,7 +34,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const DEFAULT_DATA = { parceiros: [], custos: {} };
 
-function readData() {
+const JSONBIN_KEY = process.env.JSONBIN_KEY;
+const JSONBIN_ID  = process.env.JSONBIN_ID;
+const useJsonbin  = !!(JSONBIN_KEY && JSONBIN_ID);
+
+async function readData() {
+  if (useJsonbin) {
+    try {
+      const r = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_ID}/latest`, {
+        headers: { 'X-Master-Key': JSONBIN_KEY },
+      });
+      const d = await r.json();
+      return d.record || DEFAULT_DATA;
+    } catch (e) {
+      console.error('JSONbin read error:', e.message);
+      return DEFAULT_DATA;
+    }
+  }
+  // fallback: arquivo local (dev)
   try {
     if (!fs.existsSync(DATA_FILE)) {
       fs.mkdirSync(path.dirname(DATA_FILE), { recursive: true });
@@ -47,18 +64,26 @@ function readData() {
   }
 }
 
-function writeData(data) {
+async function writeData(data) {
+  if (useJsonbin) {
+    await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_ID}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
+      body: JSON.stringify(data),
+    });
+    return;
+  }
   fs.mkdirSync(path.dirname(DATA_FILE), { recursive: true });
   fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
 }
 
 // ── Local data endpoints ──────────────────────────────────────────────────────
 
-app.get('/api/data', (req, res) => res.json(readData()));
+app.get('/api/data', async (req, res) => res.json(await readData()));
 
-app.post('/api/data', (req, res) => {
+app.post('/api/data', async (req, res) => {
   try {
-    writeData(req.body);
+    await writeData(req.body);
     res.json({ ok: true });
   } catch (e) {
     res.status(500).json({ error: e.message });

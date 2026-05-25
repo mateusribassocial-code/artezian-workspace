@@ -138,16 +138,16 @@
               </div>
               <span class="receita-value" id="receita-mensalidades">R$ —</span>
             </div>
-            <div class="receita-row">
-              <div class="receita-info">
-                <span class="receita-name">Comissões Parceiros</span>
-                <span class="receita-source">Automático</span>
-              </div>
-              <span class="receita-value" id="receita-comissoes">R$ —</span>
-            </div>
             <div class="receita-total-row">
               <span class="receita-label-total">Total Receitas</span>
               <span class="receita-value-total" id="receita-total">R$ —</span>
+            </div>
+            <div class="receita-meta-row">
+              <span class="receita-meta-label">Meta de Comissão</span>
+              <div class="meta-comissao-wrap">
+                <input type="number" id="meta-comissao-input" class="meta-input" min="0" step="0.01" placeholder="0,00" />
+                <button class="btn-meta-save" id="btnSalvarMetaComissao">✓</button>
+              </div>
             </div>
           </div>
 
@@ -180,12 +180,13 @@
                 <th>Comissão <span id="parceiro-mes-label">(Mai)</span></th>
                 <th>Total Mês</th>
                 <th>Em Aberto</th>
+                <th>Meta Receita</th>
                 <th></th>
               </tr>
             </thead>
             <tbody id="parceirosBody">
               <tr class="empty-row">
-                <td colspan="8">Nenhum parceiro cadastrado</td>
+                <td colspan="9">Nenhum parceiro cadastrado</td>
               </tr>
             </tbody>
           </table>
@@ -361,7 +362,6 @@
                 <th>Mês</th>
                 <th>Reservas (DC)</th>
                 <th>Mensalidades</th>
-                <th>Comissões</th>
                 <th>Receita Total</th>
                 <th>Custos</th>
                 <th>Resultado</th>
@@ -369,7 +369,7 @@
               </tr>
             </thead>
             <tbody id="historicoBody">
-              <tr class="empty-row"><td colspan="8">Nenhum mês registrado ainda</td></tr>
+              <tr class="empty-row"><td colspan="7">Nenhum mês registrado ainda</td></tr>
             </tbody>
           </table>
         </div>
@@ -418,6 +418,10 @@
         <div class="form-group">
           <label>Valor em Aberto — comissões não recebidas (R$)</label>
           <input type="number" id="p-emaberto" min="0" step="0.01" placeholder="0,00" />
+        </div>
+        <div class="form-group">
+          <label>Meta de Valor de Receita (R$)</label>
+          <input type="number" id="p-meta-receita" min="0" step="0.01" placeholder="0,00" />
         </div>
       </div>
       <div class="modal-footer">

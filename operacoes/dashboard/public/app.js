@@ -230,30 +230,27 @@ function calcReceitas() {
     return sum + (parseFloat(p.valorFixo) || 0);
   }, 0);
 
-  // Comissões: soma das comissões do mês atual
-  const totalComissoes = state.appData.parceiros.reduce((sum, p) => {
-    const val = p.comissoes?.[state.currentMonth];
-    return sum + (parseFloat(val) || 0);
-  }, 0);
-
-  return { totalReservas, totalMensalidades, totalComissoes };
+  return { totalReservas, totalMensalidades };
 }
 
 function renderReceitas() {
-  const { totalReservas, totalMensalidades, totalComissoes } = calcReceitas();
-  const total = totalReservas + totalMensalidades + totalComissoes;
+  const { totalReservas, totalMensalidades } = calcReceitas();
+  const total = totalReservas + totalMensalidades;
 
   document.getElementById('receita-reservas').textContent     = brl(totalReservas);
   document.getElementById('receita-mensalidades').textContent = brl(totalMensalidades);
-  document.getElementById('receita-comissoes').textContent    = brl(totalComissoes);
   document.getElementById('receita-total').textContent        = brl(total);
+
+  // Meta de comissão — carrega valor salvo
+  const meta = parseFloat(state.appData.metas?.comissao) || 0;
+  document.getElementById('meta-comissao-input').value = meta || '';
 }
 
 /* ── Bloco 1 — Summary ──────────────────────────────────────────── */
 
 function renderSummary() {
-  const { totalReservas, totalMensalidades, totalComissoes } = calcReceitas();
-  const receita = totalReservas + totalMensalidades + totalComissoes;
+  const { totalReservas, totalMensalidades } = calcReceitas();
+  const receita = totalReservas + totalMensalidades;
 
   const custo = getCustosDoMes().reduce((s, c) => s + (parseFloat(c.valor) || 0), 0);
 
@@ -282,12 +279,16 @@ function renderParceiros() {
   }
 
   tbody.innerHTML = parceiros.map(p => {
-    const comissao  = parseFloat(p.comissoes?.[state.currentMonth]) || 0;
-    const fixo      = parseFloat(p.valorFixo) || 0;
-    const emAberto  = parseFloat(p.valorEmAberto) || 0;
-    const total     = fixo + comissao;
+    const comissao   = parseFloat(p.comissoes?.[state.currentMonth]) || 0;
+    const fixo       = parseFloat(p.valorFixo) || 0;
+    const emAberto   = parseFloat(p.valorEmAberto) || 0;
+    const metaReceita = parseFloat(p.metaReceita) || 0;
+    const total      = fixo + comissao;
     const abertoHtml = emAberto > 0
       ? `<strong class="emaberto-value">${brl(emAberto)}</strong>`
+      : `<span class="emaberto-zero">—</span>`;
+    const metaHtml = metaReceita > 0
+      ? `<span class="meta-receita-value">${brl(metaReceita)}</span>`
       : `<span class="emaberto-zero">—</span>`;
     return `
       <tr>
@@ -298,6 +299,7 @@ function renderParceiros() {
         <td>${brl(comissao)}</td>
         <td><strong>${brl(total)}</strong></td>
         <td>${abertoHtml}</td>
+        <td>${metaHtml}</td>
         <td><button class="edit-btn" onclick="openEditParceiro('${p.id}')">✎</button></td>
       </tr>
     `;
@@ -517,6 +519,7 @@ function openModal(id = null) {
     document.getElementById('p-mensalidade').value       = p.valorFixo || '';
     document.getElementById('p-comissao').value          = p.comissoes?.[state.currentMonth] || '';
     document.getElementById('p-emaberto').value          = p.valorEmAberto || '';
+    document.getElementById('p-meta-receita').value      = p.metaReceita || '';
     deleteBtn.style.display = 'inline-flex';
   } else {
     document.getElementById('modalTitle').textContent    = 'Novo Parceiro';
@@ -526,6 +529,7 @@ function openModal(id = null) {
     document.getElementById('p-mensalidade').value       = '';
     document.getElementById('p-comissao').value          = '';
     document.getElementById('p-emaberto').value          = '';
+    document.getElementById('p-meta-receita').value      = '';
     deleteBtn.style.display = 'none';
   }
 
@@ -550,9 +554,10 @@ document.getElementById('btnSalvarParceiro').addEventListener('click', async () 
   const nome = document.getElementById('p-nome').value.trim();
   if (!nome) { alert('Informe o nome do parceiro'); return; }
 
-  const valorFixo    = parseFloat(document.getElementById('p-mensalidade').value) || 0;
-  const comissao     = parseFloat(document.getElementById('p-comissao').value)    || 0;
-  const valorEmAberto = parseFloat(document.getElementById('p-emaberto').value)   || 0;
+  const valorFixo     = parseFloat(document.getElementById('p-mensalidade').value)   || 0;
+  const comissao      = parseFloat(document.getElementById('p-comissao').value)       || 0;
+  const valorEmAberto = parseFloat(document.getElementById('p-emaberto').value)       || 0;
+  const metaReceita   = parseFloat(document.getElementById('p-meta-receita').value)   || 0;
 
   if (state.editingParceiroId) {
     const p = state.appData.parceiros.find(x => x.id === state.editingParceiroId);
@@ -561,6 +566,7 @@ document.getElementById('btnSalvarParceiro').addEventListener('click', async () 
     p.imoveis       = document.getElementById('p-imoveis').value.trim();
     p.valorFixo     = valorFixo;
     p.valorEmAberto = valorEmAberto;
+    p.metaReceita   = metaReceita;
     if (!p.comissoes) p.comissoes = {};
     if (comissao) p.comissoes[state.currentMonth] = comissao;
   } else {
@@ -571,6 +577,7 @@ document.getElementById('btnSalvarParceiro').addEventListener('click', async () 
       imoveis:  document.getElementById('p-imoveis').value.trim(),
       valorFixo,
       valorEmAberto,
+      metaReceita,
       comissoes: comissao ? { [state.currentMonth]: comissao } : {},
     };
     state.appData.parceiros.push(newP);
@@ -682,8 +689,8 @@ function deveRegistrarMes(ym) {
 async function saveMonthSnapshot() {
   if (!deveRegistrarMes(state.currentMonth)) return;
 
-  const { totalReservas, totalMensalidades, totalComissoes } = calcReceitas();
-  const receita = totalReservas + totalMensalidades + totalComissoes;
+  const { totalReservas, totalMensalidades } = calcReceitas();
+  const receita = totalReservas + totalMensalidades;
   const custo   = getCustosDoMes().reduce((s, c) => s + (parseFloat(c.valor) || 0), 0);
   const resultado = receita - custo;
   const margem    = receita > 0 ? +((resultado / receita) * 100).toFixed(1) : 0;
@@ -691,7 +698,7 @@ async function saveMonthSnapshot() {
   if (!state.appData.historico) state.appData.historico = {};
   state.appData.historico[state.currentMonth] = {
     savedAt:    new Date().toISOString(),
-    receita:    { reservas: totalReservas, mensalidades: totalMensalidades, comissoes: totalComissoes, total: receita },
+    receita:    { reservas: totalReservas, mensalidades: totalMensalidades, total: receita },
     custo,
     resultado,
     margem,
@@ -728,7 +735,6 @@ function renderHistorico() {
         <td><strong>${monthLabel(m)}</strong></td>
         <td>${brl(d.receita.reservas)}</td>
         <td>${brl(d.receita.mensalidades)}</td>
-        <td>${brl(d.receita.comissoes)}</td>
         <td><strong>${brl(d.receita.total)}</strong></td>
         <td>${brl(d.custo)}</td>
         <td>${res}</td>
@@ -976,6 +982,19 @@ document.getElementById('btnExportarPDF').addEventListener('click', () => {
   `;
 
   window.print();
+});
+
+/* ── Meta de Comissão (Empresa) ─────────────────────────────────── */
+
+document.getElementById('btnSalvarMetaComissao').addEventListener('click', async () => {
+  const val = parseFloat(document.getElementById('meta-comissao-input').value) || 0;
+  if (!state.appData.metas) state.appData.metas = {};
+  state.appData.metas.comissao = val;
+  await saveData(state.appData);
+  const btn = document.getElementById('btnSalvarMetaComissao');
+  btn.textContent = '✓';
+  btn.style.background = 'var(--green)';
+  setTimeout(() => { btn.textContent = '✓'; btn.style.background = ''; }, 1500);
 });
 
 /* ── Init ───────────────────────────────────────────────────────── */

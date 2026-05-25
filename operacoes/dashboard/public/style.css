@@ -800,6 +800,66 @@ body {
   color: var(--light);
 }
 
+.meta-receita-value {
+  color: var(--petrol);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.receita-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0 0;
+  border-top: 1px dashed var(--border);
+  margin-top: 8px;
+}
+
+.receita-meta-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--mid);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.meta-comissao-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.meta-input {
+  width: 130px;
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+  text-align: right;
+}
+
+.meta-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.btn-meta-save {
+  background: var(--gold);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius);
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.btn-meta-save:hover { background: var(--petrol); }
+
 .tipo-badge {
   display: inline-block;
   padding: 2px 8px;

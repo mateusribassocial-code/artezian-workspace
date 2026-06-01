@@ -328,6 +328,7 @@
 - **Mínimo de diárias:** 3 noites
 - **Taxa de limpeza:** R$150 para imóveis de 1 quarto | R$200 para imóveis de 2 quartos ou mais
 - **Outubro (alta temporada):** aplicar acréscimo de 30% sobre a diária de baixa temporada
+- **Café da manhã:** Nenhuma unidade inclui café da manhã
 
 ---
 

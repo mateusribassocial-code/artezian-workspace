@@ -8,6 +8,11 @@
 ## CONDOMÍNIO MONT CARMELO — TAPERAPUÃ
 
 > Condomínio com piscina adulto e infantil, sauna, churrasqueira coletiva, segurança 24h, restaurantes e acesso à praia de Taperapuã. Beach clubs próximos: Axé Moi, Tôa Tôa, Cabana Malibu, Boa Beach.
+>
+> **O que tem por perto:**
+> **Beach clubs:** Axé Moi, Tôa Tôa (luau às sextas 21h–3h), Boa Beach, Cabana Malibu, Beat Beach, Bartuque Beach, Barraca do Gaúcho (churrasco rodízio), Cabana Jubarte
+> **Restaurantes:** Colher de Pau (baiana), Orla Center (complexo com churrascaria, culinária japonesa e aquário)
+> **Passeios:** Reserva da Jaqueira (1,4km · aldeia pataxó), Praia do Mutá (4,4km · tranquila), Orla Center (2km), Centro Histórico de Porto Seguro (8km)
 
 ### Studio do João
 - **ID:** DS03J
@@ -19,7 +24,7 @@
 - **Diárias:** Baixa R$250 | Alta R$600 | Feriados R$400
 - **Taxa de limpeza:** R$150
 - **Destaques:** Ar-condicionado, cozinha equipada, vaga de garagem, acesso ao condomínio Mont Carmelo
-
+- **Pet Friendly:** Sim, Pequeno porte
 
 ---
 
@@ -52,6 +57,11 @@
 ## CONDOMÍNIO VARANDAS DE PORTO — TAPERAPUÃ
 
 > Condomínio recém reformado com piscina, jardim, área gourmet com churrasqueira, espreguiçadeiras, mesas e cadeiras, banheiros e lavabo. Estacionamento com 3 vagas internas e 4 externas. A 500m das melhores barracas: Barraca do Gaúcho e Cabana Jubarte. Roupa de cama inclusa em todas as unidades.
+>
+> **O que tem por perto:**
+> **Beach clubs:** Barraca do Gaúcho (churrasco rodízio), Cabana Jubarte, Tôa Tôa (luau às sextas), Axé Moi, Boa Beach, Beat Beach
+> **Restaurantes:** Colher de Pau (baiana), Orla Center (complexo gastronômico)
+> **Passeios:** Reserva da Jaqueira (1,4km), Praia do Mutá (4,4km), Orla Center (2km), Centro Histórico de Porto Seguro (8km)
 
 ### VP-01 (AP01)
 - **ID:** JR01J
@@ -172,6 +182,11 @@
 
 ## APARTAMENTOS AVULSOS — TAPERAPUÃ / PORTO SEGURO
 
+> **O que tem por perto (Taperapuã):**
+> **Beach clubs:** Tôa Tôa, Axé Moi, Boa Beach, Bartuque Beach, Beat Beach, Cabana Malibu, Barraca do Gaúcho (churrasco rodízio)
+> **Restaurantes:** Colher de Pau (baiana), Orla Center (complexo com churrascaria, culinária japonesa e aquário)
+> **Passeios:** Reserva da Jaqueira (1,4km), Praia do Mutá (4,4km), Orla Center (2km), Centro Histórico de Porto Seguro (8km)
+
 ### Apartamento da Isa
 - **ID:** DS06J
 - **Link:** https://www.artezian.com.br/pt/apartment/DS06J
@@ -222,6 +237,7 @@
 - **Diárias:** Baixa R$750 | Alta R$1.600 | Feriados R$1.200
 - **Taxa de limpeza:** R$200
 - **Destaques:** Churrasqueira privativa, ar-condicionado em todos os ambientes, vista para o mar, perto dos recifes de coral
+- **Vizinhança:** Praia de Coroa Vermelha (frente ao mar) · Caminho de Moisés (trilha de corais na maré baixa) · Feirinha Pataxó (artesanato indígena) · Restaurantes: Recanto do Sossego, quiosques à beira-mar · Passeios: Escuna para Coroa Alta, Reserva Pataxó da Jaqueira, Parque Ecológico Fazenda Mãe Tereza
 
 ---
 
@@ -235,6 +251,7 @@
 - **Diárias:** Baixa R$750 | Alta R$1.400 | Feriados R$1.100
 - **Taxa de limpeza:** R$200
 - **Destaques:** Churrasqueira privativa, banheiro social no térreo, vaga de garagem, próximo à Praia do Parracho e Mirante dos Corais
+- **Vizinhança:** Praias: Mucugê (10min a pé), Parracho (20min a pé), Pitinga (5min de van) · Gastronomia: Rua Mucugê, Praça São Brás, Broadway (noturno) · Passeios: Mirante das Fitas, Recife de Fora (escuna/mergulho), Igreja N. Sra. d'Ajuda (séc. XVII)
 
 ---
 
@@ -250,6 +267,7 @@
 - **Diárias:** Baixa R$1.600 | Alta R$3.000 | Feriados R$2.500
 - **Mínimo de diárias:** 3 noites
 - **Destaques:** Piscina, área gourmet com churrasqueira, suítes amplas — melhor custo-benefício entre as casas
+- **Vizinhança:** Beach clubs: Tôa Tôa, Axé Moi, Boa Beach, Beat Beach · Restaurantes: Colher de Pau, Orla Center · Passeios: Reserva da Jaqueira (1,4km), Praia do Mutá (4,4km), Centro Histórico de Porto Seguro (8km)
 
 ---
 
@@ -264,6 +282,7 @@
 - **Taxa de limpeza:** R$250 | **Caução:** R$2.000
 - **Mínimo de diárias:** 3 noites
 - **Destaques:** Vista mar completa, piscina privativa, área gourmet externa, limpeza diária, suíte master premium
+- **Vizinhança:** Praias: Mucugê (10min a pé), Parracho (20min a pé), Pitinga (5min de van) · Gastronomia: Rua Mucugê, Praça São Brás, Broadway (noturno) · Passeios: Mirante das Fitas, Recife de Fora (escuna/mergulho), Igreja N. Sra. d'Ajuda (séc. XVII)
 
 ---
 
@@ -277,6 +296,7 @@
 - **Diárias:** Baixa R$1.500 | Alta R$3.000 | Feriados R$2.500
 - **Mínimo de diárias:** 3 noites
 - **Destaques:** Piscina com guarda-sol e espreguiçadeiras, área gourmet, próximo ao Axé Moi e Beat Beach
+- **Vizinhança:** Beach clubs: Axé Moi, Beat Beach, Tôa Tôa, Boa Beach · Restaurantes: Colher de Pau, Orla Center · Passeios: Reserva da Jaqueira (1,4km), Praia do Mutá (4,4km), Centro Histórico de Porto Seguro (8km)
 
 ---
 
@@ -290,6 +310,7 @@
 - **Diárias:** Baixa R$1.800 | Alta R$2.700 | Feriados R$2.200
 - **Mínimo de diárias:** 3 noites
 - **Destaques:** Piscina, área de festas, churrasqueira, freezer externo, próximo à Orla Center e Dengo Bar
+- **Vizinhança:** Beach clubs: Tôa Tôa, Axé Moi, Boa Beach, Beat Beach · Restaurantes: Orla Center (complexo gastronômico), Colher de Pau, Dengo Bar · Passeios: Reserva da Jaqueira (1,4km), Praia do Mutá (4,4km), Centro Histórico de Porto Seguro (8km)
 
 ---
 
@@ -303,6 +324,7 @@
 - **Diárias:** Baixa R$2.500 | Alta R$3.500 | Feriados R$3.500
 - **Mínimo de diárias:** 3 noites
 - **Destaques:** Maior casa do catálogo, piscina grande, área de jogos, cozinha externa com churrasqueira, ideal para grupos e eventos
+- **Vizinhança:** Beach clubs: Tôa Tôa, Axé Moi, Boa Beach, Beat Beach · Restaurantes: Colher de Pau, Orla Center · Passeios: Reserva da Jaqueira (1,4km), Praia do Mutá (4,4km), Centro Histórico de Porto Seguro (8km)
 
 ---
 

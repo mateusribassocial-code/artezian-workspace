@@ -189,7 +189,7 @@
 - **ID:** FL10J
 - **Link:** https://www.artezian.com.br/pt/apartment/FL10J
 - **Video:** https://www.youtube.com/watch?v=xjnOGp2ELQQ
-- **Localização:** Taperapuã, Porto Seguro
+- **Localização:** Taperapuã, Porto Seguro (180m da praia — Residencial Village do Bosque, próx. Axé Moi)
 - **Capacidade:** até 10 pessoas
 - **Quartos:** 3 suítes (1 no térreo) | **Camas:** 2 casal + 6 solteiros | **Banheiros:** 3
 - **Diárias:** Baixa R$750 | Alta R$1.600 | Feriados R$1.200
@@ -297,7 +297,7 @@
 - **ID:** GG06J
 - **Link:** https://www.artezian.com.br/pt/apartment/GG06J
 - **Video:** https://www.youtube.com/watch?v=VpjgSYfPblw
-- **Localização:** Taperapuã, Porto Seguro
+- **Localização:** Taperapuã, Porto Seguro (500m da praia — Porto Seguro Prime Village, Av. do Coqueiral)
 - **Capacidade:** até 58 pessoas
 - **Quartos:** 9 | **Camas:** 9 casal + 19 solteiros | **Banheiros:** 9
 - **Diárias:** Baixa R$2.500 | Alta R$3.500 | Feriados R$3.500

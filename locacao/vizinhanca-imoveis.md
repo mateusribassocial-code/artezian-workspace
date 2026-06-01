@@ -13,12 +13,12 @@
 - Apartamento do Emanoel (DS05J) — 400m da praia
 - Apartamento da Isa (DS06J) — 400m da praia
 - VP-01 a VP-09 / Varandas de Porto (JR01J–JR09J) — 500m da praia
-- Apartamento do Reinaldo / FL10J — Taperapuã (distância a confirmar)
+- Apartamento do Reinaldo / FL10J — **180m da praia** (Residencial Village do Bosque, próx. Axé Moi)
 - Flat da Joyce (HA03J) — Taperapuã (próx. Bartuque Beach e Boa Beach)
 - Casa do Tremura (GF02J) — 300m da praia
 - Casa da Moana (GF06J) — 5 min da praia
 - Casa do John (GG08J) — 600m da praia
-- Casa do Euller (GG06J) — Taperapuã
+- Casa do Euller (GG06J) — **500m da praia** (Porto Seguro Prime Village, Av. do Coqueiral)
 
 ---
 

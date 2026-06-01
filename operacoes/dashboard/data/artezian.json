@@ -123,7 +123,8 @@
       "valorEmAberto": 0,
       "comissoes": {
         "2026-05": 345
-      }
+      },
+      "metaReceita": 18000
     }
   ],
   "custos": {
@@ -237,7 +238,7 @@
   },
   "historico": {
     "2026-05": {
-      "savedAt": "2026-05-25T14:38:21.102Z",
+      "savedAt": "2026-05-25T20:52:23.561Z",
       "receita": {
         "reservas": 1060,
         "mensalidades": 2000,

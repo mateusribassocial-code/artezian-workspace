@@ -185,19 +185,6 @@
 
 ---
 
-### Apartamento da Josi
-- **ID:** DT04J
-- **Link:** https://www.artezian.com.br/pt/apartment/DT04J
-- **Video:** https://www.youtube.com/watch?v=RKqMnJd4_f8
-- **Localização:** Taperapuã, Porto Seguro (100m da praia)
-- **Capacidade:** até 8 pessoas
-- **Quartos:** 2 suítes | **Camas:** 1 king + 2 solteiros + sofá-cama | **Banheiros:** 3
-- **Diárias:** Baixa R$500 | Alta R$1.100 | Feriados R$750
-- **Taxa de limpeza:** R$200
-- **Destaques:** Vista incrível no condomínio, ar-condicionado, cozinha equipada
-
----
-
 ### Apartamento do Reinaldo (Taperapuã)
 - **ID:** FL10J
 - **Link:** https://www.artezian.com.br/pt/apartment/FL10J
@@ -220,7 +207,7 @@
 - **Quartos:** 3 (1 no térreo) | **Camas:** 2 casal + 4 solteiros | **Banheiros:** 4
 - **Diárias:** Baixa R$650 | Alta R$1.200 | Feriados R$850
 - **Taxa de limpeza:** R$200
-- **Destaques:** Churrasqueira privativa, ar-condicionado em todos os quartos, vaga de garagem, próximo ao Bartuque Beach e Boa Beach
+- **Destaques:** Churrasqueira, ar-condicionado em todos os quartos, vaga de garagem, próximo ao Bartuque Beach e Boa Beach
 
 ---
 

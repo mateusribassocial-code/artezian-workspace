@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --gold: #c2a14e;
+      --dark: #2a2a2a;
+      --petrol: #264653;
+      --white: #ffffff;
+      --light-bg: #f9f8f5;
+      --light-gold: #f5f0e8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #fff;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      display: flex;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+      position: relative;
+    }
+
+    /* ─── CAPA ─── */
+    .s-capa {
+      background: var(--petrol);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .s-capa::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: rgba(194,161,78,0.12);
+    }
+
+    .s-capa::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      background: rgba(194,161,78,0.08);
+    }
+
+    .capa-tag {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    .capa-title {
+      font-size: 64px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .capa-title span { color: var(--gold); }
+
+    .capa-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .capa-brand {
+      margin-top: 56px;
+      color: rgba(255,255,255,0.65);
+      font-size: 13px;
+      letter-spacing: 3px;
+      font-weight: 300;
+      text-transform: uppercase;
+    }
+
+    .capa-brand span { color: var(--gold); font-weight: 600; }
+
+    /* ─── OVERVIEW ─── */
+    .s-overview {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 64px;
+      background: var(--white);
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .slide-title {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 44px;
+    }
+
+    .etapas-row {
+      display: flex;
+      gap: 0;
+      width: 100%;
+      max-width: 1060px;
+    }
+
+    .etapa-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 12px;
+      position: relative;
+    }
+
+    .etapa-item + .etapa-item::before {
+      content: '→';
+      position: absolute;
+      left: -6px;
+      top: 18px;
+      color: var(--gold);
+      font-size: 16px;
+    }
+
+    .etapa-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .n1 { background: #f5f0e8; color: var(--gold); border: 1.5px solid var(--gold); }
+    .n2 { background: rgba(38,70,83,0.08); color: var(--petrol); border: 1.5px solid var(--petrol); }
+    .n3 { background: #f5f0e8; color: var(--gold); border: 1.5px solid var(--gold); }
+    .n4 { background: rgba(38,70,83,0.08); color: var(--petrol); border: 1.5px solid var(--petrol); }
+    .n5 { background: #f5f0e8; color: var(--gold); border: 1.5px solid var(--gold); }
+    .n6 { background: var(--petrol); color: var(--white); }
+
+    .etapa-name {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .etapa-desc-ov {
+      font-size: 11px;
+      color: #888;
+      line-height: 1.5;
+    }
+
+    /* ─── ETAPA SLIDES ─── */
+    .s-etapa {
+      flex-direction: row;
+    }
+
+    .etapa-left {
+      width: 38%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 48px;
+    }
+
+    .gold-bg  { background: var(--gold); }
+    .petrol-bg { background: var(--petrol); }
+
+    .gold-bg  .big-num, .gold-bg  .etapa-tag, .gold-bg  .etapa-big-title { color: var(--white); }
+    .petrol-bg .big-num, .petrol-bg .etapa-tag, .petrol-bg .etapa-big-title { color: var(--white); }
+
+    .big-num {
+      font-size: 96px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .etapa-tag {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .etapa-big-title {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .etapa-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 56px;
+      background: var(--white);
+    }
+
+    .etapa-right.light { background: var(--light-bg); }
+
+    .content-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    .content-body {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.8;
+      max-width: 520px;
+    }
+
+    .content-body strong { color: var(--dark); font-weight: 600; }
+
+    .bullets {
+      list-style: none;
+      margin-top: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .bi {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .bi.teal { background: var(--petrol); }
+
+    /* ─── FECHAMENTO ─── */
+    .s-close {
+      background: var(--dark);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .s-close::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(194,161,78,0.10) 0%, transparent 70%);
+    }
+
+    .close-tag {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .close-title {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .close-title span { color: var(--gold); }
+
+    .close-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      font-weight: 300;
+      max-width: 460px;
+      line-height: 1.7;
+      margin-bottom: 44px;
+    }
+
+    .close-contact {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .contact-item { text-align: left; }
+
+    .contact-label {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .contact-value {
+      font-size: 14px;
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .divider {
+      width: 1px; height: 32px;
+      background: rgba(255,255,255,0.12);
+    }
+
+    @media print {
+      @page {
+        size: 1280px 720px;
+        margin: 0;
+      }
+      body { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SLIDE 1 — CAPA -->
+<div class="slide s-capa">
+  <div class="capa-tag">Bem-vindo à parceria</div>
+  <div class="capa-title">Onboarding<br><span>Proprietário</span></div>
+  <div class="capa-sub">Como funciona nossa operação juntos</div>
+  <div class="capa-brand">Artezian <span>Real Estate Atelie</span></div>
+</div>
+
+<!-- SLIDE 2 — OVERVIEW -->
+<div class="slide s-overview">
+  <div class="section-label">Processo de parceria</div>
+  <div class="slide-title">As 6 etapas da nossa jornada</div>
+  <div class="etapas-row">
+    <div class="etapa-item">
+      <div class="etapa-num n1">01</div>
+      <div class="etapa-name">Contrato</div>
+      <div class="etapa-desc-ov">Definir regras e alinhamentos da parceria</div>
+    </div>
+    <div class="etapa-item">
+      <div class="etapa-num n2">02</div>
+      <div class="etapa-name">Captação</div>
+      <div class="etapa-desc-ov">Material fotográfico e de vídeo do imóvel</div>
+    </div>
+    <div class="etapa-item">
+      <div class="etapa-num n3">03</div>
+      <div class="etapa-name">Precificação</div>
+      <div class="etapa-desc-ov">Estratégia de preço competitiva e lucrativa</div>
+    </div>
+    <div class="etapa-item">
+      <div class="etapa-num n4">04</div>
+      <div class="etapa-name">Metas</div>
+      <div class="etapa-desc-ov">Definição de metas e indicadores</div>
+    </div>
+    <div class="etapa-item">
+      <div class="etapa-num n5">05</div>
+      <div class="etapa-name">Início</div>
+      <div class="etapa-desc-ov">Campanhas de Meta Ads e WhatsApp</div>
+    </div>
+    <div class="etapa-item">
+      <div class="etapa-num n6">06</div>
+      <div class="etapa-name">Continuidade</div>
+      <div class="etapa-desc-ov">Ações recorrentes de marketing e comercial</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 — ETAPA 01 -->
+<div class="slide s-etapa">
+  <div class="etapa-left gold-bg">
+    <div class="big-num">01</div>
+    <div class="etapa-tag">Primeira etapa</div>
+    <div class="etapa-big-title">Contrato &<br>Regras</div>
+  </div>
+  <div class="etapa-right">
+    <div class="content-title">O que acontece aqui</div>
+    <p class="content-body">Antes de qualquer ação, precisamos ter tudo no papel — não pra criar burocracia, mas pra <strong>garantir que a parceria funciona dos dois lados.</strong></p>
+    <ul class="bullets">
+      <li><span class="bi"></span>Definição da forma de trabalho e responsabilidades de cada parte</li>
+      <li><span class="bi"></span>Exigências mínimas de qualidade do imóvel para anunciar</li>
+      <li><span class="bi"></span>Modelo de comissão, repasses e prazos</li>
+      <li><span class="bi"></span>Boas práticas da parceria — o que funciona e o que não pode acontecer</li>
+      <li><span class="bi"></span>Assinatura do contrato de representação de locação</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SLIDE 4 — ETAPA 02 -->
+<div class="slide s-etapa">
+  <div class="etapa-left petrol-bg">
+    <div class="big-num">02</div>
+    <div class="etapa-tag">Segunda etapa</div>
+    <div class="etapa-big-title">Captação<br>de Material</div>
+  </div>
+  <div class="etapa-right light">
+    <div class="content-title">O que acontece aqui</div>
+    <p class="content-body">Essa é a etapa que mais impacta a performance do anúncio. <strong>Um imóvel bem fotografado converte muito mais</strong> — e a gente sabe disso na prática.</p>
+    <ul class="bullets">
+      <li><span class="bi teal"></span>Agendamento da visita de captação de fotos e vídeos</li>
+      <li><span class="bi teal"></span>Preparação do imóvel: organização, decoração mínima e iluminação</li>
+      <li><span class="bi teal"></span>Fotos profissionais de todos os ambientes</li>
+      <li><span class="bi teal"></span>Vídeo walkthrough para redes sociais e anúncios</li>
+      <li><span class="bi teal"></span>Edição e entrega do material pronto para uso</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SLIDE 5 — ETAPA 03 -->
+<div class="slide s-etapa">
+  <div class="etapa-left gold-bg">
+    <div class="big-num">03</div>
+    <div class="etapa-tag">Terceira etapa</div>
+    <div class="etapa-big-title">Precificação<br>Estratégica</div>
+  </div>
+  <div class="etapa-right">
+    <div class="content-title">O que acontece aqui</div>
+    <p class="content-body">Preço errado = imóvel parado ou dinheiro na mesa. A precificação tem que equilibrar <strong>rentabilidade pra você e competitividade no mercado.</strong></p>
+    <ul class="bullets">
+      <li><span class="bi"></span>Análise de localização, diferenciais e proximidade de atrações</li>
+      <li><span class="bi"></span>Avaliação de lazer e estrutura — o que justifica cobrar mais</li>
+      <li><span class="bi"></span>Pesquisa de concorrência direta na plataforma e na região</li>
+      <li><span class="bi"></span>Definição de tabela por temporada: baixa, média e alta</li>
+      <li><span class="bi"></span>Estratégia de desconto progressivo para minimizar ociosidade</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SLIDE 6 — ETAPA 04 -->
+<div class="slide s-etapa">
+  <div class="etapa-left petrol-bg">
+    <div class="big-num">04</div>
+    <div class="etapa-tag">Quarta etapa</div>
+    <div class="etapa-big-title">Metas de<br>Desempenho</div>
+  </div>
+  <div class="etapa-right light">
+    <div class="content-title">O que acontece aqui</div>
+    <p class="content-body">Sem meta, não tem como medir se a parceria está funcionando. Aqui a gente define juntos <strong>o que é sucesso para o seu imóvel.</strong></p>
+    <ul class="bullets">
+      <li><span class="bi teal"></span>Taxa de ocupação esperada por mês e por temporada</li>
+      <li><span class="bi teal"></span>Faturamento médio mensal projetado</li>
+      <li><span class="bi teal"></span>Meta de avaliação nas plataformas (nota mínima)</li>
+      <li><span class="bi teal"></span>Tempo médio de resposta ao hóspede</li>
+      <li><span class="bi teal"></span>Indicadores de satisfação e taxa de retorno de hóspedes</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SLIDE 7 — ETAPA 05 -->
+<div class="slide s-etapa">
+  <div class="etapa-left gold-bg">
+    <div class="big-num">05</div>
+    <div class="etapa-tag">Quinta etapa</div>
+    <div class="etapa-big-title">Início das<br>Campanhas</div>
+  </div>
+  <div class="etapa-right">
+    <div class="content-title">O que acontece aqui</div>
+    <p class="content-body">Com tudo pronto, ativamos a máquina. Aqui começa a <strong>captação ativa de hóspedes</strong> pelo digital e pelas nossas bases.</p>
+    <ul class="bullets">
+      <li><span class="bi"></span>Publicação do anúncio nas plataformas (site Artezian, Airbnb e afins)</li>
+      <li><span class="bi"></span>Campanha de Meta Ads segmentada para o perfil de hóspede ideal</li>
+      <li><span class="bi"></span>Disparo de WhatsApp na base ativa de interessados</li>
+      <li><span class="bi"></span>Publicação de conteúdo orgânico no Instagram (@ojoaomendonca)</li>
+      <li><span class="bi"></span>Atendimento comercial e gestão de reservas pela equipe Artezian</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SLIDE 8 — ETAPA 06 -->
+<div class="slide s-etapa">
+  <div class="etapa-left petrol-bg">
+    <div class="big-num">06</div>
+    <div class="etapa-tag">Sexta etapa</div>
+    <div class="etapa-big-title">Continuidade<br>& Resultados</div>
+  </div>
+  <div class="etapa-right light">
+    <div class="content-title">O que acontece aqui</div>
+    <p class="content-body">Aqui a parceria engrena de vez. Ações recorrentes de <strong>marketing, atendimento e análise de resultado</strong> pra manter o imóvel sempre ocupado.</p>
+    <ul class="bullets">
+      <li><span class="bi teal"></span>Relatório mensal de desempenho (ocupação, faturamento, avaliações)</li>
+      <li><span class="bi teal"></span>Revisão de precificação conforme sazonalidade e demanda</li>
+      <li><span class="bi teal"></span>Campanhas sazonais: Réveillon, Carnaval, alta temporada</li>
+      <li><span class="bi teal"></span>Gestão ativa de avaliações e reputação online</li>
+      <li><span class="bi teal"></span>Reunião trimestral de revisão de metas e estratégia</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SLIDE 9 — FECHAMENTO -->
+<div class="slide s-close">
+  <div class="close-tag">Próximo passo</div>
+  <div class="close-title">Prontos pra<br>começar <span>juntos?</span></div>
+  <div class="close-sub">Agora que você conhece o processo, o próximo passo é simples: a gente agenda uma conversa, alinha os detalhes e coloca o seu imóvel pra trabalhar.</div>
+  <div class="close-contact">
+    <div class="contact-item">
+      <div class="contact-label">Site</div>
+      <div class="contact-value">artezian.com.br</div>
+    </div>
+    <div class="divider"></div>
+    <div class="contact-item">
+      <div class="contact-label">Instagram</div>
+      <div class="contact-value">@ojoaomendonca</div>
+    </div>
+    <div class="divider"></div>
+    <div class="contact-item">
+      <div class="contact-label">Porto Seguro · BA</div>
+      <div class="contact-value">Real Estate Atelie</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

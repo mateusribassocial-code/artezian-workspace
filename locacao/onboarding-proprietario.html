@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onboarding Proprietário — Artezian</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --gold: #c2a14e;
+      --dark: #2a2a2a;
+      --petrol: #264653;
+      --white: #ffffff;
+      --light-bg: #f9f8f5;
+      --light-gold: #f5f0e8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      overflow: hidden;
+    }
+
+    /* SLIDE WRAPPER */
+    .deck {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0; left: 0;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .slide.active { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* NAV */
+    .nav {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .nav-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(42,42,42,0.2);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .nav-dot.active { background: var(--gold); }
+
+    .nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 100;
+      transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .nav-btn:hover { background: var(--gold); color: var(--white); }
+    .nav-btn.prev { left: 24px; }
+    .nav-btn.next { right: 24px; }
+
+    /* ─── SLIDE 1 — CAPA ─── */
+    #s1 {
+      background: var(--petrol);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #s1::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(194,161,78,0.12);
+    }
+
+    #s1::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: rgba(194,161,78,0.08);
+    }
+
+    .capa-tag {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    .capa-title {
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .capa-title span { color: var(--gold); }
+
+    .capa-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .logo-capa {
+      margin-top: 48px;
+      opacity: 0.9;
+    }
+
+    .logo-capa svg text {
+      fill: var(--white);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* ─── SLIDE 2 — ETAPAS OVERVIEW ─── */
+    #s2 {
+      background: var(--white);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 64px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .slide-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    .etapas-row {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .etapa-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 12px;
+      position: relative;
+    }
+
+    .etapa-item + .etapa-item::before {
+      content: '→';
+      position: absolute;
+      left: -6px;
+      top: 24px;
+      color: var(--gold);
+      font-size: 16px;
+    }
+
+    .etapa-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .etapa-num.n1 { background: var(--light-gold); color: var(--gold); border: 1.5px solid var(--gold); }
+    .etapa-num.n2 { background: rgba(38,70,83,0.08); color: var(--petrol); border: 1.5px solid var(--petrol); }
+    .etapa-num.n3 { background: var(--light-gold); color: var(--gold); border: 1.5px solid var(--gold); }
+    .etapa-num.n4 { background: rgba(38,70,83,0.08); color: var(--petrol); border: 1.5px solid var(--petrol); }
+    .etapa-num.n5 { background: var(--light-gold); color: var(--gold); border: 1.5px solid var(--gold); }
+    .etapa-num.n6 { background: var(--petrol); color: var(--white); }
+
+    .etapa-name {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .etapa-desc {
+      font-size: 11px;
+      color: #888;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    /* ─── SLIDES DE ETAPA (3–8) ─── */
+    .etapa-slide {
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    .etapa-left {
+      width: 38%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 48px;
+    }
+
+    .etapa-left.gold-bg { background: var(--gold); }
+    .etapa-left.petrol-bg { background: var(--petrol); }
+
+    .etapa-left.gold-bg .big-num,
+    .etapa-left.gold-bg .etapa-big-title,
+    .etapa-left.gold-bg .etapa-tag { color: var(--white); }
+
+    .etapa-left.petrol-bg .big-num,
+    .etapa-left.petrol-bg .etapa-big-title,
+    .etapa-left.petrol-bg .etapa-tag { color: var(--white); }
+
+    .etapa-left.white-bg {
+      background: var(--white);
+      border-right: 1px solid #eee;
+    }
+
+    .etapa-left.white-bg .big-num { color: rgba(194,161,78,0.15); }
+    .etapa-left.white-bg .etapa-tag { color: var(--gold); }
+    .etapa-left.white-bg .etapa-big-title { color: var(--dark); }
+
+    .etapa-left.light-bg { background: var(--light-bg); border-right: 1px solid #eee; }
+    .etapa-left.light-bg .big-num { color: rgba(38,70,83,0.1); }
+    .etapa-left.light-bg .etapa-tag { color: var(--petrol); }
+    .etapa-left.light-bg .etapa-big-title { color: var(--dark); }
+
+    .big-num {
+      font-size: 96px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .etapa-tag {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .etapa-big-title {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .etapa-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 56px;
+      background: var(--white);
+    }
+
+    .etapa-right.light { background: var(--light-bg); }
+
+    .content-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .content-body {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.8;
+      font-weight: 400;
+      max-width: 520px;
+    }
+
+    .content-body strong { color: var(--dark); font-weight: 600; }
+
+    .bullets {
+      list-style: none;
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .bullet-icon {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .bullet-icon.teal { background: var(--petrol); }
+
+    /* ─── SLIDE 9 — FECHAMENTO ─── */
+    #s9 {
+      background: var(--dark);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #s9::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(194,161,78,0.12) 0%, transparent 70%);
+    }
+
+    .close-tag {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .close-title {
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 16px;
+      max-width: 560px;
+    }
+
+    .close-title span { color: var(--gold); }
+
+    .close-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      font-weight: 300;
+      max-width: 420px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .close-contact {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+    }
+
+    .contact-item {
+      text-align: left;
+    }
+
+    .contact-label {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .contact-value {
+      font-size: 14px;
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .divider { width: 1px; background: rgba(255,255,255,0.1); }
+
+    /* Slide number badge */
+    .slide-badge {
+      position: fixed;
+      top: 24px; right: 32px;
+      font-size: 11px;
+      color: rgba(42,42,42,0.3);
+      font-weight: 500;
+      z-index: 100;
+      letter-spacing: 1px;
+    }
+
+    .slide-badge.light { color: rgba(255,255,255,0.35); }
+
+    /* Logo watermark */
+    .watermark {
+      position: fixed;
+      bottom: 28px; left: 32px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: rgba(42,42,42,0.2);
+      z-index: 100;
+    }
+
+    .watermark.light { color: rgba(255,255,255,0.25); }
+  </style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- ─── SLIDE 1 — CAPA ─── -->
+  <div class="slide active" id="s1">
+    <div class="capa-tag">Bem-vindo à parceria</div>
+    <div class="capa-title">Onboarding<br><span>Proprietário</span></div>
+    <div class="capa-sub">Como funciona nossa operação juntos</div>
+    <div class="logo-capa" style="margin-top: 52px; color: rgba(255,255,255,0.7); font-size: 13px; letter-spacing: 3px; font-weight: 300; text-transform: uppercase;">
+      Artezian <span style="color: var(--gold); font-weight: 600;">Real Estate Atelie</span>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 2 — OVERVIEW ─── -->
+  <div class="slide" id="s2">
+    <div class="section-label">Processo de parceria</div>
+    <div class="slide-title">As 6 etapas da nossa jornada</div>
+    <div class="etapas-row">
+
+      <div class="etapa-item">
+        <div class="etapa-num n1">01</div>
+        <div class="etapa-name">Contrato</div>
+        <div class="etapa-desc">Definir regras e alinhamentos da parceria</div>
+      </div>
+
+      <div class="etapa-item">
+        <div class="etapa-num n2">02</div>
+        <div class="etapa-name">Captação</div>
+        <div class="etapa-desc">Material fotográfico e de vídeo do imóvel</div>
+      </div>
+
+      <div class="etapa-item">
+        <div class="etapa-num n3">03</div>
+        <div class="etapa-name">Precificação</div>
+        <div class="etapa-desc">Estratégia de preço competitiva e lucrativa</div>
+      </div>
+
+      <div class="etapa-item">
+        <div class="etapa-num n4">04</div>
+        <div class="etapa-name">Metas</div>
+        <div class="etapa-desc">Definição de metas e indicadores de desempenho</div>
+      </div>
+
+      <div class="etapa-item">
+        <div class="etapa-num n5">05</div>
+        <div class="etapa-name">Início</div>
+        <div class="etapa-desc">Campanhas de Meta Ads e disparo no WhatsApp</div>
+      </div>
+
+      <div class="etapa-item">
+        <div class="etapa-num n6">06</div>
+        <div class="etapa-name">Continuidade</div>
+        <div class="etapa-desc">Ações recorrentes de marketing e comercial</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 3 — ETAPA 01: CONTRATO ─── -->
+  <div class="slide etapa-slide" id="s3">
+    <div class="etapa-left gold-bg">
+      <div class="big-num">01</div>
+      <div class="etapa-tag">Primeira etapa</div>
+      <div class="etapa-big-title">Contrato &<br>Regras</div>
+    </div>
+    <div class="etapa-right">
+      <div class="content-title">O que acontece aqui</div>
+      <p class="content-body">
+        Antes de qualquer ação, precisamos ter tudo no papel — não pra criar burocracia, mas pra <strong>garantir que a parceria funciona dos dois lados.</strong>
+      </p>
+      <ul class="bullets">
+        <li><span class="bullet-icon"></span>Definição da forma de trabalho e responsabilidades de cada parte</li>
+        <li><span class="bullet-icon"></span>Exigências mínimas de qualidade do imóvel para anunciar</li>
+        <li><span class="bullet-icon"></span>Modelo de comissão, repasses e prazos</li>
+        <li><span class="bullet-icon"></span>Boas práticas da parceria — o que funciona e o que não pode acontecer</li>
+        <li><span class="bullet-icon"></span>Assinatura do contrato de representação de locação</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 4 — ETAPA 02: CAPTAÇÃO ─── -->
+  <div class="slide etapa-slide" id="s4">
+    <div class="etapa-left petrol-bg">
+      <div class="big-num">02</div>
+      <div class="etapa-tag">Segunda etapa</div>
+      <div class="etapa-big-title">Captação<br>de Material</div>
+    </div>
+    <div class="etapa-right light">
+      <div class="content-title">O que acontece aqui</div>
+      <p class="content-body">
+        Essa é a etapa que mais impacta a performance do anúncio. <strong>Um imóvel bem fotografado converte muito mais</strong> — e a gente sabe disso na prática.
+      </p>
+      <ul class="bullets">
+        <li><span class="bullet-icon teal"></span>Agendamento da visita de captação de fotos e vídeos</li>
+        <li><span class="bullet-icon teal"></span>Preparação do imóvel: organização, decoração mínima e iluminação</li>
+        <li><span class="bullet-icon teal"></span>Fotos profissionais de todos os ambientes</li>
+        <li><span class="bullet-icon teal"></span>Vídeo walkthrough para redes sociais e anúncios</li>
+        <li><span class="bullet-icon teal"></span>Edição e entrega do material pronto para uso</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 5 — ETAPA 03: PRECIFICAÇÃO ─── -->
+  <div class="slide etapa-slide" id="s5">
+    <div class="etapa-left gold-bg">
+      <div class="big-num">03</div>
+      <div class="etapa-tag">Terceira etapa</div>
+      <div class="etapa-big-title">Precificação<br>Estratégica</div>
+    </div>
+    <div class="etapa-right">
+      <div class="content-title">O que acontece aqui</div>
+      <p class="content-body">
+        Preço errado = imóvel parado ou dinheiro na mesa. A precificação tem que equilibrar <strong>rentabilidade pra você e competitividade no mercado.</strong>
+      </p>
+      <ul class="bullets">
+        <li><span class="bullet-icon"></span>Análise de localização, diferenciais e proximidade de atrações</li>
+        <li><span class="bullet-icon"></span>Avaliação de lazer e estrutura — o que justifica cobrar mais</li>
+        <li><span class="bullet-icon"></span>Pesquisa de concorrência direta na plataforma e na região</li>
+        <li><span class="bullet-icon"></span>Definição de tabela por temporada: baixa, média e alta</li>
+        <li><span class="bullet-icon"></span>Estratégia de desconto progressivo para minimizar ociosidade</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 6 — ETAPA 04: METAS ─── -->
+  <div class="slide etapa-slide" id="s6">
+    <div class="etapa-left petrol-bg">
+      <div class="big-num">04</div>
+      <div class="etapa-tag">Quarta etapa</div>
+      <div class="etapa-big-title">Metas de<br>Desempenho</div>
+    </div>
+    <div class="etapa-right light">
+      <div class="content-title">O que acontece aqui</div>
+      <p class="content-body">
+        Sem meta, não tem como medir se a parceria está funcionando. Aqui a gente define juntos <strong>o que é sucesso para o seu imóvel.</strong>
+      </p>
+      <ul class="bullets">
+        <li><span class="bullet-icon teal"></span>Taxa de ocupação esperada por mês e por temporada</li>
+        <li><span class="bullet-icon teal"></span>Faturamento médio mensal projetado</li>
+        <li><span class="bullet-icon teal"></span>Meta de avaliação nas plataformas (nota mínima)</li>
+        <li><span class="bullet-icon teal"></span>Tempo médio de resposta ao hóspede</li>
+        <li><span class="bullet-icon teal"></span>Indicadores de satisfação e taxa de retorno de hóspedes</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 7 — ETAPA 05: INÍCIO DE AÇÕES ─── -->
+  <div class="slide etapa-slide" id="s7">
+    <div class="etapa-left gold-bg">
+      <div class="big-num">05</div>
+      <div class="etapa-tag">Quinta etapa</div>
+      <div class="etapa-big-title">Início das<br>Campanhas</div>
+    </div>
+    <div class="etapa-right">
+      <div class="content-title">O que acontece aqui</div>
+      <p class="content-body">
+        Com tudo pronto, ativamos a máquina. Aqui começa a <strong>captação ativa de hóspedes</strong> pelo digital e pelas nossas bases.
+      </p>
+      <ul class="bullets">
+        <li><span class="bullet-icon"></span>Publicação do anúncio nas plataformas (site Artezian, Airbnb e afins)</li>
+        <li><span class="bullet-icon"></span>Campanha de Meta Ads segmentada para o perfil de hóspede ideal</li>
+        <li><span class="bullet-icon"></span>Disparo de WhatsApp na base ativa de interessados</li>
+        <li><span class="bullet-icon"></span>Publicação de conteúdo orgânico no Instagram (@ojoaomendonca)</li>
+        <li><span class="bullet-icon"></span>Atendimento comercial e gestão de reservas pela equipe Artezian</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 8 — ETAPA 06: CONTINUIDADE ─── -->
+  <div class="slide etapa-slide" id="s8">
+    <div class="etapa-left petrol-bg">
+      <div class="big-num">06</div>
+      <div class="etapa-tag">Sexta etapa</div>
+      <div class="etapa-big-title">Continuidade<br>& Resultados</div>
+    </div>
+    <div class="etapa-right light">
+      <div class="content-title">O que acontece aqui</div>
+      <p class="content-body">
+        Aqui a parceria engrena de vez. Ações recorrentes de <strong>marketing, atendimento e análise de resultado</strong> pra manter o imóvel sempre ocupado.
+      </p>
+      <ul class="bullets">
+        <li><span class="bullet-icon teal"></span>Relatório mensal de desempenho (ocupação, faturamento, avaliações)</li>
+        <li><span class="bullet-icon teal"></span>Revisão de precificação conforme sazonalidade e demanda</li>
+        <li><span class="bullet-icon teal"></span>Campanhas sazonais: Réveillon, Carnaval, alta temporada</li>
+        <li><span class="bullet-icon teal"></span>Gestão ativa de avaliações e reputação online</li>
+        <li><span class="bullet-icon teal"></span>Reunião trimestral de revisão de metas e estratégia</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 9 — FECHAMENTO ─── -->
+  <div class="slide" id="s9">
+    <div class="close-tag">Próximo passo</div>
+    <div class="close-title">Prontos pra<br>começar <span>juntos?</span></div>
+    <div class="close-sub">
+      Agora que você conhece o processo, o próximo passo é simples: a gente agenda uma conversa, alinha os detalhes e coloca o seu imóvel pra trabalhar.
+    </div>
+    <div class="close-contact">
+      <div class="contact-item">
+        <div class="contact-label">WhatsApp</div>
+        <div class="contact-value">artezian.com.br</div>
+      </div>
+      <div class="divider"></div>
+      <div class="contact-item">
+        <div class="contact-label">Instagram</div>
+        <div class="contact-value">@ojoaomendonca</div>
+      </div>
+      <div class="divider"></div>
+      <div class="contact-item">
+        <div class="contact-label">Porto Seguro · BA</div>
+        <div class="contact-value">Real Estate Atelie</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- NAV CONTROLS -->
+<button class="nav-btn prev" onclick="navigate(-1)">&#8592;</button>
+<button class="nav-btn next" onclick="navigate(1)">&#8594;</button>
+
+<div class="nav" id="nav-dots"></div>
+
+<div class="slide-badge" id="badge">1 / 9</div>
+<div class="watermark" id="watermark">Artezian</div>
+
+<script>
+  const total = 9;
+  let current = 1;
+
+  const dotsEl = document.getElementById('nav-dots');
+  const badge  = document.getElementById('badge');
+  const wm     = document.getElementById('watermark');
+
+  // build dots
+  for (let i = 1; i <= total; i++) {
+    const d = document.createElement('div');
+    d.className = 'nav-dot' + (i === 1 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  }
+
+  function goTo(n) {
+    document.getElementById('s' + current).classList.remove('active');
+    document.querySelectorAll('.nav-dot')[current - 1].classList.remove('active');
+    current = Math.max(1, Math.min(total, n));
+    document.getElementById('s' + current).classList.add('active');
+    document.querySelectorAll('.nav-dot')[current - 1].classList.add('active');
+    badge.textContent = current + ' / ' + total;
+
+    const darkSlides = [1, 9];
+    const lightMode = darkSlides.includes(current);
+    badge.className = 'slide-badge' + (lightMode ? ' light' : '');
+    wm.className = 'watermark' + (lightMode ? ' light' : '');
+
+    const nb = document.querySelectorAll('.nav-btn');
+    nb.forEach(b => {
+      b.style.borderColor = lightMode ? 'rgba(255,255,255,0.4)' : 'var(--gold)';
+      b.style.color = lightMode ? 'rgba(255,255,255,0.6)' : 'var(--gold)';
+    });
+
+    dotsEl.querySelectorAll('.nav-dot').forEach(d => {
+      d.style.background = '';
+    });
+    if (lightMode) {
+      dotsEl.querySelectorAll('.nav-dot').forEach(d => {
+        d.style.background = 'rgba(255,255,255,0.25)';
+      });
+      dotsEl.querySelectorAll('.nav-dot')[current - 1].style.background = 'var(--gold)';
+    }
+  }
+
+  function navigate(dir) { goTo(current + dir); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   navigate(-1);
+  });
+
+  // Touch swipe
+  let touchX = 0;
+  document.addEventListener('touchstart', e => touchX = e.touches[0].clientX);
+  document.addEventListener('touchend', e => {
+    const dx = touchX - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 40) navigate(dx > 0 ? 1 : -1);
+  });
+</script>
+
+</body>
+</html>

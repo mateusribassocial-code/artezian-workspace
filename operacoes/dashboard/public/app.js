@@ -172,16 +172,24 @@ function renderAll() {
 
 /* ── Bloco 1 — Custos ───────────────────────────────────────────── */
 
-function getCustosDoMes() {
+function getCustosFixos() {
+  return (state.appData.custosFixos || []).map(c => ({ ...c, natureza: 'Fixo' }));
+}
+
+function getCustosVariaveisDoMes() {
   const raw = state.appData.custos?.[state.currentMonth];
   if (!raw) return [];
-  // suporta formato legado (objeto simples) e novo (array)
-  if (Array.isArray(raw)) return raw;
+  if (Array.isArray(raw)) return raw.map(c => ({ ...c, natureza: c.natureza || 'Variável' }));
+  // legado: objeto simples
   const legado = [];
-  if (raw.ferramentas)   legado.push({ id: uid(), tipo: 'Ferramentas',   titulo: 'Ferramentas',   frequencia: 'Mensal', valor: raw.ferramentas });
-  if (raw.administrativo) legado.push({ id: uid(), tipo: 'Administrativo', titulo: 'Administrativo', frequencia: 'Mensal', valor: raw.administrativo });
-  if (raw.midiaPaga)     legado.push({ id: uid(), tipo: 'Mídia Paga',    titulo: 'Mídia Paga',    frequencia: 'Mensal', valor: raw.midiaPaga });
+  if (raw.ferramentas)    legado.push({ id: uid(), tipo: 'Ferramentas',    titulo: 'Ferramentas',    frequencia: 'Mensal', valor: raw.ferramentas,    natureza: 'Variável' });
+  if (raw.administrativo) legado.push({ id: uid(), tipo: 'Administrativo', titulo: 'Administrativo', frequencia: 'Mensal', valor: raw.administrativo, natureza: 'Variável' });
+  if (raw.midiaPaga)      legado.push({ id: uid(), tipo: 'Mídia Paga',     titulo: 'Mídia Paga',     frequencia: 'Mensal', valor: raw.midiaPaga,      natureza: 'Variável' });
   return legado;
+}
+
+function getCustosDoMes() {
+  return [...getCustosFixos(), ...getCustosVariaveisDoMes()];
 }
 
 function renderCustos() {
@@ -189,7 +197,7 @@ function renderCustos() {
   const tbody  = document.getElementById('custosBody');
 
   if (!custos.length) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="5">Nenhum custo cadastrado neste mês</td></tr>';
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Nenhum custo cadastrado neste mês</td></tr>';
     document.getElementById('custo-total').textContent = brl(0);
     return;
   }
@@ -198,13 +206,16 @@ function renderCustos() {
     const tipoCls = c.tipo === 'Ferramentas' ? 'ferramentas'
                   : c.tipo === 'Administrativo' ? 'administrativo'
                   : c.tipo === 'Mídia Paga' ? 'midia' : 'outro';
+    const nat    = c.natureza || 'Variável';
+    const natCls = nat === 'Fixo' ? 'fixo' : 'variavel';
     return `
       <tr>
+        <td><span class="tipo-badge ${natCls}">${nat}</span></td>
         <td><span class="tipo-badge ${tipoCls}">${escHtml(c.tipo)}</span></td>
         <td>${escHtml(c.titulo)}</td>
         <td>${escHtml(c.frequencia)}</td>
         <td><strong>${brl(c.valor)}</strong></td>
-        <td><button class="edit-btn" onclick="openEditCusto('${c.id}')">✎</button></td>
+        <td><button class="edit-btn" onclick="openEditCusto('${c.id}', '${nat}')">✎</button></td>
       </tr>
     `;
   }).join('');
@@ -213,8 +224,11 @@ function renderCustos() {
 }
 
 function updateCustoTotal() {
-  const total = getCustosDoMes().reduce((s, c) => s + (parseFloat(c.valor) || 0), 0);
-  document.getElementById('custo-total').textContent = brl(total);
+  const fixos     = getCustosFixos().reduce((s, c) => s + (parseFloat(c.valor) || 0), 0);
+  const variaveis = getCustosVariaveisDoMes().reduce((s, c) => s + (parseFloat(c.valor) || 0), 0);
+  document.getElementById('custo-total').textContent = brl(fixos + variaveis);
+  const sub = document.getElementById('custo-subtotals');
+  if (sub) sub.innerHTML = `<span>Fixos: <strong>${brl(fixos)}</strong></span><span>Variáveis: <strong>${brl(variaveis)}</strong></span>`;
 }
 
 /* ── Bloco 1 — Receitas ─────────────────────────────────────────── */
@@ -624,14 +638,19 @@ document.getElementById('btnDeleteParceiro').addEventListener('click', async () 
 /* ── Modal — Custo ──────────────────────────────────────────────── */
 
 let editingCustoId = null;
+let editingCustoNatureza = null;
 
-function openCustoModal(id = null) {
+function openCustoModal(id = null, natureza = null) {
   editingCustoId = id;
+  editingCustoNatureza = natureza;
   const deleteBtn = document.getElementById('btnDeleteCusto');
 
   if (id) {
-    const c = getCustosDoMes().find(x => x.id === id);
+    const c = natureza === 'Fixo'
+      ? getCustosFixos().find(x => x.id === id)
+      : getCustosVariaveisDoMes().find(x => x.id === id);
     document.getElementById('custoModalTitle').textContent = 'Editar Custo';
+    document.getElementById('c-natureza').value   = c.natureza || 'Variável';
     document.getElementById('c-tipo').value       = c.tipo;
     document.getElementById('c-titulo').value     = c.titulo;
     document.getElementById('c-frequencia').value = c.frequencia;
@@ -639,6 +658,7 @@ function openCustoModal(id = null) {
     deleteBtn.style.display = 'inline-flex';
   } else {
     document.getElementById('custoModalTitle').textContent = 'Novo Custo';
+    document.getElementById('c-natureza').value   = 'Variável';
     document.getElementById('c-tipo').value       = 'Ferramentas';
     document.getElementById('c-titulo').value     = '';
     document.getElementById('c-frequencia').value = 'Mensal';
@@ -652,9 +672,10 @@ function openCustoModal(id = null) {
 function closeCustoModal() {
   document.getElementById('custoModal').classList.remove('open');
   editingCustoId = null;
+  editingCustoNatureza = null;
 }
 
-window.openEditCusto = function(id) { openCustoModal(id); };
+window.openEditCusto = function(id, natureza) { openCustoModal(id, natureza); };
 
 document.getElementById('btnAddCusto').addEventListener('click', () => openCustoModal());
 document.getElementById('btnCloseCustoModal').addEventListener('click', closeCustoModal);
@@ -669,20 +690,48 @@ document.getElementById('btnSalvarCusto').addEventListener('click', async () => 
   if (!titulo) { alert('Informe o título do custo'); return; }
   if (!valor)  { alert('Informe o valor'); return; }
 
+  const natureza   = document.getElementById('c-natureza').value;
   const tipo       = document.getElementById('c-tipo').value;
   const frequencia = document.getElementById('c-frequencia').value;
 
-  if (!state.appData.custos) state.appData.custos = {};
-  let lista = getCustosDoMes();
+  if (!state.appData.custosFixos) state.appData.custosFixos = [];
+  if (!state.appData.custos)      state.appData.custos = {};
 
   if (editingCustoId) {
-    const idx = lista.findIndex(c => c.id === editingCustoId);
-    if (idx >= 0) lista[idx] = { ...lista[idx], tipo, titulo, frequencia, valor };
+    const prevNat = editingCustoNatureza;
+
+    if (prevNat === 'Fixo' && natureza === 'Fixo') {
+      const idx = state.appData.custosFixos.findIndex(c => c.id === editingCustoId);
+      if (idx >= 0) state.appData.custosFixos[idx] = { ...state.appData.custosFixos[idx], tipo, titulo, frequencia, valor };
+
+    } else if (prevNat === 'Variável' && natureza === 'Variável') {
+      let lista = getCustosVariaveisDoMes();
+      const idx = lista.findIndex(c => c.id === editingCustoId);
+      if (idx >= 0) lista[idx] = { ...lista[idx], tipo, titulo, frequencia, valor };
+      state.appData.custos[state.currentMonth] = lista;
+
+    } else if (prevNat === 'Variável' && natureza === 'Fixo') {
+      // promove para fixo
+      state.appData.custos[state.currentMonth] = getCustosVariaveisDoMes().filter(c => c.id !== editingCustoId);
+      state.appData.custosFixos.push({ id: uid(), tipo, titulo, frequencia, valor });
+
+    } else if (prevNat === 'Fixo' && natureza === 'Variável') {
+      // rebaixa para variável do mês
+      state.appData.custosFixos = state.appData.custosFixos.filter(c => c.id !== editingCustoId);
+      let lista = getCustosVariaveisDoMes();
+      lista.push({ id: uid(), tipo, titulo, frequencia, valor, natureza: 'Variável' });
+      state.appData.custos[state.currentMonth] = lista;
+    }
   } else {
-    lista.push({ id: uid(), tipo, titulo, frequencia, valor });
+    if (natureza === 'Fixo') {
+      state.appData.custosFixos.push({ id: uid(), tipo, titulo, frequencia, valor });
+    } else {
+      let lista = getCustosVariaveisDoMes();
+      lista.push({ id: uid(), tipo, titulo, frequencia, valor, natureza: 'Variável' });
+      state.appData.custos[state.currentMonth] = lista;
+    }
   }
 
-  state.appData.custos[state.currentMonth] = lista;
   await saveData(state.appData);
   closeCustoModal();
   renderCustos();
@@ -691,8 +740,13 @@ document.getElementById('btnSalvarCusto').addEventListener('click', async () => 
 
 document.getElementById('btnDeleteCusto').addEventListener('click', async () => {
   if (!confirm('Excluir este custo?')) return;
-  let lista = getCustosDoMes().filter(c => c.id !== editingCustoId);
-  state.appData.custos[state.currentMonth] = lista;
+
+  if (editingCustoNatureza === 'Fixo') {
+    state.appData.custosFixos = (state.appData.custosFixos || []).filter(c => c.id !== editingCustoId);
+  } else {
+    state.appData.custos[state.currentMonth] = getCustosVariaveisDoMes().filter(c => c.id !== editingCustoId);
+  }
+
   await saveData(state.appData);
   closeCustoModal();
   renderCustos();

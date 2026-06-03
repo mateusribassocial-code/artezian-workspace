@@ -259,5 +259,21 @@
       "resultado": 2000,
       "margem": 100
     }
+  },
+  "relatorios": {
+    "we4te6dfz__2026-06": [
+      {
+        "id": "fn04iewbn",
+        "nome": "Rita Moura",
+        "valor": 700,
+        "comissao": 105
+      },
+      {
+        "id": "84yd5lk1p",
+        "nome": "Waldinei Aparecido Passos Braga",
+        "valor": 1600,
+        "comissao": 240
+      }
+    ]
   }
 }

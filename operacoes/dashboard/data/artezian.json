@@ -247,6 +247,17 @@
       "custo": 3662.04,
       "resultado": -602.04,
       "margem": -19.7
+    },
+    "2026-06": {
+      "savedAt": "2026-06-03T08:23:40.073Z",
+      "receita": {
+        "reservas": 0,
+        "mensalidades": 2000,
+        "total": 2000
+      },
+      "custo": 0,
+      "resultado": 2000,
+      "margem": 100
     }
   }
 }

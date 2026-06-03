@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Apto do Reinaldo — Estratégia | Artezian</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+  :root { --gold:#c2a14e;--dark:#2a2a2a;--teal:#264653;--white:#ffffff;--light:#f8f6f1;--gray:#888;--border:#e8e0d0; }
+  * { margin:0;padding:0;box-sizing:border-box; }
+  body { font-family:'Lato',sans-serif;color:var(--dark);background:#e5e5e5; }
+  .page { width:210mm;min-height:297mm;background:var(--white);margin:12px auto;position:relative;overflow:hidden;page-break-after:always; }
+  .pi { padding:13mm 15mm;height:100%;display:flex;flex-direction:column; }
+  .ph { display:flex;justify-content:space-between;align-items:center;padding-bottom:5mm;border-bottom:1px solid var(--border);margin-bottom:7mm; }
+  .ph .brand { font-family:'Playfair Display',serif;font-size:11pt;color:var(--gold);letter-spacing:1px; }
+  .ph .plabel { font-size:7.5pt;color:var(--gray);letter-spacing:1.5px;text-transform:uppercase; }
+  h1,h2 { font-family:'Playfair Display',serif; }
+  .stitle { font-family:'Playfair Display',serif;font-size:19pt;color:var(--teal);margin-bottom:2mm; }
+  .ssub { font-size:8.5pt;color:var(--gray);margin-bottom:6mm;line-height:1.5; }
+  .gbar { width:28px;height:2px;background:var(--gold);margin-bottom:4mm; }
+  .pf { margin-top:auto;padding-top:4mm;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center; }
+  .pf .fbrand { font-size:7.5pt;color:var(--gold);font-family:'Playfair Display',serif; }
+  .pf .fnote { font-size:7pt;color:var(--gray); }
+  hr.div { border:none;border-top:1px solid var(--border);margin:3.5mm 0; }
+  .tsm { font-size:8pt;color:var(--gray);line-height:1.6; }
+
+  /* COVER */
+  .cover { background:var(--teal);min-height:297mm;display:flex;flex-direction:column;justify-content:space-between;padding:17mm 15mm; }
+  .clogo { font-family:'Playfair Display',serif;font-size:12pt;color:var(--gold);letter-spacing:2px;text-transform:uppercase; }
+  .clogo span { display:block;font-size:7.5pt;color:rgba(255,255,255,0.5);letter-spacing:3px;font-family:'Lato',sans-serif;font-weight:300;margin-top:3px; }
+  .cmain { flex:1;display:flex;flex-direction:column;justify-content:center; }
+  .ceyebrow { font-size:7.5pt;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:5mm; }
+  .ctitle { font-family:'Playfair Display',serif;font-size:30pt;color:var(--white);line-height:1.15;margin-bottom:4mm; }
+  .csub { font-size:11pt;color:rgba(255,255,255,0.6);font-weight:300;line-height:1.6; }
+  .cline { width:36px;height:2px;background:var(--gold);margin:5mm 0; }
+  .cmeta { display:flex;gap:8mm;border-top:1px solid rgba(255,255,255,0.15);padding-top:5mm;flex-wrap:wrap; }
+  .cmitem .lbl { font-size:6.5pt;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:2px; }
+  .cmitem .val { font-size:8.5pt;color:rgba(255,255,255,0.85); }
+
+  /* TABLES */
+  table.t { width:100%;border-collapse:collapse;margin-bottom:4mm; }
+  table.t th { background:var(--teal);color:var(--white);font-size:7.5pt;text-transform:uppercase;letter-spacing:.5px;padding:2.5mm 3mm;text-align:left;font-weight:400; }
+  table.t td { padding:2.5mm 3mm;font-size:8.5pt;border-bottom:1px solid var(--border); }
+  table.t tr:last-child td { border-bottom:none; }
+  table.t tr:nth-child(even) td { background:var(--light); }
+  table.t .hl td { background:#fdf8ee!important;font-weight:700; }
+  table.t .tr td { background:var(--teal)!important;color:var(--white);font-weight:700;border:none; }
+  table.t .tr td.gc { color:var(--gold); }
+  .gt { color:var(--gold);font-weight:700; }
+  .tt { color:var(--teal);font-weight:700; }
+  .rt { color:#c24a4a;font-weight:700; }
+
+  /* METRIC ROW */
+  .mr { display:grid;grid-template-columns:repeat(3,1fr);gap:3.5mm;margin-bottom:4mm; }
+  .mr2 { display:grid;grid-template-columns:repeat(2,1fr);gap:3.5mm;margin-bottom:4mm; }
+  .mc { background:var(--light);border-radius:5px;padding:3.5mm;text-align:center; }
+  .mc.dk { background:var(--teal); }
+  .mc.gk { background:var(--gold); }
+  .mc .ml { font-size:7pt;text-transform:uppercase;letter-spacing:1px;color:var(--gray);margin-bottom:1.5mm; }
+  .mc.dk .ml,.mc.gk .ml { color:rgba(255,255,255,.65); }
+  .mc .mv { font-family:'Playfair Display',serif;font-size:18pt;color:var(--teal);line-height:1; }
+  .mc.dk .mv { color:var(--white); }
+  .mc.gk .mv { color:var(--white); }
+  .mc .ms { font-size:7pt;color:var(--gray);margin-top:1mm; }
+  .mc.dk .ms,.mc.gk .ms { color:rgba(255,255,255,.6); }
+
+  /* LEVEL CARDS */
+  .lg { display:grid;grid-template-columns:repeat(3,1fr);gap:3.5mm;margin-bottom:4mm; }
+  .lc { border-radius:5px;overflow:hidden; }
+  .lc .lh { padding:2.5mm 3.5mm;font-size:7.5pt;text-transform:uppercase;letter-spacing:1px;font-weight:700; }
+  .lc.lmin .lh { background:#e8e0d0;color:var(--gray); }
+  .lc.lmet .lh { background:var(--gold);color:var(--white); }
+  .lc.lidl .lh { background:var(--teal);color:var(--white); }
+  .lc .lb { background:var(--light);padding:3.5mm; }
+  .lc .lrev { font-family:'Playfair Display',serif;font-size:15pt;color:var(--teal);margin-bottom:1mm; }
+  .lc.lmet .lrev { color:var(--gold); }
+  .lc.lidl .lrev { color:var(--teal); }
+  .lc .lcomm { font-size:8.5pt;color:var(--dark);margin-bottom:2.5mm; }
+  .lc .lres { font-size:7.5pt;font-weight:700;padding:1.5mm 2.5mm;border-radius:3px;display:inline-block; }
+  .lc.lmin .lres { background:#ddd;color:#666; }
+  .lc.lmet .lres { background:#fdf8ee;color:var(--gold); }
+  .lc.lidl .lres { background:#264653;color:var(--white); }
+  .lc .locc { font-size:7.5pt;color:var(--gray);margin-top:2.5mm;line-height:1.6; }
+
+  /* CARDS */
+  .card { background:var(--light);border-radius:5px;padding:4mm;margin-bottom:3.5mm;border-left:3px solid var(--gold); }
+  .card .ctit { font-size:7.5pt;text-transform:uppercase;letter-spacing:1px;color:var(--gold);font-weight:700;margin-bottom:2mm; }
+  .card p { font-size:8.5pt;color:var(--dark);line-height:1.6; }
+  .callout { border-left:3px solid var(--gold);background:#fdf8ee;padding:3mm 4.5mm;border-radius:0 5px 5px 0;margin-bottom:3.5mm; }
+  .callout p { font-size:8.5pt;color:var(--dark);line-height:1.6; }
+  .callout strong { color:var(--teal); }
+
+  /* STRATEGY GRID */
+  .sg { display:grid;grid-template-columns:1fr 1fr;gap:3.5mm;margin-bottom:4mm; }
+  .sc { border:1px solid var(--border);border-radius:5px;overflow:hidden; }
+  .sc .sh { background:var(--teal);color:var(--white);padding:2.5mm 3.5mm;font-size:8pt;font-weight:700; }
+  .sc .sb { padding:3.5mm; }
+  .sc .sb ul { list-style:none;padding:0; }
+  .sc .sb li { font-size:8pt;color:var(--dark);padding:1.5mm 0 1.5mm 3mm;border-bottom:1px solid var(--border);position:relative;line-height:1.4; }
+  .sc .sb li:last-child { border-bottom:none; }
+  .sc .sb li::before { content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:3px;background:var(--gold);border-radius:50%; }
+
+  /* UNIT CARDS GRID */
+  .ug { display:grid;gap:4mm;margin-bottom:4mm; }
+  .ug.u1 { grid-template-columns:1fr; }
+  .ug.u2 { grid-template-columns:1fr 1fr; }
+  .ug.u3 { grid-template-columns:1fr 1fr 1fr; }
+  .uc { background:var(--light);border-radius:5px;padding:4mm;border-left:3px solid var(--gold); }
+  .uc .utype { font-size:7pt;color:var(--gray);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:2mm; }
+  .uc .uname { font-family:'Playfair Display',serif;font-size:12pt;color:var(--teal);margin-bottom:2mm; }
+  .uc .uid { font-size:7pt;color:var(--gray); }
+  .uc .urates { display:flex;gap:3mm;margin:3mm 0; }
+  .uc .urate { text-align:center;flex:1;background:var(--white);padding:2mm;border-radius:4px; }
+  .uc .urate .rl { font-size:6.5pt;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-bottom:1mm; }
+  .uc .urate .rv { font-size:10pt;font-weight:700;color:var(--teal); }
+  .uc .unotes { font-size:7.5pt;color:var(--gray); }
+
+  /* KPI */
+  .kg { display:grid;grid-template-columns:1fr 1fr;gap:3.5mm;margin-bottom:4mm; }
+  .kc { background:var(--light);border-radius:5px;padding:3.5mm;border-top:2px solid var(--gold); }
+  .kc .kt { font-size:7.5pt;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-bottom:3mm; }
+  .kc ul { list-style:none; }
+  .kc li { font-size:7.5pt;padding:1.5mm 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center; }
+  .kc li:last-child { border-bottom:none; }
+  .kc .ktg { font-weight:700;color:var(--gold);font-size:8pt; }
+
+  /* STEPS */
+  .step { display:flex;gap:3.5mm;align-items:flex-start;margin-bottom:3.5mm;padding:3.5mm;background:var(--light);border-radius:5px; }
+  .snum { background:var(--gold);color:var(--white);width:6mm;height:6mm;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8.5pt;font-weight:700;flex-shrink:0; }
+  .scont .stit { font-size:8.5pt;font-weight:700;color:var(--teal);margin-bottom:1mm; }
+  .scont .sdesc { font-size:7.5pt;color:var(--dark);line-height:1.5; }
+  .scont .stag { display:inline-block;font-size:6.5pt;padding:.5mm 2mm;border-radius:3px;background:var(--teal);color:var(--white);margin-top:1.5mm;text-transform:uppercase;letter-spacing:1px; }
+
+  @media print {
+    body { background:white; }
+    .page { margin:0;box-shadow:none;page-break-after:always; }
+    @page { size:A4;margin:0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div class="page">
+  <div class="cover">
+    <div class="clogo">Artezian<span>Real Estate Atelie</span></div>
+    <div class="cmain">
+      <div class="ceyebrow">Estratégia de Operação · Parceiro</div>
+      <h1 class="ctitle">Apto<br>do Reinaldo</h1>
+      <div class="cline"></div>
+      <p class="csub">Taperapuã · Porto Seguro<br>Modelo comercial, metas de receita e estratégia de distribuição por temporada</p>
+    </div>
+    <div class="cmeta">
+      <div class="cmitem"><div class="lbl">Elaborado por</div><div class="val">Artezian Real Estate Atelie</div></div>
+      <div class="cmitem"><div class="lbl">Data</div><div class="val">Junho de 2026</div></div>
+      <div class="cmitem"><div class="lbl">Unidades</div><div class="val">1 unidade · Taperapuã, Porto Seguro</div></div>
+      <div class="cmitem"><div class="lbl">Modelo</div><div class="val">Comissão 15% + Fixo R$ 2.500/mês</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PORTFÓLIO -->
+<div class="page">
+  <div class="pi">
+    <div class="ph"><div class="brand">Artezian</div><div class="plabel">Portfólio</div></div>
+    <div class="gbar"></div>
+    <h2 class="stitle">A Unidade</h2>
+    <p class="ssub">180m da praia · Residencial Village do Bosque · Taperapuã, Porto Seguro</p>
+
+    <div class="ug u1">
+    <div class="uc">
+      <div class="utype">3 Suítes</div>
+      <div class="uname">Apto do Reinaldo</div>
+      <div class="uid">ID: FL10J · Capacidade: 10 pessoas · 3 quartos</div>
+      <div class="urates">
+        <div class="urate"><div class="rl">Baixa</div><div class="rv">R$ 750</div></div>
+        <div class="urate"><div class="rl">Feriados</div><div class="rv">R$ 1.200</div></div>
+        <div class="urate" style="background:#fdf8ee;"><div class="rl">Alta</div><div class="rv" style="color:var(--gold);">R$ 1.600</div></div>
+      </div>
+      <div class="unotes">Churrasqueira privativa · Vista piscina · Suíte no térreo · 180m da praia · Taxa de limpeza: R$ 200</div>
+    </div>
+  </div>
+
+    <div class="callout">
+      <p><strong>Sobre o imóvel:</strong> Apartamento de 3 suítes no Residencial Village do Bosque. A 180m da praia de Taperapuã, próximo ao Axé Moi. Um dos apartamentos mais próximos da praia no portfólio.</p>
+    </div>
+
+    <div class="card">
+      <div class="ctit">O que tem por perto</div>
+      <p>Axé Moi (a pé) · Tôa Tôa · Boa Beach · Bartuque Beach · Colher de Pau</p>
+    </div>
+
+    <div class="mr" style="margin-top:3mm;">
+      <div class="mc dk">
+        <div class="ml">Capacidade total</div>
+        <div class="mv">10</div>
+        <div class="ms">pessoas</div>
+      </div>
+      <div class="mc gk">
+        <div class="ml">Diária alta temporada</div>
+        <div class="mv">R$ 1.600</div>
+        <div class="ms">média do portfólio</div>
+      </div>
+      <div class="mc">
+        <div class="ml">Diária baixa temporada</div>
+        <div class="mv" style="color:var(--teal);">R$ 750</div>
+        <div class="ms">média do portfólio</div>
+      </div>
+    </div>
+    <div class="pf"><div class="fbrand">Artezian Real Estate Atelie</div><div class="fnote">Apto do Reinaldo · Estratégia de Operação · 2026</div></div>
+  </div>
+</div>
+
+<!-- MODELO DE PARCERIA + BREAK-EVEN -->
+<div class="page">
+  <div class="pi">
+    <div class="ph"><div class="brand">Artezian</div><div class="plabel">Modelo de Parceria</div></div>
+    <div class="gbar"></div>
+    <h2 class="stitle">Modelo Comercial & Break-even</h2>
+    <p class="ssub">Estrutura financeira da parceria e ponto de equilíbrio por temporada</p>
+
+    <div class="mr">
+      <div class="mc dk">
+        <div class="ml">Comissão Artezian</div>
+        <div class="mv">15%</div>
+        <div class="ms">sobre receita bruta</div>
+      </div>
+      <div class="mc gk">
+        <div class="ml">Fixo Mensal</div>
+        <div class="mv">R$ 2.500</div>
+        <div class="ms">independente da ocupação</div>
+      </div>
+      <div class="mc">
+        <div class="ml">Receita mín. necessária</div>
+        <div class="mv" style="color:var(--teal);">R$ 16.667</div>
+        <div class="ms">R$ 2.500 ÷ 15%</div>
+      </div>
+    </div>
+
+    <table class="t" style="margin-bottom:4mm;">
+      <thead><tr><th>Temporada</th><th>Diária média</th><th>Receita máx. (1 un × 30d)</th><th>Ocupação mínima</th><th>Noites p/ break-even</th></tr></thead>
+      <tbody>
+        <tr><td><b>Baixa</b></td><td>R$ 750</td><td>R$ 22.500</td><td class="gt">74%</td><td>23 noites</td></tr>
+        <tr><td><b>Feriados</b></td><td>R$ 1.200</td><td>R$ 36.000</td><td class="gt">46%</td><td>14 noites</td></tr>
+        <tr class="hl"><td><b>Alta</b></td><td>R$ 1.600</td><td>R$ 48.000</td><td class="gt">35%</td><td>11 noites</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sg">
+      <div class="sc">
+        <div class="sh">✦ Artezian é responsável por</div>
+        <div class="sb"><ul>
+          <li>Gestão dos anúncios — Airbnb, site, Booking.com</li>
+          <li>Atendimento de hóspedes via WhatsApp e Instagram</li>
+          <li>Precificação dinâmica por temporada e feriados</li>
+          <li>Coordenação de check-in, check-out e limpeza</li>
+          <li>Relatórios mensais de performance e ocupação</li>
+          <li>Estratégia de marketing e distribuição de demanda</li>
+        </ul></div>
+      </div>
+      <div class="sc">
+        <div class="sh" style="background:var(--gold);">✦ Parceiro é responsável por</div>
+        <div class="sb"><ul>
+          <li>Disponibilidade e manutenção do imóvel</li>
+          <li>Enxoval, equipamentos e estrutura</li>
+          <li>Aprovação do calendário de disponibilidade</li>
+          <li>Bloqueios para uso próprio (com antecedência)</li>
+          <li>Custos de reparo e manutenção corretiva</li>
+          <li>IPTU, condomínio e despesas do imóvel</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Simulação alta temporada — 1 semana com 100% de ocupação:</strong>
+      1 un × 7 noites × R$ 1.600/n = <strong>R$ 11.200</strong> de receita → comissão de <strong>R$ 1.680</strong>
+      (ainda não cobre o fixo — precisa de mais noites).</p>
+    </div>
+    <div class="pf"><div class="fbrand">Artezian Real Estate Atelie</div><div class="fnote">Apto do Reinaldo · Estratégia de Operação · 2026</div></div>
+  </div>
+</div>
+
+<!-- METAS -->
+<div class="page">
+  <div class="pi">
+    <div class="ph"><div class="brand">Artezian</div><div class="plabel">Metas de Performance</div></div>
+    <div class="gbar"></div>
+    <h2 class="stitle">Metas por Nível</h2>
+    <p class="ssub">Três patamares de performance para acompanhamento mensal</p>
+
+    <div class="lg">
+      <div class="lc lmin">
+        <div class="lh">Nível Mínimo</div>
+        <div class="lb">
+          <div class="lrev">R$ 16.667</div>
+          <div class="lcomm">Comissão: <strong>R$ 2.500</strong></div>
+          <span class="lres">Resultado: R$ 0</span>
+          <div class="locc"><strong>Baixa:</strong> 74% · 23 n<br><strong>Feriados:</strong> 46% · 14 n<br><strong>Alta:</strong> 35% · 11 n</div>
+        </div>
+      </div>
+      <div class="lc lmet">
+        <div class="lh">⭐ Nível Meta</div>
+        <div class="lb">
+          <div class="lrev">R$ 33.333</div>
+          <div class="lcomm">Comissão: <strong>R$ 5.000</strong></div>
+          <span class="lres">Resultado: +R$ 2.500</span>
+          <div class="locc"><strong>Baixa:</strong> 148%<br><strong>Feriados:</strong> 93%<br><strong>Alta:</strong> 69%</div>
+        </div>
+      </div>
+      <div class="lc lidl">
+        <div class="lh">🏆 Nível Ideal</div>
+        <div class="lb">
+          <div class="lrev" style="color:var(--white);">R$ 50.000</div>
+          <div class="lcomm" style="color:rgba(255,255,255,.8);">Comissão: <strong style="color:var(--gold);">R$ 7.500</strong></div>
+          <span class="lres">Resultado: +R$ 5.000</span>
+          <div class="locc" style="color:rgba(255,255,255,.7);"><strong style="color:rgba(255,255,255,.9);">Baixa:</strong> 222%<br><strong style="color:rgba(255,255,255,.9);">Feriados:</strong> 139%<br><strong style="color:rgba(255,255,255,.9);">Alta:</strong> 104%</div>
+        </div>
+      </div>
+    </div>
+
+    <table class="t">
+      <thead><tr><th>Nível</th><th>Receita alvo</th><th>Comissão</th><th>Fixo</th><th>Resultado líquido</th><th>Ocp. mín. (baixa)</th><th>Ocp. mín. (alta)</th></tr></thead>
+      <tbody>
+        <tr><td><b>Mínimo</b></td><td>R$ 16.667</td><td>R$ 2.500</td><td>R$ 2.500</td><td>R$ 0</td><td class="gt">74%</td><td class="gt">35%</td></tr>
+        <tr class="hl"><td><b>Meta</b></td><td>R$ 33.333</td><td>R$ 5.000</td><td>R$ 2.500</td><td class="gt">+R$ 2.500</td><td class="gt">148%</td><td class="gt">69%</td></tr>
+        <tr><td><b>Ideal</b></td><td>R$ 50.000</td><td>R$ 7.500</td><td>R$ 2.500</td><td class="tt">+R$ 5.000</td><td class="gt">222%</td><td class="gt">104%</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Benchmark:</strong> Propriedades bem geridas em Porto Seguro atingem 55–75% de ocupação anual. Com gestão ativa da Artezian, atingir o Nível Meta é realista dentro de 3 a 6 meses de operação estruturada.</p>
+    </div>
+    <div class="pf"><div class="fbrand">Artezian Real Estate Atelie</div><div class="fnote">Apto do Reinaldo · Estratégia de Operação · 2026</div></div>
+  </div>
+</div>
+
+<!-- PROJEÇÃO ANUAL -->
+<div class="page">
+  <div class="pi">
+    <div class="ph"><div class="brand">Artezian</div><div class="plabel">Projeção Anual</div></div>
+    <div class="gbar"></div>
+    <h2 class="stitle">Projeção 12 Meses</h2>
+    <p class="ssub">Cenário Meta — receita bruta, comissão e resultado por mês (1 unidade)</p>
+
+    <table class="t" style="font-size:8pt;">
+      <thead><tr><th>Mês</th><th>Temporada</th><th>Ocupação</th><th>Noites</th><th>Receita bruta</th><th>Comissão</th><th>Fixo</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr>
+      <td>Janeiro</td>
+      <td><span style="font-size:6.5pt;font-weight:700;padding:1px 4px;border-radius:3px;background:#fde8e8;color:#c24a4a;">Alta</span></td>
+      <td>80%</td>
+      <td>24</td>
+      <td>R$ 38.400</td>
+      <td class="gt">R$ 5.760</td>
+      <td>R$ 2.500</td>
+      <td class="gt">+R$ 3.260</td>
+    </tr><tr>
+      <td>Fevereiro</td>
+      <td><span style="font-size:6.5pt;font-weight:700;padding:1px 4px;border-radius:3px;background:#fde8e8;color:#c24a4a;">Alta</span></td>
+      <td>85%</td>
+      <td>26</td>
+      <td>R$ 41.600</td>
+      <td class="gt">R$ 6.240</td>
+      <td>R$ 2.500</td>
+      <td class="gt">+R$ 3.740</td>
+    </tr><tr>
+      <td>Março</td>
+      <td><span style="font-size:6.5pt;font-weight:700;padding:1px 4px;border-radius:3px;background:#fef3e2;color:#c27c00;">Feriado/Mista</span></td>
+      <td>45%</td>
+      <td>14</td>
+      <td>R$ 16.800</td>
+      <td class="gt">R$ 2.520</td>
+      <td>R$ 2.500</td>
+      <td class="gt">+R$ 20</td>
+    </tr><tr>
+      <td>Abril</td>
+      <td><span style="font-size:6.5pt;font-weight:700;padding:1px 4px;border-radius:3px;background:#fef3e2;color:#c27c00;">Feriado/Mista</span></td>
+      <td>40%</td>
+      <td>12</td>
+      <td>R$ 14.400</td>
+      <td class="rt">R$ 2.160</td>
+      <td>R$ 2.500</td>
+      <td class="rt">R$ -340</td>
+    </tr><tr>
+      <td>Maio</td>
+      <td><span style="font-size:6.5pt;font-weight:700;padding:1px 4px;border-radius:3px;background:#e8f4e8;color:#4a7c4a;">Baixa</span></td>
+      <td>35%</td>
+      <td>11</td>
+      <td>R$ 8.250</td>
+      <td class="rt">R$ 1.238</td>
+      <td>R$ 2.500</td>
+      <td class="rt">R$ -1.262</td>
+    </tr><tr>
+      <td>Junho</td>
+      <td><span style="font-size:6.5pt;font-weight:700;padding:1px 4px;border-radius:3px;background:#e8f4e8;color:#4a7c4a;">Baixa</span></td>
+      <td>35%</td>
+      <td>11</td>
+      <td>R$ 8.250</td>
+      <td class="rt">R$ 1.238</td>
+      <td>R$ 2.500</td>
+      <td class="rt">R$ -1.262</td>
+    </tr><tr>
+      <td>Julho</td>
+      <td><span style="font-size:6.5pt;font-weight:700;padding:1px 4px;border-radius:3px;background:#fef3e2;color:#c27c00;">Feriado/Mista</span></td>
+      <td>75%</td>
+      <td>23</td>
+      <td>R$ 27.600</td>
+      <td class="gt">R$ 4.140</td>
+      <td>R$ 2.500</td>
+      <td class="gt">+R$ 1.640</td>
+    </tr><tr>
+      <td>Agosto</td>
+      <td><span style="font-size:6.5pt;font-weight:700;padding:1px 4px;border-radius:3px;background:#e8f4e8;color:#4a7c4a;">Baixa</span></td>
+      <td>35%</td>
+      <td>11</td>
+      <td>R$ 8.250</td>
+      <td class="rt">R$ 1.238</td>
+      <td>R$ 2.500</td>
+      <td class="rt">R$ -1.262</td>
+    </tr><tr>
+      <td>Setembro</td>
+      <td><span style="font-size:6.5pt;font-weight:700;padding:1px 4px;border-radius:3px;background:#e8f4e8;color:#4a7c4a;">Baixa</span></td>
+      <td>35%</td>
+      <td>11</td>
+      <td>R$ 8.250</td>
+      <td class="rt">R$ 1.238</td>
+      <td>R$ 2.500</td>
+      <td class="rt">R$ -1.262</td>
+    </tr><tr>
+      <td>Outubro</td>
+      <td><span style="font-size:6.5pt;font-weight:700;padding:1px 4px;border-radius:3px;background:#e8f4e8;color:#4a7c4a;">Baixa</span></td>
+      <td>38%</td>
+      <td>11</td>
+      <td>R$ 8.250</td>
+      <td class="rt">R$ 1.238</td>
+      <td>R$ 2.500</td>
+      <td class="rt">R$ -1.262</td>
+    </tr><tr>
+      <td>Novembro</td>
+      <td><span style="font-size:6.5pt;font-weight:700;padding:1px 4px;border-radius:3px;background:#fef3e2;color:#c27c00;">Feriado/Mista</span></td>
+      <td>50%</td>
+      <td>15</td>
+      <td>R$ 18.000</td>
+      <td class="gt">R$ 2.700</td>
+      <td>R$ 2.500</td>
+      <td class="gt">+R$ 200</td>
+    </tr><tr>
+      <td>Dezembro</td>
+      <td><span style="font-size:6.5pt;font-weight:700;padding:1px 4px;border-radius:3px;background:#fde8e8;color:#c24a4a;">Alta</span></td>
+      <td>75%</td>
+      <td>23</td>
+      <td>R$ 36.800</td>
+      <td class="gt">R$ 5.520</td>
+      <td>R$ 2.500</td>
+      <td class="gt">+R$ 3.020</td>
+    </tr>
+        <tr class="tr">
+          <td><b>TOTAL ANO</b></td>
+          <td>—</td>
+          <td><b>52% média</b></td>
+          <td><b>192</b></td>
+          <td><b>R$ 234.850</b></td>
+          <td class="gc"><b>R$ 35.228</b></td>
+          <td><b>R$ 30.000</b></td>
+          <td class="gc"><b>+R$ 5.228</b></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Resultado líquido projetado (Cenário Meta):</strong> R$ 5.228 no ano, com média de R$ 436/mês acima do fixo. Receita bruta estimada em R$ 234.850 com ocupação média anual de 52%.</p>
+    </div>
+    <div class="pf"><div class="fbrand">Artezian Real Estate Atelie</div><div class="fnote">Apto do Reinaldo · Estratégia de Operação · 2026</div></div>
+  </div>
+</div>
+
+<!-- DISTRIBUIÇÃO + OPERAÇÃO -->
+<div class="page">
+  <div class="pi">
+    <div class="ph"><div class="brand">Artezian</div><div class="plabel">Distribuição & Operação</div></div>
+    <div class="gbar"></div>
+    <h2 class="stitle">Estratégia de Distribuição</h2>
+    <p class="ssub">Como a Artezian distribui o imóvel para maximizar ocupação e receita</p>
+
+    <div class="sg" style="margin-bottom:4mm;">
+      <div class="sc">
+        <div class="sh">Airbnb — Canal Principal</div>
+        <div class="sb"><ul>
+          <li>Listagem otimizada com fotos profissionais</li>
+          <li>Resposta em menos de 1h (melhora ranking)</li>
+          <li>Superhost João @ojoaomendonca (4.9 ⭐ · 95k)</li>
+          <li>Precificação dinâmica via Stays</li>
+          <li>Calendário aberto com 90 dias de antecedência</li>
+        </ul></div>
+      </div>
+      <div class="sc">
+        <div class="sh" style="background:var(--gold);">Direto — Canal Estratégico</div>
+        <div class="sb"><ul>
+          <li>Site artezian.com.br com reserva direta</li>
+          <li>WhatsApp API Oficial com atendimento automático</li>
+          <li>Leads orgânicos via @ojoaomendonca (95k)</li>
+          <li>5–10% de desconto para reservas diretas</li>
+          <li>CRM Datacrazy para hóspedes recorrentes</li>
+        </ul></div>
+      </div>
+      <div class="sc">
+        <div class="sh">Booking / OTAs Secundárias</div>
+        <div class="sb"><ul>
+          <li>Booking.com para baixa temporada</li>
+          <li>Sincronização de calendário via Stays</li>
+          <li>Preço ligeiramente superior para cobrir comissão</li>
+        </ul></div>
+      </div>
+      <div class="sc">
+        <div class="sh" style="background:var(--dark);">Marketing & Conteúdo</div>
+        <div class="sb"><ul>
+          <li>Reels de Porto Seguro via @ojoaomendonca</li>
+          <li>Meta Ads em alta temporada e feriados</li>
+          <li>Google Ads para buscas diretas de aluguel</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <table class="t">
+      <thead><tr><th>Temporada</th><th>Airbnb</th><th>Direto/WhatsApp</th><th>Booking/OTAs</th><th>Prioridade</th></tr></thead>
+      <tbody>
+        <tr><td><b>Alta</b></td><td>50%</td><td>40%</td><td>10%</td><td>Direto (sem taxa) + Airbnb</td></tr>
+        <tr><td><b>Feriados</b></td><td>55%</td><td>35%</td><td>10%</td><td>Airbnb (visibilidade) + Direto</td></tr>
+        <tr><td><b>Baixa</b></td><td>45%</td><td>25%</td><td>30%</td><td>Abrir mais canais p/ ocupação</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card">
+      <div class="ctit">Estratégia operacional por temporada</div>
+      <p><strong>Alta temporada:</strong> Mínimo 5 noites. Anúncios abertos com 90 dias de antecedência. Preço máximo aplicado.<br>
+      <strong>Feriados:</strong> Mínimo 3 noites. Bloquear datas de baixa rotatividade ao redor do feriado.<br>
+      <strong>Baixa temporada:</strong> Mínimo 2 noites. Desconto progressivo para reservas com 30+ dias. Focar em ocupação contínua.</p>
+    </div>
+    <div class="pf"><div class="fbrand">Artezian Real Estate Atelie</div><div class="fnote">Apto do Reinaldo · Estratégia de Operação · 2026</div></div>
+  </div>
+</div>
+
+<!-- KPIs + PRÓXIMOS PASSOS -->
+<div class="page">
+  <div class="pi">
+    <div class="ph"><div class="brand">Artezian</div><div class="plabel">KPIs & Próximos Passos</div></div>
+    <div class="gbar"></div>
+    <h2 class="stitle">Indicadores & Implantação</h2>
+    <p class="ssub">Métricas mensais e plano de implantação da operação</p>
+
+    <div class="kg" style="margin-bottom:4mm;">
+      <div class="kc">
+        <div class="kt">Ocupação & Receita</div>
+        <ul>
+          <li>Taxa de ocupação mensal <span class="ktg">Meta: ≥ 148%</span></li>
+          <li>Receita bruta mensal <span class="ktg">Meta: R$ 33.333</span></li>
+          <li>Diária média realizada (ADR) <span class="ktg">Vs. tabela base</span></li>
+          <li>Comissão gerada <span class="ktg">Meta: R$ 5.000</span></li>
+        </ul>
+      </div>
+      <div class="kc">
+        <div class="kt">Qualidade & Canal</div>
+        <ul>
+          <li>Avaliação média Airbnb <span class="ktg">Meta: ≥ 4.8 ⭐</span></li>
+          <li>Taxa de resposta <span class="ktg">Meta: ≥ 95%</span></li>
+          <li>Reservas diretas <span class="ktg">Meta: ≥ 30%</span></li>
+          <li>Cancelamentos <span class="ktg">Meta: &lt; 5%</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="snum">1</div>
+      <div class="scont">
+        <div class="stit">Onboarding e cadastro no Stays</div>
+        <div class="sdesc">Cadastrar a unidade no Stays e conectar ao Airbnb, artezian.com.br e Booking. Configurar calendário, políticas de cancelamento e mínimos por temporada.</div>
+        <span class="stag">Semana 1–2</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">2</div>
+      <div class="scont">
+        <div class="stit">Fotos profissionais e otimização dos anúncios</div>
+        <div class="sdesc">Sessão fotográfica do imóvel. Criar título e descrição otimizados para o perfil do hóspede ideal. Configurar preços dinâmicos por temporada.</div>
+        <span class="stag">Semana 2–3</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">3</div>
+      <div class="scont">
+        <div class="stit">Configurar atendimento e WhatsApp API</div>
+        <div class="sdesc">Ativar fluxo de atendimento automático para consultas. Integrar ao CRM Datacrazy para registro de leads e hóspedes recorrentes.</div>
+        <span class="stag">Semana 3</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">4</div>
+      <div class="scont">
+        <div class="stit">Primeira revisão de performance</div>
+        <div class="sdesc">Reunião de 30 dias para apresentar os primeiros KPIs, ajustar precificação e alinhar expectativas para o próximo trimestre.</div>
+        <span class="stag">Mês 1</span>
+      </div>
+    </div>
+
+    <div style="background:var(--teal);border-radius:5px;padding:5mm;text-align:center;margin-top:auto;">
+      <p style="font-family:'Playfair Display',serif;font-size:12pt;color:var(--white);margin-bottom:1.5mm;">Artezian Real Estate Atelie</p>
+      <p style="font-size:8pt;color:rgba(255,255,255,.6);margin-bottom:2mm;">Porto Seguro · Coroa Vermelha · Arraial D'Ajuda · Taperapuã</p>
+      <p style="font-size:8.5pt;color:var(--gold);">artezian.com.br · @ojoaomendonca</p>
+    </div>
+    <div class="pf"><div class="fbrand">Artezian Real Estate Atelie</div><div class="fnote">Apto do Reinaldo · Estratégia de Operação · 2026</div></div>
+  </div>
+</div>
+
+</body>
+</html>

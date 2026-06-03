@@ -210,6 +210,10 @@ app.get('/api/diagnostico', async (req, res) => {
 
 // ── Start ─────────────────────────────────────────────────────────────────────
 
-app.listen(PORT, () => {
-  console.log(`\n  Artezian Dashboard → http://localhost:${PORT}\n`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`\n  Artezian Dashboard → http://localhost:${PORT}\n`);
+  });
+}
+
+module.exports = app;

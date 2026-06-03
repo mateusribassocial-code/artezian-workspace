@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Varandas de Porto — Estratégia de Operação | Artezian</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c2a14e;
+      --dark: #2a2a2a;
+      --teal: #264653;
+      --white: #ffffff;
+      --light: #f8f6f1;
+      --gray: #888888;
+      --border: #e8e0d0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      color: var(--dark);
+      background: #e5e5e5;
+    }
+
+    /* ── PAGE ── */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--white);
+      margin: 12px auto;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    /* ── SHARED LAYOUT ── */
+    .page-inner {
+      padding: 14mm 16mm 14mm 16mm;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 6mm;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 8mm;
+    }
+
+    .page-header .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 11pt;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    .page-header .page-label {
+      font-size: 8pt;
+      color: var(--gray);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    h1 { font-family: 'Playfair Display', serif; }
+    h2 { font-family: 'Playfair Display', serif; }
+    h3 { font-family: 'Lato', sans-serif; font-weight: 700; }
+
+    /* ── COVER ── */
+    .cover {
+      background: var(--teal);
+      min-height: 297mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18mm 16mm;
+    }
+
+    .cover-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 13pt;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .cover-logo span {
+      display: block;
+      font-size: 8pt;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 3px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      margin-top: 3px;
+    }
+
+    .cover-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+    .cover-eyebrow {
+      font-family: 'Lato', sans-serif;
+      font-size: 8pt;
+      color: var(--gold);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .cover-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 34pt;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 4mm;
+    }
+
+    .cover-subtitle {
+      font-family: 'Lato', sans-serif;
+      font-size: 12pt;
+      color: rgba(255,255,255,0.65);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .cover-line {
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+      margin: 6mm 0;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 10mm;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 6mm;
+    }
+
+    .cover-meta-item { }
+    .cover-meta-item .label {
+      font-size: 7pt;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 2px;
+    }
+    .cover-meta-item .value {
+      font-size: 9pt;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20pt;
+      color: var(--teal);
+      margin-bottom: 2mm;
+    }
+
+    .section-sub {
+      font-size: 9pt;
+      color: var(--gray);
+      margin-bottom: 7mm;
+      line-height: 1.5;
+    }
+
+    .gold-bar {
+      width: 30px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 5mm;
+    }
+
+    /* ── UNIT CARDS ── */
+    .unit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 5mm;
+      margin-bottom: 6mm;
+    }
+
+    .unit-card {
+      background: var(--light);
+      border-radius: 5px;
+      padding: 5mm;
+      border-left: 3px solid var(--gold);
+    }
+
+    .unit-card .unit-type {
+      font-size: 7pt;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 2mm;
+    }
+
+    .unit-card .unit-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 13pt;
+      color: var(--teal);
+      margin-bottom: 2mm;
+    }
+
+    .unit-card .unit-qty {
+      font-size: 22pt;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .unit-card .unit-qty span {
+      font-size: 9pt;
+      color: var(--gray);
+      font-weight: 400;
+    }
+
+    .unit-total-bar {
+      background: var(--teal);
+      border-radius: 5px;
+      padding: 4mm 6mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--white);
+    }
+
+    .unit-total-bar .label {
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .unit-total-bar .value {
+      font-size: 20pt;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .unit-total-bar .note {
+      font-size: 8pt;
+      color: rgba(255,255,255,0.6);
+      text-align: right;
+    }
+
+    /* ── PRICING TABLE ── */
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 5mm;
+    }
+
+    .price-table th {
+      background: var(--teal);
+      color: var(--white);
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 3mm 4mm;
+      text-align: left;
+      font-weight: 400;
+    }
+
+    .price-table td {
+      padding: 3mm 4mm;
+      font-size: 9pt;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .price-table tr:last-child td { border-bottom: none; }
+    .price-table tr:nth-child(even) td { background: var(--light); }
+
+    .price-table .highlight td {
+      background: #fdf8ee !important;
+      font-weight: 700;
+    }
+
+    .gold-text { color: var(--gold); font-weight: 700; }
+    .teal-text { color: var(--teal); font-weight: 700; }
+
+    /* ── METRICS ROW ── */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4mm;
+      margin-bottom: 5mm;
+    }
+
+    .metric-card {
+      background: var(--light);
+      border-radius: 5px;
+      padding: 4mm;
+      text-align: center;
+    }
+
+    .metric-card.dark {
+      background: var(--teal);
+    }
+
+    .metric-card.gold-bg {
+      background: var(--gold);
+    }
+
+    .metric-card .metric-label {
+      font-size: 7pt;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray);
+      margin-bottom: 2mm;
+    }
+
+    .metric-card.dark .metric-label,
+    .metric-card.gold-bg .metric-label {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .metric-card .metric-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 20pt;
+      color: var(--teal);
+      line-height: 1;
+    }
+
+    .metric-card.dark .metric-value {
+      color: var(--white);
+    }
+
+    .metric-card.gold-bg .metric-value {
+      color: var(--white);
+    }
+
+    .metric-card .metric-sub {
+      font-size: 7.5pt;
+      color: var(--gray);
+      margin-top: 1mm;
+    }
+
+    .metric-card.dark .metric-sub,
+    .metric-card.gold-bg .metric-sub {
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* ── LEVEL CARDS ── */
+    .level-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 4mm;
+      margin-bottom: 5mm;
+    }
+
+    .level-card {
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .level-card .level-header {
+      padding: 3mm 4mm;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+    }
+
+    .level-card.minimum .level-header { background: #e8e0d0; color: var(--gray); }
+    .level-card.meta .level-header { background: var(--gold); color: var(--white); }
+    .level-card.ideal .level-header { background: var(--teal); color: var(--white); }
+
+    .level-card .level-body {
+      background: var(--light);
+      padding: 4mm;
+    }
+
+    .level-card .level-revenue {
+      font-family: 'Playfair Display', serif;
+      font-size: 17pt;
+      color: var(--teal);
+      margin-bottom: 1mm;
+    }
+
+    .level-card.meta .level-revenue { color: var(--gold); }
+
+    .level-card .level-commission {
+      font-size: 9pt;
+      color: var(--dark);
+      margin-bottom: 3mm;
+    }
+
+    .level-card .level-result {
+      font-size: 8pt;
+      font-weight: 700;
+      padding: 2mm 3mm;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .level-card.minimum .level-result { background: #ddd; color: #666; }
+    .level-card.meta .level-result { background: #fdf8ee; color: var(--gold); }
+    .level-card.ideal .level-result { background: #264653; color: var(--white); }
+
+    .level-card .level-occ {
+      font-size: 8pt;
+      color: var(--gray);
+      margin-top: 3mm;
+      line-height: 1.6;
+    }
+
+    /* ── SEASON CALENDAR ── */
+    .season-list { margin-bottom: 5mm; }
+
+    .season-item {
+      display: grid;
+      grid-template-columns: 2.5cm 4cm 2.5cm 2.5cm 3cm;
+      gap: 3mm;
+      align-items: center;
+      padding: 3mm 4mm;
+      border-radius: 5px;
+      margin-bottom: 2mm;
+    }
+
+    .season-item:nth-child(odd) { background: var(--light); }
+
+    .season-badge {
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 1.5mm 2.5mm;
+      border-radius: 3px;
+      text-align: center;
+    }
+
+    .badge-low { background: #e8f4e8; color: #4a7c4a; }
+    .badge-holiday { background: #fef3e2; color: #c27c00; }
+    .badge-high { background: #fde8e8; color: #c24a4a; }
+
+    .season-item .s-period { font-size: 8.5pt; color: var(--dark); }
+    .season-item .s-rate { font-size: 11pt; font-weight: 700; color: var(--teal); }
+    .season-item .s-comm { font-size: 9pt; color: var(--gold); font-weight: 700; }
+    .season-item .s-note { font-size: 7.5pt; color: var(--gray); }
+
+    .season-header {
+      display: grid;
+      grid-template-columns: 2.5cm 4cm 2.5cm 2.5cm 3cm;
+      gap: 3mm;
+      padding: 2mm 4mm;
+      margin-bottom: 1mm;
+    }
+    .season-header span {
+      font-size: 7pt;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray);
+    }
+
+    /* ── PROJECTION ── */
+    .proj-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5pt;
+      margin-bottom: 5mm;
+    }
+
+    .proj-table th {
+      background: var(--dark);
+      color: var(--white);
+      padding: 3mm 3mm;
+      text-align: left;
+      font-size: 7.5pt;
+      letter-spacing: 0.5px;
+    }
+
+    .proj-table td {
+      padding: 2.5mm 3mm;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .proj-table tr:nth-child(even) td { background: var(--light); }
+
+    .proj-table .total-row td {
+      background: var(--teal) !important;
+      color: var(--white);
+      font-weight: 700;
+      border: none;
+    }
+
+    .proj-table .total-row td.gold { color: var(--gold); }
+
+    /* ── STRATEGY ── */
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin-bottom: 5mm;
+    }
+
+    .strategy-card {
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .strategy-card .s-header {
+      background: var(--teal);
+      color: var(--white);
+      padding: 3mm 4mm;
+      font-size: 8.5pt;
+      font-weight: 700;
+    }
+
+    .strategy-card .s-body {
+      padding: 4mm;
+    }
+
+    .strategy-card .s-body ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .strategy-card .s-body li {
+      font-size: 8.5pt;
+      color: var(--dark);
+      padding: 1.5mm 0;
+      border-bottom: 1px solid var(--border);
+      padding-left: 3mm;
+      position: relative;
+      line-height: 1.4;
+    }
+
+    .strategy-card .s-body li:last-child { border-bottom: none; }
+
+    .strategy-card .s-body li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    /* ── KPI ── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin-bottom: 5mm;
+    }
+
+    .kpi-card {
+      background: var(--light);
+      border-radius: 5px;
+      padding: 4mm;
+      border-top: 2px solid var(--gold);
+    }
+
+    .kpi-card .kpi-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 3mm;
+    }
+
+    .kpi-card .kpi-list {
+      list-style: none;
+    }
+
+    .kpi-card .kpi-list li {
+      font-size: 8pt;
+      padding: 1.5mm 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .kpi-card .kpi-list li:last-child { border-bottom: none; }
+
+    .kpi-card .kpi-list .kpi-target {
+      font-weight: 700;
+      color: var(--gold);
+      font-size: 8.5pt;
+    }
+
+    /* ── NEXT STEPS ── */
+    .steps-list { }
+
+    .step-item {
+      display: flex;
+      gap: 4mm;
+      align-items: flex-start;
+      margin-bottom: 4mm;
+      padding: 4mm;
+      background: var(--light);
+      border-radius: 5px;
+    }
+
+    .step-number {
+      background: var(--gold);
+      color: var(--white);
+      width: 7mm;
+      height: 7mm;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9pt;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step-content .step-title {
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 1mm;
+    }
+
+    .step-content .step-desc {
+      font-size: 8.5pt;
+      color: var(--dark);
+      line-height: 1.5;
+    }
+
+    .step-content .step-tag {
+      display: inline-block;
+      font-size: 7pt;
+      padding: 0.5mm 2mm;
+      border-radius: 3px;
+      background: var(--teal);
+      color: var(--white);
+      margin-top: 1.5mm;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ── TWO-COL ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6mm;
+    }
+
+    .info-box {
+      background: var(--light);
+      border-radius: 5px;
+      padding: 4mm;
+      margin-bottom: 4mm;
+    }
+
+    .info-box .info-title {
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 2mm;
+    }
+
+    .info-box p {
+      font-size: 8.5pt;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* ── CALLOUT ── */
+    .callout {
+      border-left: 3px solid var(--gold);
+      background: #fdf8ee;
+      padding: 3mm 5mm;
+      border-radius: 0 5px 5px 0;
+      margin-bottom: 4mm;
+    }
+
+    .callout p {
+      font-size: 8.5pt;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    .callout strong { color: var(--teal); }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      margin-top: auto;
+      padding-top: 5mm;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .page-footer .footer-brand {
+      font-size: 7.5pt;
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+    }
+
+    .page-footer .footer-note {
+      font-size: 7pt;
+      color: var(--gray);
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: white; }
+      .page { margin: 0; box-shadow: none; page-break-after: always; }
+      @page { size: A4; margin: 0; }
+    }
+
+    /* ── TAG ── */
+    .tag {
+      display: inline-block;
+      font-size: 7pt;
+      padding: 1mm 2mm;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .tag-gold { background: #fdf8ee; color: var(--gold); border: 1px solid var(--gold); }
+    .tag-teal { background: #e8f0f2; color: var(--teal); border: 1px solid var(--teal); }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 4mm 0;
+    }
+
+    .text-sm { font-size: 8pt; color: var(--gray); line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PÁGINA 1 — CAPA                                     -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="cover">
+    <div class="cover-logo">
+      Artezian
+      <span>Real Estate Atelie</span>
+    </div>
+
+    <div class="cover-main">
+      <div class="cover-eyebrow">Estratégia de Operação · Parceiro</div>
+      <h1 class="cover-title">Varandas<br>de Porto</h1>
+      <div class="cover-line"></div>
+      <p class="cover-subtitle">
+        Modelo comercial, metas de receita e<br>
+        estratégia de distribuição por temporada
+      </p>
+    </div>
+
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <div class="label">Elaborado por</div>
+        <div class="value">Artezian Real Estate Atelie</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="label">Data</div>
+        <div class="value">Junho de 2026</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="label">Portfólio</div>
+        <div class="value">9 Unidades · Porto Seguro</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="label">Modelo</div>
+        <div class="value">Comissão 15% + Fixo R$ 2.500</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PÁGINA 2 — O PORTFÓLIO                              -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="brand">Artezian</div>
+      <div class="page-label">Portfólio de Unidades</div>
+    </div>
+
+    <div class="gold-bar"></div>
+    <h2 class="section-title">As 9 Unidades</h2>
+    <p class="section-sub">Composição do portfólio Varandas de Porto sob gestão Artezian</p>
+
+    <div class="unit-grid">
+      <div class="unit-card">
+        <div class="unit-type">Tipo A</div>
+        <div class="unit-name">Studios</div>
+        <div class="unit-qty">4 <span>unidades</span></div>
+        <hr class="divider">
+        <p class="text-sm">Ideal para casais e viajantes solo. Ticket médio mais acessível, alta rotatividade. Boa performance o ano todo.</p>
+      </div>
+      <div class="unit-card">
+        <div class="unit-type">Tipo B</div>
+        <div class="unit-name">Apto 1 Quarto</div>
+        <div class="unit-qty">4 <span>unidades</span></div>
+        <hr class="divider">
+        <p class="text-sm">Maior conforto para casais ou famílias pequenas. Diária acima da média, equilíbrio entre ocupação e receita.</p>
+      </div>
+      <div class="unit-card">
+        <div class="unit-type">Tipo C</div>
+        <div class="unit-name">Apto 2 Quartos</div>
+        <div class="unit-qty">1 <span>unidade</span></div>
+        <hr class="divider">
+        <p class="text-sm">Unidade premium. Atende famílias e grupos. Diária mais alta, especialmente em alta temporada e feriados.</p>
+      </div>
+    </div>
+
+    <div class="unit-total-bar">
+      <div>
+        <div class="label">Total sob gestão</div>
+        <div class="value">9 Unidades</div>
+      </div>
+      <div style="text-align:center">
+        <div class="label">Capacidade mensal máxima</div>
+        <div class="value">270 noites</div>
+      </div>
+      <div class="note">
+        9 unidades × 30 dias<br>
+        100% de ocupação teórica
+      </div>
+    </div>
+
+    <hr class="divider" style="margin: 5mm 0;">
+
+    <div class="callout">
+      <p><strong>Estratégia de composição:</strong> A combinação de studios (volume) + aptos 1q (equilíbrio) + apto 2q (premium) permite atender diferentes perfis de hóspede e maximizar a receita ao longo do ano. Em feriados e alta temporada, o Tipo C deve ser priorizado com precificação diferenciada.</p>
+    </div>
+
+    <div class="info-box">
+      <div class="info-title">Oportunidade identificada — Tipo C (2 Quartos)</div>
+      <p>O apartamento de 2 quartos representa o maior potencial de receita por unidade. Em alta temporada, recomendamos precificação 40–60% acima da tabela base, posicionando como "família/grupo exclusivo". Uma única semana de alta temporada nesta unidade equivale à receita de duas semanas de um studio.</p>
+    </div>
+
+    <div class="page-footer">
+      <div class="footer-brand">Artezian Real Estate Atelie</div>
+      <div class="footer-note">Varandas de Porto · Estratégia de Operação · 2026</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PÁGINA 3 — MODELO DE PARCERIA                       -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="brand">Artezian</div>
+      <div class="page-label">Modelo de Parceria</div>
+    </div>
+
+    <div class="gold-bar"></div>
+    <h2 class="section-title">Como Funciona a Parceria</h2>
+    <p class="section-sub">Estrutura comercial e divisão de responsabilidades</p>
+
+    <div class="metrics-row">
+      <div class="metric-card dark">
+        <div class="metric-label">Comissão Artezian</div>
+        <div class="metric-value">15%</div>
+        <div class="metric-sub">sobre receita bruta de locação</div>
+      </div>
+      <div class="metric-card gold-bg">
+        <div class="metric-label">Fixo Mensal</div>
+        <div class="metric-value">R$ 2.500</div>
+        <div class="metric-sub">independente da ocupação</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Break-even</div>
+        <div class="metric-value" style="color:var(--teal)">R$ 16.667</div>
+        <div class="metric-sub">receita mínima p/ cobrir o fixo</div>
+      </div>
+    </div>
+
+    <div class="strategy-grid">
+      <div class="strategy-card">
+        <div class="s-header">✦ Artezian é responsável por</div>
+        <div class="s-body">
+          <ul>
+            <li>Gestão completa dos anúncios nas plataformas (Airbnb, site, direto)</li>
+            <li>Atendimento de hóspedes via WhatsApp e Instagram</li>
+            <li>Precificação dinâmica por temporada e feriados</li>
+            <li>Coordenação de check-in, check-out e limpeza</li>
+            <li>Relatórios mensais de performance e ocupação</li>
+            <li>Estratégia de marketing e distribuição de demanda</li>
+            <li>Gestão via PMS (Stays) integrado a todos os canais</li>
+          </ul>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <div class="s-header" style="background:var(--gold);">✦ Varandas de Porto é responsável por</div>
+        <div class="s-body">
+          <ul>
+            <li>Disponibilidade e manutenção dos imóveis</li>
+            <li>Enxoval, equipamentos e estrutura dos apartamentos</li>
+            <li>Aprovação do calendário de disponibilidade</li>
+            <li>Bloqueios para uso próprio (com antecedência)</li>
+            <li>Custos de reparo e manutenção corretiva</li>
+            <li>IPTU, condomínio e despesas do imóvel</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Lógica do modelo:</strong> O pagamento fixo de R$ 2.500 garante ao parceiro um piso de serviço contínuo, mesmo em meses de baixa demanda. A comissão de 15% alinha os incentivos — quanto mais a Artezian performa, mais o parceiro ganha e mais a Artezian recebe. É um modelo de interesse compartilhado.</p>
+    </div>
+
+    <div class="info-box">
+      <div class="info-title">Comissão por noite gerada — referência rápida</div>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Temporada</th>
+            <th>Diária</th>
+            <th>Comissão/noite</th>
+            <th>Noites p/ cobrir fixo (9 un)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag-teal">Baixa</span></td>
+            <td>R$ 250</td>
+            <td class="gold-text">R$ 37,50</td>
+            <td>67 noites totais (~7,4/un)</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-gold">Feriados</span></td>
+            <td>R$ 400</td>
+            <td class="gold-text">R$ 60,00</td>
+            <td>42 noites totais (~4,7/un)</td>
+          </tr>
+          <tr class="highlight">
+            <td><span class="tag" style="background:#fde8e8;color:#c24a4a;border:1px solid #c24a4a;">Alta</span></td>
+            <td>R$ 550</td>
+            <td class="gold-text">R$ 82,50</td>
+            <td>30 noites totais (~3,3/un)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="page-footer">
+      <div class="footer-brand">Artezian Real Estate Atelie</div>
+      <div class="footer-note">Varandas de Porto · Estratégia de Operação · 2026</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PÁGINA 4 — CALENDÁRIO E PRECIFICAÇÃO                -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="brand">Artezian</div>
+      <div class="page-label">Calendário & Precificação</div>
+    </div>
+
+    <div class="gold-bar"></div>
+    <h2 class="section-title">Calendário de Temporadas</h2>
+    <p class="section-sub">Faixas de preço por período · Porto Seguro e Região</p>
+
+    <div class="season-header">
+      <span>Tipo</span>
+      <span>Período</span>
+      <span>Diária base</span>
+      <span>Comissão</span>
+      <span>Observação</span>
+    </div>
+
+    <div class="season-list">
+      <div class="season-item">
+        <div><span class="season-badge badge-high">Alta</span></div>
+        <div class="s-period">Dez 20 – Mar 10<br><small style="color:var(--gray)">~80 dias</small></div>
+        <div class="s-rate">R$ 550</div>
+        <div class="s-comm">R$ 82,50/n</div>
+        <div class="s-note">Verão / Férias escolares. Máxima demanda. Antecipar anúncios.</div>
+      </div>
+      <div class="season-item">
+        <div><span class="season-badge badge-holiday">Feriado</span></div>
+        <div class="s-period">Carnaval, Páscoa, Jul, Nov<br><small style="color:var(--gray)">~40 dias</small></div>
+        <div class="s-rate">R$ 400</div>
+        <div class="s-comm">R$ 60,00/n</div>
+        <div class="s-note">Demanda intensa em períodos curtos. Mínimo de estada recomendado.</div>
+      </div>
+      <div class="season-item">
+        <div><span class="season-badge badge-low">Baixa</span></div>
+        <div class="s-period">Abr – Jun · Ago – Nov<br><small style="color:var(--gray)">~245 dias</small></div>
+        <div class="s-rate">R$ 250</div>
+        <div class="s-comm">R$ 37,50/n</div>
+        <div class="s-note">Foco em ocupação contínua. Estratégia de desconto progressivo.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="two-col">
+      <div>
+        <h3 style="font-size:9.5pt; color:var(--teal); margin-bottom:3mm; text-transform:uppercase; letter-spacing:1px;">Estratégia de Precificação por Tipo</h3>
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>Unidade</th>
+              <th>Baixa</th>
+              <th>Feriados</th>
+              <th>Alta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Studio (4 un)</td>
+              <td>R$ 220</td>
+              <td>R$ 360</td>
+              <td>R$ 490</td>
+            </tr>
+            <tr>
+              <td>Apto 1q (4 un)</td>
+              <td>R$ 250</td>
+              <td>R$ 400</td>
+              <td>R$ 550</td>
+            </tr>
+            <tr class="highlight">
+              <td>Apto 2q (1 un)</td>
+              <td>R$ 350</td>
+              <td>R$ 580</td>
+              <td>R$ 800</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="text-sm" style="margin-top:2mm;">Sugestão de diferenciação por tipologia. Apto 2q tem potencial de diária 45–60% acima dos demais.</p>
+      </div>
+      <div>
+        <h3 style="font-size:9.5pt; color:var(--teal); margin-bottom:3mm; text-transform:uppercase; letter-spacing:1px;">Boas Práticas de Precificação</h3>
+        <div class="info-box" style="margin-bottom:2mm;">
+          <div class="info-title">Mínimo de estada por período</div>
+          <p>Alta temporada: 5 noites mín. · Feriados: 3 noites mín. · Baixa: 2 noites mín. Evita reservas de 1 noite que fragmentam o calendário.</p>
+        </div>
+        <div class="info-box">
+          <div class="info-title">Janela de antecedência</div>
+          <p>Abrir calendário da alta temporada com 90 dias de antecedência. Para feriados, 60 dias. Isso aumenta visibilidade no algoritmo do Airbnb.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div class="footer-brand">Artezian Real Estate Atelie</div>
+      <div class="footer-note">Varandas de Porto · Estratégia de Operação · 2026</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PÁGINA 5 — PONTO DE EQUILÍBRIO                      -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="brand">Artezian</div>
+      <div class="page-label">Análise de Break-even</div>
+    </div>
+
+    <div class="gold-bar"></div>
+    <h2 class="section-title">Ponto de Equilíbrio</h2>
+    <p class="section-sub">Quanto o portfólio precisa gerar para cobrir o custo fixo mensal da gestão</p>
+
+    <div class="metrics-row" style="margin-bottom:6mm;">
+      <div class="metric-card dark">
+        <div class="metric-label">Fixo mensal</div>
+        <div class="metric-value">R$ 2.500</div>
+        <div class="metric-sub">custo base da operação</div>
+      </div>
+      <div class="metric-card gold-bg">
+        <div class="metric-label">Receita mínima necessária</div>
+        <div class="metric-value">R$ 16.667</div>
+        <div class="metric-sub">R$ 2.500 ÷ 15%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Por unidade/mês</div>
+        <div class="metric-value" style="color:var(--teal)">R$ 1.852</div>
+        <div class="metric-sub">R$ 16.667 ÷ 9 unidades</div>
+      </div>
+    </div>
+
+    <table class="price-table" style="margin-bottom:5mm;">
+      <thead>
+        <tr>
+          <th>Temporada</th>
+          <th>Diária</th>
+          <th>Receita máx. (9un × 30d)</th>
+          <th>Ocupação mínima</th>
+          <th>Noites totais</th>
+          <th>Noites/unidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="season-badge badge-low">Baixa</span></td>
+          <td>R$ 250</td>
+          <td>R$ 67.500</td>
+          <td class="gold-text">24,7%</td>
+          <td>67 noites</td>
+          <td>7,4 noites</td>
+        </tr>
+        <tr>
+          <td><span class="season-badge badge-holiday">Feriados</span></td>
+          <td>R$ 400</td>
+          <td>R$ 108.000</td>
+          <td class="gold-text">15,4%</td>
+          <td>42 noites</td>
+          <td>4,7 noites</td>
+        </tr>
+        <tr class="highlight">
+          <td><span class="season-badge badge-high">Alta</span></td>
+          <td>R$ 550</td>
+          <td>R$ 148.500</td>
+          <td class="gold-text">11,2%</td>
+          <td>30 noites</td>
+          <td>3,3 noites</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout" style="margin-bottom:5mm;">
+      <p><strong>Leitura prática:</strong> Em alta temporada, uma semana com 100% de ocupação das 9 unidades gera R$ 34.650 de receita e R$ 5.198 de comissão — mais que o dobro do custo fixo. O break-even em baixa temporada exige ~25% de ocupação, o que é facilmente atingível com gestão ativa.</p>
+    </div>
+
+    <h3 style="font-size:9.5pt; color:var(--teal); margin-bottom:3mm; text-transform:uppercase; letter-spacing:1px;">Simulação — Uma Semana Cheia por Temporada</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Cenário</th>
+          <th>Diária</th>
+          <th>Unidades</th>
+          <th>Noites</th>
+          <th>Receita bruta</th>
+          <th>Comissão</th>
+          <th>Vs. Fixo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Semana baixa temporada</td>
+          <td>R$ 250</td>
+          <td>9</td>
+          <td>7</td>
+          <td>R$ 15.750</td>
+          <td>R$ 2.363</td>
+          <td style="color:#c24a4a;">–R$ 137</td>
+        </tr>
+        <tr>
+          <td>Semana feriado</td>
+          <td>R$ 400</td>
+          <td>9</td>
+          <td>7</td>
+          <td>R$ 25.200</td>
+          <td>R$ 3.780</td>
+          <td class="gold-text">+R$ 1.280</td>
+        </tr>
+        <tr class="highlight">
+          <td>Semana alta temporada</td>
+          <td>R$ 550</td>
+          <td>9</td>
+          <td>7</td>
+          <td>R$ 34.650</td>
+          <td>R$ 5.198</td>
+          <td class="teal-text">+R$ 2.698</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="page-footer">
+      <div class="footer-brand">Artezian Real Estate Atelie</div>
+      <div class="footer-note">Varandas de Porto · Estratégia de Operação · 2026</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PÁGINA 6 — METAS POR NÍVEL                          -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="brand">Artezian</div>
+      <div class="page-label">Metas de Performance</div>
+    </div>
+
+    <div class="gold-bar"></div>
+    <h2 class="section-title">Metas por Nível</h2>
+    <p class="section-sub">Três patamares de performance para acompanhamento mensal da operação</p>
+
+    <div class="level-grid" style="margin-bottom:6mm;">
+      <div class="level-card minimum">
+        <div class="level-header">Nível Mínimo</div>
+        <div class="level-body">
+          <div class="level-revenue">R$ 16.667</div>
+          <div class="level-commission">Comissão: <strong>R$ 2.500</strong></div>
+          <span class="level-result">Resultado: R$ 0</span>
+          <div class="level-occ">
+            <strong>Baixa:</strong> 25% ocup. · 67 noites<br>
+            <strong>Feriados:</strong> 15% ocup. · 42 noites<br>
+            <strong>Alta:</strong> 11% ocup. · 30 noites
+          </div>
+        </div>
+      </div>
+      <div class="level-card meta">
+        <div class="level-header">⭐ Nível Meta</div>
+        <div class="level-body">
+          <div class="level-revenue">R$ 33.333</div>
+          <div class="level-commission">Comissão: <strong>R$ 5.000</strong></div>
+          <span class="level-result">Resultado: +R$ 2.500</span>
+          <div class="level-occ">
+            <strong>Baixa:</strong> 49% ocup. · 133 noites<br>
+            <strong>Feriados:</strong> 31% ocup. · 83 noites<br>
+            <strong>Alta:</strong> 22% ocup. · 61 noites
+          </div>
+        </div>
+      </div>
+      <div class="level-card ideal">
+        <div class="level-header">🏆 Nível Ideal</div>
+        <div class="level-body">
+          <div class="level-revenue" style="color:var(--white)">R$ 50.000</div>
+          <div class="level-commission" style="color:rgba(255,255,255,0.8)">Comissão: <strong style="color:var(--gold)">R$ 7.500</strong></div>
+          <span class="level-result">Resultado: +R$ 5.000</span>
+          <div class="level-occ" style="color:rgba(255,255,255,0.7)">
+            <strong style="color:rgba(255,255,255,0.9)">Baixa:</strong> 74% ocup. · 200 noites<br>
+            <strong style="color:rgba(255,255,255,0.9)">Feriados:</strong> 46% ocup. · 125 noites<br>
+            <strong style="color:rgba(255,255,255,0.9)">Alta:</strong> 34% ocup. · 91 noites
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:9.5pt; color:var(--teal); margin-bottom:3mm; text-transform:uppercase; letter-spacing:1px;">Detalhamento por unidade — Nível Meta (referência prática)</h3>
+    <table class="price-table" style="margin-bottom:5mm;">
+      <thead>
+        <tr>
+          <th>Unidade</th>
+          <th>Qtd</th>
+          <th>Noites/un (baixa)</th>
+          <th>Noites/un (feriado)</th>
+          <th>Noites/un (alta)</th>
+          <th>Receita/un</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Studio</td>
+          <td>4</td>
+          <td>~15 noites</td>
+          <td>~9 noites</td>
+          <td>~7 noites</td>
+          <td>~R$ 3.700</td>
+        </tr>
+        <tr>
+          <td>Apto 1 Quarto</td>
+          <td>4</td>
+          <td>~15 noites</td>
+          <td>~9 noites</td>
+          <td>~7 noites</td>
+          <td>~R$ 3.700</td>
+        </tr>
+        <tr class="highlight">
+          <td>Apto 2 Quartos</td>
+          <td>1</td>
+          <td>~15 noites</td>
+          <td>~9 noites</td>
+          <td>~7 noites</td>
+          <td>~R$ 5.250</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Benchmark de mercado:</strong> Propriedades bem geridas em Porto Seguro atingem 55–75% de ocupação anual. Com 9 unidades e gestão ativa, atingir o Nível Meta (49% em baixa, ~70% em alta) é realista dentro de 3 a 6 meses de operação estruturada.</p>
+    </div>
+
+    <div class="page-footer">
+      <div class="footer-brand">Artezian Real Estate Atelie</div>
+      <div class="footer-note">Varandas de Porto · Estratégia de Operação · 2026</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PÁGINA 7 — PROJEÇÃO ANUAL                           -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="brand">Artezian</div>
+      <div class="page-label">Projeção Anual</div>
+    </div>
+
+    <div class="gold-bar"></div>
+    <h2 class="section-title">Projeção 12 Meses</h2>
+    <p class="section-sub">Cenário Meta — receita bruta, comissão e resultado por mês (9 unidades)</p>
+
+    <table class="proj-table" style="margin-bottom:5mm;">
+      <thead>
+        <tr>
+          <th>Mês</th>
+          <th>Temporada</th>
+          <th>Ocp. estimada</th>
+          <th>Noites ocup.</th>
+          <th>Receita bruta</th>
+          <th>Comissão (15%)</th>
+          <th>Fixo</th>
+          <th>Resultado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Janeiro</td>
+          <td><span class="season-badge badge-high" style="font-size:6.5pt">Alta</span></td>
+          <td>80%</td>
+          <td>216</td>
+          <td>R$ 118.800</td>
+          <td>R$ 17.820</td>
+          <td>R$ 2.500</td>
+          <td class="teal-text">+R$ 15.320</td>
+        </tr>
+        <tr>
+          <td>Fevereiro</td>
+          <td><span class="season-badge badge-high" style="font-size:6.5pt">Alta + Carnaval</span></td>
+          <td>85%</td>
+          <td>204</td>
+          <td>R$ 112.200</td>
+          <td>R$ 16.830</td>
+          <td>R$ 2.500</td>
+          <td class="teal-text">+R$ 14.330</td>
+        </tr>
+        <tr>
+          <td>Março</td>
+          <td><span class="season-badge badge-holiday" style="font-size:6.5pt">Feriado/Baixa</span></td>
+          <td>45%</td>
+          <td>122</td>
+          <td>R$ 40.260</td>
+          <td>R$ 6.039</td>
+          <td>R$ 2.500</td>
+          <td class="gold-text">+R$ 3.539</td>
+        </tr>
+        <tr>
+          <td>Abril</td>
+          <td><span class="season-badge badge-holiday" style="font-size:6.5pt">Páscoa + Baixa</span></td>
+          <td>40%</td>
+          <td>108</td>
+          <td>R$ 33.840</td>
+          <td>R$ 5.076</td>
+          <td>R$ 2.500</td>
+          <td class="gold-text">+R$ 2.576</td>
+        </tr>
+        <tr>
+          <td>Maio</td>
+          <td><span class="season-badge badge-low" style="font-size:6.5pt">Baixa</span></td>
+          <td>35%</td>
+          <td>95</td>
+          <td>R$ 23.750</td>
+          <td>R$ 3.563</td>
+          <td>R$ 2.500</td>
+          <td class="gold-text">+R$ 1.063</td>
+        </tr>
+        <tr>
+          <td>Junho</td>
+          <td><span class="season-badge badge-low" style="font-size:6.5pt">Baixa</span></td>
+          <td>35%</td>
+          <td>95</td>
+          <td>R$ 23.750</td>
+          <td>R$ 3.563</td>
+          <td>R$ 2.500</td>
+          <td class="gold-text">+R$ 1.063</td>
+        </tr>
+        <tr>
+          <td>Julho</td>
+          <td><span class="season-badge badge-holiday" style="font-size:6.5pt">Férias/Feriado</span></td>
+          <td>75%</td>
+          <td>203</td>
+          <td>R$ 81.200</td>
+          <td>R$ 12.180</td>
+          <td>R$ 2.500</td>
+          <td class="teal-text">+R$ 9.680</td>
+        </tr>
+        <tr>
+          <td>Agosto</td>
+          <td><span class="season-badge badge-low" style="font-size:6.5pt">Baixa</span></td>
+          <td>35%</td>
+          <td>95</td>
+          <td>R$ 23.750</td>
+          <td>R$ 3.563</td>
+          <td>R$ 2.500</td>
+          <td class="gold-text">+R$ 1.063</td>
+        </tr>
+        <tr>
+          <td>Setembro</td>
+          <td><span class="season-badge badge-low" style="font-size:6.5pt">Baixa</span></td>
+          <td>35%</td>
+          <td>95</td>
+          <td>R$ 23.750</td>
+          <td>R$ 3.563</td>
+          <td>R$ 2.500</td>
+          <td class="gold-text">+R$ 1.063</td>
+        </tr>
+        <tr>
+          <td>Outubro</td>
+          <td><span class="season-badge badge-low" style="font-size:6.5pt">Baixa</span></td>
+          <td>38%</td>
+          <td>103</td>
+          <td>R$ 25.750</td>
+          <td>R$ 3.863</td>
+          <td>R$ 2.500</td>
+          <td class="gold-text">+R$ 1.363</td>
+        </tr>
+        <tr>
+          <td>Novembro</td>
+          <td><span class="season-badge badge-holiday" style="font-size:6.5pt">Feriado + Baixa</span></td>
+          <td>50%</td>
+          <td>135</td>
+          <td>R$ 45.000</td>
+          <td>R$ 6.750</td>
+          <td>R$ 2.500</td>
+          <td class="gold-text">+R$ 4.250</td>
+        </tr>
+        <tr>
+          <td>Dezembro</td>
+          <td><span class="season-badge badge-high" style="font-size:6.5pt">Alta</span></td>
+          <td>75%</td>
+          <td>203</td>
+          <td>R$ 111.650</td>
+          <td>R$ 16.748</td>
+          <td>R$ 2.500</td>
+          <td class="teal-text">+R$ 14.248</td>
+        </tr>
+        <tr class="total-row">
+          <td><strong>TOTAL ANO</strong></td>
+          <td>—</td>
+          <td><strong>53% média</strong></td>
+          <td><strong>1.674</strong></td>
+          <td><strong>R$ 663.700</strong></td>
+          <td class="gold"><strong>R$ 99.555</strong></td>
+          <td><strong>R$ 30.000</strong></td>
+          <td class="gold"><strong>+R$ 69.555</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Resultado líquido projetado (Cenário Meta):</strong> R$ 69.555 no ano, com margem de R$ 5.796/mês acima do fixo. Receita bruta do portfólio estimada em R$ 663.700 com ocupação média anual de 53%.</p>
+    </div>
+
+    <div class="page-footer">
+      <div class="footer-brand">Artezian Real Estate Atelie</div>
+      <div class="footer-note">Varandas de Porto · Estratégia de Operação · 2026</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PÁGINA 8 — ESTRATÉGIA POR PRODUTO                   -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="brand">Artezian</div>
+      <div class="page-label">Estratégia por Produto</div>
+    </div>
+
+    <div class="gold-bar"></div>
+    <h2 class="section-title">Estratégia por Tipo de Unidade</h2>
+    <p class="section-sub">Posicionamento, público e tática de ocupação por tipologia</p>
+
+    <div class="strategy-grid" style="margin-bottom:4mm;">
+      <div class="strategy-card">
+        <div class="s-header">Tipo A — Studios (4 unidades)</div>
+        <div class="s-body">
+          <div class="info-title" style="margin-bottom:2mm;">Público-alvo</div>
+          <p class="text-sm" style="margin-bottom:3mm;">Casais em viagem romântica, viajantes solo a trabalho, turistas de curta estada (2–4 noites).</p>
+          <ul>
+            <li>Diária sugerida baixa: R$ 220 · Feriado: R$ 360 · Alta: R$ 490</li>
+            <li>Foco em volume — alta rotatividade o ano todo</li>
+            <li>Mínimo de 2 noites. Sem mínimo em baixa com baixa demanda</li>
+            <li>Fotos e título com destaque para vista, localização e custo-benefício</li>
+            <li>Estratégia de desconto para reservas com 30+ dias de antecedência</li>
+          </ul>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <div class="s-header" style="background:var(--gold)">Tipo B — Apto 1 Quarto (4 unidades)</div>
+        <div class="s-body">
+          <div class="info-title" style="margin-bottom:2mm;">Público-alvo</div>
+          <p class="text-sm" style="margin-bottom:3mm;">Casais em viagem de lazer, famílias pequenas (2 adultos + 1 criança), aniversários e luas de mel.</p>
+          <ul>
+            <li>Diária sugerida baixa: R$ 250 · Feriado: R$ 400 · Alta: R$ 550</li>
+            <li>Equilíbrio entre diária e ocupação — carro-chefe do portfólio</li>
+            <li>Mínimo 2–3 noites. Alta temporada: 5 noites</li>
+            <li>Destaque para conforto, cozinha equipada e localização</li>
+            <li>Primeiros a anunciar e primeiros a fechar em alta temporada</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="strategy-card" style="margin-bottom:4mm;">
+      <div class="s-header" style="background:var(--dark); font-size:9pt; padding: 3.5mm 4mm;">Tipo C — Apto 2 Quartos (1 unidade) · UNIDADE PREMIUM</div>
+      <div class="s-body" style="display:grid; grid-template-columns:1fr 1fr; gap:4mm;">
+        <div>
+          <div class="info-title" style="margin-bottom:2mm;">Público-alvo</div>
+          <p class="text-sm" style="margin-bottom:3mm;">Famílias (2 adultos + 2 crianças), grupos de amigos (4 pessoas), viagens corporativas, comemorações especiais.</p>
+          <ul style="list-style:none; padding:0;">
+            <li style="font-size:8.5pt; padding:1.5mm 0; border-bottom:1px solid var(--border); padding-left:3mm; position:relative;">
+              <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:3px;background:var(--gold);border-radius:50%;display:block;"></span>
+              Diária sugerida baixa: R$ 350 · Feriado: R$ 580 · Alta: R$ 800</li>
+            <li style="font-size:8.5pt; padding:1.5mm 0; border-bottom:1px solid var(--border); padding-left:3mm; position:relative;">
+              <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:3px;background:var(--gold);border-radius:50%;display:block;"></span>
+              Posicionar como "exclusivo família" — menos reservas, maior ticket</li>
+            <li style="font-size:8.5pt; padding:1.5mm 0; border-bottom:1px solid var(--border); padding-left:3mm; position:relative;">
+              <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:3px;background:var(--gold);border-radius:50%;display:block;"></span>
+              Mínimo: 3 noites baixa · 5 noites feriado · 7 noites alta</li>
+            <li style="font-size:8.5pt; padding:1.5mm 0; padding-left:3mm; position:relative;">
+              <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:3px;background:var(--gold);border-radius:50%;display:block;"></span>
+              Investir em fotos profissionais destacando os 2 quartos separados</li>
+          </ul>
+        </div>
+        <div>
+          <div class="info-title" style="margin-bottom:2mm;">Potencial de receita</div>
+          <div class="metrics-row" style="grid-template-columns:1fr 1fr; gap:3mm;">
+            <div class="metric-card dark" style="padding:3mm;">
+              <div class="metric-label">Alta temporada</div>
+              <div class="metric-value" style="font-size:14pt;">R$ 5.600</div>
+              <div class="metric-sub">7 noites × R$ 800</div>
+            </div>
+            <div class="metric-card gold-bg" style="padding:3mm;">
+              <div class="metric-label">Anual (estimado)</div>
+              <div class="metric-value" style="font-size:14pt;">R$ 85k</div>
+              <div class="metric-sub">com 55% de ocupação</div>
+            </div>
+          </div>
+          <div class="callout" style="margin-top:3mm;">
+            <p><strong>Esta unidade sozinha</strong> pode gerar mais de 1/8 da receita total do portfólio. Precificação diferenciada é fundamental.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div class="footer-brand">Artezian Real Estate Atelie</div>
+      <div class="footer-note">Varandas de Porto · Estratégia de Operação · 2026</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PÁGINA 9 — DISTRIBUIÇÃO & CANAIS                    -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="brand">Artezian</div>
+      <div class="page-label">Canais & Distribuição</div>
+    </div>
+
+    <div class="gold-bar"></div>
+    <h2 class="section-title">Estratégia de Distribuição</h2>
+    <p class="section-sub">Como a Artezian distribui as unidades para maximizar ocupação e receita</p>
+
+    <div class="strategy-grid" style="margin-bottom:5mm;">
+      <div class="strategy-card">
+        <div class="s-header">Airbnb — Canal Principal</div>
+        <div class="s-body">
+          <ul>
+            <li>Listagem otimizada com fotos profissionais e título com palavras-chave locais</li>
+            <li>Resposta em menos de 1h (aumenta ranking no algoritmo)</li>
+            <li>Superhost ativo — João @ojoaomendonca (4.9 ⭐ · 95k seguidores)</li>
+            <li>Precificação dinâmica via Stays integrado ao Airbnb</li>
+            <li>Reviews respondidos em até 48h para manter score</li>
+            <li>Calendário aberto com antecedência de 90 dias</li>
+          </ul>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <div class="s-header" style="background:var(--gold)">Direto — Canal Estratégico</div>
+        <div class="s-body">
+          <ul>
+            <li>Site artezian.com.br com formulário de reserva direta</li>
+            <li>Atendimento via WhatsApp API Oficial (resposta automática + humana)</li>
+            <li>Leads orgânicos via @ojoaomendonca no Instagram (95k seguidores)</li>
+            <li>Desconto de 5–10% para reservas diretas (sem taxa Airbnb)</li>
+            <li>Banco de hóspedes recorrentes com follow-up pós-estadia</li>
+            <li>CRM Datacrazy para gestão e nutrição dos leads de hospedagem</li>
+          </ul>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <div class="s-header">Booking / OTAs Secundárias</div>
+        <div class="s-body">
+          <ul>
+            <li>Booking.com como canal complementar para baixa temporada</li>
+            <li>Sincronização de calendário via Stays (evita double booking)</li>
+            <li>Preço ligeiramente superior ao Airbnb para compensar comissão</li>
+            <li>Foco em períodos com baixa demanda orgânica</li>
+          </ul>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <div class="s-header" style="background:var(--dark)">Marketing — Geração de Demanda</div>
+        <div class="s-body">
+          <ul>
+            <li>Conteúdo orgânico via @ojoaomendonca (reels de Porto Seguro)</li>
+            <li>Meta Ads para campanhas sazonais (alta temporada e feriados)</li>
+            <li>Google Ads para buscas diretas de "aluguel Porto Seguro"</li>
+            <li>Parcerias com agências de viagem locais para B2B</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:9.5pt; color:var(--teal); margin-bottom:3mm; text-transform:uppercase; letter-spacing:1px;">Mix de canais recomendado por temporada</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Temporada</th>
+          <th>Airbnb</th>
+          <th>Direto/WhatsApp</th>
+          <th>Booking/OTAs</th>
+          <th>Prioridade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="season-badge badge-high">Alta</span></td>
+          <td>50%</td>
+          <td>40%</td>
+          <td>10%</td>
+          <td>Direto (sem taxa) e Airbnb</td>
+        </tr>
+        <tr>
+          <td><span class="season-badge badge-holiday">Feriados</span></td>
+          <td>55%</td>
+          <td>35%</td>
+          <td>10%</td>
+          <td>Airbnb (visibilidade) + Direto</td>
+        </tr>
+        <tr>
+          <td><span class="season-badge badge-low">Baixa</span></td>
+          <td>45%</td>
+          <td>25%</td>
+          <td>30%</td>
+          <td>Abrir mais canais p/ ocupação</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="page-footer">
+      <div class="footer-brand">Artezian Real Estate Atelie</div>
+      <div class="footer-note">Varandas de Porto · Estratégia de Operação · 2026</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PÁGINA 10 — KPIs E ACOMPANHAMENTO                   -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="brand">Artezian</div>
+      <div class="page-label">KPIs & Acompanhamento</div>
+    </div>
+
+    <div class="gold-bar"></div>
+    <h2 class="section-title">Indicadores Mensais</h2>
+    <p class="section-sub">Métricas de acompanhamento da operação — revisadas mensalmente com o parceiro</p>
+
+    <div class="kpi-grid" style="margin-bottom:5mm;">
+      <div class="kpi-card">
+        <div class="kpi-title">Ocupação</div>
+        <ul class="kpi-list">
+          <li>Taxa de ocupação geral <span class="kpi-target">Meta: ≥ 49%</span></li>
+          <li>Taxa de ocupação por tipo de unidade <span class="kpi-target">Monitorar</span></li>
+          <li>Noites ocupadas vs. disponíveis <span class="kpi-target">≥ 133 noites/mês</span></li>
+          <li>Dias bloqueados (uso próprio / manutenção) <span class="kpi-target">Registrar</span></li>
+        </ul>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Receita</div>
+        <ul class="kpi-list">
+          <li>Receita bruta total <span class="kpi-target">Meta: ≥ R$ 33.333</span></li>
+          <li>Receita por unidade disponível (RevPAU) <span class="kpi-target">≥ R$ 1.852/un</span></li>
+          <li>Diária média realizada (ADR) <span class="kpi-target">Vs. tabela base</span></li>
+          <li>Comissão Artezian gerada <span class="kpi-target">Meta: R$ 5.000</span></li>
+        </ul>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Qualidade</div>
+        <ul class="kpi-list">
+          <li>Avaliação média Airbnb <span class="kpi-target">Meta: ≥ 4.8 ⭐</span></li>
+          <li>Taxa de resposta às mensagens <span class="kpi-target">Meta: ≥ 95%</span></li>
+          <li>Tempo médio de resposta <span class="kpi-target">Meta: &lt; 1h</span></li>
+          <li>Reclamações / ocorrências operacionais <span class="kpi-target">Meta: 0</span></li>
+        </ul>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Canal & Conversão</div>
+        <ul class="kpi-list">
+          <li>% reservas diretas vs. OTAs <span class="kpi-target">Meta: ≥ 30% direto</span></li>
+          <li>Hóspedes recorrentes <span class="kpi-target">Meta: ≥ 15%</span></li>
+          <li>Lead time médio (dias até check-in) <span class="kpi-target">Monitorar</span></li>
+          <li>Reservas canceladas <span class="kpi-target">Meta: &lt; 5%</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-size:9.5pt; color:var(--teal); margin-bottom:3mm; text-transform:uppercase; letter-spacing:1px;">Frequência de relatórios</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Frequência</th>
+          <th>O que é entregue</th>
+          <th>Canal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Semanal</strong></td>
+          <td>Reservas confirmadas, cancelamentos e ocupação da semana</td>
+          <td>WhatsApp</td>
+        </tr>
+        <tr>
+          <td><strong>Mensal</strong></td>
+          <td>Relatório completo: receita, ocupação, KPIs, comparativo vs. meta</td>
+          <td>PDF + reunião</td>
+        </tr>
+        <tr>
+          <td><strong>Trimestral</strong></td>
+          <td>Análise de sazonalidade, ajuste de preços e estratégia para próximo trimestre</td>
+          <td>Reunião presencial</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="page-footer">
+      <div class="footer-brand">Artezian Real Estate Atelie</div>
+      <div class="footer-note">Varandas de Porto · Estratégia de Operação · 2026</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PÁGINA 11 — PRÓXIMOS PASSOS                         -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="brand">Artezian</div>
+      <div class="page-label">Próximos Passos</div>
+    </div>
+
+    <div class="gold-bar"></div>
+    <h2 class="section-title">Plano de Implantação</h2>
+    <p class="section-sub">O que precisa acontecer para a operação entrar em ritmo de cruzeiro</p>
+
+    <div class="steps-list" style="margin-bottom:5mm;">
+      <div class="step-item">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <div class="step-title">Cadastro e onboarding das unidades</div>
+          <div class="step-desc">Cadastrar as 9 unidades no Stays (PMS) e conectar ao Airbnb, site artezian.com.br e Booking.com. Configurar calendários, políticas de cancelamento e regras de mínimo de estada por temporada.</div>
+          <span class="step-tag">Semana 1–2</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <div class="step-title">Fotos profissionais e otimização dos anúncios</div>
+          <div class="step-desc">Sessão fotográfica das 9 unidades com destaque por tipologia. Criar títulos e descrições otimizadas por tipo (Studio, 1q, 2q). Configurar preços dinâmicos por temporada no Stays.</div>
+          <span class="step-tag">Semana 2–3</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <div class="step-title">Configuração do atendimento via WhatsApp</div>
+          <div class="step-desc">Ativar WhatsApp API Oficial com fluxo de atendimento automático para consultas de disponibilidade, preços e confirmações. Integrar ao CRM Datacrazy para registro de leads e hóspedes.</div>
+          <span class="step-tag">Semana 3</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <div class="step-title">Definição do calendário de temporadas 2026/2027</div>
+          <div class="step-desc">Alinhar com o parceiro as datas de uso próprio e bloqueios previstos. Configurar o calendário completo no Stays com sazonalidade e feriados já mapeados. Abrir reservas da alta temporada imediatamente.</div>
+          <span class="step-tag">Semana 2–3</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <div class="step-title">Primeira revisão de performance</div>
+          <div class="step-desc">Reunião de 30 dias para apresentar os primeiros KPIs, ajustar precificação se necessário e alinhar expectativas para o próximo trimestre. Consolidar o relatório mensal padrão.</div>
+          <span class="step-tag">Mês 1</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-bottom:5mm;">
+      <p><strong>Expectativa de resultados:</strong> Nos primeiros 30 dias, foco em ocupação e reviews. Do 2º ao 6º mês, otimização de precificação e crescimento de canal direto. A partir do mês 6, operar consistentemente no Nível Meta com picos no Nível Ideal durante alta temporada.</p>
+    </div>
+
+    <div style="background:var(--teal); border-radius:5px; padding:6mm; text-align:center; margin-top:auto;">
+      <p style="font-family:'Playfair Display',serif; font-size:14pt; color:var(--white); margin-bottom:2mm;">Artezian Real Estate Atelie</p>
+      <p style="font-size:8.5pt; color:rgba(255,255,255,0.65); margin-bottom:3mm;">Porto Seguro · Coroa Vermelha · Arraial D'Ajuda · Taperapuan</p>
+      <p style="font-size:9pt; color:var(--gold);">artezian.com.br · @ojoaomendonca</p>
+    </div>
+
+    <div class="page-footer">
+      <div class="footer-brand">Artezian Real Estate Atelie</div>
+      <div class="footer-note">Varandas de Porto · Estratégia de Operação · 2026</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

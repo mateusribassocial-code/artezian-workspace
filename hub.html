@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Artezian — Hub de Painéis</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #0a0a0f;
+      color: #e8e8f0;
+      min-height: 100vh;
+      padding: 40px 24px 80px;
+    }
+
+    header {
+      max-width: 900px;
+      margin: 0 auto 48px;
+    }
+
+    .logo {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #c8a96e;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    h1 span {
+      color: #c8a96e;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      font-size: 15px;
+      color: #888;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    section h2 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #c8a96e;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #1e1e2e;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: #111118;
+      border: 1px solid #1e1e2e;
+      border-radius: 10px;
+      padding: 18px 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, background 0.15s, transform 0.1s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      border-color: #c8a96e;
+      background: #16161f;
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: #666;
+      margin-top: 2px;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: #1a1a28;
+      color: #888;
+      border: 1px solid #2a2a3e;
+      align-self: flex-start;
+    }
+
+    .badge.server { color: #f0a500; border-color: #3a2a00; background: #1e1600; }
+
+    footer {
+      max-width: 900px;
+      margin: 60px auto 0;
+      font-size: 12px;
+      color: #444;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <p class="logo">Artezian Real Estate Atelie</p>
+  <h1>Hub de <span>Painéis</span></h1>
+  <p class="subtitle">Todos os dashboards e ferramentas em um só lugar</p>
+</header>
+
+<main>
+
+  <!-- OPERAÇÕES GERAIS -->
+  <section>
+    <h2>Operações Gerais</h2>
+    <div class="grid">
+      <a class="card" href="artezian.html">
+        <div class="card-icon">✅</div>
+        <div class="card-title">Tarefas</div>
+        <div class="card-desc">Lista de tarefas e gestão operacional</div>
+        <span class="badge">artezian.html</span>
+      </a>
+      <a class="card" href="operacoes/dashboard/public/index.html">
+        <div class="card-icon">📊</div>
+        <div class="card-title">Dashboard Principal</div>
+        <div class="card-desc">Visão geral da operação Artezian</div>
+        <span class="badge">dashboard</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- PRECIFICAÇÃO -->
+  <section>
+    <h2>Precificação</h2>
+    <div class="grid">
+      <a class="card" href="operacoes/precificacao/dashboard.html">
+        <div class="card-icon">💰</div>
+        <div class="card-title">Painel de Precificação</div>
+        <div class="card-desc">Análise de preços — Porto Seguro e região</div>
+        <span class="badge">dashboard.html</span>
+      </a>
+      <a class="card" href="operacoes/precificacao/index.html">
+        <div class="card-icon">📈</div>
+        <div class="card-title">Precificação — Índice</div>
+        <div class="card-desc">Painel completo de precificação</div>
+        <span class="badge">index.html</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ESTRATÉGIAS DE IMÓVEIS -->
+  <section>
+    <h2>Estratégias de Imóveis</h2>
+    <div class="grid">
+      <a class="card" href="operacoes/varandas-de-porto-estrategia.html">
+        <div class="card-icon">🏢</div>
+        <div class="card-title">Varandas de Porto</div>
+        <div class="card-desc">Estratégia de operação</div>
+        <span class="badge">estratégia</span>
+      </a>
+      <a class="card" href="operacoes/mont-carmelo-estrategia.html">
+        <div class="card-icon">🏠</div>
+        <div class="card-title">Condomínio Mont Carmelo</div>
+        <div class="card-desc">Estratégia de operação</div>
+        <span class="badge">estratégia</span>
+      </a>
+      <a class="card" href="operacoes/apto-isa-estrategia.html">
+        <div class="card-icon">🏠</div>
+        <div class="card-title">Apartamento da Isa</div>
+        <div class="card-desc">Estratégia de operação</div>
+        <span class="badge">estratégia</span>
+      </a>
+      <a class="card" href="operacoes/reinaldo-taperapua-estrategia.html">
+        <div class="card-icon">🏠</div>
+        <div class="card-title">Apto do Reinaldo — Taperapuã</div>
+        <div class="card-desc">Estratégia de operação</div>
+        <span class="badge">estratégia</span>
+      </a>
+      <a class="card" href="operacoes/reinaldo-coroa-vermelha-estrategia.html">
+        <div class="card-icon">🏠</div>
+        <div class="card-title">Apto do Reinaldo — Coroa Vermelha</div>
+        <div class="card-desc">Estratégia de operação</div>
+        <span class="badge">estratégia</span>
+      </a>
+      <a class="card" href="operacoes/flat-joyce-estrategia.html">
+        <div class="card-icon">🏠</div>
+        <div class="card-title">Flat da Joyce</div>
+        <div class="card-desc">Estratégia de operação</div>
+        <span class="badge">estratégia</span>
+      </a>
+      <a class="card" href="operacoes/jessilene-estrategia.html">
+        <div class="card-icon">🏠</div>
+        <div class="card-title">Apto da Jessilene</div>
+        <div class="card-desc">Estratégia de operação</div>
+        <span class="badge">estratégia</span>
+      </a>
+      <a class="card" href="operacoes/casa-tremura-estrategia.html">
+        <div class="card-icon">🏡</div>
+        <div class="card-title">Casa do Tremura</div>
+        <div class="card-desc">Estratégia de operação</div>
+        <span class="badge">estratégia</span>
+      </a>
+      <a class="card" href="operacoes/casa-laureana-estrategia.html">
+        <div class="card-icon">🏡</div>
+        <div class="card-title">Casa da Laureana</div>
+        <div class="card-desc">Estratégia de operação</div>
+        <span class="badge">estratégia</span>
+      </a>
+      <a class="card" href="operacoes/casa-moana-estrategia.html">
+        <div class="card-icon">🏡</div>
+        <div class="card-title">Casa da Moana</div>
+        <div class="card-desc">Estratégia de operação</div>
+        <span class="badge">estratégia</span>
+      </a>
+      <a class="card" href="operacoes/casa-john-estrategia.html">
+        <div class="card-icon">🏡</div>
+        <div class="card-title">Casa do John</div>
+        <div class="card-desc">Estratégia de operação</div>
+        <span class="badge">estratégia</span>
+      </a>
+      <a class="card" href="operacoes/casa-euller-estrategia.html">
+        <div class="card-icon">🏡</div>
+        <div class="card-title">Casa do Euller</div>
+        <div class="card-desc">Estratégia de operação</div>
+        <span class="badge">estratégia</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- LOCAÇÃO -->
+  <section>
+    <h2>Locação</h2>
+    <div class="grid">
+      <a class="card" href="locacao/onboarding-proprietario.html">
+        <div class="card-icon">📋</div>
+        <div class="card-title">Onboarding Proprietário</div>
+        <div class="card-desc">Fluxo de entrada de novos proprietários</div>
+        <span class="badge">onboarding</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Artezian Real Estate Atelie · Porto Seguro, BA
+</footer>
+
+</body>
+</html>

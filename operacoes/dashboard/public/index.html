@@ -516,6 +516,49 @@
     </div>
   </div>
 
+  <!-- MODAL — METAS POR UNIDADE -->
+  <div class="modal-overlay" id="metaModal">
+    <div class="modal modal--wide">
+      <div class="modal-header">
+        <h3>Metas — <span id="metaModalUnitName"></span></h3>
+        <button class="btn-close" id="btnCloseMetaModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="meta-edit-table">
+          <div class="meta-edit-header">
+            <span>Nível</span>
+            <span>Receita Alvo (R$)</span>
+            <span>Comissão (R$)</span>
+            <span>Resultado (R$)</span>
+          </div>
+          <div class="meta-edit-row meta-edit-row--min">
+            <span class="meta-edit-label">Mínimo</span>
+            <input type="number" id="meta-min-receita"   min="0" step="1" />
+            <input type="number" id="meta-min-comissao"  min="0" step="1" />
+            <input type="number" id="meta-min-resultado"        step="1" />
+          </div>
+          <div class="meta-edit-row meta-edit-row--meta">
+            <span class="meta-edit-label">Meta ⭐</span>
+            <input type="number" id="meta-meta-receita"   min="0" step="1" />
+            <input type="number" id="meta-meta-comissao"  min="0" step="1" />
+            <input type="number" id="meta-meta-resultado"        step="1" />
+          </div>
+          <div class="meta-edit-row meta-edit-row--ideal">
+            <span class="meta-edit-label">Ideal 🏆</span>
+            <input type="number" id="meta-ideal-receita"   min="0" step="1" />
+            <input type="number" id="meta-ideal-comissao"  min="0" step="1" />
+            <input type="number" id="meta-ideal-resultado"        step="1" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" id="btnResetMeta">Restaurar padrão</button>
+        <button class="btn-ghost" id="btnCancelMetaModal">Cancelar</button>
+        <button class="btn-primary" id="btnSalvarMeta">Salvar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ÁREA DE IMPRESSÃO PDF -->
   <div id="printArea" style="display:none"></div>
 

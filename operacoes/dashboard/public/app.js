@@ -7,6 +7,7 @@ const state = {
   reservas: [],
   unitFilter: 'all',
   editingParceiroId: null,
+  editingUnitCode: null,
 };
 
 /* ── Helpers ────────────────────────────────────────────────────── */
@@ -346,10 +347,15 @@ function escHtml(str) {
 /* ── Bloco 2 — Unidades (Stays) ─────────────────────────────────── */
 
 const META_LEVELS = [
-  { label: 'Mínimo',  icon: '',    receita: 16667, comissao: 2500, resultado: 0,    cls: 'min'  },
-  { label: 'Meta',    icon: ' ⭐', receita: 33333, comissao: 5000, resultado: 2500, cls: 'meta' },
+  { label: 'Mínimo', icon: '',    receita: 16667, comissao: 2500, resultado: 0,    cls: 'min'  },
+  { label: 'Meta',   icon: ' ⭐', receita: 33333, comissao: 5000, resultado: 2500, cls: 'meta' },
   { label: 'Ideal',  icon: ' 🏆', receita: 50000, comissao: 7500, resultado: 5000, cls: 'ideal'},
 ];
+
+function getMeta(code) {
+  const stored = (state.appData.metasUnidades || {})[code];
+  return META_LEVELS.map(def => ({ ...def, ...(stored?.[def.cls] || {}) }));
+}
 
 function renderUnidades() {
   // Stays: filtra somente ativos
@@ -392,7 +398,8 @@ function renderUnidades() {
     const baths  = l._f_bathrooms || null;
     const code   = l.id || '';
 
-    const metaHtml = META_LEVELS.map(m => `
+    const levels = getMeta(code);
+    const metaHtml = levels.map(m => `
       <div class="unit-meta-level unit-meta-level--${m.cls}">
         <span class="unit-meta-label">${m.label}${m.icon}</span>
         <span class="unit-meta-receita">${brl(m.receita)}</span>
@@ -401,11 +408,17 @@ function renderUnidades() {
       </div>
     `).join('');
 
+    const safeName = escHtml(name).replace(/'/g, '&#39;');
+    const safeCode = escHtml(code);
+
     return `
       <div class="unit-card">
         <div class="unit-card-header">
           <span class="unit-card-type">${type}</span>
-          ${code ? `<span class="unit-code">${escHtml(code)}</span>` : ''}
+          <div style="display:flex;align-items:center;gap:6px">
+            ${code ? `<span class="unit-code">${safeCode}</span>` : ''}
+            ${code ? `<button class="btn-edit-meta" onclick="openMetaModal('${safeCode}','${safeName}')" title="Editar metas">&#9998;</button>` : ''}
+          </div>
         </div>
         <div class="unit-card-name">${escHtml(name)}</div>
         <div class="unit-card-meta">
@@ -909,8 +922,62 @@ function renderChart() {
   });
 }
 
-/* ── Unidades — código Stays ────────────────────────────────────── */
-// já incorporado no renderUnidades() via listing.id
+/* ── Modal de Metas por Unidade ─────────────────────────────────── */
+
+function openMetaModal(code, name) {
+  state.editingUnitCode = code;
+  document.getElementById('metaModalUnitName').textContent = name;
+
+  const levels = getMeta(code);
+  ['min', 'meta', 'ideal'].forEach((cls, i) => {
+    const m = levels[i];
+    document.getElementById(`meta-${cls}-receita`).value   = m.receita;
+    document.getElementById(`meta-${cls}-comissao`).value  = m.comissao;
+    document.getElementById(`meta-${cls}-resultado`).value = m.resultado;
+  });
+
+  document.getElementById('metaModal').classList.add('open');
+}
+
+function closeMetaModal() {
+  state.editingUnitCode = null;
+  document.getElementById('metaModal').classList.remove('open');
+}
+
+document.getElementById('btnCloseMetaModal').addEventListener('click', closeMetaModal);
+document.getElementById('btnCancelMetaModal').addEventListener('click', closeMetaModal);
+document.getElementById('metaModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeMetaModal();
+});
+
+document.getElementById('btnResetMeta').addEventListener('click', async () => {
+  const code = state.editingUnitCode;
+  if (!code || !state.appData.metasUnidades) return;
+  delete state.appData.metasUnidades[code];
+  await saveData(state.appData);
+  renderUnidades();
+  closeMetaModal();
+});
+
+document.getElementById('btnSalvarMeta').addEventListener('click', async () => {
+  const code = state.editingUnitCode;
+  if (!code) return;
+
+  if (!state.appData.metasUnidades) state.appData.metasUnidades = {};
+
+  state.appData.metasUnidades[code] = {};
+  ['min', 'meta', 'ideal'].forEach(cls => {
+    state.appData.metasUnidades[code][cls] = {
+      receita:   Number(document.getElementById(`meta-${cls}-receita`).value),
+      comissao:  Number(document.getElementById(`meta-${cls}-comissao`).value),
+      resultado: Number(document.getElementById(`meta-${cls}-resultado`).value),
+    };
+  });
+
+  await saveData(state.appData);
+  renderUnidades();
+  closeMetaModal();
+});
 
 /* ── Relatório do Parceiro ──────────────────────────────────────── */
 

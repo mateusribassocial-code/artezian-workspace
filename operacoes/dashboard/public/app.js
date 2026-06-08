@@ -345,6 +345,12 @@ function escHtml(str) {
 
 /* ── Bloco 2 — Unidades (Stays) ─────────────────────────────────── */
 
+const META_LEVELS = [
+  { label: 'Mínimo',  icon: '',    receita: 16667, comissao: 2500, resultado: 0,    cls: 'min'  },
+  { label: 'Meta',    icon: ' ⭐', receita: 33333, comissao: 5000, resultado: 2500, cls: 'meta' },
+  { label: 'Ideal',  icon: ' 🏆', receita: 50000, comissao: 7500, resultado: 5000, cls: 'ideal'},
+];
+
 function renderUnidades() {
   // Stays: filtra somente ativos
   const all    = state.stays.filter(l => l.status === 'active' || !l.status);
@@ -386,6 +392,15 @@ function renderUnidades() {
     const baths  = l._f_bathrooms || null;
     const code   = l.id || '';
 
+    const metaHtml = META_LEVELS.map(m => `
+      <div class="unit-meta-level unit-meta-level--${m.cls}">
+        <span class="unit-meta-label">${m.label}${m.icon}</span>
+        <span class="unit-meta-receita">${brl(m.receita)}</span>
+        <span class="unit-meta-comissao">${brl(m.comissao)}</span>
+        <span class="unit-meta-resultado">${m.resultado > 0 ? '+' : ''}${brl(m.resultado)}</span>
+      </div>
+    `).join('');
+
     return `
       <div class="unit-card">
         <div class="unit-card-header">
@@ -399,6 +414,14 @@ function renderUnidades() {
           ${rooms ? `<span>🛏 ${rooms} quarto${rooms !== 1 ? 's' : ''}</span>` : ''}
           ${baths ? `<span>🚿 ${baths} banheiro${baths !== 1 ? 's' : ''}</span>` : ''}
         </div>
+        <div class="unit-meta-divider"></div>
+        <div class="unit-meta-header">
+          <span>Nível</span>
+          <span>Receita</span>
+          <span>Comissão</span>
+          <span>Resultado</span>
+        </div>
+        <div class="unit-meta-levels">${metaHtml}</div>
       </div>
     `;
   }).join('');

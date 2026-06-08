@@ -594,7 +594,7 @@ body {
 /* ── Units grid ──────────────────────────────────────────────── */
 .units-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 14px;
   margin-top: 4px;
 }
@@ -652,6 +652,74 @@ body {
   font-size: 11px;
   color: var(--mid);
 }
+
+.unit-meta-divider {
+  border-top: 1px solid var(--border);
+  margin: 12px 0 8px;
+}
+
+.unit-meta-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.unit-meta-header span {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--light);
+  text-align: right;
+}
+
+.unit-meta-header span:first-child { text-align: left; }
+
+.unit-meta-levels { display: flex; flex-direction: column; gap: 4px; }
+
+.unit-meta-level {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 4px;
+  align-items: center;
+  padding: 5px 7px;
+  border-radius: 5px;
+}
+
+.unit-meta-level span {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.unit-meta-level .unit-meta-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  text-align: left;
+}
+
+.unit-meta-level--min {
+  background: rgba(120,120,120,.07);
+  color: var(--mid);
+}
+.unit-meta-level--min .unit-meta-resultado { color: var(--mid); }
+
+.unit-meta-level--meta {
+  background: rgba(194,161,78,.1);
+  color: var(--dark);
+}
+.unit-meta-level--meta .unit-meta-label    { color: var(--gold); }
+.unit-meta-level--meta .unit-meta-resultado { color: #c28200; font-weight: 700; }
+
+.unit-meta-level--ideal {
+  background: rgba(34,139,34,.08);
+  color: var(--dark);
+}
+.unit-meta-level--ideal .unit-meta-label    { color: #2d7a2d; }
+.unit-meta-level--ideal .unit-meta-resultado { color: #2d7a2d; font-weight: 700; }
 
 /* ── Reservas stats ──────────────────────────────────────────── */
 .reservas-stats {

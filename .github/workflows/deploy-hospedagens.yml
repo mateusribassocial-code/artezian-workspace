@@ -20,7 +20,7 @@ jobs:
           username: u432659370
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: locacao/gestao-hospedagens/
-          server-dir: public_html/hospedagens/
+          server-dir: nodejs/public/hospedagens/
           exclude: |
             **/.git*
             **/apps-script.gs

@@ -31,6 +31,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/hospedagens', express.static(path.join(__dirname, 'public', 'hospedagens')));
 
 // ── Data helpers ──────────────────────────────────────────────────────────────
 

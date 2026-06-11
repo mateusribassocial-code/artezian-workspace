@@ -16,9 +16,9 @@ jobs:
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
+          server: 72.60.153.200
+          username: u432659370
+          password: ${{ secrets.FTP_PASSWORD }}
           local-dir: locacao/gestao-hospedagens/
           server-dir: public_html/hospedagens/
           exclude: |

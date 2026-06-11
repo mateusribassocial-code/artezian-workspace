@@ -349,11 +349,16 @@ const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyc5esX8GBJB
 // INIT
 // ─────────────────────────────────────────────
 (function init() {
-  scriptUrl = localStorage.getItem('az_script_url') || DEFAULT_SCRIPT_URL;
-  document.getElementById('script-url').value = scriptUrl;
-  if (scriptUrl) {
-    document.getElementById('config-connected').style.display = 'inline';
+  // Sempre usa DEFAULT_SCRIPT_URL a menos que o usuário tenha salvo uma manualmente diferente
+  const savedUrl = localStorage.getItem('az_script_url');
+  scriptUrl = savedUrl || DEFAULT_SCRIPT_URL;
+  // Se a URL salva era antiga (diferente da default atual), atualiza automaticamente
+  if (!savedUrl || savedUrl !== DEFAULT_SCRIPT_URL) {
+    scriptUrl = DEFAULT_SCRIPT_URL;
+    localStorage.setItem('az_script_url', DEFAULT_SCRIPT_URL);
   }
+  document.getElementById('script-url').value = scriptUrl;
+  document.getElementById('config-connected').style.display = 'inline';
   const saved = localStorage.getItem('az_entries');
   if (saved) entries = JSON.parse(saved);
   render();
@@ -416,25 +421,28 @@ async function syncFromStays() {
   setPill('stays', 'loading', '↻ Buscando...');
   try {
     const r = await fetch(scriptUrl + '?action=syncStays');
-    const d = await r.json();
+    const text = await r.text();
+    let d;
+    try { d = JSON.parse(text); }
+    catch(e) { throw new Error('Resposta inválida: ' + text.slice(0, 200)); }
+
     if (d.ok) {
-      // Reload all entries from Sheets after sync
       const r2 = await fetch(scriptUrl + '?action=getAll');
       const d2 = await r2.json();
-      if (d2.entries) {
-        entries = d2.entries;
-        persist();
-        render();
-      }
+      if (d2.entries) { entries = d2.entries; persist(); render(); }
       const errMsg = d.errors && d.errors.length ? ` (${d.errors.length} erro(s))` : '';
       setPill('stays', 'ok', `✓ ${d.count} entradas${errMsg}`);
-      setTimeout(() => setPill('stays', 'idle', '↻ Stays'), 4000);
+      if (d.errors && d.errors.length) console.warn('Stays sync errors:', d.errors);
+      setTimeout(() => setPill('stays', 'idle', '↻ Stays'), 5000);
     } else {
+      const msg = d.error || JSON.stringify(d).slice(0, 100);
       setPill('stays', 'error', '✗ Stays');
+      alert('Erro no sync Stays:\n' + msg);
       setTimeout(() => setPill('stays', 'idle', '↻ Stays'), 4000);
     }
   } catch(e) {
     setPill('stays', 'error', '✗ Stays');
+    alert('Erro ao conectar:\n' + e.message);
     setTimeout(() => setPill('stays', 'idle', '↻ Stays'), 4000);
   }
 }

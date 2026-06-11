@@ -1,4 +1,4 @@
-name: Deploy Hospedagens → Hostinger
+name: Deploy Hospedagens → Hostinger (v2)
 
 on:
   push:

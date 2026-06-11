@@ -58,7 +58,7 @@ function doGet(e) {
   if (callback) {
     return ContentService
       .createTextOutput(callback + '(' + json + ');')
-      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+      .setMimeType(ContentService.MimeType.TEXT);
   }
 
   return ContentService

@@ -1,0 +1,26 @@
+name: Deploy Hospedagens → Hostinger
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "locacao/gestao-hospedagens/**"
+      - ".github/workflows/deploy-hospedagens.yml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          local-dir: locacao/gestao-hospedagens/
+          server-dir: public_html/hospedagens/
+          exclude: |
+            **/.git*
+            **/apps-script.gs

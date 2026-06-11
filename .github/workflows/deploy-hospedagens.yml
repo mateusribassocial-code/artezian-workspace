@@ -17,7 +17,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: 72.60.153.200
-          username: u432659370
+          username: u432659370.ojoaomendonca.com.br
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: locacao/gestao-hospedagens/
           server-dir: nodejs/public/hospedagens/

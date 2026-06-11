@@ -11,9 +11,9 @@
 // ============================================================
 
 // ── Stays API ────────────────────────────────────────────────
-const STAYS_CLIENT_ID     = '5b5be656';
-const STAYS_CLIENT_SECRET = 'fe48e730';
-const STAYS_BASE_URL      = 'https://play.stays.net/external/v1';
+const STAYS_CLIENT_ID     = 'c1793dc6';
+const STAYS_CLIENT_SECRET = '55140c70';
+const STAYS_BASE_URL      = 'https://artezian.stays.net/external/v1';
 
 const STAYS_LISTING_MAP = {
   'GF02J': 'casa-tremura',

@@ -395,14 +395,39 @@ function showConfigMsg(msg, type) {
 }
 
 // ─────────────────────────────────────────────
+// JSONP — funciona a partir de file:// sem CORS
+// ─────────────────────────────────────────────
+function scriptFetch(url, timeoutMs) {
+  timeoutMs = timeoutMs || 30000;
+  return new Promise(function(resolve, reject) {
+    var cbName = 'jcb_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+    var script = document.createElement('script');
+    var timer = setTimeout(function() {
+      cleanup();
+      reject(new Error('Timeout (' + (timeoutMs/1000) + 's)'));
+    }, timeoutMs);
+
+    function cleanup() {
+      delete window[cbName];
+      if (script.parentNode) script.parentNode.removeChild(script);
+      clearTimeout(timer);
+    }
+
+    window[cbName] = function(data) { cleanup(); resolve(data); };
+    script.onerror  = function()    { cleanup(); reject(new Error('Erro ao carregar script')); };
+    script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + cbName;
+    document.head.appendChild(script);
+  });
+}
+
+// ─────────────────────────────────────────────
 // GOOGLE SHEETS SYNC
 // ─────────────────────────────────────────────
 async function syncFromSheets() {
   if (!scriptUrl) return;
   setPill('sheets', 'loading', '↻ Sincronizando...');
   try {
-    const r = await fetch(scriptUrl + '?action=getAll');
-    const d = await r.json();
+    const d = await scriptFetch(scriptUrl + '?action=getAll');
     if (d.entries) {
       entries = d.entries;
       persist();
@@ -420,24 +445,17 @@ async function syncFromStays() {
   if (!scriptUrl) { alert('Configure a URL do Apps Script primeiro.'); return; }
   setPill('stays', 'loading', '↻ Buscando...');
   try {
-    const r = await fetch(scriptUrl + '?action=syncStays');
-    const text = await r.text();
-    let d;
-    try { d = JSON.parse(text); }
-    catch(e) { throw new Error('Resposta inválida: ' + text.slice(0, 200)); }
-
+    const d = await scriptFetch(scriptUrl + '?action=syncStays', 120000);
     if (d.ok) {
-      const r2 = await fetch(scriptUrl + '?action=getAll');
-      const d2 = await r2.json();
+      const d2 = await scriptFetch(scriptUrl + '?action=getAll');
       if (d2.entries) { entries = d2.entries; persist(); render(); }
       const errMsg = d.errors && d.errors.length ? ` (${d.errors.length} erro(s))` : '';
       setPill('stays', 'ok', `✓ ${d.count} entradas${errMsg}`);
       if (d.errors && d.errors.length) console.warn('Stays sync errors:', d.errors);
       setTimeout(() => setPill('stays', 'idle', '↻ Stays'), 5000);
     } else {
-      const msg = d.error || JSON.stringify(d).slice(0, 100);
       setPill('stays', 'error', '✗ Stays');
-      alert('Erro no sync Stays:\n' + msg);
+      alert('Erro no sync Stays:\n' + (d.error || JSON.stringify(d).slice(0, 150)));
       setTimeout(() => setPill('stays', 'idle', '↻ Stays'), 4000);
     }
   } catch(e) {
@@ -450,8 +468,8 @@ async function syncFromStays() {
 async function pushEntry(action, payload) {
   if (!scriptUrl) return;
   try {
-    await fetch(scriptUrl + '?action=' + action + '&data=' + encodeURIComponent(JSON.stringify(payload)));
-  } catch(e) { /* silent fail — local data already saved */ }
+    await scriptFetch(scriptUrl + '?action=' + action + '&data=' + encodeURIComponent(JSON.stringify(payload)));
+  } catch(e) { /* silent — dado já salvo localmente */ }
 }
 
 function setPill(target, cls, txt) {

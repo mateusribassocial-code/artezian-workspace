@@ -37,8 +37,9 @@ const COLS = [
 
 // ── Router ───────────────────────────────────────────────────
 function doGet(e) {
-  const action = e.parameter.action;
-  const data   = e.parameter.data
+  const action   = e.parameter.action;
+  const callback = e.parameter.callback;  // JSONP support
+  const data     = e.parameter.data
     ? JSON.parse(decodeURIComponent(e.parameter.data))
     : null;
 
@@ -51,8 +52,17 @@ function doGet(e) {
     default:          result = { error: 'Ação desconhecida: ' + action };
   }
 
+  const json = JSON.stringify(result);
+
+  // JSONP: evita bloqueio de CORS ao abrir de file://
+  if (callback) {
+    return ContentService
+      .createTextOutput(callback + '(' + json + ');')
+      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+  }
+
   return ContentService
-    .createTextOutput(JSON.stringify(result))
+    .createTextOutput(json)
     .setMimeType(ContentService.MimeType.JSON);
 }
 

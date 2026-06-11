@@ -180,9 +180,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <!-- Tabs -->
   <div class="tabs">
     <button class="tab active" id="tab-all" onclick="setProperty('all')">Todos</button>
-    <button class="tab" id="tab-mont-carmelo" onclick="setProperty('mont-carmelo')">Mont Carmelo</button>
+    <button class="tab" id="tab-casa-tremura" onclick="setProperty('casa-tremura')">Casa do Tremura</button>
     <button class="tab" id="tab-casa-euller" onclick="setProperty('casa-euller')">Casa do Euller</button>
+    <button class="tab" id="tab-casa-moana" onclick="setProperty('casa-moana')">Casa da Moana</button>
+    <button class="tab" id="tab-casa-john" onclick="setProperty('casa-john')">Casa do John</button>
     <button class="tab" id="tab-casa-laureana" onclick="setProperty('casa-laureana')">Casa da Laureana</button>
+    <button class="tab" id="tab-apto-jessilene" onclick="setProperty('apto-jessilene')">Apto da Jessilene</button>
+    <button class="tab" id="tab-apto-isa" onclick="setProperty('apto-isa')">Apto da Isa</button>
   </div>
 
   <!-- Action bar -->
@@ -216,9 +220,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div class="fg">
     <label>Imóvel</label>
     <select id="f-property">
-      <option value="mont-carmelo">Mont Carmelo</option>
+      <option value="casa-tremura">Casa do Tremura</option>
       <option value="casa-euller">Casa do Euller</option>
+      <option value="casa-moana">Casa da Moana</option>
+      <option value="casa-john">Casa do John</option>
       <option value="casa-laureana">Casa da Laureana</option>
+      <option value="apto-jessilene">Apto da Jessilene</option>
+      <option value="apto-isa">Apto da Isa</option>
     </select>
   </div>
 
@@ -304,9 +312,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 // CONSTANTS
 // ─────────────────────────────────────────────
 const PROPS = {
-  'mont-carmelo':  'Mont Carmelo',
-  'casa-euller':   'Casa do Euller',
-  'casa-laureana': 'Casa da Laureana'
+  'casa-tremura':   'Casa do Tremura',
+  'casa-euller':    'Casa do Euller',
+  'casa-moana':     'Casa da Moana',
+  'casa-john':      'Casa do John',
+  'casa-laureana':  'Casa da Laureana',
+  'apto-jessilene': 'Apto da Jessilene',
+  'apto-isa':       'Apto da Isa'
 };
 const PAY_LABELS = {
   pix:'PIX', dinheiro:'Dinheiro', transferencia:'Transferência',
@@ -553,7 +565,7 @@ function openAdd(type, propId, dateStr) {
 
   if (propId) document.getElementById('f-property').value = propId;
   else if (curProp !== 'all') document.getElementById('f-property').value = curProp;
-  else document.getElementById('f-property').value = 'mont-carmelo';
+  else document.getElementById('f-property').value = 'casa-tremura';
 
   document.getElementById('add-overlay').classList.add('open');
   setTimeout(() => {

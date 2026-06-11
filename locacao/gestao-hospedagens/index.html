@@ -26,6 +26,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .sync-pill.error{background:#fde8e0;color:#d95c35}
 .sync-pill.loading{background:rgba(255,255,255,.25);color:#fff;animation:pulse 1s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+/* source badges */
+.src-badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;text-transform:uppercase;letter-spacing:.4px;margin-left:6px}
+.src-badge.stays{background:#e8f0fe;color:#3b5bdb}
+.src-badge.manual{background:#f0f0f0;color:#888}
 
 /* CONTAINER */
 .container{max-width:1100px;margin:0 auto;padding:20px 16px}
@@ -154,6 +158,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <span>Artezian Real Estate Atelie</span>
   </div>
   <div class="header-right">
+    <div class="sync-pill idle" id="stays-pill" onclick="syncFromStays()">↻ Stays</div>
     <div class="sync-pill idle" id="sync-pill" onclick="syncFromSheets()">↻ Sheets</div>
   </div>
 </div>
@@ -389,7 +394,7 @@ function showConfigMsg(msg, type) {
 // ─────────────────────────────────────────────
 async function syncFromSheets() {
   if (!scriptUrl) return;
-  setPill('loading', '↻ Sincronizando...');
+  setPill('sheets', 'loading', '↻ Sincronizando...');
   try {
     const r = await fetch(scriptUrl + '?action=getAll');
     const d = await r.json();
@@ -397,12 +402,40 @@ async function syncFromSheets() {
       entries = d.entries;
       persist();
       render();
-      setPill('ok', '✓ Sincronizado');
-      setTimeout(() => setPill('idle', '↻ Sheets'), 3000);
+      setPill('sheets', 'ok', '✓ Sheets');
+      setTimeout(() => setPill('sheets', 'idle', '↻ Sheets'), 3000);
     }
   } catch(e) {
-    setPill('error', '✗ Erro ao sincronizar');
-    setTimeout(() => setPill('idle', '↻ Sheets'), 4000);
+    setPill('sheets', 'error', '✗ Sheets');
+    setTimeout(() => setPill('sheets', 'idle', '↻ Sheets'), 4000);
+  }
+}
+
+async function syncFromStays() {
+  if (!scriptUrl) { alert('Configure a URL do Apps Script primeiro.'); return; }
+  setPill('stays', 'loading', '↻ Buscando...');
+  try {
+    const r = await fetch(scriptUrl + '?action=syncStays');
+    const d = await r.json();
+    if (d.ok) {
+      // Reload all entries from Sheets after sync
+      const r2 = await fetch(scriptUrl + '?action=getAll');
+      const d2 = await r2.json();
+      if (d2.entries) {
+        entries = d2.entries;
+        persist();
+        render();
+      }
+      const errMsg = d.errors && d.errors.length ? ` (${d.errors.length} erro(s))` : '';
+      setPill('stays', 'ok', `✓ ${d.count} entradas${errMsg}`);
+      setTimeout(() => setPill('stays', 'idle', '↻ Stays'), 4000);
+    } else {
+      setPill('stays', 'error', '✗ Stays');
+      setTimeout(() => setPill('stays', 'idle', '↻ Stays'), 4000);
+    }
+  } catch(e) {
+    setPill('stays', 'error', '✗ Stays');
+    setTimeout(() => setPill('stays', 'idle', '↻ Stays'), 4000);
   }
 }
 
@@ -413,8 +446,9 @@ async function pushEntry(action, payload) {
   } catch(e) { /* silent fail — local data already saved */ }
 }
 
-function setPill(cls, txt) {
-  const el = document.getElementById('sync-pill');
+function setPill(target, cls, txt) {
+  const id = target === 'stays' ? 'stays-pill' : 'sync-pill';
+  const el = document.getElementById(id);
   el.className = 'sync-pill ' + cls;
   el.textContent = txt;
 }
@@ -517,9 +551,12 @@ function renderList() {
         <small class="${pend>0?'pend':''}">pend: R$ ${fmtMoney(pend)}</small>
       </div>`;
     }
+    const srcBadge = e.source === 'stays'
+      ? `<span class="src-badge stays">Stays</span>`
+      : `<span class="src-badge manual">Manual</span>`;
     return `<div class="entry-card" onclick="openDet('${e.id}',event)">
       <div class="type-stripe ${e.type}"></div>
-      <div class="card-info"><h4>${title}</h4><p>${sub}</p></div>
+      <div class="card-info"><h4>${title}${srcBadge}</h4><p>${sub}</p></div>
       ${valHtml}
     </div>`;
   }).join('');
@@ -623,6 +660,8 @@ function saveEntry() {
     entry.paymentMethod = '';
   }
 
+  entry.source  = 'manual';
+  entry.staysId = '';
   entries.push(entry);
   persist();
   pushEntry('add', entry);
@@ -641,8 +680,9 @@ function openDet(id, e) {
 
   const nights = daysBetween(en.checkIn, en.checkOut);
   document.getElementById('det-title').textContent = en.type === 'reserva' ? en.guestName : 'Bloqueio de Data';
+  const srcLabel = en.source === 'stays' ? ' <span class="src-badge stays">Stays</span>' : '';
   document.getElementById('det-badge').innerHTML =
-    `<div class="detail-badge ${en.type}">${en.type === 'reserva' ? '🏠 Reserva' : '🔒 Bloqueio'}</div>`;
+    `<div class="detail-badge ${en.type}">${en.type === 'reserva' ? '🏠 Reserva' : '🔒 Bloqueio'}${srcLabel}</div>`;
 
   const rows = [];
   rows.push(['Imóvel', PROPS[en.propertyId] || en.propertyId]);

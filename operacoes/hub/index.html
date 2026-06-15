@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artezian — Central de Atalhos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:    #c2a14e;
+      --gold-dk: #a8893c;
+      --petrol:  #264653;
+      --petrol-dk: #1a3340;
+      --bg:      #f4f2ee;
+      --card:    #ffffff;
+      --text:    #2a2a2a;
+      --muted:   #7a7a7a;
+      --border:  #e8e4dc;
+      --radius:  8px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── Header ─────────────────────────────── */
+    header {
+      background: var(--petrol);
+      padding: 28px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header .brand { display: flex; align-items: center; gap: 12px; }
+
+    header .brand-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    header .brand-sub {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .btn-add {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-add:hover { background: var(--gold-dk); }
+
+    /* ── Main ────────────────────────────────── */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 40px 80px;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    /* ── Card ────────────────────────────────── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border-top: 3px solid var(--gold);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-head {
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--petrol);
+      margin-bottom: 4px;
+    }
+
+    .card-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .card-url {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: var(--gold-dk);
+      text-decoration: none;
+      font-weight: 500;
+      word-break: break-all;
+    }
+
+    .card-url:hover { text-decoration: underline; }
+
+    .card-body { padding: 16px 20px; flex: 1; }
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    .field:last-child { margin-bottom: 0; }
+
+    .field-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .field-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 10px;
+    }
+
+    .field-value {
+      flex: 1;
+      font-size: 0.85rem;
+      color: var(--text);
+      font-family: monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      background: none;
+      border: none;
+      outline: none;
+    }
+
+    .field-value.empty {
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      font-style: italic;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      padding: 2px 4px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      transition: color 0.15s, background 0.15s;
+      flex-shrink: 0;
+    }
+
+    .icon-btn:hover { color: var(--petrol); background: var(--border); }
+    .icon-btn.copy-ok { color: #10b981; }
+
+    .card-footer {
+      padding: 12px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-open {
+      flex: 1;
+      background: var(--petrol);
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+    }
+
+    .btn-open:hover { background: var(--petrol-dk); }
+
+    .btn-edit, .btn-del {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+    }
+
+    .btn-edit:hover { border-color: var(--gold); color: var(--gold-dk); }
+    .btn-del:hover  { border-color: #ef4444; color: #ef4444; }
+
+    /* ── Empty state ─────────────────────────── */
+    .empty {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+
+    .empty p { margin-top: 8px; font-size: 0.9rem; }
+
+    /* ── Modal ───────────────────────────────── */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26,51,64,0.6);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .overlay.open { display: flex; }
+
+    .modal {
+      background: var(--card);
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    .modal-head {
+      background: var(--petrol);
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-head h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      font-size: 1.2rem;
+      line-height: 1;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .modal-close:hover { color: #fff; }
+
+    .modal-body { padding: 24px; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-group:last-child { margin-bottom: 0; }
+
+    .form-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .form-input:focus { border-color: var(--gold); }
+
+    .form-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .form-row .form-group { flex: 1; }
+
+    .modal-foot {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .btn-cancel {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 9px 18px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .btn-cancel:hover { border-color: var(--text); color: var(--text); }
+
+    .btn-save {
+      background: var(--gold);
+      border: none;
+      color: #fff;
+      padding: 9px 22px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-save:hover { background: var(--gold-dk); }
+
+    /* ── Toast ───────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--petrol);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      opacity: 0;
+      transition: all 0.25s;
+      pointer-events: none;
+      z-index: 200;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── Responsive ──────────────────────────── */
+    @media (max-width: 600px) {
+      header { padding: 20px; }
+      main { padding: 24px 16px 60px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div>
+      <div class="brand-name">Artezian</div>
+      <div class="brand-sub">Central de Atalhos</div>
+    </div>
+  </div>
+  <button class="btn-add" onclick="openModal()">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    Novo acesso
+  </button>
+</header>
+
+<main>
+  <div class="section-label">Ferramentas e sites</div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<!-- Modal add/edit -->
+<div class="overlay" id="overlay" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="modal-title">Novo acesso</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Nome</label>
+        <input class="form-input" id="f-name" placeholder="ex: Gestão de Hospedagens" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Descrição (opcional)</label>
+        <input class="form-input" id="f-desc" placeholder="ex: Painel de reservas e bloqueios" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label">URL</label>
+        <input class="form-input" id="f-url" placeholder="https://ojoaomendonca.com.br/hospedagens/" autocomplete="off">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Login / Usuário</label>
+          <input class="form-input" id="f-login" placeholder="usuário ou e-mail" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Senha</label>
+          <input class="form-input" id="f-pass" placeholder="••••••••" autocomplete="new-password">
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="btn-save" onclick="saveCard()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  const STORAGE_KEY = 'artezian_hub_v2';
+
+  const DEFAULT_DATA = [
+    {
+      id: 'card-1',
+      name: 'ojoaomendonca.com.br',
+      desc: 'Site principal do João Mendonça',
+      url: 'https://ojoaomendonca.com.br',
+      login: '',
+      pass: ''
+    },
+    {
+      id: 'card-2',
+      name: 'Gestão de Hospedagens',
+      desc: 'Painel de reservas e bloqueios dos imóveis',
+      url: 'https://ojoaomendonca.com.br/hospedagens/',
+      login: '',
+      pass: ''
+    }
+  ];
+
+  let cards = [];
+  let editingId = null;
+
+  // ── Storage ─────────────────────────────────
+
+  function load() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      try { cards = JSON.parse(raw); }
+      catch { cards = [...DEFAULT_DATA]; }
+    } else {
+      cards = [...DEFAULT_DATA];
+      save();
+    }
+  }
+
+  function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cards));
+  }
+
+  // ── Render ───────────────────────────────────
+
+  function render() {
+    const grid = document.getElementById('grid');
+
+    if (!cards.length) {
+      grid.innerHTML = `
+        <div class="empty">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c2a14e" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="3"/>
+            <path d="M12 8v8M8 12h8"/>
+          </svg>
+          <p>Nenhum acesso cadastrado.<br>Clique em <strong>Novo acesso</strong> para começar.</p>
+        </div>`;
+      return;
+    }
+
+    grid.innerHTML = cards.map(c => cardHTML(c)).join('');
+  }
+
+  function cardHTML(c) {
+    const hasLogin = c.login && c.login.trim();
+    const hasPass  = c.pass  && c.pass.trim();
+
+    const loginField = `
+      <div class="field">
+        <div class="field-label">Login</div>
+        <div class="field-row">
+          <span class="field-value ${hasLogin ? '' : 'empty'}" id="login-${c.id}">
+            ${hasLogin ? escHtml(c.login) : 'não informado'}
+          </span>
+          ${hasLogin ? `
+          <button class="icon-btn" title="Copiar" onclick="copyField('${c.id}','login')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2"/>
+              <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+            </svg>
+          </button>` : ''}
+        </div>
+      </div>`;
+
+    const passField = `
+      <div class="field">
+        <div class="field-label">Senha</div>
+        <div class="field-row">
+          <span class="field-value ${hasPass ? '' : 'empty'}" id="pass-${c.id}" data-visible="false" data-val="${hasPass ? escAttr(c.pass) : ''}">
+            ${hasPass ? '••••••••' : 'não informada'}
+          </span>
+          ${hasPass ? `
+          <button class="icon-btn" title="Mostrar/ocultar" onclick="togglePass('${c.id}')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+          <button class="icon-btn" title="Copiar" onclick="copyField('${c.id}','pass')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2"/>
+              <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+            </svg>
+          </button>` : ''}
+        </div>
+      </div>`;
+
+    return `
+      <div class="card" id="${c.id}">
+        <div class="card-head">
+          <div class="card-title">${escHtml(c.name)}</div>
+          ${c.desc ? `<div class="card-desc">${escHtml(c.desc)}</div>` : ''}
+          <a class="card-url" href="${escAttr(c.url)}" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+              <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+            </svg>
+            ${escHtml(c.url)}
+          </a>
+        </div>
+        <div class="card-body">
+          ${loginField}
+          ${passField}
+        </div>
+        <div class="card-footer">
+          <a class="btn-open" href="${escAttr(c.url)}" target="_blank" rel="noopener">Abrir</a>
+          <button class="btn-edit" onclick="editCard('${c.id}')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
+          </button>
+          <button class="btn-del" onclick="deleteCard('${c.id}')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/>
+              <path d="M10 11v6M14 11v6"/>
+              <path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/>
+            </svg>
+          </button>
+        </div>
+      </div>`;
+  }
+
+  // ── Modal ────────────────────────────────────
+
+  function openModal(id) {
+    editingId = id || null;
+    const modal = document.getElementById('modal-title');
+
+    if (id) {
+      const c = cards.find(x => x.id === id);
+      modal.textContent = 'Editar acesso';
+      document.getElementById('f-name').value  = c.name;
+      document.getElementById('f-desc').value  = c.desc  || '';
+      document.getElementById('f-url').value   = c.url;
+      document.getElementById('f-login').value = c.login || '';
+      document.getElementById('f-pass').value  = c.pass  || '';
+    } else {
+      modal.textContent = 'Novo acesso';
+      document.getElementById('f-name').value  = '';
+      document.getElementById('f-desc').value  = '';
+      document.getElementById('f-url').value   = '';
+      document.getElementById('f-login').value = '';
+      document.getElementById('f-pass').value  = '';
+    }
+
+    document.getElementById('overlay').classList.add('open');
+    setTimeout(() => document.getElementById('f-name').focus(), 50);
+  }
+
+  function closeModal() {
+    document.getElementById('overlay').classList.remove('open');
+    editingId = null;
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('overlay')) closeModal();
+  }
+
+  function saveCard() {
+    const name  = document.getElementById('f-name').value.trim();
+    const desc  = document.getElementById('f-desc').value.trim();
+    const url   = document.getElementById('f-url').value.trim();
+    const login = document.getElementById('f-login').value.trim();
+    const pass  = document.getElementById('f-pass').value;
+
+    if (!name || !url) {
+      toast('Preencha nome e URL');
+      return;
+    }
+
+    if (editingId) {
+      const idx = cards.findIndex(c => c.id === editingId);
+      if (idx !== -1) cards[idx] = { id: editingId, name, desc, url, login, pass };
+    } else {
+      cards.push({ id: 'card-' + Date.now(), name, desc, url, login, pass });
+    }
+
+    save();
+    render();
+    closeModal();
+    toast(editingId ? 'Acesso atualizado' : 'Acesso criado');
+  }
+
+  function editCard(id) { openModal(id); }
+
+  function deleteCard(id) {
+    if (!confirm('Remover este acesso?')) return;
+    cards = cards.filter(c => c.id !== id);
+    save();
+    render();
+    toast('Acesso removido');
+  }
+
+  // ── Copy & toggle ────────────────────────────
+
+  function copyField(id, field) {
+    const card = cards.find(c => c.id === id);
+    if (!card) return;
+    const val = field === 'login' ? card.login : card.pass;
+    navigator.clipboard.writeText(val).then(() => toast('Copiado!'));
+  }
+
+  function togglePass(id) {
+    const el = document.getElementById('pass-' + id);
+    if (!el) return;
+    const visible = el.dataset.visible === 'true';
+    el.dataset.visible = String(!visible);
+    el.textContent = visible ? '••••••••' : el.dataset.val;
+  }
+
+  // ── Toast ────────────────────────────────────
+
+  let toastTimer;
+  function toast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 2000);
+  }
+
+  // ── Utils ────────────────────────────────────
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function escAttr(s) {
+    return String(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  // ── Keyboard ─────────────────────────────────
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'Enter' && document.getElementById('overlay').classList.contains('open')) {
+      saveCard();
+    }
+  });
+
+  // ── Init ─────────────────────────────────────
+  load();
+  render();
+</script>
+</body>
+</html>

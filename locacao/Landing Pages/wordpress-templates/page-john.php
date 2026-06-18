@@ -1,10 +1,16 @@
-﻿<!DOCTYPE html>
+<?php
+/**
+ * Template Name: Landing — Casa do John
+ * Template Post Type: page
+ */
+?>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casa do Euller — Até 58 pessoas | Porto Seguro | Artezian</title>
-    <meta name="description" content="A maior casa do portfólio Artezian. Até 58 pessoas, 9 quartos, 9 banheiros, piscina ampla, cozinha externa e área de jogos. Ideal para eventos e grandes grupos.">
+    <title>Casa do John — Até 31 pessoas | Taperapuã, Porto Seguro</title>
+    <meta name="description" content="Casa privativa para até 31 pessoas em Taperapuã. Ideal para grupos mistos com beliches, piscina ampla e churrasqueira completa. Reserve pelo WhatsApp.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -27,14 +33,12 @@
         .hero-sub{font-size:16px;font-weight:300;opacity:.88;margin-bottom:28px}
         .btn-hero{display:inline-flex;align-items:center;gap:9px;background:var(--gold);color:var(--white);padding:16px 32px;border-radius:6px;font-weight:600;font-size:15px;border:none;cursor:pointer;transition:background .2s,transform .1s}
         .btn-hero:hover{background:#a88a3f;transform:translateY(-1px)}
-        .destaque-strip{background:var(--petrol);color:var(--white);text-align:center;padding:14px 24px;font-size:13px;font-weight:600;letter-spacing:.5px}
-        .destaque-strip span{color:var(--gold)}
-        .stats{background:var(--dark);color:var(--white);display:flex;flex-wrap:wrap;justify-content:center}
-        .stat{display:flex;flex-direction:column;align-items:center;padding:24px 36px;border-right:1px solid rgba(255,255,255,.12)}
+        .stats{background:var(--petrol);color:var(--white);display:flex;flex-wrap:wrap;justify-content:center}
+        .stat{display:flex;flex-direction:column;align-items:center;padding:24px 36px;border-right:1px solid rgba(255,255,255,.18)}
         .stat:last-child{border-right:none}
         .stat-icon{font-size:22px;margin-bottom:6px}
         .stat-val{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--gold)}
-        .stat-lbl{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;opacity:.65;margin-top:2px}
+        .stat-lbl{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;opacity:.75;margin-top:2px}
         section{padding:72px 40px}
         .sec-hdr{text-align:center;margin-bottom:48px}
         .sec-tag{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
@@ -51,7 +55,7 @@
         .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:860px;margin:0 auto}
         .price-card{background:var(--white);border-radius:8px;padding:36px 24px;text-align:center;border:1px solid var(--border);position:relative}
         .price-card.hl{border-color:var(--gold);box-shadow:0 8px 40px rgba(194,161,78,.15)}
-        .price-card.hl::before{content:'Alta / Feriados';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--white);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:4px 14px;border-radius:20px;white-space:nowrap}
+        .price-card.hl::before{content:'Alta Temporada';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--white);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:4px 14px;border-radius:20px;white-space:nowrap}
         .price-season{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--petrol);margin-bottom:14px}
         .price-val{font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:var(--dark);line-height:1}
         .price-rs{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:500;vertical-align:top;margin-top:8px;display:inline-block}
@@ -81,23 +85,23 @@
         .btn-sticky:hover{background:#a88a3f}
         .wa-svg{width:20px;height:20px;fill:currentColor;flex-shrink:0}
         @media(max-width:900px){.gallery{grid-template-columns:repeat(2,1fr);grid-template-rows:auto}.gallery .p:first-child{grid-row:1;grid-column:1/3;height:280px}.gallery .p{height:220px}.pricing-grid{grid-template-columns:1fr;max-width:360px}}
-        @media(max-width:600px){section{padding:52px 20px}.hero-content{padding:28px 20px}header{padding:14px 20px}.gallery{grid-template-columns:1fr}.gallery .p:first-child{grid-column:1}.gallery .p{height:220px}.stat{padding:18px 20px;border-right:none;border-bottom:1px solid rgba(255,255,255,.12);width:50%}.sticky{padding:10px 16px}}
+        @media(max-width:600px){section{padding:52px 20px}.hero-content{padding:28px 20px}header{padding:14px 20px}.gallery{grid-template-columns:1fr}.gallery .p:first-child{grid-column:1}.gallery .p{height:220px}.stat{padding:18px 20px;border-right:none;border-bottom:1px solid rgba(255,255,255,.18);width:50%}.sticky{padding:10px 16px}}
     </style>
 </head>
 <body>
 <header>
-    <span class="logo">ARTEZIAN</span>
+    <a href="<?php echo home_url('/'); ?>" class="logo">ARTEZIAN</a>
     <button class="header-cta" onclick="goForm()">Tenho Interesse</button>
 </header>
 
 <div class="hero">
-    <img src="/fotos/euller/01.jpg" alt="Casa do Euller" class="hero-img" onerror="this.style.display='none';document.querySelector('.hero-fallback').style.display='block'">
+    <img src="<?php echo home_url('/wp-content/uploads/fotos/john/01.jpg'); ?>" alt="Casa do John" class="hero-img" onerror="this.style.display='none';document.querySelector('.hero-fallback').style.display='block'">
     <div class="hero-fallback" style="display:none"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <span class="hero-badge">Porto Seguro · Taperapuã · O maior do portfólio</span>
-        <h1>Casa do Euller</h1>
-        <p class="hero-sub">A maior casa privativa do portfólio · Até 58 pessoas · 9 quartos · 9 banheiros</p>
+        <span class="hero-badge">Porto Seguro · Taperapuã · 600m da praia</span>
+        <h1>Casa do John</h1>
+        <p class="hero-sub">Casa privativa · Até 31 pessoas · Ideal para grupos mistos</p>
         <button class="btn-hero" onclick="goForm()">
             <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Tenho Interesse
@@ -105,42 +109,40 @@
     </div>
 </div>
 
-<div class="destaque-strip">A única opção do portfólio para grupos acima de 31 pessoas · <span>Única disponível no portfólio para sua escala</span></div>
-
 <div class="stats">
-    <div class="stat"><span class="stat-icon">👥</span><span class="stat-val">58</span><span class="stat-lbl">Pessoas</span></div>
-    <div class="stat"><span class="stat-icon">🚪</span><span class="stat-val">9</span><span class="stat-lbl">Quartos</span></div>
-    <div class="stat"><span class="stat-icon">🚿</span><span class="stat-val">9</span><span class="stat-lbl">Banheiros</span></div>
-    <div class="stat"><span class="stat-icon">🛏️</span><span class="stat-val">28</span><span class="stat-lbl">Camas</span></div>
+    <div class="stat"><span class="stat-icon">👥</span><span class="stat-val">31</span><span class="stat-lbl">Pessoas</span></div>
+    <div class="stat"><span class="stat-icon">🚪</span><span class="stat-val">5</span><span class="stat-lbl">Quartos</span></div>
+    <div class="stat"><span class="stat-icon">🛏️</span><span class="stat-val">12</span><span class="stat-lbl">Beliches</span></div>
+    <div class="stat"><span class="stat-icon">🏖️</span><span class="stat-val">600m</span><span class="stat-lbl">da Praia</span></div>
     <div class="stat"><span class="stat-icon">🏊</span><span class="stat-val">Piscina</span><span class="stat-lbl">Ampla</span></div>
 </div>
 
 <section>
     <div class="sec-hdr">
         <p class="sec-tag">Fotos</p>
-        <h2 class="sec-title">Conheça a Casa do Euller</h2>
+        <h2 class="sec-title">Conheça a Casa do John</h2>
     </div>
     <div class="gallery">
-        <div class="p"><img src="/fotos/euller/02.jpg" alt="Casa do Euller — Área externa"></div>
-        <div class="p"><img src="/fotos/euller/03.jpg" alt="Casa do Euller — Piscina"></div>
-        <div class="p"><img src="/fotos/euller/04.jpg" alt="Casa do Euller — Área de lazer"></div>
-        <div class="p"><img src="/fotos/euller/05.jpg" alt="Casa do Euller — Cozinha externa"></div>
-        <div class="p"><img src="/fotos/euller/06.jpg" alt="Casa do Euller — Quarto"></div>
+        <div class="p"><img src="<?php echo home_url('/wp-content/uploads/fotos/john/02.jpg'); ?>" alt="Casa do John — Área externa"></div>
+        <div class="p"><img src="<?php echo home_url('/wp-content/uploads/fotos/john/03.jpg'); ?>" alt="Casa do John — Piscina"></div>
+        <div class="p"><img src="<?php echo home_url('/wp-content/uploads/fotos/john/04.jpg'); ?>" alt="Casa do John — Área gourmet"></div>
+        <div class="p"><img src="<?php echo home_url('/wp-content/uploads/fotos/john/05.jpg'); ?>" alt="Casa do John — Quarto"></div>
+        <div class="p"><img src="<?php echo home_url('/wp-content/uploads/fotos/john/06.jpg'); ?>" alt="Casa do John — Beliches"></div>
     </div>
 </section>
 
 <section style="padding-top:0">
     <div class="sec-hdr"><p class="sec-tag">Estrutura</p><h2 class="sec-title">O que você encontra</h2></div>
     <div class="amenities">
-        <div class="amenity"><span class="am-icon">🏊</span> Ampla piscina com guarda-sol e espreguiçadeiras</div>
-        <div class="amenity"><span class="am-icon">🍖</span> Cozinha externa com churrasqueira</div>
-        <div class="amenity"><span class="am-icon">🎱</span> Mesa de sinuca</div>
-        <div class="amenity"><span class="am-icon">🎮</span> Área de recreação com jogos</div>
-        <div class="amenity"><span class="am-icon">🛏️</span> 9 camas casal + 19 camas solteiro</div>
+        <div class="amenity"><span class="am-icon">🏊</span> Ampla piscina privativa</div>
+        <div class="amenity"><span class="am-icon">🍖</span> Área gourmet com churrasqueira completa</div>
+        <div class="amenity"><span class="am-icon">🧊</span> Freezer externo</div>
+        <div class="amenity"><span class="am-icon">🛏️</span> 12 beliches — ideal para grupos grandes</div>
+        <div class="amenity"><span class="am-icon">🛏️</span> 3 camas casal + 2 auxiliares + sofá-cama</div>
         <div class="amenity"><span class="am-icon">❄️</span> Ar-condicionado em todos os quartos</div>
-        <div class="amenity"><span class="am-icon">🏘️</span> Foco em privacidade e espaço</div>
-        <div class="amenity"><span class="am-icon">🛒</span> Fácil acesso a barracas e supermercado</div>
+        <div class="amenity"><span class="am-icon">📍</span> Próximo à Orla Center e Dengo Bar</div>
         <div class="amenity"><span class="am-icon">📶</span> Wi-Fi</div>
+        <div class="amenity"><span class="am-icon">🚿</span> 4 banheiros</div>
         <div class="amenity"><span class="am-icon">🔒</span> Casa 100% privativa</div>
     </div>
 </section>
@@ -150,21 +152,21 @@
     <div class="pricing-grid">
         <div class="price-card">
             <p class="price-season">Baixa Temporada</p>
-            <div class="price-val"><span class="price-rs">R$</span>2.500</div>
+            <div class="price-val"><span class="price-rs">R$</span>1.800</div>
             <p class="price-period">por noite</p>
-            <div class="price-info">Mínimo 3 noites<br>Desconto 10% à vista no Pix</div>
-        </div>
-        <div class="price-card hl">
-            <p class="price-season">Feriados / Alta</p>
-            <div class="price-val"><span class="price-rs">R$</span>3.500</div>
-            <p class="price-period">por noite</p>
-            <div class="price-info">Mínimo 3 noites<br>Desconto 10% à vista no Pix</div>
+            <div class="price-info">Mínimo 3 noites<br>Desconto 10% à vista no Pix<br>Taxa de limpeza: R$ 300</div>
         </div>
         <div class="price-card">
-            <p class="price-season">Média por pessoa</p>
-            <div class="price-val"><span class="price-rs">~R$</span>43</div>
-            <p class="price-period">por pessoa/noite na baixa</p>
-            <div class="price-info">Calculado com 58 pessoas<br>O custo mais distribuído do portfólio</div>
+            <p class="price-season">Feriados</p>
+            <div class="price-val"><span class="price-rs">R$</span>2.200</div>
+            <p class="price-period">por noite</p>
+            <div class="price-info">Mínimo 3 noites<br>Desconto 10% à vista no Pix<br>Taxa de limpeza: R$ 300</div>
+        </div>
+        <div class="price-card hl">
+            <p class="price-season">Alta · Jan</p>
+            <div class="price-val"><span class="price-rs">R$</span>2.700</div>
+            <p class="price-period">por noite</p>
+            <div class="price-info">Mínimo 3 noites<br>Desconto 10% à vista no Pix<br>Taxa de limpeza: R$ 300</div>
         </div>
     </div>
     <p class="pricing-note">Pagamento: Pix · 30% na reserva + 70% no check-in<br>Check-in a partir das 15h · Checkout até as 12h<br>Cancelamento gratuito até 30 dias antes do check-in</p>
@@ -173,11 +175,11 @@
 <section class="form-sec" id="form">
     <div class="sec-hdr">
         <p class="sec-tag">Reserve Agora</p>
-        <h2 class="sec-title">Tenho Interesse na Casa do Euller</h2>
+        <h2 class="sec-title">Tenho Interesse na Casa do John</h2>
         <p class="form-desc">Deixa seus dados e a gente entra em contato pelo WhatsApp.</p>
     </div>
     <div class="form-wrap">
-        <form onsubmit="enviarLead(event,'Casa do Euller (#013)')">
+        <form onsubmit="enviarLead(event,'Casa do John (014)')">
             <div class="fg"><label>Seu nome</label><input type="text" name="nome" placeholder="João Silva" required></div>
             <div class="fg"><label>E-mail</label><input type="email" name="email" placeholder="joao@email.com" required></div>
             <div class="fg"><label>WhatsApp / Telefone</label><input type="tel" name="tel" placeholder="(11) 99999-9999" required></div>
@@ -193,13 +195,13 @@
 <footer>
     <p class="foot-brand">ARTEZIAN</p>
     <p>Real Estate Atelie · Porto Seguro, Bahia</p>
-    <p style="margin-top:8px"><a href="https://artezian.com.br">artezian.com.br</a> · <a href="https://instagram.com/ojoaomendonca">@ojoaomendonca</a></p>
+    <p style="margin-top:8px"><a href="<?php echo home_url('/'); ?>">artezian.com.br</a> · <a href="https://instagram.com/ojoaomendonca">@ojoaomendonca</a></p>
 </footer>
 
 <div class="sticky" id="sticky">
     <div>
-        <div class="sticky-price">R$ 2.500<span style="font-size:14px;font-family:Montserrat;font-weight:400;color:#999">/noite</span></div>
-        <div class="sticky-lbl">A partir de · até 58 pessoas · 9 quartos</div>
+        <div class="sticky-price">R$ 1.800<span style="font-size:14px;font-family:Montserrat;font-weight:400;color:#999">/noite</span></div>
+        <div class="sticky-lbl">A partir de · até 31 pessoas · beliches incluso</div>
     </div>
     <button class="btn-sticky" onclick="goForm()">
         <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -216,4 +218,3 @@ new IntersectionObserver(e=>{stickyEl.style.display=e[0].isIntersecting?'none':'
 </script>
 </body>
 </html>
-

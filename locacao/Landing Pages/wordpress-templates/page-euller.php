@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+<?php
+/**
+ * Template Name: Landing — Casa do Euller
+ * Template Post Type: page
+ */
+?>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -86,12 +92,12 @@
 </head>
 <body>
 <header>
-    <span class="logo">ARTEZIAN</span>
+    <a href="<?php echo home_url('/'); ?>" class="logo">ARTEZIAN</a>
     <button class="header-cta" onclick="goForm()">Tenho Interesse</button>
 </header>
 
 <div class="hero">
-    <img src="/fotos/euller/01.jpg" alt="Casa do Euller" class="hero-img" onerror="this.style.display='none';document.querySelector('.hero-fallback').style.display='block'">
+    <img src="<?php echo home_url('/wp-content/uploads/fotos/euller/01.jpg'); ?>" alt="Casa do Euller" class="hero-img" onerror="this.style.display='none';document.querySelector('.hero-fallback').style.display='block'">
     <div class="hero-fallback" style="display:none"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -121,11 +127,11 @@
         <h2 class="sec-title">Conheça a Casa do Euller</h2>
     </div>
     <div class="gallery">
-        <div class="p"><img src="/fotos/euller/02.jpg" alt="Casa do Euller — Área externa"></div>
-        <div class="p"><img src="/fotos/euller/03.jpg" alt="Casa do Euller — Piscina"></div>
-        <div class="p"><img src="/fotos/euller/04.jpg" alt="Casa do Euller — Área de lazer"></div>
-        <div class="p"><img src="/fotos/euller/05.jpg" alt="Casa do Euller — Cozinha externa"></div>
-        <div class="p"><img src="/fotos/euller/06.jpg" alt="Casa do Euller — Quarto"></div>
+        <div class="p"><img src="<?php echo home_url('/wp-content/uploads/fotos/euller/02.jpg'); ?>" alt="Casa do Euller — Área externa"></div>
+        <div class="p"><img src="<?php echo home_url('/wp-content/uploads/fotos/euller/03.jpg'); ?>" alt="Casa do Euller — Piscina"></div>
+        <div class="p"><img src="<?php echo home_url('/wp-content/uploads/fotos/euller/04.jpg'); ?>" alt="Casa do Euller — Área de lazer"></div>
+        <div class="p"><img src="<?php echo home_url('/wp-content/uploads/fotos/euller/05.jpg'); ?>" alt="Casa do Euller — Cozinha externa"></div>
+        <div class="p"><img src="<?php echo home_url('/wp-content/uploads/fotos/euller/06.jpg'); ?>" alt="Casa do Euller — Quarto"></div>
     </div>
 </section>
 
@@ -193,7 +199,7 @@
 <footer>
     <p class="foot-brand">ARTEZIAN</p>
     <p>Real Estate Atelie · Porto Seguro, Bahia</p>
-    <p style="margin-top:8px"><a href="https://artezian.com.br">artezian.com.br</a> · <a href="https://instagram.com/ojoaomendonca">@ojoaomendonca</a></p>
+    <p style="margin-top:8px"><a href="<?php echo home_url('/'); ?>">artezian.com.br</a> · <a href="https://instagram.com/ojoaomendonca">@ojoaomendonca</a></p>
 </footer>
 
 <div class="sticky" id="sticky">
@@ -216,4 +222,3 @@ new IntersectionObserver(e=>{stickyEl.style.display=e[0].isIntersecting?'none':'
 </script>
 </body>
 </html>
-

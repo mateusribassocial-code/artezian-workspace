@@ -1,4 +1,13 @@
 {
+  "mcpServers": {
+    "google-ads-artezian": {
+      "type": "stdio",
+      "command": "python",
+      "args": [
+        ".claude/skills/google-ads-ratos/scripts/mcp_server.py"
+      ]
+    }
+  },
   "hooks": {
     "Stop": [
       {

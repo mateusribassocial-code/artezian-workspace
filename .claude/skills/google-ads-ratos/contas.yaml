@@ -1,0 +1,14 @@
+# ============================================================================
+# Google Ads Ratos — Artezian Real Estate
+# ============================================================================
+
+clientes:
+
+  artezian:
+    nome: "Artezian Real Estate"
+    nicho: "imobiliario"
+    google:
+      customer_id: "3262773141"
+      customer_id_secundario: "8881844905"
+    moeda: "BRL"
+    notas: "Conta principal: 3262773141 (Artezian - Real State). Conta secundária: 8881844905 (Artezian)."

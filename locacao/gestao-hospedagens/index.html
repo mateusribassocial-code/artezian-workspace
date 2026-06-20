@@ -192,6 +192,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <button class="tab" id="tab-casa-laureana" onclick="setProperty('casa-laureana')">Casa da Laureana</button>
     <button class="tab" id="tab-apto-jessilene" onclick="setProperty('apto-jessilene')">Apto da Jessilene</button>
     <button class="tab" id="tab-apto-isa" onclick="setProperty('apto-isa')">Apto da Isa</button>
+    <button class="tab" id="tab-max-t1" onclick="setProperty('max-t1')">Max 1Q · Mundaí</button>
+    <button class="tab" id="tab-max-t2" onclick="setProperty('max-t2')">Max 2Q · Mundaí</button>
   </div>
 
   <!-- Action bar -->
@@ -232,6 +234,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <option value="casa-laureana">Casa da Laureana</option>
       <option value="apto-jessilene">Apto da Jessilene</option>
       <option value="apto-isa">Apto da Isa</option>
+      <option value="max-t1">Max 1 Quarto · Mundaí</option>
+      <option value="max-t2">Max 2 Quartos · Mundaí</option>
     </select>
   </div>
 
@@ -323,7 +327,9 @@ const PROPS = {
   'casa-john':      'Casa do John',
   'casa-laureana':  'Casa da Laureana',
   'apto-jessilene': 'Apto da Jessilene',
-  'apto-isa':       'Apto da Isa'
+  'apto-isa':       'Apto da Isa',
+  'max-t1':         'Max 1 Quarto · Mundaí',
+  'max-t2':         'Max 2 Quartos · Mundaí'
 };
 const PAY_LABELS = {
   pix:'PIX', dinheiro:'Dinheiro', transferencia:'Transferência',

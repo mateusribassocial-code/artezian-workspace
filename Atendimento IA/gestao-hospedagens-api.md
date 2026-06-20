@@ -76,8 +76,12 @@ Apenas os imóveis gerenciados diretamente pela Artezian têm `propertyId` no si
 | Casa da Laureana (GF04J) | `casa-laureana` |
 | Apto da Jessilene (HA02J) | `apto-jessilene` |
 | Apto da Isa (DS06J) | `apto-isa` |
+| Max 1 Quarto · Mundaí (8 unidades) | `max-t1` |
+| Max 2 Quartos · Mundaí (6 unidades) | `max-t2` |
 
-> Varandas de Porto, Mont Carmelo e Condomínio do Max são gerenciados pela Stays — as reservas desses imóveis ficam lá.
+> Varandas de Porto e Mont Carmelo são gerenciados pela Stays — as reservas desses imóveis ficam lá.
+> Condomínio do Max não está na Stays — todas as reservas são registradas manualmente neste sistema.
+> Para o Max, use o campo `notes` para indicar o número do apartamento (ex: "Apto 05").
 
 ---
 

@@ -77,7 +77,7 @@ Apenas os imóveis gerenciados diretamente pela Artezian têm `propertyId` no si
 | Apto da Jessilene (HA02J) | `apto-jessilene` |
 | Apto da Isa (DS06J) | `apto-isa` |
 
-> Varandas de Porto, Mont Carmelo e Condomínio do Max não estão no sistema ainda.
+> Varandas de Porto, Mont Carmelo e Condomínio do Max são gerenciados pela Stays — as reservas desses imóveis ficam lá.
 
 ---
 

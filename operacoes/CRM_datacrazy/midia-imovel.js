@@ -27,7 +27,7 @@ const MIDIA = {
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131146/DS03J-1_l4lqgm.jpg",
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131146/DS03J-2_oqflm9.jpg",
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131146/DS03J-3_nfbm1r.jpg",
-      "",
+      "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131147/DS03J_foto_cama3_tafx2z.jpg",
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131146/DS03J-5_ggzidx.jpg",
     ]
   },
@@ -35,8 +35,8 @@ const MIDIA = {
     video: "https://res.cloudinary.com/dwtylly4h/video/upload/v1782131320/DS04J_nymqap.mp4",
     fotos: [
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131311/DS04J-1_aiq8xc.jpg",
-      "",
-      "",
+      "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131311/DSJ04-2_xfmhbu.jpg",
+      "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131311/DSJ04J-3_gbpz4v.jpg",
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131312/DS04J-4_err7qc.jpg",
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131312/DS04J-5_hosnyt.jpg",
     ]
@@ -126,7 +126,7 @@ const MIDIA = {
     fotos: ["", "", "", "", ""]
   },
   "JR01J": {
-    video: "",
+    video: "https://res.cloudinary.com/dwtylly4h/video/upload/v1782131726/JR01.MP4_necaog.mp4",
     fotos: [
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131721/JR01J-1_aweeyh.png",
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131718/JR01J-2_p9dklk.png",
@@ -136,7 +136,7 @@ const MIDIA = {
     ]
   },
   "JR03J": {
-    video: "",
+    video: "https://res.cloudinary.com/dwtylly4h/video/upload/v1782131765/JR03.MP4_r5dbxm.mp4",
     fotos: [
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131759/JR03J-1_lb36ds.png",
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131758/JR03J-2_tlk7uk.png",
@@ -146,7 +146,7 @@ const MIDIA = {
     ]
   },
   "JR04J": {
-    video: "",
+    video: "https://res.cloudinary.com/dwtylly4h/video/upload/v1782131837/JR04.MP4_hppquh.mp4",
     fotos: [
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131829/JR04J-1_tjyycr.png",
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131829/JR04J-2_p8gsxr.png",
@@ -160,7 +160,7 @@ const MIDIA = {
     fotos: ["", "", "", "", ""]
   },
   "JR07J": {
-    video: "",
+    video: "https://res.cloudinary.com/dwtylly4h/video/upload/v1782131931/JR07.MP4_rtcrtr.mp4",
     fotos: [
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131923/JR07J-1_gqvaht.png",
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131923/JR07J-2_jtkets.png",
@@ -170,7 +170,7 @@ const MIDIA = {
     ]
   },
   "JR08J": {
-    video: "",
+    video: "https://res.cloudinary.com/dwtylly4h/video/upload/v1782132012/JR08.MP4_i5wtp5.mp4",
     fotos: [
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131998/JR08J-1_p8clvg.png",
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782132007/JR08J-2_ddxzlr.png",
@@ -180,7 +180,7 @@ const MIDIA = {
     ]
   },
   "JR09J": {
-    video: "",
+    video: "https://res.cloudinary.com/dwtylly4h/video/upload/v1782131990/JR09.MP4_vskovc.mp4",
     fotos: [
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131982/JR09J-1_iqn0w0.png",
       "https://res.cloudinary.com/dwtylly4h/image/upload/v1782131984/JR09J-2_zvvaqf.png",

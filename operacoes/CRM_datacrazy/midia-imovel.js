@@ -35,7 +35,7 @@ var MIDIA = {
   "GG06J":{v:V+"GG06J.mp4_bjxyri.mp4",f:[I+"GG06J-1_b8vk7g.jpg",I+"GG06J-2_urfqor.jpg",I+"GG06J-3_bdjbdl.jpg",I+"GG06J-4_kciy0q.jpg",I+"GG06J-5_c9blii.jpg"]},
   "GG08J":{v:V+"GG08J_-_Casa_do_John_jtppev.mp4",f:[I+"GG08J-1_jklkr5.jpg",I+"GG08J-2_ivpqvw.jpg",I+"GG08J-3_mvzfog.jpg",I+"GG08J-4_wovtjj.jpg",I+"GG08J-5_lykdhj.jpg"]},
   "HA03J":{v:"",f:["","","","",""]},
-  "JR01J":{v:V+"JR01.MP4_necaog.mp4",f:[I+"JR01J-1_aweeyh.png",I+"JR01J-2_p9dklk.png",I+"JR01J-3_nm2aqx.png",I+"JR01J-4_zdmemk.png",I+"JR01J-5_llohk4.png"]},
+  "JR01J":{v:V+"JR01J_rybbdp.mp4",f:[I+"JR01J-1_aweeyh.png",I+"JR01J-2_p9dklk.png",I+"JR01J-3_nm2aqx.png",I+"JR01J-4_zdmemk.png",I+"JR01J-5_llohk4.png"]},
   "JR03J":{v:V+"JR03.MP4_r5dbxm.mp4",f:[I+"JR03J-1_lb36ds.png",I+"JR03J-2_tlk7uk.png",I+"JR03J-3_ketrcd.png",I+"JR03J-4_lm2rre.png",I+"JR03J-5_ejtrxp.png"]},
   "JR04J":{v:V+"JR04.MP4_hppquh.mp4",f:[I+"JR04J-1_tjyycr.png",I+"JR04J-2_p8gsxr.png",I+"JR04J-3_si8wv7.png",I+"JR04J-4_bgmpcd.png",I+"JR04J-5_yu79gq.png"]},
   "JR05J":{v:"",f:["","","","",""]},

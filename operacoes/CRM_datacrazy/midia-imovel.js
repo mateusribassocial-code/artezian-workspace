@@ -1,4 +1,4 @@
-const IMOVEIS = {
+var IMOVEIS = {
   "studio joão":"DS03J","studio do joão":"DS03J","ds03j":"DS03J",
   "flat da mari":"DS04J","flat mari":"DS04J","ds04j":"DS04J",
   "apartamento emanoel":"DS05J","apto emanoel":"DS05J","ds05j":"DS05J","apartamento do emanoel":"DS05J",
@@ -20,10 +20,10 @@ const IMOVEIS = {
   "condomínio do max":"VM10A","cond do max":"VM10A","vm10a":"VM10A",
 };
 
-const I = "https://res.cloudinary.com/dwtylly4h/image/upload/";
-const V = "https://res.cloudinary.com/dwtylly4h/video/upload/";
+var I = "https://res.cloudinary.com/dwtylly4h/image/upload/";
+var V = "https://res.cloudinary.com/dwtylly4h/video/upload/";
 
-const MIDIA = {
+var MIDIA = {
   "DS03J":{v:V+"DS03J.mp4_yjhh1w.mp4",f:[I+"DS03J-1_l4lqgm.jpg",I+"DS03J-2_oqflm9.jpg",I+"DS03J-3_nfbm1r.jpg",I+"DS03J_foto_cama3_tafx2z.jpg",I+"DS03J-5_ggzidx.jpg"]},
   "DS04J":{v:V+"DS04J_nymqap.mp4",f:[I+"DS04J-1_aiq8xc.jpg",I+"DSJ04-2_xfmhbu.jpg",I+"DSJ04J-3_gbpz4v.jpg",I+"DS04J-4_err7qc.jpg",I+"DS04J-5_hosnyt.jpg"]},
   "DS05J":{v:V+"DS05J.mp4_he2dn9.mp4",f:[I+"DS05J-1_vwqsuo.png",I+"DS05J-2_f5r4qe.png",I+"DS05J-3_gdultw.png",I+"DS05J-4_phpwkp.png",I+"DS05J-5_xkm6uy.png"]},
@@ -49,10 +49,10 @@ function resolveId(nome) {
   return IMOVEIS[(nome||"").toLowerCase().trim()] || nome;
 }
 
-const mcp = session.datasources["Api-request-1"];
-const imovelRaw = mcp?.imovel || "";
-const imovelId = resolveId(imovelRaw);
-const midia = MIDIA[imovelId];
+var mcp = session.datasources["Api-request-1"];
+var imovelRaw = mcp ? mcp.imovel || "" : "";
+var imovelId = resolveId(imovelRaw);
+var midia = MIDIA[imovelId];
 
 if (!midia) {
   await session.setAdditionalValue("video_link","");

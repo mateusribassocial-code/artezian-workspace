@@ -55,7 +55,7 @@ var imovelId = resolveId(imovelRaw);
 var midia = MIDIA[imovelId];
 
 if (!midia) {
-  await session.setAdditionalValue("video_link","");
+  await session.setAdditionalValue("video","");
   await session.setAdditionalValue("foto_1","");
   await session.setAdditionalValue("foto_2","");
   await session.setAdditionalValue("foto_3","");
@@ -65,7 +65,7 @@ if (!midia) {
   return;
 }
 
-await session.setAdditionalValue("video_link", midia.v||"");
+await session.setAdditionalValue("video", midia.v||"");
 await session.setAdditionalValue("foto_1", midia.f[0]||"");
 await session.setAdditionalValue("foto_2", midia.f[1]||"");
 await session.setAdditionalValue("foto_3", midia.f[2]||"");

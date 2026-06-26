@@ -86,6 +86,45 @@ GET ?action=imoveis&hospedes=6
 GET ?action=imovel&imovel=GF02J
 ```
 
+### Listar taxas de um imóvel (ver IDs antes de remover)
+```
+GET ?action=listar_taxas&imovel=DS03J
+```
+**Resposta:**
+```json
+{
+  "imovel": "DS03J",
+  "total_taxas": 1,
+  "taxas": [
+    { "id": "abc123", "nome": "Taxa de Limpeza", "tipo": "cleaning", "valor": 200 }
+  ]
+}
+```
+
+### Listar planos de tarifa de um imóvel
+```
+GET ?action=listar_tarifas&imovel=DS03J
+```
+
+### Remover taxa de limpeza (POST)
+```
+POST {URL_DO_SCRIPT}
+Content-Type: application/json
+
+{ "action": "remover_taxa_limpeza", "imovel": "DS03J" }
+```
+Opcional: passar `taxa_id` se quiser remover uma taxa específica sem busca automática.
+
+### Atualizar diária por temporada (POST)
+```
+POST {URL_DO_SCRIPT}
+Content-Type: application/json
+
+{ "action": "atualizar_diaria", "imovel": "DS03J", "baixa": 300, "alta": 700, "feriado": 500 }
+```
+Passa só os campos que quiser alterar — os demais ficam intactos.
+Opcional: passar `plano_id` se o imóvel tiver mais de um plano de tarifa.
+
 ---
 
 ## 3. Configuração no Datacrazy

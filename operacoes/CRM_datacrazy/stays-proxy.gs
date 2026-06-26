@@ -20,11 +20,40 @@ function doGet(e) {
 
   try {
     var result;
-    if      (action === "preco")        result = calcularPreco(p);
+    if      (action === "preco")           result = calcularPreco(p);
     else if (action === "disponibilidade") result = verificarDisponibilidade(p);
-    else if (action === "imoveis")      result = listarImoveis(p);
-    else if (action === "imovel")       result = detalheImovel(p);
-    else result = { erro: "action inválida. Use: preco | disponibilidade | imoveis | imovel" };
+    else if (action === "imoveis")         result = listarImoveis(p);
+    else if (action === "imovel")          result = detalheImovel(p);
+    else if (action === "listar_taxas")    result = listarTaxas(p);
+    else if (action === "listar_tarifas")  result = listarTarifas(p);
+    else result = { erro: "action inválida. Use: preco | disponibilidade | imoveis | imovel | listar_taxas | listar_tarifas" };
+
+    return jsonOk(result);
+  } catch (err) {
+    return jsonOk({ erro: err.message });
+  }
+}
+
+function doPost(e) {
+  var p = {};
+  try {
+    // Aceita parâmetros tanto por query string quanto por JSON body
+    if (e.postData && e.postData.contents) {
+      p = JSON.parse(e.postData.contents);
+    } else {
+      p = e.parameter || {};
+    }
+  } catch (err) {
+    p = e.parameter || {};
+  }
+
+  var action = p.action || "";
+
+  try {
+    var result;
+    if      (action === "remover_taxa_limpeza") result = removerTaxaLimpeza(p);
+    else if (action === "atualizar_diaria")     result = atualizarDiaria(p);
+    else result = { erro: "action inválida. Use: remover_taxa_limpeza | atualizar_diaria" };
 
     return jsonOk(result);
   } catch (err) {
@@ -192,6 +221,160 @@ function detalheImovel(p) {
   };
 }
 
+/**
+ * Lista todas as taxas/fees de um imóvel.
+ * Útil pra pegar o ID da taxa de limpeza antes de remover.
+ *
+ * Params: imovel
+ * Exemplo: ?action=listar_taxas&imovel=DS03J
+ */
+function listarTaxas(p) {
+  var imovel = p.imovel || "";
+  if (!imovel) return { erro: "Parâmetro obrigatório: imovel" };
+
+  var listing = staysGet("/content/listings/" + imovel);
+  var fees = listing.fees || listing._o_fees || [];
+
+  var taxas = fees.map(function(f) {
+    return {
+      id:    f._id || f.id || null,
+      nome:  f.internalName || f.name || "",
+      tipo:  f._s_type || f.type || "",
+      valor: f._mcval ? (f._mcval.BRL || 0) : (f.value || 0)
+    };
+  });
+
+  return {
+    imovel: imovel,
+    total_taxas: taxas.length,
+    taxas: taxas
+  };
+}
+
+/**
+ * Lista os planos de tarifa (rate plans) de um imóvel.
+ *
+ * Params: imovel
+ * Exemplo: ?action=listar_tarifas&imovel=DS03J
+ */
+function listarTarifas(p) {
+  var imovel = p.imovel || "";
+  if (!imovel) return { erro: "Parâmetro obrigatório: imovel" };
+
+  var plans = staysGet("/prices/rates?listingId=" + imovel);
+  if (!Array.isArray(plans)) plans = plans.ratePlans || plans.rates || [plans];
+
+  var tarifas = plans.map(function(r) {
+    return {
+      id:   r._id || r.id || null,
+      nome: r.internalName || r.name || "",
+      min_noites: r._i_minNights || r.minNights || null,
+      valor_base: r._mc_nightlyPrice ? (r._mc_nightlyPrice.BRL || null) : null
+    };
+  });
+
+  return {
+    imovel: imovel,
+    total_planos: tarifas.length,
+    planos: tarifas
+  };
+}
+
+/**
+ * Remove a taxa de limpeza de um imóvel.
+ * Primeiro busca o ID da taxa via listar_taxas, depois deleta.
+ *
+ * Params: imovel, [taxa_id] (opcional — se omitido, busca automaticamente)
+ * Exemplo POST body: { "action": "remover_taxa_limpeza", "imovel": "DS03J" }
+ */
+function removerTaxaLimpeza(p) {
+  var imovel  = p.imovel   || "";
+  var taxaId  = p.taxa_id  || "";
+
+  if (!imovel) return { erro: "Parâmetro obrigatório: imovel" };
+
+  // Busca ID automaticamente se não foi passado
+  if (!taxaId) {
+    var listing = staysGet("/content/listings/" + imovel);
+    var fees    = listing.fees || listing._o_fees || [];
+    var taxaLimpeza = null;
+
+    for (var i = 0; i < fees.length; i++) {
+      var nome = (fees[i].internalName || fees[i].name || "").toLowerCase();
+      if (nome.indexOf("limpeza") >= 0 || nome.indexOf("cleaning") >= 0) {
+        taxaLimpeza = fees[i];
+        break;
+      }
+    }
+
+    if (!taxaLimpeza) {
+      return { erro: "Taxa de limpeza não encontrada para o imóvel " + imovel + ". Use listar_taxas pra ver as taxas disponíveis." };
+    }
+
+    taxaId = taxaLimpeza._id || taxaLimpeza.id || "";
+    if (!taxaId) {
+      return { erro: "Taxa de limpeza encontrada mas sem ID. Verifique com listar_taxas.", taxa: taxaLimpeza };
+    }
+  }
+
+  staysDelete("/content/fees/" + taxaId);
+
+  return {
+    ok: true,
+    imovel: imovel,
+    taxa_removida: taxaId,
+    mensagem: "Taxa de limpeza removida com sucesso."
+  };
+}
+
+/**
+ * Atualiza o valor de diária de um imóvel por temporada.
+ * Passa os valores que quiser alterar — os demais ficam intactos.
+ *
+ * Params: imovel, [baixa], [alta], [feriado], [plano_id] (opcional)
+ * Exemplo POST body: { "action": "atualizar_diaria", "imovel": "DS03J", "baixa": 300, "alta": 700 }
+ */
+function atualizarDiaria(p) {
+  var imovel  = p.imovel   || "";
+  var baixa   = p.baixa    ? parseFloat(p.baixa)   : null;
+  var alta    = p.alta     ? parseFloat(p.alta)    : null;
+  var feriado = p.feriado  ? parseFloat(p.feriado) : null;
+  var planoId = p.plano_id || "";
+
+  if (!imovel) return { erro: "Parâmetro obrigatório: imovel" };
+  if (baixa === null && alta === null && feriado === null) {
+    return { erro: "Informe ao menos um valor: baixa, alta ou feriado" };
+  }
+
+  // Busca o plano de tarifa do imóvel se não foi passado
+  if (!planoId) {
+    var plans = staysGet("/prices/rates?listingId=" + imovel);
+    if (!Array.isArray(plans)) plans = plans.ratePlans || plans.rates || [plans];
+    if (plans.length === 0) return { erro: "Nenhum plano de tarifa encontrado para " + imovel };
+    planoId = plans[0]._id || plans[0].id || "";
+    if (!planoId) return { erro: "Plano de tarifa sem ID. Use listar_tarifas pra inspecionar." };
+  }
+
+  var payload = { listingId: imovel };
+  if (baixa   !== null) payload._mc_nightlyPriceLow      = { BRL: baixa };
+  if (alta    !== null) payload._mc_nightlyPriceHigh     = { BRL: alta };
+  if (feriado !== null) payload._mc_nightlyPriceHoliday  = { BRL: feriado };
+
+  var resultado = staysPut("/prices/rates/" + planoId, payload);
+
+  return {
+    ok: true,
+    imovel: imovel,
+    plano_id: planoId,
+    atualizado: {
+      baixa:   baixa,
+      alta:    alta,
+      feriado: feriado
+    },
+    resposta: resultado
+  };
+}
+
 // ─── Stays API helpers ────────────────────────────────────────────────────
 
 function authHeader() {
@@ -222,6 +405,33 @@ function staysPost(path, payload) {
     throw new Error("Stays POST " + path + " → " + resp.getResponseCode() + ": " + resp.getContentText().substring(0, 200));
   }
   return JSON.parse(resp.getContentText());
+}
+
+function staysPut(path, payload) {
+  var resp = UrlFetchApp.fetch(STAYS_BASE + path, {
+    method: "put",
+    contentType: "application/json",
+    headers: { Authorization: authHeader() },
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  });
+  if (resp.getResponseCode() !== 200 && resp.getResponseCode() !== 204) {
+    throw new Error("Stays PUT " + path + " → " + resp.getResponseCode() + ": " + resp.getContentText().substring(0, 200));
+  }
+  var body = resp.getContentText();
+  return body ? JSON.parse(body) : { ok: true };
+}
+
+function staysDelete(path) {
+  var resp = UrlFetchApp.fetch(STAYS_BASE + path, {
+    method: "delete",
+    headers: { Authorization: authHeader() },
+    muteHttpExceptions: true
+  });
+  if (resp.getResponseCode() !== 200 && resp.getResponseCode() !== 204) {
+    throw new Error("Stays DELETE " + path + " → " + resp.getResponseCode() + ": " + resp.getContentText().substring(0, 200));
+  }
+  return { ok: true };
 }
 
 function staysListings() {

@@ -26,7 +26,9 @@ function doGet(e) {
     else if (action === "imovel")          result = detalheImovel(p);
     else if (action === "listar_taxas")    result = listarTaxas(p);
     else if (action === "listar_tarifas")  result = listarTarifas(p);
-    else result = { erro: "action inválida. Use: preco | disponibilidade | imoveis | imovel | listar_taxas | listar_tarifas" };
+    else if (action === "raw_listing")     result = staysGet("/content/listings/" + (p.imovel || ""));
+    else if (action === "raw_get")         result = staysGet(p.path || "/content/listings");
+    else result = { erro: "action inválida. Use: preco | disponibilidade | imoveis | imovel | listar_taxas | listar_tarifas | raw_listing | raw_get" };
 
     return jsonOk(result);
   } catch (err) {

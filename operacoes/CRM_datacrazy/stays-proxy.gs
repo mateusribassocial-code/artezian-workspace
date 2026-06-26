@@ -519,7 +519,20 @@ function vincularCliente(p) {
   var to       = fmt(hoje);
 
   // Pega todas as reservas do período (uma chamada)
-  var reservas = staysGet("/booking/reservations?from=" + from + "&to=" + to + "&dateType=arrival");
+  // creation: captura reservas criadas no período (inclui check-ins futuros)
+  // arrival:  captura hospedes que chegaram (histórico de estadias)
+  var fmt2     = function(d) { return d.toISOString().split("T")[0]; };
+  var toFuturo = fmt2(new Date(hoje.getTime() + 365 * 24 * 60 * 60 * 1000));
+
+  var reservasCriadas = staysGet("/booking/reservations?from=" + from + "&to=" + to       + "&dateType=creation");
+  var reservasFuturas = staysGet("/booking/reservations?from=" + to   + "&to=" + toFuturo + "&dateType=arrival");
+
+  // Merge sem duplicatas
+  var idsReservas = {};
+  var reservas = [];
+  reservasCriadas.concat(reservasFuturas).forEach(function(r) {
+    if (!idsReservas[r._id]) { idsReservas[r._id] = true; reservas.push(r); }
+  });
 
   // Coleta IDs de cliente únicos
   var idsUnicos = {};

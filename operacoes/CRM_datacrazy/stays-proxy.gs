@@ -29,15 +29,42 @@ function doGet(e) {
     else if (action === "reserva")         result = detalheReserva(p);
     else if (action === "ocupacao")        result = ocupacaoPeriodo(p);
     else if (action === "financeiro")      result = resumoFinanceiro(p);
-    else if (action === "hospedes")        result = listarHospedes(p);
+    else if (action === "hospedes")         result = listarHospedes(p);
+    else if (action === "vincular_cliente") result = vincularCliente(p);
     else result = {
       erro: "action inválida",
       actions_disponiveis: [
         "preco", "disponibilidade", "imoveis", "imovel",
-        "reservas", "reserva", "ocupacao", "financeiro", "hospedes"
+        "reservas", "reserva", "ocupacao", "financeiro", "hospedes",
+        "vincular_cliente"
       ]
     };
 
+    return jsonOk(result);
+  } catch (err) {
+    return jsonOk({ erro: err.message });
+  }
+}
+
+// doPost — Conexão Universal do Datacrazy chama via POST
+function doPost(e) {
+  var p = {};
+  try {
+    if (e.postData && e.postData.contents) {
+      p = JSON.parse(e.postData.contents);
+    } else {
+      p = e.parameter || {};
+    }
+  } catch (err) {
+    p = e.parameter || {};
+  }
+
+  var action = p.action || "vincular_cliente";
+
+  try {
+    var result;
+    if (action === "vincular_cliente") result = vincularCliente(p);
+    else result = { erro: "action inválida. Use: vincular_cliente" };
     return jsonOk(result);
   } catch (err) {
     return jsonOk({ erro: err.message });
@@ -452,6 +479,164 @@ function listarHospedes(p) {
       };
     }).sort(function(a, b) { return a.checkin > b.checkin ? 1 : -1; })
   };
+}
+
+// ─── VINCULAR CLIENTE ─────────────────────────────────────────────────────
+
+/**
+ * Conexão Universal — Datacrazy chama esse endpoint passando dados do lead.
+ * Busca o cliente no histórico de reservas do Stays por email, telefone ou nome.
+ *
+ * Aceita GET ou POST.
+ *
+ * Params (query string ou JSON body):
+ *   email    — email do lead no Datacrazy
+ *   telefone — telefone (qualquer formato: 31986480350, +5531986480350, (31) 98648-0350)
+ *   nome     — nome completo (fallback, busca parcial)
+ *   meses    — quantos meses de histórico varrer (default: 24)
+ *
+ * Exemplo GET:
+ *   ?action=vincular_cliente&email=fulano@email.com&telefone=31986480350
+ *
+ * Exemplo POST body:
+ *   { "email": "fulano@email.com", "telefone": "31986480350", "nome": "Fulano Silva" }
+ */
+function vincularCliente(p) {
+  var emailBusca    = normalizeEmail(p.email    || "");
+  var telefoneBusca = normalizePhone(p.telefone || p.phone || "");
+  var nomeBusca     = (p.nome || p.name || "").toLowerCase().trim();
+  var meses         = parseInt(p.meses) || 24;
+
+  if (!emailBusca && !telefoneBusca && !nomeBusca) {
+    return { erro: "Informe ao menos um campo: email, telefone ou nome" };
+  }
+
+  // Período de busca
+  var hoje     = new Date();
+  var fromDate = new Date(hoje.getTime() - meses * 30 * 24 * 60 * 60 * 1000);
+  var fmt      = function(d) { return d.toISOString().split("T")[0]; };
+  var from     = fmt(fromDate);
+  var to       = fmt(hoje);
+
+  // Pega todas as reservas do período (uma chamada)
+  var reservas = staysGet("/booking/reservations?from=" + from + "&to=" + to + "&dateType=arrival");
+
+  // Coleta IDs de cliente únicos
+  var idsUnicos = {};
+  reservas.forEach(function(r) { if (r._idclient) idsUnicos[r._idclient] = true; });
+
+  // Para cada cliente único, busca dados e tenta fazer match
+  var clienteEncontrado = null;
+  var reservasDoCliente = [];
+  var listings          = staysGet("/content/listings");
+  var nomesImoveis      = {};
+  listings.forEach(function(l) { nomesImoveis[l._id] = l.internalName || l.id; });
+
+  var idsLista = Object.keys(idsUnicos);
+  for (var i = 0; i < idsLista.length; i++) {
+    var idCliente = idsLista[i];
+    var cliente;
+    try {
+      cliente = staysGet("/booking/clients/" + idCliente);
+    } catch(e) {
+      continue;
+    }
+
+    var emailCliente    = normalizeEmail(cliente.email || "");
+    var telefoneCliente = normalizePhone((cliente.phones && cliente.phones[0]) ? (cliente.phones[0].iso || "") : "");
+    var nomeCliente     = (cliente.name || "").toLowerCase().trim();
+
+    var matchEmail    = emailBusca    && emailCliente    && emailCliente    === emailBusca;
+    var matchTelefone = telefoneBusca && telefoneCliente && telefoneCliente === telefoneBusca;
+    var matchNome     = nomeBusca     && nomeCliente     && nomeCliente.indexOf(nomeBusca) >= 0;
+
+    if (matchEmail || matchTelefone || matchNome) {
+      clienteEncontrado = {
+        stays_id:      idCliente,
+        nome:          cliente.name          || "",
+        email:         cliente.email         || "",
+        telefone:      telefoneCliente,
+        cpf:           (cliente.documents && cliente.documents[0]) ? (cliente.documents[0].numb || "") : "",
+        data_nascimento: cliente.birthDate   || "",
+        genero:        cliente.gender        || "",
+        idioma:        cliente.prefLang      || "",
+        cliente_desde: cliente.creationDate  || "",
+        match_por:     matchEmail ? "email" : (matchTelefone ? "telefone" : "nome")
+      };
+
+      // Coleta todas as reservas desse cliente
+      reservas.forEach(function(r) {
+        if (r._idclient !== idCliente) return;
+        var fees    = (r.price && r.price.hostingDetails) ? (r.price.hostingDetails.fees || []) : [];
+        var limpeza = 0;
+        fees.forEach(function(f) {
+          if ((f.name || "").toLowerCase().indexOf("limpeza") >= 0) limpeza += (f._f_val || 0);
+        });
+        reservasDoCliente.push({
+          id:          r.id,
+          imovel:      nomesImoveis[r._idlisting] || r._idlisting,
+          checkin:     r.checkInDate,
+          checkout:    r.checkOutDate,
+          noites:      diffNoites(r.checkInDate, r.checkOutDate),
+          hospedes:    r.guests || 0,
+          total:       r.price ? r.price._f_total : 0,
+          total_pago:  r.stats ? r.stats._f_totalPaid : 0,
+          taxa_limpeza: limpeza,
+          status:      r.type
+        });
+      });
+
+      break; // Achou, para a busca
+    }
+  }
+
+  if (!clienteEncontrado) {
+    return {
+      encontrado:   false,
+      busca:        { email: emailBusca, telefone: telefoneBusca, nome: nomeBusca },
+      periodo_varredura: from + " → " + to,
+      clientes_verificados: idsLista.length,
+      mensagem:     "Nenhum hóspede encontrado com esses dados no histórico de " + meses + " meses."
+    };
+  }
+
+  // Calcula métricas
+  var totalGasto    = 0;
+  var totalPago     = 0;
+  var ultimaEstadia = "";
+  reservasDoCliente.forEach(function(r) {
+    totalGasto += r.total;
+    totalPago  += r.total_pago;
+    if (!ultimaEstadia || r.checkin > ultimaEstadia) ultimaEstadia = r.checkin;
+  });
+
+  return {
+    encontrado:          true,
+    match_por:           clienteEncontrado.match_por,
+    cliente:             clienteEncontrado,
+    historico: {
+      total_reservas:    reservasDoCliente.length,
+      total_gasto:       totalGasto,
+      total_pago:        totalPago,
+      a_receber:         totalGasto - totalPago,
+      ultima_estadia:    ultimaEstadia,
+      periodo_varredura: from + " → " + to
+    },
+    reservas:            reservasDoCliente.sort(function(a, b) { return b.checkin > a.checkin ? 1 : -1; })
+  };
+}
+
+// ─── Utils de normalização ────────────────────────────────────────────────
+
+function normalizeEmail(email) {
+  return (email || "").toLowerCase().trim();
+}
+
+function normalizePhone(phone) {
+  // Remove tudo que não é dígito, depois pega os últimos 11 dígitos (DDD + número BR)
+  var digits = (phone || "").replace(/\D/g, "");
+  if (digits.length > 11) digits = digits.slice(-11); // remove código país
+  return digits;
 }
 
 // ─── Stays API helpers ────────────────────────────────────────────────────

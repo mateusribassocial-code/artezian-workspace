@@ -16,7 +16,7 @@ A API externa v1 do Stays é **somente leitura** — alteração de tarifas e ta
 
 URL base:
 ```
-https://script.google.com/macros/s/AKfycbzVHC4Lozb1WHcXjwdkmQ1XJtCiencLHb40hAcKb7CD4C4gvzkuiOG-N5EsKudQnc8ZTQ/exec
+https://script.google.com/macros/s/AKfycbwEwufr9vrzGXYt4GTs1cY317F49v2yvXDerRmjQhqRRIc27d5AgXpFkdmefUAYK-r4Qw/exec
 ```
 
 ---

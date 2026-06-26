@@ -1,162 +1,162 @@
-# Stays Proxy — Setup e Configuração no Datacrazy
+# Stays Proxy — Setup e Referência
 
-## 1. Deploy do Google Apps Script
+## O que é
 
-1. Acesse [script.google.com](https://script.google.com) → **Novo projeto**
-2. Apague o código padrão e cole o conteúdo de `stays-proxy.gs`
-3. Salve o projeto (ex.: "Stays Proxy Artezian")
-4. Clique em **Implantar** → **Nova implantação**
-   - Tipo: **App da Web**
-   - Executar como: **Eu (minha conta Google)**
-   - Quem tem acesso: **Qualquer pessoa**
-5. Clique em **Implantar** → Copie a **URL do app da web**
+Google Apps Script que serve como proxy entre a IA do Datacrazy e a API do Stays.
+A API externa v1 do Stays é **somente leitura** — alteração de tarifas e taxas só pelo painel `artezian.stays.net`.
 
-A URL terá o formato:
+---
+
+## Deploy
+
+1. Acessa [script.google.com](https://script.google.com) → abre o projeto "Stays Proxy Artezian"
+2. Cola o conteúdo de `stays-proxy.gs` (substitui tudo)
+3. Salva (Ctrl+S)
+4. **Implantar → Gerenciar implantações → edita → Nova versão → Implantar**
+
+URL base:
 ```
-https://script.google.com/macros/s/AKfycb.../exec
+https://script.google.com/macros/s/AKfycbzVHC4Lozb1WHcXjwdkmQ1XJtCiencLHb40hAcKb7CD4C4gvzkuiOG-N5EsKudQnc8ZTQ/exec
 ```
 
 ---
 
-## 2. Endpoints disponíveis
+## O que a API do Stays suporta
 
-Base: `{URL_DO_SCRIPT}?action=...`
+| Categoria | Suporte |
+|-----------|---------|
+| Listar imóveis | ✅ |
+| Detalhe de imóvel | ✅ |
+| Calcular preço / disponibilidade | ✅ |
+| Listar reservas por período | ✅ |
+| Detalhe de reserva (hóspedes, valores, taxas) | ✅ |
+| Mapa de ocupação | ✅ (construído via reservas) |
+| Resumo financeiro | ✅ (construído via reservas) |
+| Alterar tarifas / diárias | ❌ (só pelo painel) |
+| Remover taxa de limpeza | ❌ (só pelo painel) |
+| Calendário de disponibilidade isolado | ❌ endpoint não existe |
+| Avaliações / reviews | ❌ endpoint não existe |
 
-### Calcular preço
+---
+
+## Endpoints disponíveis
+
+### 1. Calcular preço e disponibilidade
 ```
-GET ?action=preco&imovel=DS03J&checkin=2026-07-10&checkout=2026-07-14&hospedes=4
+GET ?action=preco&imovel=DS03J&checkin=2026-09-10&checkout=2026-09-14&hospedes=2
 ```
 **Resposta:**
 ```json
 {
   "disponivel": true,
   "imovel": "DS03J",
-  "checkin": "2026-07-10",
-  "checkout": "2026-07-14",
+  "checkin": "2026-09-10",
+  "checkout": "2026-09-14",
   "noites": 4,
-  "hospedes": 4,
-  "diaria": 450,
-  "valor_hospedagem": 1800,
-  "taxa_limpeza": 200,
-  "total": 2000,
-  "moeda": "BRL",
-  "resumo": "R$450/noite · 4 noites · total R$2000"
+  "diaria": 250,
+  "valor_hospedagem": 1000,
+  "taxa_limpeza": 0,
+  "total": 1000,
+  "taxas": [],
+  "resumo": "R$250/noite · 4 noites · total R$1000"
 }
 ```
 
-### Verificar disponibilidade (resposta simplificada)
+---
+
+### 2. Verificar disponibilidade (resposta simplificada)
 ```
-GET ?action=disponibilidade&imovel=DS03J&checkin=2026-07-10&checkout=2026-07-14&hospedes=2
-```
-**Resposta:**
-```json
-{
-  "disponivel": true,
-  "imovel": "DS03J",
-  "checkin": "2026-07-10",
-  "checkout": "2026-07-14",
-  "noites": 4,
-  "mensagem": "Disponível · R$450/noite · 4 noites · total R$2000"
-}
+GET ?action=disponibilidade&imovel=DS03J&checkin=2026-09-10&checkout=2026-09-14
 ```
 
-### Listar imóveis disponíveis (com filtro por capacidade)
+---
+
+### 3. Listar imóveis ativos
 ```
+GET ?action=imoveis
 GET ?action=imoveis&hospedes=6
 ```
-**Resposta:**
-```json
-{
-  "total": 8,
-  "imoveis": [
-    {
-      "id": "GF02J",
-      "nome": "Casa do Tremura 012",
-      "regiao": "Porto Seguro",
-      "max_hospedes": 10,
-      "quartos": 4,
-      "link": "https://www.artezian.com.br/pt/apartment/GF02J"
-    }
-  ]
-}
-```
+Retorna: id, nome, região, capacidade, quartos, camas, banheiros, área, link.
 
-### Detalhe de um imóvel
+---
+
+### 4. Detalhe de imóvel
 ```
 GET ?action=imovel&imovel=GF02J
 ```
+Retorna: todos os dados do imóvel — título em PT e EN, tipo, subtipo, endereço, capacidade, descrição, foto.
 
-### Listar taxas de um imóvel (ver IDs antes de remover)
+---
+
+### 5. Listar reservas por período
 ```
-GET ?action=listar_taxas&imovel=DS03J
+GET ?action=reservas&from=2026-07-01&to=2026-07-31
+GET ?action=reservas&from=2026-07-01&to=2026-07-31&tipo_data=departure
+GET ?action=reservas&from=2026-07-01&to=2026-07-31&imovel=DS03J
+GET ?action=reservas&from=2026-07-01&to=2026-07-31&status=booked
+```
+
+**Parâmetros:**
+| Param | Valores | Default |
+|-------|---------|---------|
+| `from` | YYYY-MM-DD | obrigatório |
+| `to` | YYYY-MM-DD | obrigatório |
+| `tipo_data` | `arrival` · `departure` · `creation` · `included` | `arrival` |
+| `imovel` | ID do imóvel | todos |
+| `status` | `booked` · `reserved` | todos |
+
+**Resposta por reserva:** id, checkin, checkout, noites, hóspedes, total, total pago, taxa limpeza, status, data criação.
+
+---
+
+### 6. Detalhe de uma reserva
+```
+GET ?action=reserva&id=6a3bc959fd6c75dc2e7d09ad
+```
+Usa o `_id` (hex) retornado em `reservas`. Retorna todos os dados: hóspedes com nomes, valores detalhados, taxas com IDs, horários de check-in/out.
+
+---
+
+### 7. Mapa de ocupação do período
+```
+GET ?action=ocupacao&from=2026-07-01&to=2026-07-31
+```
+Retorna quais imóveis têm reservas no período, agrupados por imóvel. Útil para visão geral da operação.
+
+---
+
+### 8. Resumo financeiro do período
+```
+GET ?action=financeiro&from=2026-07-01&to=2026-07-31
+GET ?action=financeiro&from=2026-07-01&to=2026-07-31&tipo_data=arrival
 ```
 **Resposta:**
 ```json
 {
-  "imovel": "DS03J",
-  "total_taxas": 1,
-  "taxas": [
-    { "id": "abc123", "nome": "Taxa de Limpeza", "tipo": "cleaning", "valor": 200 }
+  "periodo": "2026-07-01 → 2026-07-31",
+  "total_reservas": 12,
+  "receita_total": 48500,
+  "recebido_total": 22000,
+  "a_receber": 26500,
+  "taxa_limpeza_total": 1800,
+  "receita_hospedagem": 46700,
+  "por_imovel": [
+    { "nome": "Casa do Tremura 012", "reservas": 2, "receita": 9600, "recebido": 4800 }
   ]
 }
 ```
 
-### Listar planos de tarifa de um imóvel
-```
-GET ?action=listar_tarifas&imovel=DS03J
-```
+---
 
-### Remover taxa de limpeza (POST)
+### 9. Lista de hóspedes com check-in no período
 ```
-POST {URL_DO_SCRIPT}
-Content-Type: application/json
-
-{ "action": "remover_taxa_limpeza", "imovel": "DS03J" }
+GET ?action=hospedes&from=2026-07-01&to=2026-07-31
 ```
-Opcional: passar `taxa_id` se quiser remover uma taxa específica sem busca automática.
-
-### Atualizar diária por temporada (POST)
-```
-POST {URL_DO_SCRIPT}
-Content-Type: application/json
-
-{ "action": "atualizar_diaria", "imovel": "DS03J", "baixa": 300, "alta": 700, "feriado": 500 }
-```
-Passa só os campos que quiser alterar — os demais ficam intactos.
-Opcional: passar `plano_id` se o imóvel tiver mais de um plano de tarifa.
+Retorna: nome do titular, imóvel, datas, total de hóspedes, link da reserva. Ordenado por data de check-in.
 
 ---
 
-## 3. Configuração no Datacrazy
-
-Na seção de **Ferramentas HTTP** (ou similar) da IA do Datacrazy, cadastrar as ferramentas:
-
-### Ferramenta 1 — Calcular Preço / Verificar Disponibilidade
-- **Nome:** `consultar_stays`
-- **URL:** `{URL_DO_SCRIPT}`
-- **Método:** GET
-- **Parâmetros:**
-  | Nome | Tipo | Descrição |
-  |------|------|-----------|
-  | `action` | string fixo | `preco` |
-  | `imovel` | string | ID do imóvel (ex: DS03J) |
-  | `checkin` | string | Data de entrada (YYYY-MM-DD) |
-  | `checkout` | string | Data de saída (YYYY-MM-DD) |
-  | `hospedes` | number | Número de hóspedes |
-
-### Ferramenta 2 — Listar Imóveis
-- **Nome:** `listar_imoveis_stays`
-- **URL:** `{URL_DO_SCRIPT}`
-- **Método:** GET
-- **Parâmetros:**
-  | Nome | Tipo | Descrição |
-  |------|------|-----------|
-  | `action` | string fixo | `imoveis` |
-  | `hospedes` | number | Capacidade mínima desejada |
-
----
-
-## 4. IDs dos imóveis (referência rápida)
+## IDs dos imóveis (referência)
 
 | ID | Nome | Região | Max |
 |----|------|--------|-----|
@@ -173,8 +173,44 @@ Na seção de **Ferramentas HTTP** (ou similar) da IA do Datacrazy, cadastrar as
 | GG08J | Casa do John 014 | Porto Seguro | — |
 | HA02J | Apto da Jessilene | Arraial D'Ajuda | — |
 | HA03J | Flat da Joyce | Taperapuã | — |
-| JR01J | VP-01 | — | — |
-| JR03J | VP-03 | — | — |
-| JR04J | VP-04 | — | — |
-| JR05J | VP-05 | — | — |
-| JR07J | VP-07 | — | — |
+| JR01J | VP-01 | Varandas de Porto | — |
+| JR03J | VP-03 | Varandas de Porto | — |
+| JR04J | VP-04 | Varandas de Porto | — |
+| JR05J | VP-05 | Varandas de Porto | — |
+| JR07J | VP-07 | Varandas de Porto | — |
+
+---
+
+## Configuração no Datacrazy
+
+Cadastrar na seção de Ferramentas HTTP:
+
+### Ferramenta 1 — Consultar preço / disponibilidade
+- **Nome:** `consultar_stays`
+- **Método:** GET
+- **URL:** `{URL_DO_SCRIPT}`
+- **Params:** `action=preco`, `imovel`, `checkin`, `checkout`, `hospedes`
+
+### Ferramenta 2 — Listar imóveis disponíveis
+- **Nome:** `listar_imoveis_stays`
+- **Método:** GET
+- **URL:** `{URL_DO_SCRIPT}`
+- **Params:** `action=imoveis`, `hospedes`
+
+### Ferramenta 3 — Reservas do período
+- **Nome:** `reservas_stays`
+- **Método:** GET
+- **URL:** `{URL_DO_SCRIPT}`
+- **Params:** `action=reservas`, `from`, `to`, `tipo_data`, `imovel`, `status`
+
+### Ferramenta 4 — Financeiro do período
+- **Nome:** `financeiro_stays`
+- **Método:** GET
+- **URL:** `{URL_DO_SCRIPT}`
+- **Params:** `action=financeiro`, `from`, `to`
+
+### Ferramenta 5 — Hóspedes com check-in
+- **Nome:** `hospedes_stays`
+- **Método:** GET
+- **URL:** `{URL_DO_SCRIPT}`
+- **Params:** `action=hospedes`, `from`, `to`

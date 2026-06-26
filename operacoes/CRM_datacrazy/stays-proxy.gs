@@ -391,20 +391,24 @@ function diagnosticoTaxas(p) {
   // Calcula datas: checkin daqui 30 dias, 2 noites
   var hoje    = new Date();
   var checkin  = new Date(hoje.getTime() + 30 * 24 * 60 * 60 * 1000);
-  var checkout = new Date(hoje.getTime() + 32 * 24 * 60 * 60 * 1000);
+  var checkout = new Date(hoje.getTime() + 34 * 24 * 60 * 60 * 1000);
   var fmt = function(d) { return d.toISOString().split("T")[0]; };
 
-  var calcRaw = staysPost("/booking/calculate-price", {
-    listingIds: [imovel],
-    from: fmt(checkin),
-    to: fmt(checkout),
-    guests: 2
-  });
-
-  var item       = (calcRaw && calcRaw.length > 0) ? calcRaw[0] : {};
-  var fees       = item.fees || [];
-  var allKeys    = Object.keys(item);
-  var feesComIds = fees.map(function(f) { return JSON.parse(JSON.stringify(f)); });
+  var item = {}, fees = [], allKeys = [], feesComIds = [];
+  try {
+    var calcRaw = staysPost("/booking/calculate-price", {
+      listingIds: [imovel],
+      from: fmt(checkin),
+      to: fmt(checkout),
+      guests: 2
+    });
+    item       = (calcRaw && calcRaw.length > 0) ? calcRaw[0] : {};
+    fees       = item.fees || [];
+    allKeys    = Object.keys(item);
+    feesComIds = fees.map(function(f) { return JSON.parse(JSON.stringify(f)); });
+  } catch(e) {
+    feesComIds = [{ erro_calc_price: e.message }];
+  }
 
   // Tenta endpoints alternativos pra taxas
   var endpointsTaxas = [

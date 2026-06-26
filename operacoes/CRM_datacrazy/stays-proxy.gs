@@ -26,9 +26,9 @@ function doGet(e) {
     else if (action === "imovel")          result = detalheImovel(p);
     else if (action === "listar_taxas")    result = listarTaxas(p);
     else if (action === "listar_tarifas")  result = listarTarifas(p);
-    else if (action === "raw_listing")     result = staysGet("/content/listings/" + (p.imovel || ""));
+    else if (action === "diagnostico")     result = diagnosticoTaxas(p);
     else if (action === "raw_get")         result = staysGet(p.path || "/content/listings");
-    else result = { erro: "action inválida. Use: preco | disponibilidade | imoveis | imovel | listar_taxas | listar_tarifas | raw_listing | raw_get" };
+    else result = { erro: "action inválida. Use: preco | disponibilidade | imoveis | imovel | listar_taxas | listar_tarifas | diagnostico | raw_get" };
 
     return jsonOk(result);
   } catch (err) {
@@ -374,6 +374,76 @@ function atualizarDiaria(p) {
       feriado: feriado
     },
     resposta: resultado
+  };
+}
+
+/**
+ * Diagnóstico: chama calculate-price pra um período teste e retorna
+ * o objeto completo de fees com todos os campos (incluindo IDs).
+ * Também testa endpoints alternativos de taxas e tarifas.
+ *
+ * Params: imovel (default DS03J)
+ * Exemplo: ?action=diagnostico&imovel=DS03J
+ */
+function diagnosticoTaxas(p) {
+  var imovel = p.imovel || "DS03J";
+
+  // Calcula datas: checkin daqui 30 dias, 2 noites
+  var hoje    = new Date();
+  var checkin  = new Date(hoje.getTime() + 30 * 24 * 60 * 60 * 1000);
+  var checkout = new Date(hoje.getTime() + 32 * 24 * 60 * 60 * 1000);
+  var fmt = function(d) { return d.toISOString().split("T")[0]; };
+
+  var calcRaw = staysPost("/booking/calculate-price", {
+    listingIds: [imovel],
+    from: fmt(checkin),
+    to: fmt(checkout),
+    guests: 2
+  });
+
+  var item       = (calcRaw && calcRaw.length > 0) ? calcRaw[0] : {};
+  var fees       = item.fees || [];
+  var allKeys    = Object.keys(item);
+  var feesComIds = fees.map(function(f) { return JSON.parse(JSON.stringify(f)); });
+
+  // Tenta endpoints alternativos pra taxas
+  var endpointsTaxas = [
+    "/content/extra-charges",
+    "/content/fees",
+    "/content/listings/" + imovel + "/fees",
+    "/content/listings/" + imovel + "/extra-charges"
+  ];
+  var probes = {};
+  endpointsTaxas.forEach(function(ep) {
+    try {
+      probes[ep] = staysGet(ep);
+    } catch (e) {
+      probes[ep] = { erro: e.message };
+    }
+  });
+
+  // Tenta endpoints alternativos pra tarifas
+  var endpointsTarifas = [
+    "/prices/listing/" + imovel,
+    "/prices/seasons?listingId=" + imovel,
+    "/prices/rates/" + imovel,
+    "/content/listings/" + imovel + "/rates"
+  ];
+  endpointsTarifas.forEach(function(ep) {
+    try {
+      probes[ep] = staysGet(ep);
+    } catch (e) {
+      probes[ep] = { erro: e.message };
+    }
+  });
+
+  return {
+    imovel: imovel,
+    periodo_teste: fmt(checkin) + " → " + fmt(checkout),
+    calc_price_keys: allKeys,
+    fees_raw: feesComIds,
+    total_fees: fees.length,
+    probes: probes
   };
 }
 

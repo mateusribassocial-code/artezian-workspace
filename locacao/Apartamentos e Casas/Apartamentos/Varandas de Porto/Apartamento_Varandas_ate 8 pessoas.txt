@@ -1,4 +1,5 @@
-# Códigos: JR01J - Studio 01, JR02J - Studio 02, JR03J - Studio 03, JR04J - Studio 04
+# Códigos: JR09J - Apto 09
+
 # **Vídeos**
 Condomínio (Vídeo Completo)
 https://youtu.be/VVMpwK_YFDo
@@ -8,21 +9,20 @@ https://www.instagram.com/p/DYNlTZ-T8QW/
 
 
 # Capacidade
-> Até 4 pessoas
-> Studio - Comodo Único
+> Até 8 pessoas
+> Apartamento - Sala e 2 Quartos
 
 # Valor médio da diária (estimativa)
-Baixa temporada = R$ 210
-Feriados = R$ 350
-Janeiro - R$ 530
-
+💵 Baixa: R$ 440,00 | Feriados: R$ 680,00
+💵 Janeiro: R$ 1.200,00 | Carnaval: R$ 1080,00
+💵 Carnaporto: R$ 850,00 | Réveillon: R$ 1.600,00
 
 
 **Localização:** Bairro Paraíso dos Patachós, Taperapuã — 4 minutos andando até a praia de Taperapuã.
 
 A 100m: Mercado Big Stop, trailers de comida, praça.  
 A 300m: Barraca do Gaúcho (tradicional, na beira do mar).  
-Próximo: Barramares, Arena Xemoá, Suedes Praia, Coroa Vermelha.
+Próximo: Barramares, Arena Axé Mói , Suedes Praia, Coroa Vermelha.
 
 Estrutura do condomínio:
 - Piscina com cascata
@@ -35,9 +35,10 @@ Estrutura do condomínio:
 - Sem café da manhã (cada apê tem cozinha equipada)
 - Ambiente familiar, tranquilo
 
-*Tipo A — Studios (JR01J, JR02J, JR03J, JR04J)**
-- Capacidade: até 4 pessoas
-- Cama de casal + cama adicional, frigobar, TV, ar-condicionado, banheiro, cozinha compacta
-- Mínimo: 3 noites
-- IDs Stays: JR01J, JR02J, JR03J, JR04J
+**Tipo B — Apartamentos 1 quarto (JR05J, JR06J, JR07J, JR08J)**
+* Capacidade: até 5 pessoas
+* Quarto e sala, sofá cama, cama de casal, beliche, ar-condicionado, cozinha completa, tanquinho
+* Taxa de limpeza: R$ 100
+* Mínimo: 3 noites
+* IDs Stays: JR05J, JR06J, JR07J, JR08J
 

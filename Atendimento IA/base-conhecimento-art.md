@@ -134,6 +134,16 @@ As diárias variam conforme o período. Os períodos e seus tipos são:
 
 ---
 
+### CASA X APARTAMENTO — QUAL RECOMENDAR
+
+**Casas:** mais privativas e espaçosas. Ideais para grupos acima de 12 pessoas que querem ficar todos juntos, geralmente com lazer próprio (piscina privativa, churrasqueira). Diária mais alta.
+
+**Apartamentos:** ficam em condomínio, com mais opção de lazer compartilhado (piscina, sauna, portaria 24h). Diária mais em conta e localização mais perto da praia ou dos pontos principais.
+
+**Regra prática:** até 12 pessoas → indicar apartamento primeiro (preço e localização). Acima de 12 → indicar casa (espaço e privacidade).
+
+---
+
 ### CONDOMÍNIO MONT CARMELO — Taperapuã
 
 **Localização:** Taperapuã, a 400 metros da praia
@@ -573,6 +583,9 @@ Não. Atendimento direto pela Artezian — mais ágil e sem taxa de plataforma.
 ---
 
 ### Sobre os imóveis
+
+**Qual a diferença entre alugar uma casa e um apartamento?**
+Casa: mais privativa e espaçosa, ideal pra grupos acima de 12 pessoas — mas com diária mais alta. Apartamento: mais opção de lazer no condomínio (piscina, sauna, portaria 24h), diária mais em conta e mais perto da praia ou dos pontos principais.
 
 **Tem café da manhã?**
 Não. Todos os imóveis têm cozinha completa equipada.

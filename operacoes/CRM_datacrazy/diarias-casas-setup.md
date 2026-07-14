@@ -132,8 +132,20 @@ conversa diretamente.
 | `hospedes` | Quantidade total de hóspedes, se o hóspede informar | Number | não |
 
 **Bloco HTTP Request** (depois do trigger):
-```
-GET https://script.google.com/macros/s/AKfycbzVrdsitqZ2B527x9_L0GSOluyb1EICDwpXQZe2Kx2XEasMENAg3M5cyRx7FxoeknYv/exec?action=diarias_periodo&checkin={checkin|[Api-request-1]checkin}&checkout={checkout|[Api-request-1]checkout}&hospedes={hospedes|[Api-request-1]hospedes}
+| Campo | Valor |
+|-------|-------|
+| Método | `POST` |
+| URL | `https://script.google.com/macros/s/AKfycbzVrdsitqZ2B527x9_L0GSOluyb1EICDwpXQZe2Kx2XEasMENAg3M5cyRx7FxoeknYv/exec` |
+| Cabeçalho (Header) | `Content-Type: application/json` |
+| Corpo (Body) | ver abaixo |
+
+```json
+{
+  "action": "diarias_periodo",
+  "checkin": "{checkin|[Api-request-1]checkin}",
+  "checkout": "{checkout|[Api-request-1]checkout}",
+  "hospedes": "{hospedes|[Api-request-1]hospedes}"
+}
 ```
 
 **Bloco JavaScript** (formata a resposta — ajustar o nome da variável de entrada pro nome real
@@ -169,7 +181,16 @@ Mesmo padrão da Automação 1, com estas diferenças:
 
 **Parâmetros:** os mesmos de cima, mais `casa` (String, obrigatório — "Nome ou código da casa que o hóspede quer consultar, ex: Tremura ou GF02J").
 
-**HTTP Request:** troca `action=diarias_periodo` por `action=diaria_casa&casa={casa|[Api-request-1]casa}`.
+**HTTP Request:** mesmo Método/URL/Header de cima. Corpo:
+```json
+{
+  "action": "diaria_casa",
+  "casa": "{casa|[Api-request-1]casa}",
+  "checkin": "{checkin|[Api-request-1]checkin}",
+  "checkout": "{checkout|[Api-request-1]checkout}",
+  "hospedes": "{hospedes|[Api-request-1]hospedes}"
+}
+```
 
 **JavaScript:**
 ```js

@@ -19,7 +19,25 @@ var COL_PRECO_INICIO      = 2;                    // índice 0-based da 1ª colu
 var LINHA_DADOS_INICIO    = 4;                     // índice 0-based da 1ª linha de casa (linha 5 na planilha)
 
 function doGet(e) {
-  var p = e.parameter;
+  return rotear(e.parameter || {});
+}
+
+// doPost — bloco HTTP Request do Datacrazy manda o JSON no corpo
+function doPost(e) {
+  var p = {};
+  try {
+    if (e.postData && e.postData.contents) {
+      p = JSON.parse(e.postData.contents);
+    } else {
+      p = e.parameter || {};
+    }
+  } catch (err) {
+    p = e.parameter || {};
+  }
+  return rotear(p);
+}
+
+function rotear(p) {
   var action = p.action || "diarias_periodo";
 
   try {

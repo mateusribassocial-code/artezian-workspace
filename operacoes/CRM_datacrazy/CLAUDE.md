@@ -18,6 +18,7 @@ CRM principal da Artezian. Usado pra gestão de leads de investimento e atendime
 - `stays-proxy.gs` / `stays-proxy-setup.md` — Apps Script proxy entre Datacrazy e a API do Stays (preço, disponibilidade, reservas, financeiro)
 - `midia-sheets.gs` — Apps Script que retorna links de mídia (Instagram, YouTube, fotos) por código do imóvel
 - `diarias-vila-mundai.gs` / `diarias-vila-mundai-setup.md` — Apps Script que calcula diária média por nº de hóspedes e período, lendo a planilha "Diárias_Vila do Mundaí" no Sheets
+- `diarias-casas.gs` / `diarias-casas-setup.md` — Apps Script que calcula diária (média e total) das casas do catálogo (Tremura, Laureana, Moana, John, Euller) por período, lendo a planilha "Casas — Calendário de Diárias (numérico)" no Sheets (calendário contínuo por dia, sem casar mês/dia como no Vila do Mundaí)
 - `mcp-reserva-tool-setup.md` — automação nativa do Datacrazy (trigger MCP Server Tool) que grava check-in, check-out e nº de hóspedes nos campos adicionais do lead
 
 ## Regras específicas

@@ -32,6 +32,11 @@ calendário da planilha é contínuo (sem lacunas de dias) e cobre datas reais c
 Se editar o código depois, usa **Implantar → Gerenciar implantações → editar → Nova versão → Implantar**
 (senão a URL antiga continua servindo a versão velha).
 
+URL implantada (`{URL_DO_SCRIPT}` nos exemplos abaixo):
+```
+https://script.google.com/macros/s/AKfycbzVrdsitqZ2B527x9_L0GSOluyb1EICDwpXQZe2Kx2XEasMENAg3M5cyRx7FxoeknYv/exec
+```
+
 ---
 
 ## Endpoints disponíveis
@@ -119,9 +124,12 @@ Cadastrar na seção de Ferramentas HTTP:
 
 ---
 
-## Pendência a validar durante a configuração real
+## Testado e validado (2026-07-14)
 
-Não dá pra confirmar sem abrir a planilha diretamente: se o nome da aba não for a primeira
-(`getSheets()[0]`), ou se linhas/colunas de referência (`LINHA_DADOS_INICIO`, `COL_PRECO_INICIO`,
-`DATA_INICIO`) mudarem de posição por uma edição de estrutura na planilha, o script para de achar
-os dados corretamente — ajustar as constantes no topo do `.gs` se a planilha for reestruturada.
+Deploy confirmado e os 3 endpoints testados direto na URL implantada — retornaram as 5 casas
+corretas (nome, código, capacidade) e diárias batendo com a planilha, incluindo o aviso de
+capacidade excedida.
+
+Se a planilha for reestruturada (linhas/colunas movidas, aba adicional antes da atual), ajustar as
+constantes `LINHA_DADOS_INICIO`, `COL_PRECO_INICIO` e `DATA_INICIO` no topo do `.gs`, e trocar
+`getSheets()[0]` por `getSheetByName("nome da aba")` se deixar de ser a primeira aba.

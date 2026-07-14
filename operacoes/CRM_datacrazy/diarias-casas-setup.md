@@ -108,19 +108,87 @@ GET ?action=listar_casas
 
 ## Configuração no Datacrazy
 
-Cadastrar na seção de Ferramentas HTTP:
+Essa versão do Datacrazy não tem mais uma seção separada de "Ferramenta HTTP" pro agente de IA —
+tools chamáveis pela IA só se criam via automação com o trigger **MCP Server Tool**. O padrão
+usado (validado na automação já em produção "MCP1-Stays"): trigger MCP → bloco de requisição HTTP
+→ bloco JavaScript formata o texto de resposta → bloco de Mensagem envia direto pro WhatsApp do
+lead. Não existe um "retorno" estruturado pro agente que chamou — a automação responde a
+conversa diretamente.
 
-### Ferramenta 1 — Diária de todas as casas no período
-- **Nome:** `diarias_casas`
-- **Método:** GET
-- **URL:** `{URL_DO_SCRIPT}`
-- **Params:** `action=diarias_periodo`, `checkin`, `checkout`, `hospedes`
+### Automação 1 — Diária de todas as casas no período
 
-### Ferramenta 2 — Diária de uma casa específica
-- **Nome:** `diaria_casa_especifica`
-- **Método:** GET
-- **URL:** `{URL_DO_SCRIPT}`
-- **Params:** `action=diaria_casa`, `casa`, `checkin`, `checkout`, `hospedes`
+**Trigger → MCP Server Tool**
+| Campo | Valor |
+|-------|-------|
+| Nome da tool | `diarias_casas` |
+| Descrição da tool | `Consulta a diária média e o total de todas as casas do catálogo (Tremura, Laureana, Moana, John, Euller) num período de check-in/check-out. Chame quando o hóspede perguntar preço de casa sem especificar qual, ou pedir opções.` |
+| Parâmetro de sessão | Lead (ou o mesmo usado na automação de reserva, pra identificar o WhatsApp de destino) |
+
+**Parâmetros da tool:**
+| Nome | Descrição | Tipo | Obrigatório |
+|------|-----------|------|-------------|
+| `checkin` | Data de check-in desejada pelo hóspede | Date | ✅ |
+| `checkout` | Data de check-out desejada pelo hóspede | Date | ✅ |
+| `hospedes` | Quantidade total de hóspedes, se o hóspede informar | Number | não |
+
+**Bloco HTTP Request** (depois do trigger):
+```
+GET https://script.google.com/macros/s/AKfycbzVrdsitqZ2B527x9_L0GSOluyb1EICDwpXQZe2Kx2XEasMENAg3M5cyRx7FxoeknYv/exec?action=diarias_periodo&checkin={checkin|[Api-request-1]checkin}&checkout={checkout|[Api-request-1]checkout}&hospedes={hospedes|[Api-request-1]hospedes}
+```
+
+**Bloco JavaScript** (formata a resposta — ajustar o nome da variável de entrada pro nome real
+que o bloco HTTP expuser no editor, ex: `[Api-request-2]body` ou similar):
+```js
+const resposta = JSON.parse(corpoDaRequisicaoHttp); // trocar pela referência real do bloco HTTP
+
+let resposta_casas;
+if (resposta.erro) {
+  resposta_casas = "Não consegui consultar a diária agora, pode tentar de novo?";
+} else {
+  const disponiveis = resposta.casas.filter(c => !c.erro);
+  const linhas = disponiveis.map(c =>
+    `🏠 *${c.nome}* (até ${c.max_hospedes} pessoas)\nR$${c.valor_medio_diaria}/noite · ${c.noites} noites · total R$${c.valor_total_estimado}`
+  ).join("\n\n");
+  resposta_casas = `Diária das casas de ${resposta.checkin} a ${resposta.checkout}:\n\n${linhas}`;
+}
+
+return { resposta_casas };
+```
+
+**Bloco Mensagem → Mensagem de texto**: usar a variável `{resposta_casas}` como conteúdo.
+
+### Automação 2 — Diária de uma casa específica
+
+Mesmo padrão da Automação 1, com estas diferenças:
+
+**Trigger → MCP Server Tool**
+| Campo | Valor |
+|-------|-------|
+| Nome da tool | `diaria_casa_especifica` |
+| Descrição da tool | `Consulta a diária média e o total de UMA casa específica do catálogo num período. Chame quando o hóspede mencionar uma casa por nome ou código.` |
+
+**Parâmetros:** os mesmos de cima, mais `casa` (String, obrigatório — "Nome ou código da casa que o hóspede quer consultar, ex: Tremura ou GF02J").
+
+**HTTP Request:** troca `action=diarias_periodo` por `action=diaria_casa&casa={casa|[Api-request-1]casa}`.
+
+**JavaScript:**
+```js
+const resposta = JSON.parse(corpoDaRequisicaoHttp); // trocar pela referência real do bloco HTTP
+
+let resposta_casas;
+if (resposta.erro) {
+  resposta_casas = resposta.erro + (resposta.casas_disponiveis ? "\nCasas do catálogo: " + resposta.casas_disponiveis.join(", ") : "");
+} else {
+  resposta_casas = `🏠 *${resposta.nome}* (até ${resposta.max_hospedes} pessoas)\n${resposta.resumo}`;
+  if (resposta.aviso_capacidade) resposta_casas += `\n\n⚠️ ${resposta.aviso_capacidade}`;
+}
+
+return { resposta_casas };
+```
+
+> **Pendência a validar no editor:** confirmar (a) o nome exato da variável de saída do bloco
+> HTTP Request pra referenciar no JavaScript, e (b) se o `JSON.parse` é necessário ou se o bloco
+> HTTP já entrega objeto parseado.
 
 ---
 

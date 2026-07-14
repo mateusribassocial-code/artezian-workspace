@@ -85,7 +85,9 @@ Isso cria histórico no lead e facilita debug se algum dado vier errado.
 
 ## Pendências a validar durante a configuração real
 
-Duas coisas que não dá pra confirmar sem estar dentro do editor Datacrazy — ajustar este guia depois de testar:
-
-- **Resposta ao agente de IA:** não está claro se o fluxo precisa de um bloco de retorno explícito pra avisar sucesso à tool MCP, ou se terminar o fluxo (`nextBlockId` vazio) já responde sucesso automaticamente. Se aparecer algum bloco de "resposta"/"retorno" ao montar o fluxo, documentar aqui.
+- ~~**Resposta ao agente de IA**~~ — **Resolvido.** Não existe bloco de retorno estruturado pro
+  MCP client. O padrão confirmado (automação "MCP1-Stays" em produção, e replicado em
+  `diarias-casas-setup.md`) é: trigger MCP → bloco HTTP/lógica → bloco JavaScript monta o texto
+  de resposta → bloco de Mensagem envia direto pro WhatsApp do lead, usando o parâmetro de sessão
+  do trigger pra identificar o destinatário. A automação responde a conversa diretamente, não "devolve" dado pro agente.
 - **Formato da data recebida:** confirmar se o tipo `Date` do parâmetro chega como `AAAA-MM-DD`, ISO 8601 completo, ou timestamp — pode ser necessário um `parse-date-field-operation` antes de gravar, caso o campo adicional espere um formato específico.

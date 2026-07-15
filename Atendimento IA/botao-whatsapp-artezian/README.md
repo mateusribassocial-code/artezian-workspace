@@ -3,10 +3,18 @@
 Botão flutuante que abre um painel lateral pra captar Nome e Telefone
 antes de redirecionar o lead pro WhatsApp da Artezian (`5573999373474`).
 Grava cada envio numa planilha do Google Sheets (com Page Path, Título da
-Página, UTMs e click IDs) e dispara o evento de conversão Lead pro Meta Ads
-(Pixel + Conversions API server-side, se o site já tiver Meta Pixel
+Página, UTMs e click IDs), encaminha o lead pro CRM da Datacrazy (via
+webhook, servidor-a-servidor), dispara o evento de conversão Lead pro Meta
+Ads (Pixel + Conversions API server-side, se o site já tiver Meta Pixel
 instalado) e empurra um evento `w4w_lead` pro `dataLayer` pro Google Tag
 Manager processar (GA4 + Google Ads).
+
+O widget sempre manda os dados pro Apps Script (nunca direto pro CRM) —
+é o Apps Script que encaminha pra Datacrazy por trás, porque uma chamada
+com `Content-Type: application/json` feita pelo navegador dispararia um
+preflight CORS que o webhook da Datacrazy provavelmente não trata (ele foi
+feito pra receber chamadas servidor-a-servidor, não direto do navegador),
+o que faria o lead nunca chegar, silenciosamente.
 
 Gerado a partir do modelo em `../botao-whatsapp/`, sem o campo de
 unidade/loja (a Artezian tem um único WhatsApp de atendimento).
@@ -24,6 +32,11 @@ unidade/loja (a Artezian tem um único WhatsApp de atendimento).
 6. Implante, autorize as permissões e copie a **URL do app da Web** (termina
    em `/exec`).
 7. Cole essa URL em `gasWebAppUrl` no `whatsapp-widget.js`.
+
+O `google-apps-script.gs` já vem com `crmWebhookUrl` preenchido com o
+webhook do fluxo da Datacrazy. Se esse fluxo mudar (novo webhook gerado na
+Datacrazy), atualize `crmWebhookUrl` no `CONFIG` do `google-apps-script.gs`
+e reimplante (Gerenciar implantações → editar → Nova versão → Implantar).
 
 ### 2. Configurar o Access Token da Conversions API do Meta
 
@@ -139,9 +152,13 @@ planilha (o "Título da Página" continua sendo gravado normalmente).
   Apps Script), com o mesmo Event ID do Pixel pra deduplicar automaticamente.
   Isso mantém o tracking funcionando mesmo com ad blocker ou Safari/iOS
   bloqueando o Pixel no navegador.
+- Encaminhamento do lead pro webhook de CRM da Datacrazy, feito pelo Apps
+  Script (servidor-a-servidor) — sem risco de CORS/preflight que existiria
+  se o navegador chamasse a Datacrazy direto.
 - O evento Meta só dispara se `fbq` já existir na página — sem ele, aparece
-  um aviso no console, mas o resto do fluxo (planilha, WhatsApp, dataLayer)
-  continua normal.
+  um aviso no console, mas o resto do fluxo (planilha, CRM, WhatsApp,
+  dataLayer) continua normal. Se o webhook da Datacrazy falhar, também não
+  quebra nada — só fica um erro no log de execuções do Apps Script.
 
 ## O que ainda falta preencher
 

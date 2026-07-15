@@ -1,7 +1,9 @@
 /**
  * Recebe os leads do botão flutuante de WhatsApp do site artezian.com.br,
  * grava numa aba da planilha onde este script está vinculado
- * (Extensões > Apps Script) e envia o evento Lead pra Conversions API do Meta.
+ * (Extensões > Apps Script), envia o evento Lead pra Conversions API do Meta
+ * e encaminha o lead pro webhook de CRM da Datacrazy (servidor-a-servidor,
+ * sem risco de CORS/preflight que teria se o navegador chamasse direto).
  *
  * Colunas gravadas: Timestamp | Nome | Telefone | Produto | Page Path |
  * URL completa | Título da Página | UTM Source | UTM Medium | UTM Campaign |
@@ -17,7 +19,8 @@
 var CONFIG = {
   sheetName: "Leads",
   metaPixelId: "2071021410088369",
-  metaApiVersion: "v21.0"
+  metaApiVersion: "v21.0",
+  crmWebhookUrl: "https://api.datacrazy.io/v1/crm/api/crm/flows/webhooks/22af0d21-3a82-4e94-af48-776efd03b4bc/21bd7f59-c22f-4907-bf59-7d167da4b6f5"
 };
 
 function doPost(e) {
@@ -53,6 +56,7 @@ function doPost(e) {
     ]);
 
     sendMetaCapiLeadEvent(data);
+    sendToCrmWebhook(data);
 
     return ContentService
       .createTextOutput(JSON.stringify({ status: "ok" }))
@@ -139,5 +143,36 @@ function sendMetaCapiLeadEvent(data) {
     }
   } catch (err) {
     console.error("Falha ao chamar Meta CAPI: " + err.message);
+  }
+}
+
+/**
+ * Encaminha o lead pro webhook de CRM da Datacrazy. Roda aqui (servidor,
+ * dentro do Apps Script) em vez de o navegador chamar direto, porque uma
+ * chamada com Content-Type: application/json feita pelo navegador
+ * dispararia um preflight CORS — e se o webhook da Datacrazy não tratar
+ * OPTIONS (comum em endpoints feitos pra receber chamadas servidor-a-
+ * servidor, tipo Zapier/n8n), o preflight falha e o lead nunca chega,
+ * silenciosamente. Chamando daqui não existe esse risco.
+ */
+function sendToCrmWebhook(data) {
+  if (!CONFIG.crmWebhookUrl) {
+    console.warn("crmWebhookUrl não configurada. Lead não foi enviado pro CRM.");
+    return;
+  }
+
+  try {
+    var response = UrlFetchApp.fetch(CONFIG.crmWebhookUrl, {
+      method: "post",
+      contentType: "application/json",
+      payload: JSON.stringify(data),
+      muteHttpExceptions: true
+    });
+    var code = response.getResponseCode();
+    if (code < 200 || code >= 300) {
+      console.error("Webhook da Datacrazy retornou erro " + code + ": " + response.getContentText());
+    }
+  } catch (err) {
+    console.error("Falha ao chamar o webhook da Datacrazy: " + err.message);
   }
 }

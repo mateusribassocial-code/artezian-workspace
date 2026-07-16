@@ -3,6 +3,10 @@
 .env.local
 .env.*
 
+# Credenciais de API (Google Ads e afins — NUNCA commitar)
+**/google-ads.yaml
+!**/google-ads.yaml.example
+
 # Arquivo gerado pelo /setup com MCPs específicos do usuário
 _configurar-mcps.md
 

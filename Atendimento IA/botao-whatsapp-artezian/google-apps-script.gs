@@ -157,7 +157,7 @@ function sendMetaCapiLeadEvent(data) {
  */
 function sendToCrmWebhook(data) {
   if (!CONFIG.crmWebhookUrl) {
-    console.warn("crmWebhookUrl não configurada. Lead não foi enviado pro CRM.");
+    logCrmDebug("SEM_URL", "crmWebhookUrl não configurada.", "");
     return;
   }
 
@@ -169,10 +169,26 @@ function sendToCrmWebhook(data) {
       muteHttpExceptions: true
     });
     var code = response.getResponseCode();
-    if (code < 200 || code >= 300) {
-      console.error("Webhook da Datacrazy retornou erro " + code + ": " + response.getContentText());
-    }
+    logCrmDebug(code, response.getContentText(), CONFIG.crmWebhookUrl);
   } catch (err) {
-    console.error("Falha ao chamar o webhook da Datacrazy: " + err.message);
+    logCrmDebug("EXCEPTION", err.message, CONFIG.crmWebhookUrl);
   }
+}
+
+/**
+ * Registro temporário de diagnóstico — grava o resultado de toda chamada ao
+ * webhook da Datacrazy numa aba separada ("Debug CRM"), já que os logs do
+ * Cloud Logging não estão disponíveis pra esse projeto (aba "Execuções" sem
+ * registro). Depois de confirmar que o envio pro CRM está funcionando, pode
+ * remover essa função e a chamada a ela em sendToCrmWebhook.
+ */
+function logCrmDebug(statusCode, responseBody, url) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Debug CRM");
+  if (!sheet) {
+    sheet = ss.insertSheet("Debug CRM");
+    sheet.appendRow(["Timestamp", "Status Code", "Resposta", "URL usada"]);
+    sheet.getRange(1, 1, 1, 4).setFontWeight("bold");
+  }
+  sheet.appendRow([new Date(), statusCode, responseBody, url]);
 }

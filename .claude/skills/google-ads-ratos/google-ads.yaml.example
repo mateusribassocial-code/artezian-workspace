@@ -1,0 +1,6 @@
+developer_token: "SEU_DEVELOPER_TOKEN_AQUI"
+client_id: "SEU_CLIENT_ID_AQUI.apps.googleusercontent.com"
+client_secret: "SEU_CLIENT_SECRET_AQUI"
+refresh_token: "SEU_REFRESH_TOKEN_AQUI"
+login_customer_id: "1558858209"
+use_proto_plus: true

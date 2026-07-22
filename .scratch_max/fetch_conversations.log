@@ -11,3 +11,297 @@ Fetching OPEN conversations (default)...
   skip=800 got=100 runningTotal=900 reportedCount=999
   skip=900 got=100 runningTotal=1000 reportedCount=999
   429 rate limited, waiting 31s...
+  skip=1000 got=100 runningTotal=1100 reportedCount=999
+  skip=1100 got=100 runningTotal=1200 reportedCount=999
+  skip=1200 got=100 runningTotal=1300 reportedCount=999
+  skip=1300 got=100 runningTotal=1400 reportedCount=999
+  skip=1400 got=100 runningTotal=1500 reportedCount=999
+  skip=1500 got=100 runningTotal=1600 reportedCount=999
+  skip=1600 got=100 runningTotal=1700 reportedCount=999
+  skip=1700 got=100 runningTotal=1800 reportedCount=999
+  skip=1800 got=100 runningTotal=1900 reportedCount=999
+  skip=1900 got=100 runningTotal=2000 reportedCount=999
+  429 rate limited, waiting 31s...
+  skip=2000 got=100 runningTotal=2100 reportedCount=999
+  skip=2100 got=100 runningTotal=2200 reportedCount=999
+  skip=2200 got=100 runningTotal=2300 reportedCount=999
+  skip=2300 got=100 runningTotal=2400 reportedCount=999
+  skip=2400 got=100 runningTotal=2500 reportedCount=999
+  skip=2500 got=100 runningTotal=2600 reportedCount=999
+  skip=2600 got=100 runningTotal=2700 reportedCount=999
+  skip=2700 got=100 runningTotal=2800 reportedCount=999
+  skip=2800 got=100 runningTotal=2900 reportedCount=999
+  skip=2900 got=100 runningTotal=3000 reportedCount=999
+  429 rate limited, waiting 30s...
+  skip=3000 got=100 runningTotal=3100 reportedCount=999
+  skip=3100 got=100 runningTotal=3200 reportedCount=999
+  skip=3200 got=100 runningTotal=3300 reportedCount=999
+  skip=3300 got=100 runningTotal=3400 reportedCount=999
+  skip=3400 got=100 runningTotal=3500 reportedCount=999
+  skip=3500 got=100 runningTotal=3600 reportedCount=999
+  skip=3600 got=100 runningTotal=3700 reportedCount=999
+  skip=3700 got=100 runningTotal=3800 reportedCount=999
+  skip=3800 got=100 runningTotal=3900 reportedCount=999
+  skip=3900 got=100 runningTotal=4000 reportedCount=999
+  429 rate limited, waiting 29s...
+  skip=4000 got=100 runningTotal=4100 reportedCount=999
+  skip=4100 got=100 runningTotal=4200 reportedCount=999
+  skip=4200 got=100 runningTotal=4300 reportedCount=999
+  skip=4300 got=100 runningTotal=4400 reportedCount=999
+  skip=4400 got=100 runningTotal=4500 reportedCount=999
+  skip=4500 got=100 runningTotal=4600 reportedCount=999
+  skip=4600 got=100 runningTotal=4700 reportedCount=999
+  skip=4700 got=100 runningTotal=4800 reportedCount=999
+  skip=4800 got=100 runningTotal=4900 reportedCount=999
+  skip=4900 got=100 runningTotal=5000 reportedCount=999
+  429 rate limited, waiting 30s...
+  skip=5000 got=100 runningTotal=5100 reportedCount=999
+  skip=5100 got=100 runningTotal=5200 reportedCount=999
+  skip=5200 got=100 runningTotal=5300 reportedCount=999
+  skip=5300 got=100 runningTotal=5400 reportedCount=999
+  skip=5400 got=100 runningTotal=5500 reportedCount=999
+  skip=5500 got=100 runningTotal=5600 reportedCount=999
+  skip=5600 got=100 runningTotal=5700 reportedCount=999
+  skip=5700 got=100 runningTotal=5800 reportedCount=999
+  skip=5800 got=100 runningTotal=5900 reportedCount=999
+  skip=5900 got=100 runningTotal=6000 reportedCount=999
+  429 rate limited, waiting 30s...
+  skip=6000 got=100 runningTotal=6100 reportedCount=999
+  skip=6100 got=100 runningTotal=6200 reportedCount=999
+  skip=6200 got=100 runningTotal=6300 reportedCount=999
+  skip=6300 got=100 runningTotal=6400 reportedCount=999
+  skip=6400 got=100 runningTotal=6500 reportedCount=999
+  skip=6500 got=100 runningTotal=6600 reportedCount=999
+  skip=6600 got=100 runningTotal=6700 reportedCount=999
+  skip=6700 got=100 runningTotal=6800 reportedCount=999
+  skip=6800 got=100 runningTotal=6900 reportedCount=999
+  skip=6900 got=100 runningTotal=7000 reportedCount=999
+  429 rate limited, waiting 27s...
+  skip=7000 got=100 runningTotal=7100 reportedCount=999
+  skip=7100 got=100 runningTotal=7200 reportedCount=999
+  skip=7200 got=100 runningTotal=7300 reportedCount=999
+  skip=7300 got=100 runningTotal=7400 reportedCount=999
+  skip=7400 got=100 runningTotal=7500 reportedCount=999
+  skip=7500 got=100 runningTotal=7600 reportedCount=999
+  skip=7600 got=100 runningTotal=7700 reportedCount=999
+  skip=7700 got=100 runningTotal=7800 reportedCount=999
+  skip=7800 got=100 runningTotal=7900 reportedCount=999
+  skip=7900 got=100 runningTotal=8000 reportedCount=999
+  429 rate limited, waiting 30s...
+  skip=8000 got=100 runningTotal=8100 reportedCount=999
+  skip=8100 got=100 runningTotal=8200 reportedCount=999
+  skip=8200 got=100 runningTotal=8300 reportedCount=999
+  skip=8300 got=100 runningTotal=8400 reportedCount=999
+  skip=8400 got=100 runningTotal=8500 reportedCount=999
+  skip=8500 got=100 runningTotal=8600 reportedCount=999
+  skip=8600 got=100 runningTotal=8700 reportedCount=999
+  skip=8700 got=100 runningTotal=8800 reportedCount=999
+  skip=8800 got=100 runningTotal=8900 reportedCount=999
+  skip=8900 got=100 runningTotal=9000 reportedCount=999
+  429 rate limited, waiting 27s...
+  skip=9000 got=100 runningTotal=9100 reportedCount=999
+  skip=9100 got=100 runningTotal=9200 reportedCount=999
+  skip=9200 got=100 runningTotal=9300 reportedCount=999
+  skip=9300 got=100 runningTotal=9400 reportedCount=999
+  skip=9400 got=100 runningTotal=9500 reportedCount=999
+  skip=9500 got=100 runningTotal=9600 reportedCount=999
+  skip=9600 got=100 runningTotal=9700 reportedCount=999
+  skip=9700 got=100 runningTotal=9800 reportedCount=999
+  skip=9800 got=100 runningTotal=9900 reportedCount=999
+  skip=9900 got=100 runningTotal=10000 reportedCount=999
+  429 rate limited, waiting 27s...
+  skip=10000 got=100 runningTotal=10100 reportedCount=999
+  skip=10100 got=100 runningTotal=10200 reportedCount=999
+  skip=10200 got=100 runningTotal=10300 reportedCount=999
+  skip=10300 got=100 runningTotal=10400 reportedCount=999
+  skip=10400 got=100 runningTotal=10500 reportedCount=999
+  skip=10500 got=100 runningTotal=10600 reportedCount=999
+  skip=10600 got=100 runningTotal=10700 reportedCount=999
+  skip=10700 got=100 runningTotal=10800 reportedCount=999
+  skip=10800 got=100 runningTotal=10900 reportedCount=999
+  skip=10900 got=100 runningTotal=11000 reportedCount=999
+  429 rate limited, waiting 29s...
+  skip=11000 got=100 runningTotal=11100 reportedCount=999
+  skip=11100 got=100 runningTotal=11200 reportedCount=999
+  skip=11200 got=100 runningTotal=11300 reportedCount=999
+  skip=11300 got=100 runningTotal=11400 reportedCount=999
+  skip=11400 got=100 runningTotal=11500 reportedCount=999
+  skip=11500 got=100 runningTotal=11600 reportedCount=999
+  skip=11600 got=100 runningTotal=11700 reportedCount=999
+  skip=11700 got=100 runningTotal=11800 reportedCount=999
+  skip=11800 got=100 runningTotal=11900 reportedCount=999
+  skip=11900 got=100 runningTotal=12000 reportedCount=999
+  429 rate limited, waiting 29s...
+  skip=12000 got=100 runningTotal=12100 reportedCount=999
+  skip=12100 got=100 runningTotal=12200 reportedCount=999
+  skip=12200 got=100 runningTotal=12300 reportedCount=999
+  skip=12300 got=100 runningTotal=12400 reportedCount=999
+  skip=12400 got=100 runningTotal=12500 reportedCount=999
+  skip=12500 got=100 runningTotal=12600 reportedCount=999
+  skip=12600 got=100 runningTotal=12700 reportedCount=999
+  skip=12700 got=100 runningTotal=12800 reportedCount=999
+  skip=12800 got=100 runningTotal=12900 reportedCount=999
+  skip=12900 got=100 runningTotal=13000 reportedCount=999
+  429 rate limited, waiting 29s...
+  skip=13000 got=100 runningTotal=13100 reportedCount=999
+  skip=13100 got=100 runningTotal=13200 reportedCount=999
+  skip=13200 got=100 runningTotal=13300 reportedCount=999
+  skip=13300 got=100 runningTotal=13400 reportedCount=999
+  skip=13400 got=100 runningTotal=13500 reportedCount=999
+  skip=13500 got=100 runningTotal=13600 reportedCount=999
+  skip=13600 got=100 runningTotal=13700 reportedCount=999
+  skip=13700 got=92 runningTotal=13792 reportedCount=999
+Fetching CLOSED conversations (filter[opened]=false)...
+  skip=0 got=100 runningTotal=100 reportedCount=999
+  skip=100 got=100 runningTotal=200 reportedCount=999
+  429 rate limited, waiting 28s...
+  skip=200 got=100 runningTotal=300 reportedCount=999
+  skip=300 got=100 runningTotal=400 reportedCount=999
+  skip=400 got=100 runningTotal=500 reportedCount=999
+  skip=500 got=100 runningTotal=600 reportedCount=999
+  skip=600 got=100 runningTotal=700 reportedCount=999
+  skip=700 got=100 runningTotal=800 reportedCount=999
+  skip=800 got=100 runningTotal=900 reportedCount=999
+  skip=900 got=100 runningTotal=1000 reportedCount=999
+  skip=1000 got=100 runningTotal=1100 reportedCount=999
+  skip=1100 got=100 runningTotal=1200 reportedCount=999
+  429 rate limited, waiting 31s...
+  skip=1200 got=100 runningTotal=1300 reportedCount=999
+  skip=1300 got=100 runningTotal=1400 reportedCount=999
+  skip=1400 got=100 runningTotal=1500 reportedCount=999
+  skip=1500 got=100 runningTotal=1600 reportedCount=999
+  skip=1600 got=100 runningTotal=1700 reportedCount=999
+  skip=1700 got=100 runningTotal=1800 reportedCount=999
+  skip=1800 got=100 runningTotal=1900 reportedCount=999
+  skip=1900 got=100 runningTotal=2000 reportedCount=999
+  skip=2000 got=100 runningTotal=2100 reportedCount=999
+  skip=2100 got=100 runningTotal=2200 reportedCount=999
+  429 rate limited, waiting 30s...
+  skip=2200 got=100 runningTotal=2300 reportedCount=999
+  skip=2300 got=100 runningTotal=2400 reportedCount=999
+  skip=2400 got=100 runningTotal=2500 reportedCount=999
+  skip=2500 got=100 runningTotal=2600 reportedCount=999
+  skip=2600 got=100 runningTotal=2700 reportedCount=999
+  skip=2700 got=100 runningTotal=2800 reportedCount=999
+  skip=2800 got=100 runningTotal=2900 reportedCount=999
+  skip=2900 got=100 runningTotal=3000 reportedCount=999
+  skip=3000 got=100 runningTotal=3100 reportedCount=999
+  skip=3100 got=100 runningTotal=3200 reportedCount=999
+  429 rate limited, waiting 30s...
+  skip=3200 got=100 runningTotal=3300 reportedCount=999
+  skip=3300 got=100 runningTotal=3400 reportedCount=999
+  skip=3400 got=100 runningTotal=3500 reportedCount=999
+  skip=3500 got=100 runningTotal=3600 reportedCount=999
+  skip=3600 got=100 runningTotal=3700 reportedCount=999
+  skip=3700 got=100 runningTotal=3800 reportedCount=999
+  skip=3800 got=100 runningTotal=3900 reportedCount=999
+  skip=3900 got=100 runningTotal=4000 reportedCount=999
+  skip=4000 got=100 runningTotal=4100 reportedCount=999
+  skip=4100 got=100 runningTotal=4200 reportedCount=999
+  429 rate limited, waiting 29s...
+  skip=4200 got=100 runningTotal=4300 reportedCount=999
+  skip=4300 got=100 runningTotal=4400 reportedCount=999
+  skip=4400 got=100 runningTotal=4500 reportedCount=999
+  skip=4500 got=100 runningTotal=4600 reportedCount=999
+  skip=4600 got=100 runningTotal=4700 reportedCount=999
+  skip=4700 got=100 runningTotal=4800 reportedCount=999
+  skip=4800 got=100 runningTotal=4900 reportedCount=999
+  skip=4900 got=100 runningTotal=5000 reportedCount=999
+  skip=5000 got=100 runningTotal=5100 reportedCount=999
+  skip=5100 got=100 runningTotal=5200 reportedCount=999
+  429 rate limited, waiting 30s...
+  skip=5200 got=100 runningTotal=5300 reportedCount=999
+  skip=5300 got=100 runningTotal=5400 reportedCount=999
+  skip=5400 got=100 runningTotal=5500 reportedCount=999
+  skip=5500 got=100 runningTotal=5600 reportedCount=999
+  skip=5600 got=100 runningTotal=5700 reportedCount=999
+  skip=5700 got=100 runningTotal=5800 reportedCount=999
+  skip=5800 got=100 runningTotal=5900 reportedCount=999
+  skip=5900 got=100 runningTotal=6000 reportedCount=999
+  skip=6000 got=100 runningTotal=6100 reportedCount=999
+  skip=6100 got=100 runningTotal=6200 reportedCount=999
+  429 rate limited, waiting 28s...
+  skip=6200 got=100 runningTotal=6300 reportedCount=999
+  skip=6300 got=100 runningTotal=6400 reportedCount=999
+  skip=6400 got=100 runningTotal=6500 reportedCount=999
+  skip=6500 got=100 runningTotal=6600 reportedCount=999
+  skip=6600 got=100 runningTotal=6700 reportedCount=999
+  skip=6700 got=100 runningTotal=6800 reportedCount=999
+  skip=6800 got=100 runningTotal=6900 reportedCount=999
+  skip=6900 got=100 runningTotal=7000 reportedCount=999
+  skip=7000 got=100 runningTotal=7100 reportedCount=999
+  skip=7100 got=100 runningTotal=7200 reportedCount=999
+  429 rate limited, waiting 30s...
+  skip=7200 got=100 runningTotal=7300 reportedCount=999
+  skip=7300 got=100 runningTotal=7400 reportedCount=999
+  skip=7400 got=100 runningTotal=7500 reportedCount=999
+  skip=7500 got=100 runningTotal=7600 reportedCount=999
+  skip=7600 got=100 runningTotal=7700 reportedCount=999
+  skip=7700 got=100 runningTotal=7800 reportedCount=999
+  skip=7800 got=100 runningTotal=7900 reportedCount=999
+  skip=7900 got=100 runningTotal=8000 reportedCount=999
+  skip=8000 got=100 runningTotal=8100 reportedCount=999
+  skip=8100 got=100 runningTotal=8200 reportedCount=999
+  429 rate limited, waiting 30s...
+  skip=8200 got=100 runningTotal=8300 reportedCount=999
+  skip=8300 got=100 runningTotal=8400 reportedCount=999
+  skip=8400 got=100 runningTotal=8500 reportedCount=999
+  skip=8500 got=100 runningTotal=8600 reportedCount=999
+  skip=8600 got=100 runningTotal=8700 reportedCount=999
+  skip=8700 got=100 runningTotal=8800 reportedCount=999
+  skip=8800 got=100 runningTotal=8900 reportedCount=999
+  skip=8900 got=100 runningTotal=9000 reportedCount=999
+  skip=9000 got=100 runningTotal=9100 reportedCount=999
+  skip=9100 got=100 runningTotal=9200 reportedCount=999
+  429 rate limited, waiting 29s...
+  skip=9200 got=100 runningTotal=9300 reportedCount=999
+  skip=9300 got=100 runningTotal=9400 reportedCount=999
+  skip=9400 got=100 runningTotal=9500 reportedCount=999
+  skip=9500 got=100 runningTotal=9600 reportedCount=999
+  skip=9600 got=100 runningTotal=9700 reportedCount=999
+  skip=9700 got=100 runningTotal=9800 reportedCount=999
+  skip=9800 got=100 runningTotal=9900 reportedCount=999
+  skip=9900 got=100 runningTotal=10000 reportedCount=999
+  skip=10000 got=100 runningTotal=10100 reportedCount=999
+  skip=10100 got=100 runningTotal=10200 reportedCount=999
+  429 rate limited, waiting 28s...
+  skip=10200 got=100 runningTotal=10300 reportedCount=999
+  skip=10300 got=100 runningTotal=10400 reportedCount=999
+  skip=10400 got=100 runningTotal=10500 reportedCount=999
+  skip=10500 got=100 runningTotal=10600 reportedCount=999
+  skip=10600 got=100 runningTotal=10700 reportedCount=999
+  skip=10700 got=100 runningTotal=10800 reportedCount=999
+  skip=10800 got=100 runningTotal=10900 reportedCount=999
+  skip=10900 got=100 runningTotal=11000 reportedCount=999
+  skip=11000 got=100 runningTotal=11100 reportedCount=999
+  skip=11100 got=100 runningTotal=11200 reportedCount=999
+  429 rate limited, waiting 28s...
+  skip=11200 got=100 runningTotal=11300 reportedCount=999
+  skip=11300 got=100 runningTotal=11400 reportedCount=999
+  skip=11400 got=100 runningTotal=11500 reportedCount=999
+  skip=11500 got=100 runningTotal=11600 reportedCount=999
+  skip=11600 got=100 runningTotal=11700 reportedCount=999
+  skip=11700 got=100 runningTotal=11800 reportedCount=999
+  skip=11800 got=100 runningTotal=11900 reportedCount=999
+  skip=11900 got=100 runningTotal=12000 reportedCount=999
+  skip=12000 got=100 runningTotal=12100 reportedCount=999
+  skip=12100 got=100 runningTotal=12200 reportedCount=999
+  429 rate limited, waiting 27s...
+  skip=12200 got=100 runningTotal=12300 reportedCount=999
+  skip=12300 got=100 runningTotal=12400 reportedCount=999
+  skip=12400 got=100 runningTotal=12500 reportedCount=999
+  skip=12500 got=100 runningTotal=12600 reportedCount=999
+  skip=12600 got=100 runningTotal=12700 reportedCount=999
+  skip=12700 got=100 runningTotal=12800 reportedCount=999
+  skip=12800 got=100 runningTotal=12900 reportedCount=999
+  skip=12900 got=100 runningTotal=13000 reportedCount=999
+  skip=13000 got=100 runningTotal=13100 reportedCount=999
+  skip=13100 got=100 runningTotal=13200 reportedCount=999
+  429 rate limited, waiting 28s...
+  skip=13200 got=100 runningTotal=13300 reportedCount=999
+  skip=13300 got=100 runningTotal=13400 reportedCount=999
+  skip=13400 got=100 runningTotal=13500 reportedCount=999
+  skip=13500 got=100 runningTotal=13600 reportedCount=999
+  skip=13600 got=100 runningTotal=13700 reportedCount=999
+  skip=13700 got=92 runningTotal=13792 reportedCount=999
+DONE. unique conversations: 13792 (open: 13792 , closed: 13792 )

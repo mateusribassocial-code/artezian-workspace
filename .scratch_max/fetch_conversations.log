@@ -1,2 +1,13 @@
 Fetching OPEN conversations (default)...
   429 rate limited, waiting 20s...
+  skip=0 got=100 runningTotal=100 reportedCount=999
+  skip=100 got=100 runningTotal=200 reportedCount=999
+  skip=200 got=100 runningTotal=300 reportedCount=999
+  skip=300 got=100 runningTotal=400 reportedCount=999
+  skip=400 got=100 runningTotal=500 reportedCount=999
+  skip=500 got=100 runningTotal=600 reportedCount=999
+  skip=600 got=100 runningTotal=700 reportedCount=999
+  skip=700 got=100 runningTotal=800 reportedCount=999
+  skip=800 got=100 runningTotal=900 reportedCount=999
+  skip=900 got=100 runningTotal=1000 reportedCount=999
+  429 rate limited, waiting 31s...

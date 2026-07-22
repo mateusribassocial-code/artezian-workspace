@@ -1,0 +1,495 @@
+<title>Condomínio do Max — Relatório de Ofertas</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #faf7f1;
+    --ink: #2a2a2a;
+    --ink-soft: rgba(42, 42, 42, 0.62);
+    --gold: #c2a14e;
+    --gold-soft: rgba(194, 161, 78, 0.14);
+    --petrol: #264653;
+    --petrol-soft: rgba(38, 70, 83, 0.08);
+    --line: rgba(42, 42, 42, 0.12);
+    --shadow: 0 1px 2px rgba(42, 42, 42, 0.04), 0 8px 24px rgba(42, 42, 42, 0.05);
+    --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+    --font-body: 'Century Gothic', 'Avenir Next', 'Futura', 'Trebuchet MS', sans-serif;
+    --font-mono: 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #14181a;
+    --bg-soft: #1b2124;
+    --ink: #ece7dc;
+    --ink-soft: rgba(236, 231, 220, 0.62);
+    --gold: #dcbd77;
+    --gold-soft: rgba(220, 189, 119, 0.14);
+    --petrol: #6fa3b3;
+    --petrol-soft: rgba(111, 163, 179, 0.12);
+    --line: rgba(236, 231, 220, 0.14);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px rgba(0, 0, 0, 0.35);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14181a;
+      --bg-soft: #1b2124;
+      --ink: #ece7dc;
+      --ink-soft: rgba(236, 231, 220, 0.62);
+      --gold: #dcbd77;
+      --gold-soft: rgba(220, 189, 119, 0.14);
+      --petrol: #6fa3b3;
+      --petrol-soft: rgba(111, 163, 179, 0.12);
+      --line: rgba(236, 231, 220, 0.14);
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    scroll-snap-type: y proximity;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--gold-soft); }
+
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 700; text-wrap: balance; margin: 0; }
+
+  section {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(28px, 6vw, 96px) clamp(20px, 8vw, 120px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .wrap { max-width: 980px; margin: 0 auto; width: 100%; }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+    display: inline-block;
+  }
+
+  /* nav dots */
+  nav.dots {
+    position: fixed;
+    right: clamp(10px, 3vw, 28px);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 50;
+  }
+  nav.dots button {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  nav.dots button[aria-current="true"] {
+    background: var(--gold);
+    border-color: var(--gold);
+    transform: scale(1.25);
+  }
+  nav.dots button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  /* ===== Cover ===== */
+  .cover { background: var(--bg); }
+  .cover .logo { height: 34px; width: auto; margin-bottom: 42px; opacity: 0.92; }
+  .cover h1 {
+    font-size: clamp(2.1rem, 5.4vw, 3.6rem);
+    line-height: 1.06;
+    max-width: 14ch;
+  }
+  .cover .stat-lead {
+    font-family: var(--font-display);
+    color: var(--gold);
+    font-style: italic;
+  }
+  .cover .sub {
+    margin-top: 22px;
+    font-size: 1.02rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    line-height: 1.55;
+  }
+  .cover .period-tag {
+    margin-top: 34px;
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--petrol);
+    background: var(--petrol-soft);
+    border-radius: 6px;
+    padding: 8px 14px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ===== KPI ===== */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 40px;
+  }
+  .kpi {
+    background: var(--bg);
+    padding: 30px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .kpi .num {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.7rem);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+  .kpi .num .accent { color: var(--gold); }
+  .kpi .label {
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    line-height: 1.35;
+  }
+
+  .callout {
+    margin-top: 28px;
+    border-left: 3px solid var(--gold);
+    padding: 4px 0 4px 20px;
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    max-width: 60ch;
+  }
+  .callout strong { color: var(--ink); font-weight: 700; }
+
+  /* ===== Bars ===== */
+  .bars {
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(18px, 4vw, 46px);
+    height: 220px;
+    margin-top: 52px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .bar-col { display: flex; flex-direction: column; align-items: center; gap: 12px; flex: 1; height: 100%; justify-content: flex-end; }
+  .bar-col .bar {
+    width: 100%;
+    max-width: 88px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 5px 5px 3px 3px;
+    position: relative;
+    transition: height 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .bar-col .bar.filled { background: linear-gradient(180deg, var(--gold) 0%, var(--gold) 100%); border-color: var(--gold); }
+  .bar-col .bar .val {
+    position: absolute;
+    top: -28px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .bar-col .month { font-size: 0.82rem; color: var(--ink-soft); letter-spacing: 0.04em; text-transform: uppercase; }
+  .bar-col.peak .month { color: var(--gold); font-weight: 600; }
+
+  .growth-note {
+    margin-top: 30px;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  .growth-note b { color: var(--petrol); font-family: var(--font-display); }
+
+  /* ===== Funnel two-col ===== */
+  .funnel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-top: 40px;
+  }
+  @media (max-width: 720px) { .funnel-grid { grid-template-columns: 1fr; } }
+  .funnel-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 26px 24px;
+    background: var(--bg-soft);
+  }
+  .funnel-card .tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--petrol);
+    background: var(--petrol-soft);
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 4px;
+    margin-bottom: 14px;
+  }
+  .funnel-card h3 { font-size: 1.24rem; margin-bottom: 10px; }
+  .funnel-card p { font-size: 0.94rem; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+
+  /* ===== Messages ===== */
+  .msg-list { display: flex; flex-direction: column; gap: 26px; margin-top: 36px; }
+  .msg-card { }
+  .msg-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.01em;
+  }
+  .msg-stage { color: var(--gold); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.72rem; font-weight: 600; }
+  .msg-sep { opacity: 0.5; }
+  .bubble {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    max-width: 68ch;
+  }
+  .bubble-avatar {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--petrol);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 0.86rem;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .bubble-content {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px 10px 10px 10px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    font-size: 0.96rem;
+    line-height: 1.55;
+  }
+  .bubble-content p { margin: 0 0 0.7em 0; }
+  .bubble-content p:last-child { margin-bottom: 0; }
+  .bubble-content strong { color: var(--petrol); font-weight: 700; }
+
+  /* ===== Footer ===== */
+  footer.section-footer { border-bottom: none; }
+  .next-steps { list-style: none; margin: 30px 0 0; padding: 0; display: flex; flex-direction: column; gap: 14px; max-width: 60ch; }
+  .next-steps li {
+    display: flex;
+    gap: 14px;
+    font-size: 0.98rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .next-steps li::before {
+    content: "→";
+    color: var(--gold);
+    font-weight: 700;
+    flex: none;
+  }
+  .meta-footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bar-col .bar { transition: none; }
+  }
+</style>
+
+<nav class="dots" aria-label="Seções">
+  <button data-target="s-cover" aria-current="true" aria-label="Capa"></button>
+  <button data-target="s-panorama" aria-label="Panorama"></button>
+  <button data-target="s-curva" aria-label="Curva mensal"></button>
+  <button data-target="s-funil" aria-label="Padrões de abordagem"></button>
+  <button data-target="s-mensagens" aria-label="Exemplos de mensagens"></button>
+  <button data-target="s-proximos" aria-label="Próximos passos"></button>
+</nav>
+
+<section id="s-cover" class="cover">
+  <div class="wrap">
+    <img class="logo" src="data:image/png;base64,{{LOGO_B64}}" alt="Artezian">
+    <div class="eyebrow">Relatório interno · Atendimento WhatsApp / Datacrazy</div>
+    <h1>Quantas vezes ofertamos o<br><span class="stat-lead">Condomínio do Max</span></h1>
+    <p class="sub">Levantamento de todas as menções ao Max T1 e Max T2 nas conversas de atendimento, feito a partir do histórico completo do Datacrazy.</p>
+    <div class="period-tag">22 abr → 21 jul 2026 · 2.786 conversas analisadas</div>
+  </div>
+</section>
+
+<section id="s-panorama">
+  <div class="wrap">
+    <div class="eyebrow">Panorama</div>
+    <h2 style="font-size: clamp(1.6rem, 3.2vw, 2.2rem); max-width: 22ch;">Nos últimos 3 meses, o Max apareceu 69 vezes — sempre puxado por nós</h2>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="num"><span class="accent">69</span></div>
+        <div class="label">menções ao Condomínio do Max nas conversas</div>
+      </div>
+      <div class="kpi">
+        <div class="num">46</div>
+        <div class="label">leads únicos que receberam a oferta</div>
+      </div>
+      <div class="kpi">
+        <div class="num">100%</div>
+        <div class="label">partiram do atendimento — nenhum lead pediu o Max pelo nome</div>
+      </div>
+      <div class="kpi">
+        <div class="num">0</div>
+        <div class="label">ofertas em abril e maio — o produto só entrou em cena em 21/06</div>
+      </div>
+    </div>
+    <p class="callout">O Max é um produto <strong>recente no catálogo</strong> do atendimento: a primeira menção aparece só em 21/06, numa conversa em que o Max entra como opção pet-friendly — antes disso, zero atividade no período.</p>
+  </div>
+</section>
+
+<section id="s-curva">
+  <div class="wrap">
+    <div class="eyebrow">Curva mensal</div>
+    <h2 style="font-size: clamp(1.6rem, 3.2vw, 2.2rem); max-width: 22ch;">Julho teve quase 9x mais ofertas que junho</h2>
+    <div class="bars" id="bars">
+      <div class="bar-col"><div class="bar" data-h="0" style="height:0"><span class="val">0</span></div><div class="month">Abril</div></div>
+      <div class="bar-col"><div class="bar" data-h="0" style="height:0"><span class="val">0</span></div><div class="month">Maio</div></div>
+      <div class="bar-col"><div class="bar filled" data-h="12" style="height:0"><span class="val">7</span></div><div class="month">Junho</div></div>
+      <div class="bar-col peak"><div class="bar filled" data-h="100" style="height:0"><span class="val">62</span></div><div class="month">Julho*</div></div>
+    </div>
+    <p class="growth-note">*Julho contabilizado até dia 21. Pico em um único dia: <b>17 ofertas em 06/07</b>, concentradas numa leva de reengajamento automático.</p>
+  </div>
+</section>
+
+<section id="s-funil">
+  <div class="wrap">
+    <div class="eyebrow">Como o Max é ofertado</div>
+    <h2 style="font-size: clamp(1.6rem, 3.2vw, 2.2rem); max-width: 26ch;">Dois padrões diferentes de abordagem convivem na mesma janela</h2>
+    <div class="funnel-grid">
+      <div class="funnel-card">
+        <span class="tag">1 – 6 jul</span>
+        <h3>Reengajamento automático</h3>
+        <p>Leva de mensagens do tipo "Aqui é o Max ☀️, vi que vc demonstrou interesse..." disparada pra leads que já haviam demonstrado interesse antes. Concentra o pico de 17 ofertas em 06/07, incluindo tentativas de segunda abordagem e avisos de encerramento de atendimento.</p>
+      </div>
+      <div class="funnel-card">
+        <span class="tag">a partir de 13 jul</span>
+        <h3>Cartão padrão do catálogo</h3>
+        <p>Formato consolidado — "🏡 Max T1/T2 · Mundaí · até X pessoas" com vídeo e diária estimada — recomendado pelo agente de IA dentro da conversa quando o perfil do lead combina com o Max (pet-friendly, Mundaí, grupo, orçamento). É o padrão que domina a partir da segunda quinzena de julho.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s-mensagens">
+  <div class="wrap">
+    <div class="eyebrow">Exemplos reais</div>
+    <h2 style="font-size: clamp(1.6rem, 3.2vw, 2.2rem); max-width: 24ch;">Seis momentos do funil, direto das conversas</h2>
+    <div class="msg-list">
+{{EXAMPLE_CARDS}}
+    </div>
+  </div>
+</section>
+
+<section id="s-proximos" class="section-footer">
+  <div class="wrap">
+    <div class="eyebrow">Próximos passos</div>
+    <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); max-width: 26ch;">O que dá pra aprofundar a partir daqui</h2>
+    <ul class="next-steps">
+      <li>Gráfico dia a dia completo de abril a julho, pra visualizar a rampa de adoção do Max com mais granularidade.</li>
+      <li>Quebra por atendente / agente de IA (Art Mendonça 1, 2, 3) — quem está puxando mais ofertas do Max.</li>
+      <li>Taxa de conversão: das 46 leads que receberam a oferta, quantas viraram negócio fechado no pipeline.</li>
+    </ul>
+    <div class="meta-footer">
+      <span>Fonte: API Datacrazy · conversas/mensagens</span>
+      <span>Gerado em 22/07/2026</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var bars = document.querySelectorAll('.bar');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          bars.forEach(function (b) {
+            b.style.height = b.getAttribute('data-h') + '%';
+          });
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+    var curva = document.getElementById('s-curva');
+    if (curva) io.observe(curva);
+
+    var sections = Array.from(document.querySelectorAll('section[id]'));
+    var dots = Array.from(document.querySelectorAll('nav.dots button'));
+    dots.forEach(function (d) {
+      d.addEventListener('click', function () {
+        var target = document.getElementById(d.getAttribute('data-target'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          dots.forEach(function (d) {
+            d.setAttribute('aria-current', d.getAttribute('data-target') === e.target.id ? 'true' : 'false');
+          });
+        }
+      });
+    }, { threshold: 0.55 });
+    sections.forEach(function (s) { spy.observe(s); });
+  })();
+</script>

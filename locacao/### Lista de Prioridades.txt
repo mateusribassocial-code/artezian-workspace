@@ -2,20 +2,17 @@
 
 >>> Studios Até 4 Pessoas - Cômodo único
 1 - Varandas de Porto (JR01J - Studio 01, JR02J - Studio 02, JR03J - Studio 03, JR04J - Studio 04)
-2 - Condomínio do Max (VM01A - VM02A - VM03A - VM04A - VM05A - VM06A - VM07A - VM08A)
-3 - DS04J - Flat da Mari
-4 - DS03J - Studio do João
+2 - DS04J - Flat da Mari
+3 - DS03J - Studio do João
 
 >>> Apartamentos Até 6 pessoas - 01 Quarto
 1 - Varandas de Porto (JR05J - Apto 05, JR06J - Apto 06, JR07J - Apto 07, JR08J - Apto 08)
-2 - Condomínio do Max  (VM01A - VM02A - VM03A - VM04A - VM05A - VM06A - VM07A - VM08A)
-3 - DS04J - Flat da Mari
+2 - DS04J - Flat da Mari
 
 >>> Apartamentos Até 8 pessoas - 02 Quartos
 1 - Varandas de Porto (JR09J - Apto 09)
-2 - Condomínio do Max  (VM09B - VM10B - VM11B - VM12B - VM13B - VM14B - VM15B - VM16B)
-3 - HA03J - Flat da Joyce (03 Quartos)
-4 - DS05J - Apto do Emanoel
+2 - HA03J - Flat da Joyce (03 Quartos)
+3 - DS05J - Apto do Emanoel
 
 >>> Apartamentos Até 12 pessoas - 03 Quartos
 1 - FL10J - Apartamento do Reinaldo (Taperapuan)

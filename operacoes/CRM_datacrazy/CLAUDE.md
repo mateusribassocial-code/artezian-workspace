@@ -20,6 +20,7 @@ CRM principal da Artezian. Usado pra gestão de leads de investimento e atendime
 - `diarias-vila-mundai.gs` / `diarias-vila-mundai-setup.md` — Apps Script que calcula diária média por nº de hóspedes e período, lendo a planilha "Diárias_Vila do Mundaí" no Sheets
 - `diarias-casas.gs` / `diarias-casas-setup.md` — Apps Script que calcula diária (média e total) das casas do catálogo (Tremura, Laureana, Moana, John, Euller) por período, lendo a planilha "Casas — Calendário de Diárias (numérico)" no Sheets (calendário contínuo por dia, sem casar mês/dia como no Vila do Mundaí)
 - `mcp-reserva-tool-setup.md` — automação nativa do Datacrazy (trigger MCP Server Tool) que grava check-in, check-out e nº de hóspedes nos campos adicionais do lead
+- `mcp-consulta-disp-stays-setup.md` — MCP Server Tool `Consultar_disp_stays`: bloco JS que chama a API do Stays direto (sem passar pelo `stays-proxy.gs`) pra responder disponibilidade, diária e total ao lead; documenta o que atualiza automático (preço/disponibilidade) vs manual (mapa de imóveis e vídeos)
 - `mcp-handoff-agentes-setup.md` — cadeia de handoff entre os 3 Agentes de IA do funil de locação (Art Mendonça 01 → 02 → 03), cada um invocando o próximo ao concluir sua parte via o bloco **IA - Invocar Agente**
 
 ## Regras específicas

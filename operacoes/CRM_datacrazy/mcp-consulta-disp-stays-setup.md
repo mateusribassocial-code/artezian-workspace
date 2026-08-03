@@ -31,7 +31,7 @@ Fluxo: **MCP Server Tool** → bloco **JavaScript** (abaixo) → bloco de **Mens
   - `VIDEOS` — link de vídeo (Cloudinary) por código de imóvel.
   - Precisa editar esse bloco sempre que um imóvel entrar/sair do catálogo, mudar de apelido, ou ganhar/trocar vídeo.
 
-## Bloco JavaScript (versão atual — 2026-07-27)
+## Bloco JavaScript (versão atual — 2026-08-03)
 
 ```js
 const IMOVEIS = {
@@ -51,6 +51,8 @@ const IMOVEIS = {
   "vp-01": "JR01J", "jr01j": "JR01J", "vp-03": "JR03J", "jr03j": "JR03J",
   "vp-04": "JR04J", "jr04j": "JR04J", "vp-05": "JR05J", "jr05j": "JR05J",
   "vp-07": "JR07J", "jr07j": "JR07J",
+  "vp-08": "JR08J", "varandas 08": "JR08J", "jr08j": "JR08J",
+  "vp-09": "JR09J", "varandas 09": "JR09J", "jr09j": "JR09J",
 };
 
 const V = "https://res.cloudinary.com/dwtylly4h/video/upload/";
@@ -165,4 +167,5 @@ await session.setAdditionalValue("resposta_stays",
 ```
 
 ## Histórico de mudanças
+- **2026-08-03** — adicionado `vp-08`/`varandas 08` → `JR08J` e `vp-09`/`varandas 09` → `JR09J` no mapa `IMOVEIS`. As duas unidades já estavam ativas no catálogo Stays e já tinham vídeo no mapa `VIDEOS`, mas não resolviam por nome — lead que perguntasse por "Varandas 08" ou "Varandas 09" caía sem match. Achado ao cruzar o catálogo ativo da Stays (`content/listings`) com este mapa pra montar o painel de diárias/ocupação.
 - **2026-07-27** — removida a linha `Disponível!` da mensagem de sucesso. Resposta passou a abrir direto com "Imóvel: ...", mantendo check-in/check-out, hóspedes, diária e total. Mensagem de indisponibilidade não mudou.

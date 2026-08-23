@@ -8,7 +8,7 @@
  * Colunas gravadas: Timestamp | Nome | Telefone | Produto | Page Path |
  * URL completa | Título da Página | UTM Source | UTM Medium | UTM Campaign |
  * UTM Term | UTM Content | fbclid | gclid | gbraid | wbraid | fbp | fbc |
- * Event ID | Referrer | User Agent
+ * Event ID | Referrer | User Agent | Check-in | Check-out | Qtd Pessoas
  *
  * IMPORTANTE — Access Token da Conversions API:
  * Não cole o token aqui no código (ele vai pro histórico do git). Configure
@@ -52,7 +52,10 @@ function doPost(e) {
       data.fbc || "",
       data.eventId || "",
       data.referrer || "",
-      data.userAgent || ""
+      data.userAgent || "",
+      data.checkIn || "",
+      data.checkOut || "",
+      data.qtdPessoas || ""
     ]);
 
     sendMetaCapiLeadEvent(data);
@@ -76,18 +79,33 @@ function doGet(e) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+var SHEET_HEADERS = [
+  "Timestamp", "Nome", "Telefone", "Produto", "Page Path", "URL completa",
+  "Título da Página", "UTM Source", "UTM Medium", "UTM Campaign", "UTM Term", "UTM Content",
+  "fbclid", "gclid", "gbraid", "wbraid", "fbp", "fbc", "Event ID", "Referrer", "User Agent",
+  "Check-in", "Check-out", "Qtd Pessoas"
+];
+
 function getOrCreateSheet() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(CONFIG.sheetName);
 
   if (!sheet) {
     sheet = ss.insertSheet(CONFIG.sheetName);
-    sheet.appendRow([
-      "Timestamp", "Nome", "Telefone", "Produto", "Page Path", "URL completa",
-      "Título da Página", "UTM Source", "UTM Medium", "UTM Campaign", "UTM Term", "UTM Content",
-      "fbclid", "gclid", "gbraid", "wbraid", "fbp", "fbc", "Event ID", "Referrer", "User Agent"
-    ]);
-    sheet.getRange(1, 1, 1, 21).setFontWeight("bold");
+    sheet.appendRow(SHEET_HEADERS);
+    sheet.getRange(1, 1, 1, SHEET_HEADERS.length).setFontWeight("bold");
+    return sheet;
+  }
+
+  // Backfill do cabeçalho pra planilhas criadas antes das colunas de
+  // Check-in/Check-out/Qtd Pessoas existirem — só completa o que falta,
+  // sem mexer nas colunas e nos dados já existentes.
+  var lastCol = sheet.getLastColumn();
+  if (lastCol < SHEET_HEADERS.length) {
+    var missingHeaders = SHEET_HEADERS.slice(lastCol);
+    sheet.getRange(1, lastCol + 1, 1, missingHeaders.length)
+      .setValues([missingHeaders])
+      .setFontWeight("bold");
   }
 
   return sheet;

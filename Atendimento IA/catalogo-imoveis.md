@@ -120,15 +120,6 @@
 
 ## APARTAMENTOS AVULSOS — TAPERAPUÃ
 
-**Vídeo:** https://www.youtube.com/watch?v=WzCzDBHpds4
-**Tipo:** Apartamento
-**Nome:** Apartamento da Isa - Taperapuã
-**Código:** DS06J
-**Hospedes:** de 2 até 5 pessoas - **Quartos:** 1 suíte
-**Faixa de Valor:** De R$250 a R$600
-
----
-
 **Vídeo:** https://www.youtube.com/watch?v=xjnOGp2ELQQ
 **Tipo:** Apartamento
 **Nome:** Apartamento do Reinaldo (Taperapuã) - Taperapuã
@@ -156,17 +147,6 @@
 **Hospedes:** de 4 até 12 pessoas - **Quartos:** 3 suítes
 **Faixa de Valor:** De R$750 a R$1.600
 
----
-
-**Vídeo:** https://www.youtube.com/watch?v=yldiuX6TMn0
-**Tipo:** Apartamento
-**Nome:** Apartamento da Jessilene - Arraial D'Ajuda
-**Código:** HA02J
-**Hospedes:** de 4 até 12 pessoas - **Quartos:** 3 suítes
-**Faixa de Valor:** De R$750 a R$1.400
-
----
-
 ## CASAS
 
 **Vídeo:** https://youtu.be/CNCtmX10Bko
@@ -178,39 +158,12 @@
 
 ---
 
-**Vídeo:** https://www.youtube.com/watch?v=Uirc8KLGs0g
-**Tipo:** Casa
-**Nome:** Casa da Laureana - Arraial D'Ajuda
-**Código:** GF04J
-**Hospedes:** de 8 até 13 pessoas - **Quartos:** 4 suítes
-**Faixa de Valor:** De R$1.800 a R$3.000
-
----
-
-**Vídeo:** https://www.youtube.com/watch?v=xDgFD3-_jYc
-**Tipo:** Casa
-**Nome:** Casa da Moana - Taperapuã
-**Código:** GF06J
-**Hospedes:** de 12 até 18 pessoas - **Quartos:** 5 suítes
-**Faixa de Valor:** De R$1.500 a R$3.000
-
----
-
 **Vídeo:** https://www.youtube.com/watch?v=sKs-Fo-NQIw
 **Tipo:** Casa
 **Nome:** Casa do John - Taperapuã
 **Código:** GG08J
 **Hospedes:** de 15 até 28 pessoas - **Quartos:** 6 quartos
 **Faixa de Valor:** De R$1.800 a R$2.700
-
----
-
-**Vídeo:** https://www.youtube.com/watch?v=VpjgSYfPblw
-**Tipo:** Casa
-**Nome:** Casa do Euller - Taperapuã
-**Código:** GG06J
-**Hospedes:** de 25 até 58 pessoas - **Quartos:** 9 quartos
-**Faixa de Valor:** De R$2.500 a R$3.500
 
 ---
 

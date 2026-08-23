@@ -38,15 +38,10 @@ const IMOVEIS = {
   "studio joão": "DS03J", "studio do joão": "DS03J", "ds03j": "DS03J",
   "flat da mari": "DS04J", "flat mari": "DS04J", "ds04j": "DS04J",
   "apartamento emanoel": "DS05J", "apto emanoel": "DS05J", "ds05j": "DS05J",
-  "apto da isa": "DS06J", "apto isa": "DS06J", "ds06j": "DS06J",
   "apto do reinaldo mi": "FL10J", "apto reinaldo": "FL10J", "fl10j": "FL10J",
   "apartamento do reinaldo ji": "GC01J", "gc01j": "GC01J",
-  "apto da jessilene": "HA02J", "apto jessilene": "HA02J", "ha02j": "HA02J",
   "flat da joyce": "HA03J", "flat joyce": "HA03J", "ha03j": "HA03J",
   "casa do tremura": "GF02J", "casa tremura": "GF02J", "gf02j": "GF02J",
-  "casa laureana": "GF04J", "gf04j": "GF04J",
-  "casa da moana": "GF06J", "casa moana": "GF06J", "gf06j": "GF06J",
-  "casa do euller": "GG06J", "casa euller": "GG06J", "gg06j": "GG06J",
   "casa do john": "GG08J", "casa john": "GG08J", "gg08j": "GG08J",
   "vp-01": "JR01J", "jr01j": "JR01J", "vp-03": "JR03J", "jr03j": "JR03J",
   "vp-04": "JR04J", "jr04j": "JR04J", "vp-05": "JR05J", "jr05j": "JR05J",
@@ -62,9 +57,6 @@ const VIDEOS = {
   "DS05J": V+"v1782131463/DS05J.mp4_he2dn9.mp4",
   "FL10J": V+"v1782131613/FL10J.mp4_qkygw7.mp4",
   "GF02J": V+"v1782132258/GF02J_-_Casa_do_Tremura_yakxbl.mp4",
-  "GF04J": V+"v1782132109/GF04J.mp4_pifndc.mp4",
-  "GF06J": V+"v1782132137/GF06J.mp4_sasotv.mp4",
-  "GG06J": V+"v1782132178/GG06J.mp4_bjxyri.mp4",
   "GG08J": V+"v1782132227/GG08J_-_Casa_do_John_jtppev.mp4",
   "HA03J": V+"v1782133893/HA03J.mp4_qy7e6t.mp4",
   "JR01J": V+"v1782138866/JR01J_rybbdp.mp4",
@@ -74,7 +66,6 @@ const VIDEOS = {
   "JR07J": V+"v1782131931/JR07.MP4_rtcrtr.mp4",
   "JR08J": V+"v1782132012/JR08.MP4_i5wtp5.mp4",
   "JR09J": V+"v1782131990/JR09.MP4_vskovc.mp4",
-  "VM10A": V+"v1782131516/VM10A.mp4_vt3cra.mp4",
 };
 
 function resolveId(nome) {
@@ -167,5 +158,6 @@ await session.setAdditionalValue("resposta_stays",
 ```
 
 ## Histórico de mudanças
+- **2026-08-17** — removidas do `IMOVEIS`/`VIDEOS` as unidades `DS06J` (Apto da Isa), `HA02J` (Apto da Jessilene), `GF04J` (Casa da Laureana), `GF06J` (Casa da Moana), `GG06J` (Casa do Euller) e `VM10A` (Condomínio do Max). Nenhuma das 6 aparece mais na resposta de `content/listings` da Stays (catálogo real hoje tem 18 IDs — conferido direto na API) — resolver esses códigos e chamar `booking/calculate-price` para eles ia dar erro. Se algum desses imóveis voltar a operar (novo contrato, recadastro), reincluir no mapa e criar/confirmar o ID Stays antes de reativar.
 - **2026-08-03** — adicionado `vp-08`/`varandas 08` → `JR08J` e `vp-09`/`varandas 09` → `JR09J` no mapa `IMOVEIS`. As duas unidades já estavam ativas no catálogo Stays e já tinham vídeo no mapa `VIDEOS`, mas não resolviam por nome — lead que perguntasse por "Varandas 08" ou "Varandas 09" caía sem match. Achado ao cruzar o catálogo ativo da Stays (`content/listings`) com este mapa pra montar o painel de diárias/ocupação.
 - **2026-07-27** — removida a linha `Disponível!` da mensagem de sucesso. Resposta passou a abrir direto com "Imóvel: ...", mantendo check-in/check-out, hóspedes, diária e total. Mensagem de indisponibilidade não mudou.

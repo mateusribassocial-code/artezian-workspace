@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Artezian — Checklist Operacional</title>
+<style>
+:root{
+  --bg:       #0f1117;
+  --surface:  #1a1d27;
+  --surface2: #21253a;
+  --border:   #2e3248;
+  --text:     #e8eaf0;
+  --muted:    #8891a8;
+  --radius:   10px;
+  --locacao:  #4fc3f7;
+  --venda:    #4caf85;
+  --consultoria: #f5c518;
+  --conteudo: #ce93d8;
+  --operacoes: #ff8a65;
+  --done: #4caf85;
+  --danger: #e05c5c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;min-height:100vh;padding-bottom:60px}
+
+header{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:16px 28px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:10;flex-wrap:wrap;gap:12px;
+}
+.logo{font-size:16px;font-weight:700;letter-spacing:.5px}
+.logo span{color:var(--locacao)}
+.logo-sub{font-size:11px;color:var(--muted);font-weight:400;margin-top:2px}
+.header-right{display:flex;align-items:center;gap:18px}
+
+.overall{display:flex;align-items:center;gap:10px}
+.overall-label{font-size:12px;color:var(--muted)}
+.overall-track{width:140px;height:8px;border-radius:6px;background:var(--surface2);overflow:hidden}
+.overall-fill{height:100%;background:var(--done);border-radius:6px;transition:width .25s}
+.overall-pct{font-size:13px;font-weight:700;min-width:34px;text-align:right}
+
+.btn-reset{
+  background:none;border:1px solid var(--border);color:var(--muted);
+  padding:6px 12px;border-radius:7px;font-size:12px;cursor:pointer;transition:.15s;
+}
+.btn-reset:hover{color:var(--text);border-color:var(--muted)}
+
+main{max-width:1080px;margin:0 auto;padding:24px 24px 0}
+
+.area{margin-bottom:22px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)}
+
+.area-header{
+  display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;
+  user-select:none;transition:background .15s;
+}
+.area-header:hover{background:var(--surface2)}
+.area-header:hover .area-del{opacity:1}
+.area-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+.area-nome{font-weight:700;font-size:15px;flex:1}
+.area-desc{font-size:12px;color:var(--muted);margin-top:2px;font-weight:400}
+.area-track{width:120px;height:7px;border-radius:6px;background:var(--surface2);overflow:hidden;flex-shrink:0}
+.area-fill{height:100%;border-radius:6px;transition:width .25s}
+.area-pct{font-size:12px;color:var(--muted);min-width:64px;text-align:right;flex-shrink:0}
+.area-del{
+  opacity:0;background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:14px;padding:2px 4px;flex-shrink:0;transition:.15s;
+}
+.area-del:hover{color:var(--danger)}
+.area-toggle{color:var(--muted);font-size:12px;transition:transform .2s;flex-shrink:0}
+.area.collapsed .area-toggle{transform:rotate(-90deg)}
+.area.collapsed .area-body{display:none}
+
+.area-body{padding:4px 18px 18px}
+
+.subarea{margin-top:14px;border-top:1px solid var(--border);padding-top:14px}
+.subarea:first-child{margin-top:0;border-top:none;padding-top:0}
+.subarea-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.subarea-header:hover .subarea-del{opacity:1}
+.subarea-nome{font-weight:600;font-size:13px}
+.badge-criar{
+  font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+  padding:2px 8px;border-radius:20px;background:rgba(255,138,101,.15);color:var(--operacoes);
+}
+.subarea-count{font-size:11px;color:var(--muted);margin-left:auto}
+.subarea-del{
+  opacity:0;background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:12px;padding:0 2px;transition:.15s;
+}
+.subarea-del:hover{color:var(--danger)}
+
+.itens{display:flex;flex-direction:column;gap:1px}
+.item{
+  display:flex;align-items:flex-start;gap:10px;padding:6px 8px;border-radius:7px;
+  cursor:pointer;transition:background .1s;
+}
+.item:hover{background:var(--surface2)}
+.item:hover .item-del,.item:hover .item-sub-toggle{opacity:1}
+.item-check{
+  width:16px;height:16px;border-radius:5px;border:2px solid var(--border);
+  flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;
+  transition:background .15s,border-color .15s;
+}
+.item-check svg{width:10px;height:10px;opacity:0;transition:opacity .1s}
+.item.feito .item-check{background:var(--done);border-color:var(--done)}
+.item.feito .item-check svg{opacity:1}
+.item-texto{flex:1;font-size:13px;line-height:1.45}
+.item.feito .item-texto{color:var(--muted);text-decoration:line-through}
+.item-sub-toggle{
+  opacity:0;background:var(--surface2);border:1px solid var(--border);color:var(--muted);
+  cursor:pointer;font-size:10.5px;padding:1px 7px;border-radius:20px;flex-shrink:0;
+  transition:.15s;white-space:nowrap;
+}
+.item-sub-toggle.tem-sub{opacity:1;color:var(--text)}
+.item-sub-toggle:hover{color:var(--text);border-color:var(--muted)}
+.item-del{
+  opacity:0;background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:13px;padding:0 4px;flex-shrink:0;transition:.15s;
+}
+.item-del:hover{color:var(--danger)}
+
+.subitens-wrap{display:none;flex-direction:column;gap:1px;margin:2px 0 2px 30px;padding-left:10px;border-left:2px solid var(--border)}
+.subitens-wrap.aberto{display:flex}
+.subitem{
+  display:flex;align-items:flex-start;gap:8px;padding:4px 8px;border-radius:6px;cursor:pointer;
+}
+.subitem:hover{background:var(--surface2)}
+.subitem:hover .subitem-del{opacity:1}
+.subitem-check{
+  width:13px;height:13px;border-radius:4px;border:2px solid var(--border);
+  flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;
+  transition:background .15s,border-color .15s;
+}
+.subitem-check svg{width:8px;height:8px;opacity:0}
+.subitem.feito .subitem-check{background:var(--done);border-color:var(--done)}
+.subitem.feito .subitem-check svg{opacity:1}
+.subitem-texto{flex:1;font-size:12.5px;line-height:1.4}
+.subitem.feito .subitem-texto{color:var(--muted);text-decoration:line-through}
+.subitem-del{
+  opacity:0;background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:12px;padding:0 4px;transition:.15s;
+}
+.subitem-del:hover{color:var(--danger)}
+
+.add-item, .add-subitem, .add-subarea, .add-area{
+  display:flex;align-items:center;gap:8px;margin-top:4px;padding:6px 8px;
+}
+.add-subitem{margin-left:30px;padding-left:18px}
+.add-item input, .add-subitem input, .add-subarea input, .add-area input{
+  flex:1;background:transparent;border:none;border-bottom:1px dashed var(--border);
+  color:var(--text);font-size:12.5px;padding:4px 2px;outline:none;
+}
+.add-item input:focus, .add-subitem input:focus, .add-subarea input:focus, .add-area input:focus{border-bottom-color:var(--muted)}
+.add-item input::placeholder, .add-subitem input::placeholder, .add-subarea input::placeholder, .add-area input::placeholder{color:var(--muted)}
+
+.add-subarea{border-top:1px dashed var(--border);margin-top:14px;padding-top:14px}
+.add-area{
+  max-width:1080px;margin:0 auto 40px;padding:14px 18px;border:1px dashed var(--border);
+  border-radius:12px;background:var(--surface);
+}
+.add-area input{font-size:13.5px}
+
+footer{
+  max-width:1080px;margin:8px auto 0;padding:0 24px;color:var(--muted);font-size:11.5px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+
+@media(max-width:640px){
+  .area-header{flex-wrap:wrap}
+  .area-track{display:none}
+  .header-right{width:100%;justify-content:space-between}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">Artezian <span>Checklist Operacional</span></div>
+    <div class="logo-sub">Mapeamento por área x subárea — o que existe, o que falta criar</div>
+  </div>
+  <div class="header-right">
+    <div class="overall">
+      <span class="overall-label">Progresso geral</span>
+      <div class="overall-track"><div class="overall-fill" id="overallFill" style="width:0%"></div></div>
+      <span class="overall-pct" id="overallPct">0%</span>
+    </div>
+    <button class="btn-reset" id="btnReset" title="Restaura tudo pro mapeamento padrão original, apagando setores, subáreas e tarefas criados/excluídos por você">Resetar pro padrão</button>
+  </div>
+</header>
+
+<main id="main"></main>
+
+<div class="add-area">
+  <input type="text" id="inpNovoSetor" placeholder="+ novo setor (área de negócio)..."/>
+</div>
+
+<footer>
+  <span>Progresso salvo automaticamente neste navegador (localStorage).</span>
+  <span>Baseado no levantamento do workspace — atualize conforme a operação evoluir.</span>
+</footer>
+
+<script>
+// ---------------------------------------------------------------------------
+// SEED — mapeamento inicial (área > subárea > tarefa)
+// ---------------------------------------------------------------------------
+const SEED_AREAS = [
+  {
+    id:'locacao', nome:'Locação', cor:'var(--locacao)',
+    desc:'Reservas, atendimento e gestão de imóveis por temporada',
+    subareas:[
+      {nome:'Sistemas e tecnologia', itens:[
+        {t:'Chatbot de qualificação rodando via Datacrazy (funil migrado dos prompts avulsos)', d:true},
+        {t:'MCP de consulta de disponibilidade/preço direto na API Stays', d:true},
+        {t:'MCP de gravação de reserva (check-in/out, hóspedes) no lead', d:true},
+        {t:'MCP de resumo de lead — evita repetir perguntas já respondidas no site', d:true},
+        {t:'Handoff nativo entre agentes de atendimento', d:true},
+        {t:'Cálculo automatizado de diárias (Vila do Mundaí e Casas)', d:true},
+        {t:'Script de mídia por imóvel (fotos/vídeo/Instagram via código do imóvel)', d:true},
+        {t:'Botão de WhatsApp no site com captura de lead + Meta CAPI/GTM', d:true},
+        {t:'Painel de gestão de hospedagens (mapa de reservas/bloqueios)', d:true},
+        {t:'Painel de precificação', d:true},
+        {t:'Landing pages publicadas por imóvel (casas)', d:true},
+        {t:'Base de conhecimento de imóveis (fichas, fotos, vídeos)', d:true},
+        {t:'FAQ operacional completo (pagamento, check-in/out, cancelamento)', d:true},
+        {t:'Dashboard central único de KPIs de ocupação (hoje há protótipos soltos)', d:false},
+        {t:'Consolidar as 3 cópias duplicadas dos prompts de agente em um único lugar', d:false},
+        {t:'Promover o DATACRAZY-FRAMEWORK-ENGENHARIA-v4.md a referência técnica oficial (hoje enterrado dentro da pasta de um imóvel)', d:false},
+      ]},
+      {nome:'Parceiros', itens:[
+        {t:'Cadastro de proprietários com contato, imóveis vinculados e comissão', d:true},
+        {t:'Cadastro de empresas terceirizadas (limpeza, manutenção, enxoval)', d:false},
+        {t:'Avaliar integração de canal com Airbnb/Booking (hoje venda é 100% direta)', d:false},
+        {t:'Identificar e documentar o parceiro de transfer/aeroporto citado no FAQ', d:false},
+      ]},
+      {nome:'Administrativo e contratos', tag:'Criar', itens:[
+        {t:'Processo de onboarding do proprietário documentado ponta a ponta', d:true},
+        {t:'Contrato padrão de hóspede definido (via e-mail)', d:true},
+        {t:'Repositório central de contratos (hoje: 1 contrato avulso dentro de leads do Google Ads)', d:false},
+        {t:'Modelo de contrato de representação de locação como arquivo próprio', d:false},
+        {t:'Processo de emissão de nota fiscal', d:false},
+        {t:'Política de repasse e prazo de pagamento ao proprietário documentada', d:false},
+      ]},
+      {nome:'Logística e terceirizados', tag:'Criar', itens:[
+        {t:'Cadastro de equipe/empresa de limpeza por imóvel', d:false},
+        {t:'Escala e checklist de check-in/check-out', d:false},
+        {t:'Controle de manutenção preventiva/corretiva', d:false},
+        {t:'Gestão de enxoval (troca de roupa de cama, estoque)', d:false},
+        {t:'Processo de reposição de itens de consumo (amenities)', d:false},
+        {t:'Contato de emergência/backup por região (Coroa Vermelha, Arraial, Taperapuã)', d:false},
+      ]},
+    ]
+  },
+  {
+    id:'venda', nome:'Venda de Studios', cor:'var(--venda)',
+    desc:'Leads, propostas e pipeline de venda para investidores',
+    subareas:[
+      {nome:'Produto', itens:[
+        {t:'Template de ficha de produto (specs, preço, ROI, diferenciais)', d:true},
+        {t:'Pelo menos 1 empreendimento com ficha real preenchida', d:false},
+        {t:'Estudo do produto do 2º empreendimento', d:false},
+      ]},
+      {nome:'Leads e CRM', itens:[
+        {t:'Pipeline com funil e legendas de status/temperatura estruturado', d:true},
+        {t:'Leads reais cadastrados no pipeline (hoje está vazio)', d:false},
+        {t:'Análise retroativa das leads do 1º lançamento', d:false},
+        {t:'Mapeamento de públicos que avançaram no 1º lançamento', d:false},
+        {t:'Chatbot de qualificação de investidor (pasta existe, zero arquivos)', d:false},
+      ]},
+      {nome:'Comercial', itens:[
+        {t:'Template de proposta comercial', d:true},
+        {t:'Template de simulação de ROI', d:true},
+        {t:'Pelo menos 1 proposta e 1 simulação real geradas', d:false},
+        {t:'Argumentos de venda validados documentados fora do plano em PDF', d:false},
+      ]},
+      {nome:'Marketing e captação', itens:[
+        {t:'Landing page de investidores publicada (site + WordPress + Elementor)', d:true},
+        {t:'Campanha de anúncios específica para investidores', d:false},
+        {t:'Nutrição por WhatsApp Marketing / e-mail marketing (Manychat/Active Campaign)', d:false},
+      ]},
+    ]
+  },
+  {
+    id:'consultoria', nome:'Consultoria de CRM', cor:'var(--consultoria)',
+    desc:'Implantação Datacrazy e treinamento comercial para PMEs da região',
+    subareas:[
+      {nome:'Prova de conceito / case interno', itens:[
+        {t:'Implantação real e madura do Datacrazy pra locação (MCPs de disponibilidade, reserva, resumo, handoff)', d:true},
+        {t:'Documentação técnica detalhada de cada automação', d:true},
+        {t:'Transformar a implantação interna em case/prova de conceito comercial', d:false},
+      ]},
+      {nome:'Comercial', itens:[
+        {t:'Material de prospecção (consultoria/ está vazia)', d:false},
+        {t:'Proposta comercial padrão', d:false},
+        {t:'Pelo menos 1 cliente/case preenchido em _modelo-cliente/', d:false},
+      ]},
+      {nome:'Treinamento', itens:[
+        {t:'Roteiro/material de treinamento comercial pra equipes de cliente', d:false},
+        {t:'Skill de proposta comercial pra consultoria (já no backlog de tarefas.md)', d:false},
+      ]},
+    ]
+  },
+  {
+    id:'conteudo', nome:'Produção de Conteúdo', cor:'var(--conteudo)',
+    desc:'Instagram, YouTube, TikTok e Blog — motor de audiência do ecossistema',
+    subareas:[
+      {nome:'Marca e voz', itens:[
+        {t:'Guia de voz do João, baseado em conversas reais (marca/voz-joao.md)', d:true},
+        {t:'Design guide — paleta, tipografia (marca/design-guide.md)', d:true},
+      ]},
+      {nome:'Canais', itens:[
+        {t:'Processo/calendário editorial documentado', d:false},
+        {t:'YouTube: pelo menos 1 vídeo com pauta triada e publicada', d:false},
+        {t:'TikTok — nenhuma estrutura iniciada', d:false},
+        {t:'Blog — nenhuma estrutura iniciada', d:false},
+        {t:'Catálogo centralizado de conteúdo já publicado', d:false},
+      ]},
+    ]
+  },
+  {
+    id:'operacoes', nome:'Operações internas / Administrativo', cor:'var(--operacoes)',
+    desc:'Ferramentas conectadas, financeiro e painéis de gestão',
+    subareas:[
+      {nome:'Ferramentas conectadas', itens:[
+        {t:'Datacrazy (CRM principal)', d:true},
+        {t:'Stays (PMS)', d:true},
+        {t:'WhatsApp API Oficial', d:true},
+        {t:'Meta Ads', d:true},
+        {t:'Google Drive + Google Sheets', d:true},
+        {t:'Gmail MCP', d:false},
+        {t:'Google Calendar MCP', d:false},
+        {t:'Facebook Ads MCP', d:false},
+        {t:'N8N (automações)', d:false},
+      ]},
+      {nome:'Financeiro', itens:[
+        {t:'Controle de comissão por proprietário', d:true},
+        {t:'Processo fiscal — nota fiscal, impostos (Administrativo/ está vazia)', d:false},
+        {t:'Relatório financeiro consolidado das linhas de negócio', d:false},
+      ]},
+      {nome:'Painéis internos', itens:[
+        {t:'Protótipo de dashboard geral com layout das áreas (artezian.html)', d:true},
+        {t:'Hub de atalhos (hub.html)', d:true},
+        {t:'Popular conteúdo interno do artezian.html (tarefas, métricas, persistência)', d:false},
+      ]},
+    ]
+  },
+];
+
+const PALETTE = ['#4fc3f7','#4caf85','#f5c518','#ce93d8','#ff8a65','#7986cb','#4dd0e1','#f06292','#81c784','#ffb74d'];
+
+const LS_TREE = 'artezian_checklist_tree_v2';
+const LS_STATE_OLD = 'artezian_checklist_state_v1';
+const LS_CUSTOM_OLD = 'artezian_checklist_custom_v1';
+const LS_COLLAPSE_OLD = 'artezian_checklist_collapse_v1';
+
+function uid(prefix){ return prefix + '_' + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+function checkIcon(sizeClass){
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="#0f1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+}
+
+// ---------------------------------------------------------------------------
+// STORAGE — árvore única (setor > subárea > tarefa > subtarefa)
+// ---------------------------------------------------------------------------
+function buildSeedTree(){
+  return SEED_AREAS.map(area => ({
+    id: area.id, nome: area.nome, cor: area.cor, desc: area.desc, builtin:true, collapsed:false,
+    subareas: area.subareas.map((sub, sIdx) => ({
+      id: area.id+'-sa'+sIdx, nome: sub.nome, tag: sub.tag||null, builtin:true,
+      itens: sub.itens.map((it, iIdx) => ({
+        id: area.id+'-'+sIdx+'-'+iIdx, texto: it.t, feito: it.d, expanded:false, subitens: []
+      }))
+    }))
+  }));
+}
+
+function migrateOld(tree){
+  let stateOld=null, customOld=null, collapseOld=null;
+  try{ stateOld = JSON.parse(localStorage.getItem(LS_STATE_OLD)); }catch(e){}
+  try{ customOld = JSON.parse(localStorage.getItem(LS_CUSTOM_OLD)); }catch(e){}
+  try{ collapseOld = JSON.parse(localStorage.getItem(LS_COLLAPSE_OLD)); }catch(e){}
+
+  if(stateOld){
+    tree.forEach(area=>area.subareas.forEach(sub=>sub.itens.forEach(it=>{
+      if(stateOld.hasOwnProperty(it.id)) it.feito = !!stateOld[it.id];
+    })));
+  }
+  if(customOld){
+    Object.keys(customOld).forEach(subKey=>{
+      const parts = subKey.split('-');
+      const areaId = parts[0], sIdx = parseInt(parts[1],10);
+      const area = tree.find(a=>a.id===areaId);
+      if(area && area.subareas[sIdx]){
+        (customOld[subKey]||[]).forEach(ci=>{
+          area.subareas[sIdx].itens.push({id: ci.id || uid('i'), texto: ci.texto, feito: !!ci.feito, expanded:false, subitens:[]});
+        });
+      }
+    });
+  }
+  if(collapseOld){
+    tree.forEach(area=>{ if(collapseOld.hasOwnProperty(area.id)) area.collapsed = !!collapseOld[area.id]; });
+  }
+  if(stateOld || customOld || collapseOld){
+    localStorage.removeItem(LS_STATE_OLD);
+    localStorage.removeItem(LS_CUSTOM_OLD);
+    localStorage.removeItem(LS_COLLAPSE_OLD);
+  }
+  return tree;
+}
+
+function loadTree(){
+  const raw = localStorage.getItem(LS_TREE);
+  if(raw){
+    try{ return JSON.parse(raw); }catch(e){}
+  }
+  let t = migrateOld(buildSeedTree());
+  saveTree(t);
+  return t;
+}
+function saveTree(t){ localStorage.setItem(LS_TREE, JSON.stringify(t)); }
+
+let tree = loadTree();
+
+// ---------------------------------------------------------------------------
+// RENDER
+// ---------------------------------------------------------------------------
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function render(){
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+  let totalItens = 0, totalFeitos = 0;
+
+  tree.forEach(area=>{
+    let areaTotal = 0, areaFeitos = 0;
+    const areaEl = document.createElement('div');
+    areaEl.className = 'area' + (area.collapsed ? ' collapsed' : '');
+
+    const subareasHtml = area.subareas.map(sub=>{
+      const itensHtml = sub.itens.map(it=>{
+        areaTotal++; totalItens++;
+        if(it.feito){ areaFeitos++; totalFeitos++; }
+        const nSub = it.subitens.length;
+        const nSubFeitos = it.subitens.filter(s=>s.feito).length;
+        const subToggleLabel = nSub ? (nSubFeitos+'/'+nSub) : '+ sub';
+        const subitensHtml = it.subitens.map(si=>`
+          <div class="subitem ${si.feito?'feito':''}" data-subitem-id="${si.id}" data-item-id="${it.id}">
+            <div class="subitem-check">${checkIcon()}</div>
+            <div class="subitem-texto">${esc(si.texto)}</div>
+            <button class="subitem-del" data-del-subitem="${si.id}" data-item-id="${it.id}">✕</button>
+          </div>`).join('');
+
+        return `
+          <div>
+            <div class="item ${it.feito?'feito':''}" data-item-id="${it.id}">
+              <div class="item-check">${checkIcon()}</div>
+              <div class="item-texto">${esc(it.texto)}</div>
+              <button class="item-sub-toggle ${nSub?'tem-sub':''}" data-toggle-sub="${it.id}">${subToggleLabel}</button>
+              <button class="item-del" data-del-item="${it.id}">✕</button>
+            </div>
+            <div class="subitens-wrap ${it.expanded?'aberto':''}" data-subwrap="${it.id}">
+              ${subitensHtml}
+              <div class="add-subitem">
+                <input type="text" placeholder="+ subtarefa..." data-add-subitem="${it.id}"/>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+
+      const subFeitos = sub.itens.filter(x=>x.feito).length;
+
+      return `
+        <div class="subarea">
+          <div class="subarea-header">
+            <span class="subarea-nome">${esc(sub.nome)}</span>
+            ${sub.tag ? `<span class="badge-criar">${esc(sub.tag)}</span>` : ''}
+            <span class="subarea-count">${subFeitos}/${sub.itens.length}</span>
+            <button class="subarea-del" data-del-subarea="${sub.id}" title="Excluir subárea">✕</button>
+          </div>
+          <div class="itens">${itensHtml}</div>
+          <div class="add-item">
+            <input type="text" placeholder="+ adicionar tarefa..." data-add-item="${sub.id}"/>
+          </div>
+        </div>`;
+    }).join('');
+
+    const pct = areaTotal ? Math.round(areaFeitos/areaTotal*100) : 0;
+
+    areaEl.innerHTML = `
+      <div class="area-header" data-areaid="${area.id}">
+        <div class="area-dot" style="background:${area.cor}"></div>
+        <div style="flex:1">
+          <div class="area-nome">${esc(area.nome)}</div>
+          ${area.desc ? `<div class="area-desc">${esc(area.desc)}</div>` : ''}
+        </div>
+        <div class="area-track"><div class="area-fill" style="width:${pct}%;background:${area.cor}"></div></div>
+        <div class="area-pct">${areaFeitos}/${areaTotal} · ${pct}%</div>
+        <button class="area-del" data-del-area="${area.id}" title="Excluir setor">✕</button>
+        <div class="area-toggle">▾</div>
+      </div>
+      <div class="area-body">
+        ${subareasHtml}
+        <div class="add-subarea">
+          <input type="text" placeholder="+ nova subárea..." data-add-subarea="${area.id}"/>
+        </div>
+      </div>
+    `;
+    main.appendChild(areaEl);
+  });
+
+  const overallPct = totalItens ? Math.round(totalFeitos/totalItens*100) : 0;
+  document.getElementById('overallFill').style.width = overallPct + '%';
+  document.getElementById('overallPct').textContent = overallPct + '%';
+
+  attachEvents();
+}
+
+// ---------------------------------------------------------------------------
+// FINDERS
+// ---------------------------------------------------------------------------
+function findItem(itemId){
+  for(const area of tree){
+    for(const sub of area.subareas){
+      const it = sub.itens.find(x=>x.id===itemId);
+      if(it) return it;
+    }
+  }
+  return null;
+}
+
+// ---------------------------------------------------------------------------
+// EVENTS
+// ---------------------------------------------------------------------------
+function attachEvents(){
+  document.querySelectorAll('.area-header').forEach(h=>{
+    h.onclick = (e)=>{
+      if(e.target.closest('.area-del')) return;
+      const area = tree.find(a=>a.id===h.dataset.areaid);
+      area.collapsed = !area.collapsed;
+      saveTree(tree); render();
+    };
+  });
+
+  document.querySelectorAll('[data-del-area]').forEach(btn=>{
+    btn.onclick = (e)=>{
+      e.stopPropagation();
+      const area = tree.find(a=>a.id===btn.dataset.delArea);
+      if(!confirm('Excluir o setor "'+area.nome+'" e tudo dentro dele (subáreas e tarefas)?')) return;
+      tree = tree.filter(a=>a.id!==area.id);
+      saveTree(tree); render();
+    };
+  });
+
+  document.querySelectorAll('[data-del-subarea]').forEach(btn=>{
+    btn.onclick = (e)=>{
+      e.stopPropagation();
+      let subNome = '';
+      tree.forEach(area=>{
+        const sub = area.subareas.find(s=>s.id===btn.dataset.delSubarea);
+        if(sub) subNome = sub.nome;
+      });
+      if(!confirm('Excluir a subárea "'+subNome+'" e todas as tarefas dentro dela?')) return;
+      tree.forEach(area=>{ area.subareas = area.subareas.filter(s=>s.id!==btn.dataset.delSubarea); });
+      saveTree(tree); render();
+    };
+  });
+
+  document.querySelectorAll('.item').forEach(el=>{
+    el.onclick = (e)=>{
+      if(e.target.closest('.item-del') || e.target.closest('.item-sub-toggle')) return;
+      const it = findItem(el.dataset.itemId);
+      it.feito = !it.feito;
+      saveTree(tree); render();
+    };
+  });
+
+  document.querySelectorAll('[data-del-item]').forEach(btn=>{
+    btn.onclick = (e)=>{
+      e.stopPropagation();
+      const id = btn.dataset.delItem;
+      tree.forEach(area=>area.subareas.forEach(sub=>{
+        sub.itens = sub.itens.filter(x=>x.id!==id);
+      }));
+      saveTree(tree); render();
+    };
+  });
+
+  document.querySelectorAll('[data-toggle-sub]').forEach(btn=>{
+    btn.onclick = (e)=>{
+      e.stopPropagation();
+      const it = findItem(btn.dataset.toggleSub);
+      it.expanded = !it.expanded;
+      saveTree(tree); render();
+    };
+  });
+
+  document.querySelectorAll('.subitem').forEach(el=>{
+    el.onclick = (e)=>{
+      if(e.target.closest('.subitem-del')) return;
+      const it = findItem(el.dataset.itemId);
+      const si = it.subitens.find(s=>s.id===el.dataset.subitemId);
+      si.feito = !si.feito;
+      saveTree(tree); render();
+    };
+  });
+
+  document.querySelectorAll('[data-del-subitem]').forEach(btn=>{
+    btn.onclick = (e)=>{
+      e.stopPropagation();
+      const it = findItem(btn.dataset.itemId);
+      it.subitens = it.subitens.filter(s=>s.id!==btn.dataset.delSubitem);
+      saveTree(tree); render();
+    };
+  });
+
+  document.querySelectorAll('[data-add-item]').forEach(inp=>{
+    inp.onkeydown = (e)=>{
+      if(e.key === 'Enter' && inp.value.trim()){
+        const subId = inp.dataset.addItem;
+        tree.forEach(area=>{
+          const sub = area.subareas.find(s=>s.id===subId);
+          if(sub) sub.itens.push({id:uid('i'), texto:inp.value.trim(), feito:false, expanded:false, subitens:[]});
+        });
+        saveTree(tree); render();
+      }
+    };
+  });
+
+  document.querySelectorAll('[data-add-subitem]').forEach(inp=>{
+    inp.onkeydown = (e)=>{
+      if(e.key === 'Enter' && inp.value.trim()){
+        const it = findItem(inp.dataset.addSubitem);
+        it.subitens.push({id:uid('s'), texto:inp.value.trim(), feito:false});
+        it.expanded = true;
+        saveTree(tree); render();
+      }
+    };
+  });
+
+  document.querySelectorAll('[data-add-subarea]').forEach(inp=>{
+    inp.onkeydown = (e)=>{
+      if(e.key === 'Enter' && inp.value.trim()){
+        const area = tree.find(a=>a.id===inp.dataset.addSubarea);
+        area.subareas.push({id:uid('sa'), nome:inp.value.trim(), tag:null, itens:[]});
+        saveTree(tree); render();
+      }
+    };
+  });
+}
+
+document.getElementById('inpNovoSetor').onkeydown = (e)=>{
+  const inp = e.target;
+  if(e.key === 'Enter' && inp.value.trim()){
+    const cor = PALETTE[tree.length % PALETTE.length];
+    tree.push({id:uid('setor'), nome:inp.value.trim(), cor, desc:'', builtin:false, collapsed:false, subareas:[]});
+    saveTree(tree);
+    inp.value = '';
+    render();
+  }
+};
+
+document.getElementById('btnReset').onclick = ()=>{
+  if(!confirm('Isso apaga setores, subáreas e tarefas criados ou excluídos por você, voltando ao mapeamento padrão original. Confirma?')) return;
+  tree = buildSeedTree();
+  saveTree(tree);
+  render();
+};
+
+render();
+</script>
+</body>
+</html>

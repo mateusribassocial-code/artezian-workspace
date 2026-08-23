@@ -6,9 +6,6 @@ var IMOVEIS = {
   "apartamento do reinaldo ji":"GC01J","gc01j":"GC01J","apartamento do zé coroa":"GC01J","apto zé coroa":"GC01J",
   "flat da joyce":"HA03J","flat joyce":"HA03J","ha03j":"HA03J",
   "casa do tremura":"GF02J","casa tremura":"GF02J","gf02j":"GF02J",
-  "casa laureana":"GF04J","gf04j":"GF04J","casa da laureana":"GF04J",
-  "casa da moana":"GF06J","casa moana":"GF06J","gf06j":"GF06J",
-  "casa do euller":"GG06J","casa euller":"GG06J","gg06j":"GG06J",
   "casa do john":"GG08J","casa john":"GG08J","gg08j":"GG08J",
   "vp-01":"JR01J","jr01j":"JR01J","studio varandas 01":"JR01J",
   "vp-03":"JR03J","jr03j":"JR03J","studio varandas 03":"JR03J",
@@ -17,7 +14,6 @@ var IMOVEIS = {
   "vp-07":"JR07J","jr07j":"JR07J","apto varandas 03":"JR07J",
   "jr08j":"JR08J","apto varandas 04":"JR08J",
   "jr09j":"JR09J","apto duplex varandas 01":"JR09J",
-  "condomínio do max":"VM10A","cond do max":"VM10A","vm10a":"VM10A",
 };
 
 var I = "https://res.cloudinary.com/dwtylly4h/image/upload/";
@@ -30,9 +26,6 @@ var MIDIA = {
   "FL10J":{v:V+"v1782131613/FL10J.mp4_qkygw7.mp4",f:[I+"FL10J-1_hjgtqj.jpg",I+"FL10J-2_wreisf.jpg",I+"FL10J-3_qlg2et.jpg",I+"FL10J-4_wzahfd.jpg",I+"FL10J-5_xqrmzt.jpg"]},
   "GC01J":{v:"",f:[I+"GC01J-1_ke3tlr.jpg",I+"GC01J-2_p0u0u7.jpg",I+"GC01J-3_ezlrvf.jpg",I+"GC01J-4_apx6pk.jpg",I+"GC01J-5_xrsmn8.jpg"]},
   "GF02J":{v:V+"v1782132258/GF02J_-_Casa_do_Tremura_yakxbl.mp4",f:[I+"GF02J-1_v0p3zz.jpg",I+"GF02J-2_h7xebp.jpg",I+"GF02J-3_rvxlnb.jpg",I+"GF02J-4_lolv4n.jpg",I+"GF02J-5_xniqhe.jpg"]},
-  "GF04J":{v:V+"v1782132109/GF04J.mp4_pifndc.mp4",f:[I+"GF04J-1_ftforl.jpg",I+"GF04J-2_exbcug.jpg",I+"GF04J-3_kgz0vm.jpg",I+"GF04J-4_rao29a.jpg",I+"GF04J-5_oijbod.jpg"]},
-  "GF06J":{v:V+"v1782132137/GF06J.mp4_sasotv.mp4",f:[I+"GF06J-1_tm5si6.jpg",I+"GF06J-2_lh46qo.jpg",I+"GF06J-3_svgbcp.jpg",I+"GF06J-4_bqnceo.jpg",I+"GF06J-5_klyay7.jpg"]},
-  "GG06J":{v:V+"v1782132178/GG06J.mp4_bjxyri.mp4",f:[I+"GG06J-1_b8vk7g.jpg",I+"GG06J-2_urfqor.jpg",I+"GG06J-3_bdjbdl.jpg",I+"GG06J-4_kciy0q.jpg",I+"GG06J-5_c9blii.jpg"]},
   "GG08J":{v:V+"v1782132227/GG08J_-_Casa_do_John_jtppev.mp4",f:[I+"GG08J-1_jklkr5.jpg",I+"GG08J-2_ivpqvw.jpg",I+"GG08J-3_mvzfog.jpg",I+"GG08J-4_wovtjj.jpg",I+"GG08J-5_lykdhj.jpg"]},
   "HA03J":{v:V+"v1782133893/HA03J.mp4_qy7e6t.mp4",f:["","","","",""]},
   "JR01J":{v:V+"v1782138866/JR01J_rybbdp.mp4",f:[I+"JR01J-1_aweeyh.png",I+"JR01J-2_p9dklk.png",I+"JR01J-3_nm2aqx.png",I+"JR01J-4_zdmemk.png",I+"JR01J-5_llohk4.png"]},
@@ -42,7 +35,6 @@ var MIDIA = {
   "JR07J":{v:V+"v1782131931/JR07.MP4_rtcrtr.mp4",f:[I+"JR07J-1_gqvaht.png",I+"JR07J-2_jtkets.png",I+"JR07J-3_abyrvz.png",I+"JR07J-4_v5hdb7.png",I+"JR07J-5_mwxrdh.png"]},
   "JR08J":{v:V+"v1782132012/JR08.MP4_i5wtp5.mp4",f:[I+"JR08J-1_p8clvg.png",I+"JR08J-2_ddxzlr.png",I+"JR08J-3_qybtxg.png",I+"JR08J-4_vnvfek.png",I+"JR08J-5_pqtp7l.png"]},
   "JR09J":{v:V+"v1782131990/JR09.MP4_vskovc.mp4",f:[I+"JR09J-1_iqn0w0.png",I+"JR09J-2_zvvaqf.png",I+"JR09J-3_vlyptx.png",I+"JR09J-4_bqlqme.png",I+"JR09J-5_smsinm.png"]},
-  "VM10A":{v:V+"v1782131516/VM10A.mp4_vt3cra.mp4",f:[I+"VM10A-1_i0zryi.jpg",I+"VM10A-2_jac783.jpg",I+"VM10A-3_bwmiwb.jpg",I+"VM10A-4_u2bii2.jpg",I+"VM10A-5_qwrbfn.jpg"]},
 };
 
 function resolveId(nome) {

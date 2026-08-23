@@ -1,42 +1,43 @@
-# MCP Server Tool — Handoff entre Agentes (Art Mendonça 01 → 02 → 03)
+# MCP Server Tool — Handoff entre Agentes (Art Mendonça 2 → 3)
 
 ## O que é
 
-Cadeia de automações que encadeia os 3 Agentes de IA do funil de locação por temporada. Cada agente, ao concluir sua parte do atendimento, invoca automaticamente o próximo via o bloco nativo **IA - Invocar Agente** do Datacrazy — sem depender do lead escrever algo que "acorde" o próximo agente.
+Automação que encadeia os 2 Agentes de IA que hoje compõem o funil de locação por temporada. O
+**Art Mendonça 2**, ao concluir a apresentação de unidades, invoca automaticamente o **Art
+Mendonça 3** via bloco nativo **IA - Invocar Agente** do Datacrazy — sem depender do lead escrever
+algo que "acorde" o próximo agente.
 
-## Os 3 agentes
+> **Histórico:** o funil tinha originalmente um terceiro agente, o Art Mendonça 1, dedicado só à
+> coleta inicial de dados (check-in, check-out, hóspedes), que ao terminar invocava o Art Mendonça
+> 2. **O Art Mendonça 1 foi removido do funil.** O Art Mendonça 2 assumiu a coleta de dados
+> diretamente — ele chama `resumo_lead_site` (ver `mcp-resumo-lead-setup.md`) como primeira ação de
+> toda conversa nova pra aproveitar dados que já vieram do site, e `salvar_dados_reserva` (ver
+> `mcp-reserva-tool-setup.md`) quando precisa coletar/confirmar check-in, check-out e hóspedes
+> durante a própria conversa. Não existe mais handoff nesse primeiro ponto — é o mesmo agente do
+> início ao fim da apresentação de produtos.
+
+---
+
+## Os agentes atuais
 
 | Agente | Função | Quando passa a bola |
 |---|---|---|
-| Art Mendonça 1 | Primeiro atendimento — cumprimenta o lead, extrai check-in, check-out, nº de hóspedes | Assim que as 3 informações estiverem confirmadas |
-| Art Mendonça 2 | Apresenta pelo menos 3 unidades disponíveis com base nos dados do Agente 1, responde perguntas | Assim que tiver apresentado ≥3 unidades e coletado o feedback/preferência do lead |
+| Art Mendonça 2 | Primeiro contato: chama `resumo_lead_site` no início; coleta/confirma check-in, check-out e hóspedes (via `salvar_dados_reserva`) quando não vêm prontos do site; apresenta pelo menos 3 unidades disponíveis e responde perguntas | Assim que tiver apresentado ≥3 unidades e coletado o feedback/preferência do lead |
 | Art Mendonça 3 | Monta orçamento real usando 2 MCP tools (escopo futuro, não coberto aqui) | — (agente terminal por enquanto) |
+
+---
 
 ## Bloco usado para o handoff
 
-**IA - Invocar Agente** — ação nativa do Datacrazy que ativa um Agente de IA específico na conversa do lead. É esse bloco que substitui o agente atual pelo próximo na cadeia.
+**IA - Invocar Agente** — ação nativa do Datacrazy que ativa um Agente de IA específico na
+conversa do lead. É esse bloco que substitui o agente atual pelo próximo na cadeia.
 
-Existe também um bloco **Ação Transferir conversa**, mas esse é pra transferência pra atendimento humano — não usar aqui.
-
----
-
-## Handoff 1 — Agente 01 → Agente 02
-
-Reaproveita a automação `salvar_dados_reserva` já documentada em `mcp-reserva-tool-setup.md`. O próprio ato de chamar essa tool já é o sinal de "Agente 1 terminou" (só é chamada quando check-in, check-out e hóspedes estão confirmados) — não precisa criar uma tool nova só pra avisar. Basta adicionar mais um passo ao final do fluxo existente.
-
-### Passo novo — Invocar o Agente 02 (depois do Passo 4 — rastreabilidade, do documento original)
-
-Depois do bloco `add-lead-comment-action`, adicionar:
-
-| Bloco | Configuração |
-|---|---|
-| IA - Invocar Agente | Agente alvo: **Art Mendonça 2** |
-
-O trigger já usa parâmetro de sessão **Lead**, então o bloco de invocação deve herdar o mesmo lead/conversa automaticamente — confirmar isso no teste (ver Pendências).
+Existe também um bloco **Ação Transferir conversa**, mas esse é pra transferência pra atendimento
+humano — não usar aqui.
 
 ---
 
-## Handoff 2 — Agente 02 → Agente 03 (nova MCP Server Tool)
+## Handoff — Agente 02 → Agente 03 (MCP Server Tool `unidades_apresentadas`)
 
 ### Passo 1 — Criar a automação
 
@@ -60,7 +61,8 @@ O trigger já usa parâmetro de sessão **Lead**, então o bloco de invocação 
 
 ### Passo 3 — Gravar nos campos adicionais
 
-Pré-requisito: criar (se não existirem) os campos adicionais `Unidades Apresentadas` e `Unidade de Interesse` em Configurações → Campos Adicionais.
+Pré-requisito: criar (se não existirem) os campos adicionais `Unidades Apresentadas` e `Unidade de
+Interesse` em Configurações → Campos Adicionais.
 
 Bloco `field-operation` com `set-field-operation`:
 
@@ -85,13 +87,22 @@ Bloco `field-operation` com `set-field-operation`:
 
 ### Passo 6 — Testar
 
-Mesma lógica do `salvar_dados_reserva`: salvar sem ativar em produção, simular a chamada com um lead de teste, conferir se os campos foram gravados e se o Agente 3 assume a conversa corretamente. Só ativar depois de confirmar.
+Mesma lógica das outras tools MCP deste projeto: salvar sem ativar em produção, simular a chamada
+com um lead de teste, conferir se os campos foram gravados e se o Agente 3 assume a conversa
+corretamente. Só ativar depois de confirmar.
 
 ---
 
 ## Pendências a validar durante a configuração real
 
-- Confirmar se o bloco **IA - Invocar Agente** herda automaticamente o lead/sessão do trigger MCP, ou se pede `leadId`/conversationId como parâmetro separado.
-- Confirmar se, ao invocar o próximo agente, o agente anterior é desativado automaticamente da conversa (evitar os dois responderem em paralelo pro mesmo lead).
-- Confirmar o formato aceito pro parâmetro `Array` (`unidades_apresentadas`) — JSON array, string separada por vírgula, etc.
+- Confirmar se o bloco **IA - Invocar Agente** herda automaticamente o lead/sessão do trigger MCP,
+  ou se pede `leadId`/conversationId como parâmetro separado.
+- Confirmar se, ao invocar o próximo agente, o agente anterior é desativado automaticamente da
+  conversa (evitar os dois responderem em paralelo pro mesmo lead).
+- Confirmar o formato aceito pro parâmetro `Array` (`unidades_apresentadas`) — JSON array, string
+  separada por vírgula, etc.
+- Confirmar que as automações de `salvar_dados_reserva` e `resumo_lead_site` (antes associadas/
+  testadas pensando no Art Mendonça 1) estão de fato acessíveis e sendo chamadas pelo Art Mendonça
+  2 agora que ele é quem inicia a conversa — se o Datacrazy associar tools MCP a um agente
+  específico (e não à conta toda), pode ser necessário reapontar isso no editor.
 - Agente 03 (orçamento com 2 MCP tools) é escopo futuro — não coberto neste documento.

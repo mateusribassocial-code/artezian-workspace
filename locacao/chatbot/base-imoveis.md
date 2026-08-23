@@ -1,6 +1,6 @@
 # Base de Imóveis — Artezian Real Estate
 
-> Sincronizado com a API da Stays. Última atualização: 2026-05-05.
+> Sincronizado com a API da Stays. Última atualização: 2026-08-17.
 > Preços mantidos manualmente — atualizar conforme temporada.
 
 ---
@@ -187,19 +187,6 @@
 > **Restaurantes:** Colher de Pau (baiana), Orla Center (complexo com churrascaria, culinária japonesa e aquário)
 > **Passeios:** Reserva da Jaqueira (1,4km), Praia do Mutá (4,4km), Orla Center (2km), Centro Histórico de Porto Seguro (8km)
 
-### Apartamento da Isa
-- **ID:** DS06J
-- **Link:** https://www.artezian.com.br/pt/apartment/DS06J
-- **Video:** https://www.youtube.com/watch?v=WzCzDBHpds4
-- **Localização:** Taperapuã, Porto Seguro (400m da praia)
-- **Capacidade:** até 5 pessoas
-- **Quartos:** 1 suíte | **Camas:** 1 king + 2 solteiros + sofá-cama | **Banheiros:** 2
-- **Diárias:** Baixa R$250 | Alta R$600 | Feriados R$400
-- **Taxa de limpeza:** R$150
-- **Destaques:** Térreo, próximo à piscina e churrasqueiras, ar-condicionado, cozinha equipada
-
----
-
 ### Apartamento do Reinaldo (Taperapuã)
 - **ID:** FL10J
 - **Link:** https://www.artezian.com.br/pt/apartment/FL10J
@@ -241,20 +228,6 @@
 
 ---
 
-### Apartamento da Jessilene
-- **ID:** HA02J
-- **Link:** https://www.artezian.com.br/pt/apartment/HA02J
-- **Video:** https://www.youtube.com/watch?v=yldiuX6TMn0
-- **Localização:** Arraial D'Ajuda, Porto Seguro
-- **Capacidade:** até 12 pessoas
-- **Quartos:** 3 suítes (1 no térreo) | **Camas:** 3 casal + 3 solteiros | **Banheiros:** 4
-- **Diárias:** Baixa R$750 | Alta R$1.400 | Feriados R$1.100
-- **Taxa de limpeza:** R$200
-- **Destaques:** Churrasqueira privativa, banheiro social no térreo, vaga de garagem, próximo à Praia do Parracho e Mirante dos Corais
-- **Vizinhança:** Praias: Mucugê (10min a pé), Parracho (20min a pé), Pitinga (5min de van) · Gastronomia: Rua Mucugê, Praça São Brás, Broadway (noturno) · Passeios: Mirante das Fitas, Recife de Fora (escuna/mergulho), Igreja N. Sra. d'Ajuda (séc. XVII)
-
----
-
 ## CASAS
 
 ### Casa do Tremura
@@ -268,35 +241,6 @@
 - **Mínimo de diárias:** 3 noites
 - **Destaques:** Piscina, área gourmet com churrasqueira, suítes amplas — melhor custo-benefício entre as casas
 - **Vizinhança:** Beach clubs: Tôa Tôa, Axé Moi, Boa Beach, Beat Beach · Restaurantes: Colher de Pau, Orla Center · Passeios: Reserva da Jaqueira (1,4km), Praia do Mutá (4,4km), Centro Histórico de Porto Seguro (8km)
-
----
-
-### Casa da Laureana
-- **ID:** GF04J
-- **Link:** https://www.artezian.com.br/pt/apartment/GF04J
-- **Video:** https://www.youtube.com/watch?v=Uirc8KLGs0g
-- **Localização:** Arraial D'Ajuda (acesso à praia de carro)
-- **Capacidade:** até 13 pessoas
-- **Quartos:** 4 suítes (1 master com vista pro mar) | **Camas:** 9 | **Banheiros:** 4
-- **Diárias:** Baixa R$1.800 | Alta R$3.000 | Feriados R$2.500
-- **Taxa de limpeza:** R$250 | **Caução:** R$2.000
-- **Mínimo de diárias:** 3 noites
-- **Destaques:** Vista mar completa, piscina privativa, área gourmet externa, limpeza diária, suíte master premium
-- **Vizinhança:** Praias: Mucugê (10min a pé), Parracho (20min a pé), Pitinga (5min de van) · Gastronomia: Rua Mucugê, Praça São Brás, Broadway (noturno) · Passeios: Mirante das Fitas, Recife de Fora (escuna/mergulho), Igreja N. Sra. d'Ajuda (séc. XVII)
-
----
-
-### Casa da Moana
-- **ID:** GF06J
-- **Link:** https://www.artezian.com.br/pt/apartment/GF06J
-- **Video:** https://www.youtube.com/watch?v=xDgFD3-_jYc
-- **Localização:** Taperapuã, Porto Seguro (5 min da praia)
-- **Capacidade:** até 16 pessoas
-- **Quartos:** 5 suítes (3 no térreo) | **Camas:** 5 casal + 6 solteiros | **Banheiros:** 4
-- **Diárias:** Baixa R$1.500 | Alta R$3.000 | Feriados R$2.500
-- **Mínimo de diárias:** 3 noites
-- **Destaques:** Piscina com guarda-sol e espreguiçadeiras, área gourmet, próximo ao Axé Moi e Beat Beach
-- **Vizinhança:** Beach clubs: Axé Moi, Beat Beach, Tôa Tôa, Boa Beach · Restaurantes: Colher de Pau, Orla Center · Passeios: Reserva da Jaqueira (1,4km), Praia do Mutá (4,4km), Centro Histórico de Porto Seguro (8km)
 
 ---
 
@@ -314,34 +258,17 @@
 
 ---
 
-### Casa do Euller
-- **ID:** GG06J
-- **Link:** https://www.artezian.com.br/pt/apartment/GG06J
-- **Video:** https://www.youtube.com/watch?v=VpjgSYfPblw
-- **Localização:** Taperapuã, Porto Seguro (500m da praia — Porto Seguro Prime Village, Av. do Coqueiral)
-- **Capacidade:** até 58 pessoas
-- **Quartos:** 9 | **Camas:** 9 casal + 19 solteiros | **Banheiros:** 9
-- **Diárias:** Baixa R$2.500 | Alta R$3.500 | Feriados R$3.500
-- **Mínimo de diárias:** 3 noites
-- **Destaques:** Maior casa do catálogo, piscina grande, área de jogos, cozinha externa com churrasqueira, ideal para grupos e eventos
-- **Vizinhança:** Beach clubs: Tôa Tôa, Axé Moi, Boa Beach, Beat Beach · Restaurantes: Colher de Pau, Orla Center · Passeios: Reserva da Jaqueira (1,4km), Praia do Mutá (4,4km), Centro Histórico de Porto Seguro (8km)
-
----
-
 ## RESUMO RÁPIDO POR PERFIL
 
 | Perfil | Imóveis recomendados |
 |--------|----------------------|
-| Casal ou mini lua de mel | Studio do João, Flat da Mari, Apto da Isa, VP-01 a VP-04 (Varandas de Porto) |
-| Família pequena (até 5) | Studio do João, Flat da Mari, Apto da Isa, VP-01 a VP-08 (Varandas de Porto) |
-| Família média (até 8) | Apto da Josi, Flat da Joyce, Apto do Emanoel, VP-09 (Varandas de Porto) |
-| Grupo médio (até 12) | Apto do Reinaldo (Taperapuã ou Coroa Vermelha), Apto da Jessilene |
-| Grupo grande (até 22) | Casa do Tremura, Casa da Moana |
+| Casal ou mini lua de mel | Studio do João, Flat da Mari, VP-01 a VP-04 (Varandas de Porto) |
+| Família pequena (até 5) | Studio do João, Flat da Mari, VP-01 a VP-08 (Varandas de Porto) |
+| Família média (até 8) | Flat da Joyce, Apto do Emanoel, VP-09 (Varandas de Porto) |
+| Grupo médio (até 12) | Apto do Reinaldo (Taperapuã ou Coroa Vermelha) |
+| Grupo grande (até 27) | Casa do Tremura |
 | Grupo grande (até 31) | Casa do John |
-| Grupos enormes (até 58) | Casa do Euller |
-| Luxo / Vista pro mar | Casa da Laureana, Apto do Reinaldo (Coroa Vermelha) |
-| Arraial D'Ajuda | Casa da Laureana, Apto da Jessilene |
-| Melhor custo-benefício | Studio do João, Flat da Mari, Apto da Isa, Apto do Emanoel (Mont Carmelo) |
+| Melhor custo-benefício | Studio do João, Flat da Mari, Apto do Emanoel (Mont Carmelo) |
 
 ---
 

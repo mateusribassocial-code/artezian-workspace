@@ -1,0 +1,163 @@
+# Ecossistema de Investimento — João Mendonça
+
+- 1 · Produção de Conteúdo
+  - Canais
+    - Instagram ✅
+      - Ampliar audiência no EUA
+      - Aumentar frequência
+        - Falta tempo para criar
+    - Youtube
+      - Daily Vlog
+      - Playlist com apresentação das praias
+    - Tiktok
+      - Virais com a identidade do João: falando com hóspedes, pulando na piscina, fazendo pirueta...
+    - Blog
+      - Uma visão de um local sobre a região, linkando com o youtube e focado na indexação da IA
+  - Posicionamento
+    - Diferenciais
+      - Carisma
+      - Familiaridade com a região
+      - Acredita muito no lugar
+  - Pilares de conteúdo
+    - Turismo
+      - Praias
+      - Lazer
+    - Conhecimento
+      - Melhor período para ir e por quê
+      - Indicações
+        - Restaurantes, passeios, praias
+        - Curadoria para os futuros clientes — tanto em locação quanto em investimento
+      - Tudo o que fala passa confiança
+    - Ofertas
+      - Não parar a locação
+        - Locação enche o bolso de quem compra, cresce o perfil e gera engajamento
+      - Promoções
+        - Ofertas sazonais, relâmpago, descontos etc.
+        - Ofertas automatizadas com Manychat — cliente aplica cupom
+    - Sobre os imóveis
+      - É um meio para um fim — não vendemos luxo, m² ou conforto, vendemos uma experiência para quem quer conhecer
+    - Objeções
+      - Preço
+        - Posts sobre Porto Seguro com reclamações de preços abusivos
+      - Preconceito com a cultura
+        - Em muitas regiões a divisão política acaba afetando tudo
+- 2 · Aluguel de Airbnb
+  - O aluguel precisa ser o fluxo de caixa do ecossistema
+    - Assim dá pra tomar um pouco mais de risco em ganhos maiores
+  - Precisa rodar 98% AUTOMÁTICO
+    - João só coletando feedback pra postar
+  - Core do Instagram do João — não pode se perder
+    - Os investidores vão vir através desse diferencial
+  - Ações programadas
+    - Sazonalidade
+      - Conteúdos com gatilhos e CTAs, como a G4 Educação e outros grandes do mercado
+    - Automações
+      - Chat IG / FB
+      - Comentários IG / FB
+      - Reservas no WhatsApp
+    - Verba de impulsionamento
+      - Meta de aluguel por temporada
+- 3 · Venda de Studios
+  - Análise das leads do 1º lançamento
+    - Todas que avançaram de interesse
+      - Mapear públicos
+  - Montar planejamento do 2º empreendimento
+    - Exclusividade
+    - Montar estudo do produto
+  - Criativos
+    - Betatyping do primeiro lançamento
+    - Melhores argumentos
+      - Moro longe / administro pra você
+      - Negociação fora do banco
+      - Tabela zero — X% abaixo do valor inicial
+    - Preço
+      - Parcelamento
+      - Entrada
+      - Parcelas baixas
+  - Captação de leads
+    - Nova fonte: Youtube
+    - Nutrição
+      - WhatsApp Marketing
+        - Manychat
+          - Verificar se faz ativação sem gatilho do cliente
+        - Se não: Active Campaign
+          - Ferramenta mais cara
+      - E-mail marketing
+        - Active Campaign
+          - Plano de e-mail marketing barato
+- Info 1 · Guia de Turismo da Região
+  - Por quê?
+    - Audiência aquecida para o produto
+    - As pessoas chegam através do interesse em Porto Seguro
+    - Captação de leads para o aluguel
+    - Aumento de autoridade
+  - Conteúdo
+    - Praias
+    - Passeios
+    - Datas e festas
+      - Melhores formas de viajar
+  - Produto
+    - Ferramentas de template criam ebooks rápido (layout)
+    - Tornar algo único com o toque do João
+    - Preço
+      - Entre R$ 60 e R$ 80
+  - Links
+    - Aumenta autoridade dentro da região
+      - Restaurantes, passeios e lazer
+    - Link para a reserva do Airbnb
+  - Divulgação
+    - Página de venda — Kiwify ou Greatpages
+    - Link na bio
+    - Posts de conteúdo de Porto Seguro que já fariamos
+    - Conteúdo no Youtube
+  - Comercial
+    - Se vende sozinho
+    - Meta de venda
+- Info 2 · Curso de Investimento
+  - Nicho
+    - Baixo nível de consciência
+      - Pessoas com renda acima de R$ 15K
+    - Precisa de educação
+      - Através do consumo de conteúdo — não vai comprar por anúncio
+    - Precisa entender que é um bom negócio
+      - Por quê?
+        - Garantia de entrega
+        - Entrada baixa
+        - Parcelas de X
+    - Investidores
+      - Alto nível de consciência
+        - Compram ROI
+      - Benefício único
+        - Fator administração pesa mais
+      - Buscam negociação e facilidade
+      - Investem em outros bens
+        - Como puxar uma parcela maior desse investimento
+          - Hoje o retorno do banco é melhor, mas...
+          - O imóvel ainda é o mais seguro
+          - Quando entregue pode valer X
+    - Objeções
+      - Tx de banco
+        - Quebramos com o parcelamento com a construtora
+      - Obras entregues
+        - Será que entrega?
+      - Preconceito com a região
+        - Quebrada naturalmente através dos conteúdos e conversas
+  - Produto
+    - Focado em investimento no litoral do nordeste
+    - Definir módulos
+    - Definir preço
+  - Objetivo
+    - Captação de leads para venda de empreendimentos
+  - Captação de leads
+    - Base de leads dos cadastros em campanhas de venda
+    - Campanhas sobre investimento
+    - Como obter lucro com Airbnb
+      - Posicionamento orgânico
+  - Comercial
+    - Se vende sozinho
+    - Meta de venda
+- Info 3 · Clube de Investimento
+  - New Logo for American Bar Association by Finn Partners
+  - New Logo for Macy's
+  - New Name and Logo for AT&T TV Now
+  - More

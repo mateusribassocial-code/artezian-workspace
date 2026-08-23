@@ -1,7 +1,8 @@
 # Botão flutuante de WhatsApp — site artezian.com.br
 
-Botão flutuante que abre um painel lateral pra captar Nome e Telefone
-antes de redirecionar o lead pro WhatsApp da Artezian (`5573999373474`).
+Botão flutuante que abre um painel lateral pra captar Nome, Telefone,
+Check-in, Check-out e Quantidade de pessoas antes de redirecionar o lead
+pro WhatsApp da Artezian (`5573999373474`).
 Grava cada envio numa planilha do Google Sheets (com Page Path, Título da
 Página, UTMs e click IDs), encaminha o lead pro CRM da Datacrazy (via
 webhook, servidor-a-servidor), dispara o evento de conversão Lead pro Meta
@@ -121,13 +122,16 @@ planilha (o "Título da Página" continua sendo gravado normalmente).
 
 ### 6. Testar
 
-1. Clique no botão flutuante, preencha Nome e Telefone, e envie.
+1. Clique no botão flutuante, preencha Nome, Telefone, Check-in, Check-out
+   e Quantidade de pessoas, e envie.
 2. Confirme que o WhatsApp abre no número certo (`5573999373474`), com a
    mensagem certa.
 3. Confirme que a linha aparece na aba "Leads" da planilha, com a coluna
-   "Produto" preenchida (se a página tiver o atributo `data-w4w-produto`) e as
-   colunas de fbclid/gclid preenchidas quando o teste for feito a partir de um
-   link de anúncio (ex: `?fbclid=teste123` ou `?gclid=teste123` na URL).
+   "Produto" preenchida (se a página tiver o atributo `data-w4w-produto`), as
+   colunas "Check-in"/"Check-out" no formato DD-MM-YYYY e "Qtd Pessoas"
+   preenchida, e as colunas de fbclid/gclid preenchidas quando o teste for
+   feito a partir de um link de anúncio (ex: `?fbclid=teste123` ou
+   `?gclid=teste123` na URL).
 4. Use o **Preview** do GTM (Tag Assistant) e confirme que o evento
    `w4w_lead` aparece no dataLayer e que a Tag do Google Ads disparou nele.
 5. Se o site já tiver Meta Pixel, confira com o Meta Pixel Helper se o
@@ -138,8 +142,12 @@ planilha (o "Título da Página" continua sendo gravado normalmente).
 
 ## O que já vem pronto (não precisa mexer)
 
-- Validação de Nome e Telefone no formulário.
+- Validação de Nome, Telefone, Check-in, Check-out e Quantidade de pessoas
+  no formulário — os 5 campos são obrigatórios pra enviar.
 - Formatação automática do telefone enquanto digita.
+- Check-in/Check-out usam o seletor de data nativo do navegador (bloqueado
+  pra não permitir datas passadas nem check-out antes/igual ao check-in) e
+  são convertidos pro formato DD-MM-YYYY antes de ir pra planilha e pro CRM.
 - Captura de UTMs e click IDs (`fbclid`, `gclid`, `gbraid`, `wbraid`) da URL,
   persistidos em localStorage — sobrevivem mesmo se o visitante navegar pra
   outra página do site antes de enviar o formulário.

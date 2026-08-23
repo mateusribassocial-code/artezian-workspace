@@ -16,5 +16,9 @@ Lançamentos de novos produtos, crescimento de canal e prospecção ativa de con
 
 Sem datas definidas. Foco em estruturar a base operacional antes de escalar as outras frentes.
 
+## Ferramentas de acompanhamento
+
+- `operacoes/checklist-operacional.html` — checklist mapeado por área x subárea (Locação, Venda, Consultoria, Conteúdo, Operações) com o que já existe vs. o que falta criar. Referência de progresso pra essas prioridades.
+
 ---
 *Atualize esse arquivo quando suas prioridades mudarem.*

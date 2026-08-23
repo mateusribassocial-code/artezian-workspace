@@ -25,13 +25,21 @@ Fluxo: **MCP Server Tool** → bloco **JavaScript** (abaixo) → bloco de **Mens
 
 ## O que atualiza automático vs manual
 
-- **Automático (puxa ao vivo da API do Stays a cada chamada):** diária, disponibilidade, total, taxas (`booking/calculate-price`), nome do imóvel e nº de quartos (`content/listings/{id}`). Mudar tarifa no painel do Stays já reflete na próxima pergunta do lead — não precisa mexer nesse bloco.
+- **Automático (puxa ao vivo da API do Stays a cada chamada):** diária, disponibilidade real (`booking/reservations`), preço/taxas (`booking/calculate-price`), nome do imóvel e nº de quartos (`content/listings/{id}`). Mudar tarifa no painel do Stays já reflete na próxima pergunta do lead — não precisa mexer nesse bloco.
 - **Manual (hardcoded no bloco JS, não atualiza sozinho):**
   - `IMOVEIS` — mapa de apelido/nome digitado pelo lead → código do imóvel no Stays.
   - `VIDEOS` — link de vídeo (Cloudinary) por código de imóvel.
   - Precisa editar esse bloco sempre que um imóvel entrar/sair do catálogo, mudar de apelido, ou ganhar/trocar vídeo.
 
-## Bloco JavaScript (versão atual — 2026-08-03)
+## ⚠️ `booking/calculate-price` não verifica o calendário de reservas
+
+Confirmado via teste direto na API (2026-08-23): `booking/calculate-price` calcula a tarifa da regra de preço e devolve total **mesmo quando o imóvel já está reservado** para o período pedido — ele não cruza com o calendário de ocupação. Exemplo real: Studio do João (`DS03J`) tinha reserva confirmada de 07/09 a 11/09/2026, e uma consulta de 10/09 a 13/09 (que se sobrepõe a essa reserva) retornou preço normalmente como se estivesse livre.
+
+Por isso o bloco abaixo faz uma checagem extra antes de confiar no preço: busca `booking/reservations?from=...&to=...&dateType=included&limit=100` filtrando pelo `_id` interno do imóvel (obtido em `content/listings/{id}`), e só segue pro `calculate-price` se não houver nenhuma reserva `booked`/`reserved` sobrepondo o período. `dateType=included` pega reservas que se sobrepõem ao período mesmo quando é só um sub-trecho (testado e confirmado).
+
+**`limit=100` é obrigatório nessa chamada** — o default da API é 20 resultados e trunca silenciosamente sem aviso de paginação; 100 é o máximo aceito (`limit=500` retorna erro `must be <= 100`). Sem isso, em janelas de alta ocupação (ex: virada de ano, múltiplos imóveis) a reserva do imóvel consultado pode ficar de fora da página retornada e a automação volta a informar disponibilidade errada.
+
+## Bloco JavaScript (versão atual — 2026-08-23)
 
 ```js
 const IMOVEIS = {
@@ -114,13 +122,41 @@ const AUTH = "Basic NWI1YmU2NTY6ZmU0OGU3MzA=";
 
 let nome = imovelId;
 let quartos = "";
+let idInterno = "";
 try {
   const listing = await staysFetch(`https://artezian.stays.net/external/v1/content/listings/${imovelId}`, {
     headers: { "Authorization": AUTH }
   });
   nome = listing?.internalName || imovelId;
   quartos = listing?._i_rooms ? `${listing._i_rooms} quartos` : "";
+  idInterno = listing?._id || "";
 } catch (e) {}
+
+// calculate-price NÃO verifica o calendário de reservas — só calcula tarifa da
+// regra de preço e devolve total mesmo se o imóvel já estiver ocupado. Por isso,
+// antes de confiar no preço, cruza com as reservas reais do período.
+// limit=100 é o máximo aceito pela API (default é 20 e pode truncar silenciosamente
+// em janelas com muita reserva concorrente, escondendo a reserva do imóvel buscado).
+let ocupado = false;
+try {
+  if (idInterno) {
+    const reservas = await staysFetch(
+      `https://artezian.stays.net/external/v1/booking/reservations?from=${checkin}&to=${checkout}&dateType=included&limit=100`,
+      { headers: { "Authorization": AUTH } }
+    );
+    ocupado = Array.isArray(reservas) && reservas.some(
+      r => r._idlisting === idInterno && r.type !== "cancelled"
+    );
+  }
+} catch (e) {}
+
+if (ocupado) {
+  await session.setAdditionalValue("video_link", "");
+  await session.setAdditionalValue("resposta_stays",
+    `${nome} está indisponível de ${checkinRaw} a ${checkoutRaw}.`
+  );
+  return;
+}
 
 let stays;
 try {
@@ -158,6 +194,7 @@ await session.setAdditionalValue("resposta_stays",
 ```
 
 ## Histórico de mudanças
+- **2026-08-23** — corrigido bug de disponibilidade falsa: `booking/calculate-price` não checa o calendário de reservas e devolvia preço normal mesmo para imóveis já reservados (confirmado com teste real: Studio do João reservado 07/09–11/09/2026 retornava preço pra consulta de 10/09–13/09, período que se sobrepõe à reserva). Adicionada checagem prévia via `booking/reservations?dateType=included&limit=100` filtrando pelo `_id` interno do imóvel — só chama `calculate-price` se não houver reserva `booked`/`reserved` sobrepondo o período. `limit=100` é obrigatório (default da API é 20 e trunca sem aviso).
 - **2026-08-17** — removidas do `IMOVEIS`/`VIDEOS` as unidades `DS06J` (Apto da Isa), `HA02J` (Apto da Jessilene), `GF04J` (Casa da Laureana), `GF06J` (Casa da Moana), `GG06J` (Casa do Euller) e `VM10A` (Condomínio do Max). Nenhuma das 6 aparece mais na resposta de `content/listings` da Stays (catálogo real hoje tem 18 IDs — conferido direto na API) — resolver esses códigos e chamar `booking/calculate-price` para eles ia dar erro. Se algum desses imóveis voltar a operar (novo contrato, recadastro), reincluir no mapa e criar/confirmar o ID Stays antes de reativar.
 - **2026-08-03** — adicionado `vp-08`/`varandas 08` → `JR08J` e `vp-09`/`varandas 09` → `JR09J` no mapa `IMOVEIS`. As duas unidades já estavam ativas no catálogo Stays e já tinham vídeo no mapa `VIDEOS`, mas não resolviam por nome — lead que perguntasse por "Varandas 08" ou "Varandas 09" caía sem match. Achado ao cruzar o catálogo ativo da Stays (`content/listings`) com este mapa pra montar o painel de diárias/ocupação.
 - **2026-07-27** — removida a linha `Disponível!` da mensagem de sucesso. Resposta passou a abrir direto com "Imóvel: ...", mantendo check-in/check-out, hóspedes, diária e total. Mensagem de indisponibilidade não mudou.

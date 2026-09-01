@@ -5,6 +5,7 @@ const state = {
   appData: { parceiros: [], custos: {} },
   stays: [],
   reservas: [],
+  staysReservas: [],
   unitFilter: 'all',
   editingParceiroId: null,
   editingUnitCode: null,
@@ -95,6 +96,22 @@ async function fetchReservas(month) {
   }
 }
 
+async function fetchStaysReservas(month) {
+  try {
+    const r = await fetch(`/api/stays/reservations?month=${month}`);
+    const d = await r.json();
+    if (d.error) {
+      showApiStatus('stays-res-status', d.error + (d.detail ? ` — ${d.detail.slice(0, 120)}` : ''), true);
+      return [];
+    }
+    hideApiStatus('stays-res-status');
+    return Array.isArray(d.reservas) ? d.reservas : [];
+  } catch (e) {
+    console.error('Stays reservations fetch failed:', e);
+    return [];
+  }
+}
+
 function showApiStatus(id, msg, isError = false) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -114,15 +131,17 @@ async function loadAll() {
   const btn = document.getElementById('btnRefresh');
   btn.classList.add('spinning');
 
-  const [appData, stays, reservas] = await Promise.all([
+  const [appData, stays, reservas, staysReservas] = await Promise.all([
     fetchData(),
     fetchStays(),
     fetchReservas(state.currentMonth),
+    fetchStaysReservas(state.currentMonth),
   ]);
 
   state.appData = appData;
   state.stays   = stays;
   state.reservas = reservas;
+  state.staysReservas = staysReservas;
 
   updateStatusBadge(stays, reservas);
   renderAll();
@@ -156,6 +175,7 @@ function renderAll() {
   document.getElementById('custo-period').textContent = ml;
   document.getElementById('receita-period').textContent = ml;
   document.getElementById('reservas-period').textContent = ml;
+  document.getElementById('stays-res-period').textContent = ml;
   document.getElementById('parceiro-mes-label').textContent = `(${ml.split(' ')[0]})`;
   document.querySelectorAll('.pt-mes').forEach(el => (el.textContent = ml.split(' ')[0]));
   document.getElementById('modal-mes-label').textContent = ml;
@@ -168,6 +188,7 @@ function renderAll() {
   renderParceiros();
   renderUnidades();
   renderReservas();
+  renderStaysReservas();
   initRelatorio();
 }
 
@@ -499,6 +520,49 @@ function renderReservas() {
   }).join('');
 }
 
+/* ── Bloco 2 — Reservas Confirmadas (Stays) ─────────────────────── */
+
+function getListingLabel(idlisting) {
+  const l = state.stays.find(x => x._id === idlisting);
+  if (!l) return { code: '—', nome: idlisting || '—' };
+  const nome = l._mstitle?.pt_BR || l.internalName || l.id || '—';
+  return { code: l.id || '—', nome };
+}
+
+function renderStaysReservas() {
+  const reservas = state.staysReservas;
+  const tbody = document.getElementById('staysReservasBody');
+
+  const totalValor  = reservas.reduce((s, r) => s + (parseFloat(r.total || 0)), 0);
+  const totalPago   = reservas.reduce((s, r) => s + (parseFloat(r.totalPago || 0)), 0);
+  const ticketMedio = reservas.length > 0 ? totalValor / reservas.length : 0;
+
+  document.getElementById('stays-res-total-valor').textContent = brl(totalValor);
+  document.getElementById('stays-res-total-qtd').textContent   = String(reservas.length);
+  document.getElementById('stays-res-ticket-medio').textContent = brl(ticketMedio);
+  document.getElementById('stays-res-total-pago').textContent  = brl(totalPago);
+
+  if (!reservas.length) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="7">Sem reservas confirmadas na Stays neste período</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = reservas.map(r => {
+    const { code, nome } = getListingLabel(r._idlisting);
+    return `
+      <tr>
+        <td><span class="unit-code" style="font-size:11px">${escHtml(code)}</span> ${escHtml(nome)}</td>
+        <td>${formatDate(r.checkin)}</td>
+        <td>${formatDate(r.checkout)}</td>
+        <td>${r.noites || '—'}</td>
+        <td>${r.hospedes || '—'}</td>
+        <td><strong>${brl(r.total)}</strong></td>
+        <td>${brl(r.totalPago)}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
 function formatDate(str) {
   if (!str) return '—';
   try {
@@ -536,13 +600,19 @@ function mapStatus(s) {
 
 document.getElementById('prevMonth').addEventListener('click', async () => {
   state.currentMonth = prevMonth(state.currentMonth);
-  state.reservas = await fetchReservas(state.currentMonth);
+  [state.reservas, state.staysReservas] = await Promise.all([
+    fetchReservas(state.currentMonth),
+    fetchStaysReservas(state.currentMonth),
+  ]);
   renderAll();
 });
 
 document.getElementById('nextMonth').addEventListener('click', async () => {
   state.currentMonth = nextMonth(state.currentMonth);
-  state.reservas = await fetchReservas(state.currentMonth);
+  [state.reservas, state.staysReservas] = await Promise.all([
+    fetchReservas(state.currentMonth),
+    fetchStaysReservas(state.currentMonth),
+  ]);
   renderAll();
 });
 

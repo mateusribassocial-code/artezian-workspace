@@ -120,6 +120,64 @@ app.get('/api/stays/listings', async (req, res) => {
   }
 });
 
+function diffNoites(checkin, checkout) {
+  if (!checkin || !checkout) return 0;
+  return Math.round((new Date(checkout) - new Date(checkin)) / 86400000);
+}
+
+// GET /api/stays/reservations?month=2026-05&dateType=arrival
+app.get('/api/stays/reservations', async (req, res) => {
+  try {
+    const { month, dateType = 'arrival' } = req.query;
+    if (!month) return res.status(400).json({ error: 'Parâmetro obrigatório: month (YYYY-MM)' });
+
+    const [year, mon] = month.split('-');
+    const lastDay = new Date(parseInt(year), parseInt(mon), 0).getDate();
+    const from = `${year}-${mon}-01`;
+    const to   = `${year}-${mon}-${String(lastDay).padStart(2, '0')}`;
+
+    const base = process.env.STAYS_BASE_URL;
+    const auth = process.env.STAYS_AUTH_BASE64;
+    const headers = { Authorization: `Basic ${auth}`, 'Content-Type': 'application/json' };
+
+    const url = `${base}/external/v1/booking/reservations?from=${from}&to=${to}&dateType=${dateType}&type=booked`;
+    const response = await fetch(url, { headers });
+
+    if (!response.ok) {
+      const text = await response.text();
+      return res.status(response.status).json({ error: `Stays API ${response.status}`, detail: text.slice(0, 300) });
+    }
+
+    const raw = await response.json();
+    const lista = Array.isArray(raw) ? raw : (Array.isArray(raw.value) ? raw.value : []);
+
+    const reservas = lista.map(r => {
+      const fees = (r.price && r.price.hostingDetails) ? (r.price.hostingDetails.fees || []) : [];
+      let taxaLimpeza = 0;
+      fees.forEach(f => { if ((f.name || '').toLowerCase().includes('limpeza')) taxaLimpeza += (f._f_val || 0); });
+
+      return {
+        id: r.id,
+        _idlisting: r._idlisting,
+        checkin: r.checkInDate,
+        checkout: r.checkOutDate,
+        noites: diffNoites(r.checkInDate, r.checkOutDate),
+        hospedes: r.guests || 0,
+        total: r.price ? (r.price._f_total || 0) : 0,
+        totalPago: r.stats ? (r.stats._f_totalPaid || 0) : 0,
+        taxaLimpeza,
+        status: r.type,
+        criadaEm: r.creationDate,
+        urlReserva: r.reservationUrl || '',
+      };
+    });
+
+    res.json({ periodo: { from, to, dateType }, total: reservas.length, reservas });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // ── Datacrazy API proxy ───────────────────────────────────────────────────────
 
 app.get('/api/datacrazy/reservations', async (req, res) => {

@@ -295,6 +295,56 @@
         </div>
       </div>
 
+      <!-- ── RESERVAS CONFIRMADAS (STAYS) ── -->
+      <div class="block">
+        <div class="block-header">
+          <h2 class="block-title">Reservas Confirmadas — Stays</h2>
+          <span class="block-period" id="stays-res-period">Mai 2026</span>
+        </div>
+
+        <div class="reservas-stats">
+          <div class="res-stat">
+            <span class="res-stat-num" id="stays-res-total-valor">R$ —</span>
+            <span class="res-stat-label">Receita Total</span>
+          </div>
+          <div class="res-stat">
+            <span class="res-stat-num" id="stays-res-total-qtd">—</span>
+            <span class="res-stat-label">Reservas</span>
+          </div>
+          <div class="res-stat">
+            <span class="res-stat-num" id="stays-res-ticket-medio">R$ —</span>
+            <span class="res-stat-label">Ticket Médio</span>
+          </div>
+          <div class="res-stat">
+            <span class="res-stat-num" id="stays-res-total-pago">R$ —</span>
+            <span class="res-stat-label">Total Pago</span>
+          </div>
+        </div>
+
+        <div class="api-status" id="stays-res-status"></div>
+
+        <div class="table-wrap">
+          <table class="data-table" id="staysReservasTable">
+            <thead>
+              <tr>
+                <th>Imóvel</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Noites</th>
+                <th>Hóspedes</th>
+                <th>Valor</th>
+                <th>Pago</th>
+              </tr>
+            </thead>
+            <tbody id="staysReservasBody">
+              <tr class="empty-row">
+                <td colspan="7">Carregando dados da Stays...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <!-- ── RELATÓRIO DO PARCEIRO ── -->
       <div class="block" id="relatorioBlock">
         <div class="block-header">

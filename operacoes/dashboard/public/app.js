@@ -189,6 +189,7 @@ function renderAll() {
   renderUnidades();
   renderReservas();
   renderStaysReservas();
+  renderTarefas();
   initRelatorio();
 }
 
@@ -300,6 +301,52 @@ function renderSummary() {
   document.getElementById('s-receita').textContent = brl(receita);
   document.getElementById('s-custos').textContent  = brl(custo);
   document.getElementById('s-margem').textContent  = margem !== null ? `${margem}%` : '—%';
+}
+
+/* ── Bloco 1 — Tarefas ──────────────────────────────────────────── */
+
+function formatDateBR(str) {
+  if (!str) return '—';
+  const [y, m, d] = str.split('-');
+  if (!y || !m || !d) return str;
+  return `${d}/${m}/${y}`;
+}
+
+function renderTarefas() {
+  const tarefas = state.appData.tarefas || [];
+  const tbody = document.getElementById('tarefasBody');
+  const hoje = new Date(new Date().toDateString());
+
+  const pendentes = tarefas.filter(t => {
+    const cl = t.checklist || [];
+    return !(cl.length > 0 && cl.every(c => c.feito));
+  }).length;
+  document.getElementById('tarefas-period').textContent = tarefas.length ? `${pendentes} pendente${pendentes !== 1 ? 's' : ''}` : '';
+
+  if (!tarefas.length) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="5">Nenhuma tarefa cadastrada</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = tarefas.map(t => {
+    const checklist = t.checklist || [];
+    const total     = checklist.length;
+    const feitos    = checklist.filter(c => c.feito).length;
+    const concluida = total > 0 && feitos === total;
+    const progresso = total > 0 ? `${feitos}/${total}` : '—';
+
+    const atrasada = t.prazo && !concluida && new Date(t.prazo) < hoje;
+
+    return `
+      <tr>
+        <td>${escHtml(t.titulo)}</td>
+        <td><span class="tipo-badge ${concluida ? 'fixo' : 'variavel'}">${progresso}</span></td>
+        <td>${escHtml(t.responsavel || '—')}</td>
+        <td>${formatDateBR(t.prazo)}${atrasada ? ' <span style="color:var(--red)">⚠</span>' : ''}</td>
+        <td><button class="edit-btn" onclick="openEditTarefa('${t.id}')">✎</button></td>
+      </tr>
+    `;
+  }).join('');
 }
 
 /* ── Bloco 2 — Parceiros ────────────────────────────────────────── */
@@ -857,6 +904,107 @@ document.getElementById('btnDeleteCusto').addEventListener('click', async () => 
   closeCustoModal();
   renderCustos();
   renderSummary();
+});
+
+/* ── Modal — Tarefa ─────────────────────────────────────────────── */
+
+let editingTarefaId = null;
+let editingChecklist = [];
+
+function renderChecklistEditor() {
+  const wrap = document.getElementById('checklistEditor');
+  if (!editingChecklist.length) {
+    wrap.innerHTML = '<p class="checklist-empty">Nenhum item ainda</p>';
+    return;
+  }
+  wrap.innerHTML = editingChecklist.map((item, i) => `
+    <div class="checklist-edit-row">
+      <input type="checkbox" ${item.feito ? 'checked' : ''} onchange="toggleChecklistItem(${i})" />
+      <input type="text" value="${escHtml(item.texto)}" placeholder="Item do checklist" oninput="updateChecklistItemText(${i}, this.value)" />
+      <button type="button" class="btn-remove-item" onclick="removeChecklistItem(${i})">&times;</button>
+    </div>
+  `).join('');
+}
+
+window.toggleChecklistItem = function(i) { editingChecklist[i].feito = !editingChecklist[i].feito; };
+window.updateChecklistItemText = function(i, val) { editingChecklist[i].texto = val; };
+window.removeChecklistItem = function(i) { editingChecklist.splice(i, 1); renderChecklistEditor(); };
+
+function openTarefaModal(id = null) {
+  editingTarefaId = id;
+  const deleteBtn = document.getElementById('btnDeleteTarefa');
+
+  if (id) {
+    const t = (state.appData.tarefas || []).find(x => x.id === id);
+    document.getElementById('tarefaModalTitle').textContent = 'Editar Tarefa';
+    document.getElementById('t-titulo').value      = t.titulo;
+    document.getElementById('t-responsavel').value = t.responsavel || '';
+    document.getElementById('t-prazo').value       = t.prazo || '';
+    editingChecklist = (t.checklist || []).map(c => ({ ...c }));
+    deleteBtn.style.display = 'inline-flex';
+  } else {
+    document.getElementById('tarefaModalTitle').textContent = 'Nova Tarefa';
+    document.getElementById('t-titulo').value      = '';
+    document.getElementById('t-responsavel').value = '';
+    document.getElementById('t-prazo').value        = '';
+    editingChecklist = [];
+    deleteBtn.style.display = 'none';
+  }
+
+  renderChecklistEditor();
+  document.getElementById('tarefaModal').classList.add('open');
+}
+
+function closeTarefaModal() {
+  document.getElementById('tarefaModal').classList.remove('open');
+  editingTarefaId = null;
+  editingChecklist = [];
+}
+
+window.openEditTarefa = function(id) { openTarefaModal(id); };
+
+document.getElementById('btnAddTarefa').addEventListener('click', () => openTarefaModal());
+document.getElementById('btnCloseTarefaModal').addEventListener('click', closeTarefaModal);
+document.getElementById('btnCancelTarefaModal').addEventListener('click', closeTarefaModal);
+document.getElementById('tarefaModal').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeTarefaModal();
+});
+
+document.getElementById('btnAddChecklistItem').addEventListener('click', () => {
+  editingChecklist.push({ id: uid(), texto: '', feito: false });
+  renderChecklistEditor();
+  const inputs = document.querySelectorAll('#checklistEditor input[type="text"]');
+  if (inputs.length) inputs[inputs.length - 1].focus();
+});
+
+document.getElementById('btnSalvarTarefa').addEventListener('click', async () => {
+  const titulo = document.getElementById('t-titulo').value.trim();
+  if (!titulo) { alert('Informe o nome da tarefa'); return; }
+
+  const responsavel = document.getElementById('t-responsavel').value.trim();
+  const prazo       = document.getElementById('t-prazo').value;
+  const checklist   = editingChecklist.filter(c => c.texto.trim());
+
+  if (!state.appData.tarefas) state.appData.tarefas = [];
+
+  if (editingTarefaId) {
+    const idx = state.appData.tarefas.findIndex(t => t.id === editingTarefaId);
+    if (idx >= 0) state.appData.tarefas[idx] = { ...state.appData.tarefas[idx], titulo, responsavel, prazo, checklist };
+  } else {
+    state.appData.tarefas.push({ id: uid(), titulo, responsavel, prazo, checklist });
+  }
+
+  await saveData(state.appData);
+  closeTarefaModal();
+  renderTarefas();
+});
+
+document.getElementById('btnDeleteTarefa').addEventListener('click', async () => {
+  if (!confirm('Excluir esta tarefa?')) return;
+  state.appData.tarefas = (state.appData.tarefas || []).filter(t => t.id !== editingTarefaId);
+  await saveData(state.appData);
+  closeTarefaModal();
+  renderTarefas();
 });
 
 /* ── Histórico — snapshot automático ────────────────────────────── */

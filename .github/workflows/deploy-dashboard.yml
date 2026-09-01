@@ -1,0 +1,34 @@
+name: Deploy Dashboard → Hostinger
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "operacoes/dashboard/**"
+      - ".github/workflows/deploy-dashboard.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: 72.60.153.200
+          username: u432659370.ojoaomendonca.com.br
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: operacoes/dashboard/
+          server-dir: nodejs/
+          exclude: |
+            **/.git*
+            node_modules/**
+            data/**
+            .env
+            .env.example
+            .vercel/**
+            vercel.json
+            package-lock.json
+            iniciar.bat

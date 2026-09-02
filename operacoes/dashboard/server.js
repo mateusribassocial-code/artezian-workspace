@@ -30,8 +30,13 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/hospedagens', express.static(path.join(__dirname, 'public', 'hospedagens')));
+
+const staticOptions = {
+  setHeaders: (res) => res.setHeader('Cache-Control', 'no-cache'),
+};
+
+app.use(express.static(path.join(__dirname, 'public'), staticOptions));
+app.use('/hospedagens', express.static(path.join(__dirname, 'public', 'hospedagens'), staticOptions));
 
 // ── Data helpers ──────────────────────────────────────────────────────────────
 

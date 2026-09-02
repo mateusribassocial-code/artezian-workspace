@@ -1268,3 +1268,8 @@ body {
   .panel-frame { height: calc(100vh - 230px); min-height: 460px; }
   .doc-grid { grid-template-columns: 1fr; }
 }
+
+/* Detalhamento das receitas vindas da Stays */
+.receita-row.receita-sub { padding-left: 16px; opacity: .8; }
+.receita-row.receita-sub .receita-name { font-size: 12.5px; font-weight: 500; }
+.receita-row.receita-sub .receita-value { font-size: 13px; }

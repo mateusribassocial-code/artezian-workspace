@@ -207,7 +207,6 @@ function renderAll() {
   renderReservas();
   renderStaysReservas();
   renderStaysReservasCriadas();
-  renderTarefas();
   initRelatorio();
 }
 
@@ -275,26 +274,45 @@ function updateCustoTotal() {
 /* ── Bloco 1 — Receitas ─────────────────────────────────────────── */
 
 function calcReceitas() {
-  // Datacrazy: soma apenas negócios com status "won"
-  const totalReservas = state.reservas
-    .filter(r => r.status === 'won')
-    .reduce((sum, r) => sum + (parseFloat(r.total || 0)), 0);
+  // Receita de hospedagem sai da Stays: reservas com check-in no mês.
+  //
+  // Antes vinha dos negócios "won" do Datacrazy. Os dois medem coisas
+  // diferentes: o Datacrazy é o CRM, onde mora o funil de vendas; a Stays é o
+  // PMS, onde a reserva de fato existe, com valor, pagamento e calendário.
+  // Para receita realizada, a Stays é a fonte certa.
+  const reservas = state.staysReservas || [];
 
-  // Mensalidades: soma dos valorFixo de todos os parceiros
+  const totalReservas = reservas.reduce((sum, r) => sum + (parseFloat(r.total) || 0), 0);
+  const totalPago     = reservas.reduce((sum, r) => sum + (parseFloat(r.totalPago) || 0), 0);
+  const totalLimpeza  = reservas.reduce((sum, r) => sum + (parseFloat(r.taxaLimpeza) || 0), 0);
+
+  // Mensalidades: soma dos valorFixo de todos os parceiros (a Stays não sabe disso)
   const totalMensalidades = state.appData.parceiros.reduce((sum, p) => {
     return sum + (parseFloat(p.valorFixo) || 0);
   }, 0);
 
-  return { totalReservas, totalMensalidades };
+  return {
+    totalReservas,
+    totalMensalidades,
+    totalPago,
+    aReceber: Math.max(0, totalReservas - totalPago),
+    totalLimpeza,
+    qtdReservas: reservas.length,
+  };
 }
 
 function renderReceitas() {
-  const { totalReservas, totalMensalidades } = calcReceitas();
+  const { totalReservas, totalMensalidades, totalPago, aReceber, qtdReservas } = calcReceitas();
   const total = totalReservas + totalMensalidades;
 
   document.getElementById('receita-reservas').textContent     = brl(totalReservas);
+  document.getElementById('receita-recebido').textContent     = brl(totalPago);
+  document.getElementById('receita-a-receber').textContent    = brl(aReceber);
   document.getElementById('receita-mensalidades').textContent = brl(totalMensalidades);
   document.getElementById('receita-total').textContent        = brl(total);
+
+  document.getElementById('receita-reservas-fonte').textContent =
+    'Stays · ' + qtdReservas + (qtdReservas === 1 ? ' reserva' : ' reservas');
 
   // Meta de comissão — carrega valor salvo
   const meta = parseFloat(state.appData.metas?.comissao) || 0;
@@ -321,50 +339,13 @@ function renderSummary() {
   document.getElementById('s-margem').textContent  = margem !== null ? `${margem}%` : '—%';
 }
 
-/* ── Bloco 1 — Tarefas ──────────────────────────────────────────── */
+/* ── Formatação de data ───────────────────────────────────────── */
 
 function formatDateBR(str) {
   if (!str) return '—';
   const [y, m, d] = str.split('-');
   if (!y || !m || !d) return str;
   return `${d}/${m}/${y}`;
-}
-
-function renderTarefas() {
-  const tarefas = state.appData.tarefas || [];
-  const tbody = document.getElementById('tarefasBody');
-  const hoje = new Date(new Date().toDateString());
-
-  const pendentes = tarefas.filter(t => {
-    const cl = t.checklist || [];
-    return !(cl.length > 0 && cl.every(c => c.feito));
-  }).length;
-  document.getElementById('tarefas-period').textContent = tarefas.length ? `${pendentes} pendente${pendentes !== 1 ? 's' : ''}` : '';
-
-  if (!tarefas.length) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="5">Nenhuma tarefa cadastrada</td></tr>';
-    return;
-  }
-
-  tbody.innerHTML = tarefas.map(t => {
-    const checklist = t.checklist || [];
-    const total     = checklist.length;
-    const feitos    = checklist.filter(c => c.feito).length;
-    const concluida = total > 0 && feitos === total;
-    const progresso = total > 0 ? `${feitos}/${total}` : '—';
-
-    const atrasada = t.prazo && !concluida && new Date(t.prazo) < hoje;
-
-    return `
-      <tr>
-        <td>${escHtml(t.titulo)}</td>
-        <td><span class="tipo-badge ${concluida ? 'fixo' : 'variavel'}">${progresso}</span></td>
-        <td>${escHtml(t.responsavel || '—')}</td>
-        <td>${formatDateBR(t.prazo)}${atrasada ? ' <span style="color:var(--red)">⚠</span>' : ''}</td>
-        <td><button class="edit-btn" onclick="openEditTarefa('${t.id}')">✎</button></td>
-      </tr>
-    `;
-  }).join('');
 }
 
 /* ── Bloco 2 — Parceiros ────────────────────────────────────────── */
@@ -1039,107 +1020,6 @@ document.getElementById('btnDeleteCusto').addEventListener('click', async () => 
   renderSummary();
 });
 
-/* ── Modal — Tarefa ─────────────────────────────────────────────── */
-
-let editingTarefaId = null;
-let editingChecklist = [];
-
-function renderChecklistEditor() {
-  const wrap = document.getElementById('checklistEditor');
-  if (!editingChecklist.length) {
-    wrap.innerHTML = '<p class="checklist-empty">Nenhum item ainda</p>';
-    return;
-  }
-  wrap.innerHTML = editingChecklist.map((item, i) => `
-    <div class="checklist-edit-row">
-      <input type="checkbox" ${item.feito ? 'checked' : ''} onchange="toggleChecklistItem(${i})" />
-      <input type="text" value="${escHtml(item.texto)}" placeholder="Item do checklist" oninput="updateChecklistItemText(${i}, this.value)" />
-      <button type="button" class="btn-remove-item" onclick="removeChecklistItem(${i})">&times;</button>
-    </div>
-  `).join('');
-}
-
-window.toggleChecklistItem = function(i) { editingChecklist[i].feito = !editingChecklist[i].feito; };
-window.updateChecklistItemText = function(i, val) { editingChecklist[i].texto = val; };
-window.removeChecklistItem = function(i) { editingChecklist.splice(i, 1); renderChecklistEditor(); };
-
-function openTarefaModal(id = null) {
-  editingTarefaId = id;
-  const deleteBtn = document.getElementById('btnDeleteTarefa');
-
-  if (id) {
-    const t = (state.appData.tarefas || []).find(x => x.id === id);
-    document.getElementById('tarefaModalTitle').textContent = 'Editar Tarefa';
-    document.getElementById('t-titulo').value      = t.titulo;
-    document.getElementById('t-responsavel').value = t.responsavel || '';
-    document.getElementById('t-prazo').value       = t.prazo || '';
-    editingChecklist = (t.checklist || []).map(c => ({ ...c }));
-    deleteBtn.style.display = 'inline-flex';
-  } else {
-    document.getElementById('tarefaModalTitle').textContent = 'Nova Tarefa';
-    document.getElementById('t-titulo').value      = '';
-    document.getElementById('t-responsavel').value = '';
-    document.getElementById('t-prazo').value        = '';
-    editingChecklist = [];
-    deleteBtn.style.display = 'none';
-  }
-
-  renderChecklistEditor();
-  document.getElementById('tarefaModal').classList.add('open');
-}
-
-function closeTarefaModal() {
-  document.getElementById('tarefaModal').classList.remove('open');
-  editingTarefaId = null;
-  editingChecklist = [];
-}
-
-window.openEditTarefa = function(id) { openTarefaModal(id); };
-
-document.getElementById('btnAddTarefa').addEventListener('click', () => openTarefaModal());
-document.getElementById('btnCloseTarefaModal').addEventListener('click', closeTarefaModal);
-document.getElementById('btnCancelTarefaModal').addEventListener('click', closeTarefaModal);
-document.getElementById('tarefaModal').addEventListener('click', (e) => {
-  if (e.target === e.currentTarget) closeTarefaModal();
-});
-
-document.getElementById('btnAddChecklistItem').addEventListener('click', () => {
-  editingChecklist.push({ id: uid(), texto: '', feito: false });
-  renderChecklistEditor();
-  const inputs = document.querySelectorAll('#checklistEditor input[type="text"]');
-  if (inputs.length) inputs[inputs.length - 1].focus();
-});
-
-document.getElementById('btnSalvarTarefa').addEventListener('click', async () => {
-  const titulo = document.getElementById('t-titulo').value.trim();
-  if (!titulo) { alert('Informe o nome da tarefa'); return; }
-
-  const responsavel = document.getElementById('t-responsavel').value.trim();
-  const prazo       = document.getElementById('t-prazo').value;
-  const checklist   = editingChecklist.filter(c => c.texto.trim());
-
-  if (!state.appData.tarefas) state.appData.tarefas = [];
-
-  if (editingTarefaId) {
-    const idx = state.appData.tarefas.findIndex(t => t.id === editingTarefaId);
-    if (idx >= 0) state.appData.tarefas[idx] = { ...state.appData.tarefas[idx], titulo, responsavel, prazo, checklist };
-  } else {
-    state.appData.tarefas.push({ id: uid(), titulo, responsavel, prazo, checklist });
-  }
-
-  await saveData(state.appData);
-  closeTarefaModal();
-  renderTarefas();
-});
-
-document.getElementById('btnDeleteTarefa').addEventListener('click', async () => {
-  if (!confirm('Excluir esta tarefa?')) return;
-  state.appData.tarefas = (state.appData.tarefas || []).filter(t => t.id !== editingTarefaId);
-  await saveData(state.appData);
-  closeTarefaModal();
-  renderTarefas();
-});
-
 /* ── Histórico — snapshot automático ────────────────────────────── */
 
 const HISTORICO_INICIO = '2026-05'; // não registrar meses anteriores
@@ -1160,6 +1040,10 @@ async function saveMonthSnapshot() {
   if (!state.appData.historico) state.appData.historico = {};
   state.appData.historico[state.currentMonth] = {
     savedAt:    new Date().toISOString(),
+    // A partir de setembro/2026 a receita de reservas vem da Stays; antes disso
+    // vinha dos negocios "won" do Datacrazy. O carimbo evita comparar definicoes
+    // diferentes sem perceber ao olhar o grafico historico.
+    fonteReceita: 'stays',
     receita:    { reservas: totalReservas, mensalidades: totalMensalidades, total: receita },
     custo,
     resultado,

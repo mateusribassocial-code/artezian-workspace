@@ -131,15 +131,19 @@ function diffNoites(checkin, checkout) {
 }
 
 // GET /api/stays/reservations?month=2026-05&dateType=arrival
+// GET /api/stays/reservations?from=2026-05-01&to=2026-06-15&dateType=arrival  (from/to têm prioridade sobre month)
 app.get('/api/stays/reservations', async (req, res) => {
   try {
     const { month, dateType = 'arrival' } = req.query;
-    if (!month) return res.status(400).json({ error: 'Parâmetro obrigatório: month (YYYY-MM)' });
+    let { from, to } = req.query;
 
-    const [year, mon] = month.split('-');
-    const lastDay = new Date(parseInt(year), parseInt(mon), 0).getDate();
-    const from = `${year}-${mon}-01`;
-    const to   = `${year}-${mon}-${String(lastDay).padStart(2, '0')}`;
+    if (!from || !to) {
+      if (!month) return res.status(400).json({ error: 'Parâmetro obrigatório: month (YYYY-MM) ou from/to (YYYY-MM-DD)' });
+      const [year, mon] = month.split('-');
+      const lastDay = new Date(parseInt(year), parseInt(mon), 0).getDate();
+      from = `${year}-${mon}-01`;
+      to   = `${year}-${mon}-${String(lastDay).padStart(2, '0')}`;
+    }
 
     const base = process.env.STAYS_BASE_URL;
     const auth = process.env.STAYS_AUTH_BASE64;

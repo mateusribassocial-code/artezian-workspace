@@ -1109,6 +1109,23 @@ body {
 .result-positive { color: var(--green); font-weight: 700; }
 .result-negative { color: var(--red);   font-weight: 700; }
 
+/* ── Reservas Confirmadas (Stays) — filtros ─────────────────────── */
+.reservas-filtros {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.reservas-filtros .form-group {
+  min-width: 140px;
+}
+
+.reservas-filtros .btn-outline {
+  height: 40px;
+}
+
 /* ── Relatório do Parceiro ───────────────────────────────────── */
 .relatorio-controls {
   display: flex;

@@ -36,6 +36,12 @@ function nextMonth(ym) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
 }
 
+function monthRange(ym) {
+  const [y, m] = ym.split('-').map(Number);
+  const lastDay = new Date(y, m, 0).getDate();
+  return { from: `${ym}-01`, to: `${ym}-${String(lastDay).padStart(2, '0')}` };
+}
+
 function brl(val) {
   if (val === null || val === undefined || isNaN(Number(val))) return 'R$ —';
   return Number(val).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -96,9 +102,12 @@ async function fetchReservas(month) {
   }
 }
 
-async function fetchStaysReservas(month) {
+async function fetchStaysReservas(params) {
   try {
-    const r = await fetch(`/api/stays/reservations?month=${month}`);
+    const qs = params.from && params.to
+      ? `from=${params.from}&to=${params.to}`
+      : `month=${params.month}`;
+    const r = await fetch(`/api/stays/reservations?${qs}`);
     const d = await r.json();
     if (d.error) {
       showApiStatus('stays-res-status', d.error + (d.detail ? ` — ${d.detail.slice(0, 120)}` : ''), true);
@@ -131,11 +140,13 @@ async function loadAll() {
   const btn = document.getElementById('btnRefresh');
   btn.classList.add('spinning');
 
+  setStaysReservasDateInputs(state.currentMonth);
+
   const [appData, stays, reservas, staysReservas] = await Promise.all([
     fetchData(),
     fetchStays(),
     fetchReservas(state.currentMonth),
-    fetchStaysReservas(state.currentMonth),
+    fetchStaysReservas({ month: state.currentMonth }),
   ]);
 
   state.appData = appData;
@@ -143,6 +154,7 @@ async function loadAll() {
   state.reservas = reservas;
   state.staysReservas = staysReservas;
 
+  populateStaysImovelFilter();
   updateStatusBadge(stays, reservas);
   renderAll();
   await saveMonthSnapshot();
@@ -175,7 +187,6 @@ function renderAll() {
   document.getElementById('custo-period').textContent = ml;
   document.getElementById('receita-period').textContent = ml;
   document.getElementById('reservas-period').textContent = ml;
-  document.getElementById('stays-res-period').textContent = ml;
   document.getElementById('parceiro-mes-label').textContent = `(${ml.split(' ')[0]})`;
   document.querySelectorAll('.pt-mes').forEach(el => (el.textContent = ml.split(' ')[0]));
   document.getElementById('modal-mes-label').textContent = ml;
@@ -576,8 +587,47 @@ function getListingLabel(idlisting) {
   return { code: l.id || '—', nome };
 }
 
+function setStaysReservasDateInputs(month) {
+  const { from, to } = monthRange(month);
+  document.getElementById('stays-res-de').value  = from;
+  document.getElementById('stays-res-ate').value = to;
+}
+
+function populateStaysImovelFilter() {
+  const sel = document.getElementById('stays-res-imovel');
+  const previousValue = sel.value;
+
+  const options = state.stays
+    .map(l => ({ id: l._id, label: `${l.id || ''} — ${l._mstitle?.pt_BR || l.internalName || l.id || ''}` }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+
+  sel.innerHTML = '<option value="">Todos os imóveis</option>' +
+    options.map(o => `<option value="${escHtml(o.id)}">${escHtml(o.label)}</option>`).join('');
+
+  if (options.some(o => o.id === previousValue)) sel.value = previousValue;
+}
+
+document.getElementById('stays-res-imovel').addEventListener('change', () => renderStaysReservas());
+
+document.getElementById('btnFiltrarStaysReservas').addEventListener('click', async () => {
+  const from = document.getElementById('stays-res-de').value;
+  const to   = document.getElementById('stays-res-ate').value;
+  if (!from || !to) { alert('Informe as duas datas do período'); return; }
+  if (from > to) { alert('A data "De" não pode ser depois da data "Até"'); return; }
+
+  state.staysReservas = await fetchStaysReservas({ from, to });
+  renderStaysReservas();
+});
+
 function renderStaysReservas() {
-  const reservas = state.staysReservas;
+  const de  = document.getElementById('stays-res-de').value;
+  const ate = document.getElementById('stays-res-ate').value;
+  if (de && ate) document.getElementById('stays-res-period').textContent = `${formatDateBR(de)} – ${formatDateBR(ate)}`;
+
+  const imovelFiltro = document.getElementById('stays-res-imovel').value;
+  const reservas = imovelFiltro
+    ? state.staysReservas.filter(r => r._idlisting === imovelFiltro)
+    : state.staysReservas;
   const tbody = document.getElementById('staysReservasBody');
 
   const totalValor  = reservas.reduce((s, r) => s + (parseFloat(r.total || 0)), 0);
@@ -647,18 +697,20 @@ function mapStatus(s) {
 
 document.getElementById('prevMonth').addEventListener('click', async () => {
   state.currentMonth = prevMonth(state.currentMonth);
+  setStaysReservasDateInputs(state.currentMonth);
   [state.reservas, state.staysReservas] = await Promise.all([
     fetchReservas(state.currentMonth),
-    fetchStaysReservas(state.currentMonth),
+    fetchStaysReservas({ month: state.currentMonth }),
   ]);
   renderAll();
 });
 
 document.getElementById('nextMonth').addEventListener('click', async () => {
   state.currentMonth = nextMonth(state.currentMonth);
+  setStaysReservasDateInputs(state.currentMonth);
   [state.reservas, state.staysReservas] = await Promise.all([
     fetchReservas(state.currentMonth),
-    fetchStaysReservas(state.currentMonth),
+    fetchStaysReservas({ month: state.currentMonth }),
   ]);
   renderAll();
 });

@@ -202,6 +202,11 @@ footer{
 
 <script type="module">
 import { documentoSincronizado } from '../az-store.js';
+import { exigirLogin } from '../az-login.js';
+
+// Aberto direto (fora do painel), pede login igual. Dentro do iframe,
+// a sessao ja existe e a tela nem chega a aparecer.
+exigirLogin({});
 
 // ---------------------------------------------------------------------------
 // SEED — mapeamento inicial (área > subárea > tarefa)

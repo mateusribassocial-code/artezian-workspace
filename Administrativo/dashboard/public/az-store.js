@@ -8,21 +8,16 @@
    Usado por: checklist. A migrar: atalhos, tarefas, parceiros/custos.
    ─────────────────────────────────────────────────────────────────────────── */
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
   getFirestore, doc, getDoc, setDoc, onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCyJB9Yxvi8H-6WK1xNIVSDpcuU8Vqgn1U",
-  authDomain: "artezian-fluxo.firebaseapp.com",
-  projectId: "artezian-fluxo",
-  storageBucket: "artezian-fluxo.firebasestorage.app",
-  messagingSenderId: "477718266482",
-  appId: "1:477718266482:web:ead3191890c2d45518b8eb"
-};
+import { firebaseConfig } from './az-config.js';
+import { usuarioResolvido } from './az-auth.js';
 
-export const db = getFirestore(initializeApp(firebaseConfig));
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+export const db = getFirestore(app);
 
 /* Agrupa edições seguidas numa escrita só. */
 const ATRASO_ESCRITA = 700;
@@ -71,6 +66,17 @@ export function documentoSincronizado({ caminho, chaveLocal, aoReceber, aoMudarS
       let inicial;
 
       try {
+        // As regras exigem usuario autenticado. Sem login, nem tenta ler:
+        // o painel roda no cache local ate a pessoa entrar.
+        const usuario = await usuarioResolvido();
+        if (!usuario) {
+          inicial = local !== null ? local : semente;
+          ultimoJson = JSON.stringify(inicial);
+          online = false;
+          status('offline', 'entre na sua conta para sincronizar');
+          return inicial;
+        }
+
         const snap = await getDoc(ref);
         const conteudo = snap.exists() ? snap.data() : null;
 

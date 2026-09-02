@@ -28,6 +28,7 @@
           <span class="dot dot-ok"></span> APIs conectadas
         </div>
         <button class="btn-refresh" id="btnRefresh" title="Atualizar dados">&#8635;</button>
+        <div id="azSessao"></div>
       </div>
     </div>
   </header>
@@ -819,5 +820,9 @@
   <div id="printArea" style="display:none"></div>
 
   <script src="app.js"></script>
+  <script type="module">
+    import { exigirLogin } from './az-login.js';
+    exigirLogin({ alvoSessao: '#azSessao' });
+  </script>
 </body>
 </html>

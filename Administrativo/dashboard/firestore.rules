@@ -1,0 +1,61 @@
+rules_version = '2';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Regras do Firestore — projeto artezian-fluxo
+//
+// Colar em: Firebase Console > Firestore Database > Regras > Publicar
+//
+// Princípio: nada é legível ou gravável sem usuário autenticado. O config do
+// Firebase é público (aparece no código-fonte de qualquer página do painel) e
+// identifica o projeto, não autoriza nada. Quem protege os dados é este arquivo.
+//
+// ATENÇÃO ANTES DE PUBLICAR
+// A coleção `tarefas` hoje é acessada sem login pela página antiga em
+// public_html/artezian.html. Ao publicar estas regras, aquela página para de
+// funcionar — ela não tem tela de login. Isso é intencional: ela foi
+// substituída pela aba Tarefas do painel unificado. Publique as regras e
+// aposente a página antiga no mesmo movimento, para ninguém ficar no vácuo.
+// ─────────────────────────────────────────────────────────────────────────────
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function autenticado() {
+      return request.auth != null;
+    }
+
+    // Painéis com estado próprio: checklist, atalhos e os próximos.
+    match /paineis/{doc} {
+      allow read, write: if autenticado();
+    }
+
+    // Tarefas e as etiquetas usadas nelas.
+    match /tarefas/{doc} {
+      allow read, write: if autenticado();
+    }
+    match /tags/{doc} {
+      allow read, write: if autenticado();
+    }
+
+    // Dados de negócio — entram na última etapa da migração.
+    // Já deixados prontos para não precisar mexer nas regras de novo.
+    match /parceiros/{doc} {
+      allow read, write: if autenticado();
+    }
+    match /custos/{mes} {
+      allow read, write: if autenticado();
+    }
+    match /historico/{mes} {
+      allow read, write: if autenticado();
+    }
+    match /relatorios/{chave} {
+      allow read, write: if autenticado();
+    }
+
+    // Qualquer outro caminho fica fechado, inclusive para quem tem login.
+    // Coleção nova exige regra nova aqui — de propósito.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

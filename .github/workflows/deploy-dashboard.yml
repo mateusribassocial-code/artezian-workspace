@@ -1,4 +1,4 @@
-name: Deploy Dashboard → Hostinger
+name: Deploy Painel Artezian → Hostinger
 
 on:
   push:
@@ -32,3 +32,4 @@ jobs:
             vercel.json
             package-lock.json
             iniciar.bat
+            public/estrategias/**/*.pdf

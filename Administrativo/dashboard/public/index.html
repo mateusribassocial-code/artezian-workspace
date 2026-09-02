@@ -36,7 +36,12 @@
   <nav class="tabs">
     <button class="tab active" data-tab="empresa">Empresa</button>
     <button class="tab" data-tab="locacao">Locação</button>
+    <button class="tab" data-tab="precificacao">Precificação</button>
+    <button class="tab" data-tab="hospedagens">Hospedagens</button>
+    <button class="tab" data-tab="tarefas">Tarefas</button>
+    <button class="tab" data-tab="checklist">Checklist</button>
     <button class="tab" data-tab="historico">Histórico</button>
+    <button class="tab" data-tab="documentos">Documentos</button>
   </nav>
 
   <!-- MAIN CONTENT -->
@@ -553,6 +558,52 @@
          RELATÓRIO DO PARCEIRO (dentro da aba Locação)
          — renderizado dinamicamente por JS
     ════════════════════════════════════════════════ -->
+
+
+    <!-- ═══════════════════════════════════════════════
+         PAINÉIS INTEGRADOS
+    ════════════════════════════════════════════════ -->
+    <section class="tab-content" id="tab-precificacao">
+      <iframe class="panel-frame" data-src="precificacao/" title="Painel de Precificação"></iframe>
+    </section>
+
+    <section class="tab-content" id="tab-hospedagens">
+      <iframe class="panel-frame" data-src="hospedagens/" title="Gestão de Hospedagens"></iframe>
+    </section>
+
+    <section class="tab-content" id="tab-tarefas">
+      <iframe class="panel-frame" data-src="tarefas/" title="Tarefas"></iframe>
+    </section>
+
+    <section class="tab-content" id="tab-checklist">
+      <iframe class="panel-frame" data-src="checklist/" title="Checklist Operacional"></iframe>
+    </section>
+
+    <section class="tab-content" id="tab-documentos">
+      <div class="block">
+        <h2 class="block-title">Estratégias por imóvel</h2>
+        <div class="doc-grid">
+          <a class="doc-card" href="estrategias/apto-isa-estrategia.html" target="_blank"><span class="doc-card-nome">Apto da Isa</span><span class="doc-card-tipo">Estratégia do imóvel</span></a>
+          <a class="doc-card" href="estrategias/casa-euller-estrategia.html" target="_blank"><span class="doc-card-nome">Casa do Euller</span><span class="doc-card-tipo">Estratégia do imóvel</span></a>
+          <a class="doc-card" href="estrategias/casa-john-estrategia.html" target="_blank"><span class="doc-card-nome">Casa do John</span><span class="doc-card-tipo">Estratégia do imóvel</span></a>
+          <a class="doc-card" href="estrategias/casa-laureana-estrategia.html" target="_blank"><span class="doc-card-nome">Casa Laureana</span><span class="doc-card-tipo">Estratégia do imóvel</span></a>
+          <a class="doc-card" href="estrategias/casa-moana-estrategia.html" target="_blank"><span class="doc-card-nome">Casa Moana</span><span class="doc-card-tipo">Estratégia do imóvel</span></a>
+          <a class="doc-card" href="estrategias/casa-tremura-estrategia.html" target="_blank"><span class="doc-card-nome">Casa Tremura</span><span class="doc-card-tipo">Estratégia do imóvel</span></a>
+          <a class="doc-card" href="estrategias/flat-joyce-estrategia.html" target="_blank"><span class="doc-card-nome">Flat da Joyce</span><span class="doc-card-tipo">Estratégia do imóvel</span></a>
+          <a class="doc-card" href="estrategias/jessilene-estrategia.html" target="_blank"><span class="doc-card-nome">Jessilene</span><span class="doc-card-tipo">Estratégia do imóvel</span></a>
+          <a class="doc-card" href="estrategias/mont-carmelo-estrategia.html" target="_blank"><span class="doc-card-nome">Mont Carmelo</span><span class="doc-card-tipo">Estratégia do imóvel</span></a>
+          <a class="doc-card" href="estrategias/reinaldo-coroa-vermelha-estrategia.html" target="_blank"><span class="doc-card-nome">Reinaldo — Coroa Vermelha</span><span class="doc-card-tipo">Estratégia do imóvel</span></a>
+          <a class="doc-card" href="estrategias/reinaldo-taperapua-estrategia.html" target="_blank"><span class="doc-card-nome">Reinaldo — Taperapuã</span><span class="doc-card-tipo">Estratégia do imóvel</span></a>
+          <a class="doc-card" href="estrategias/varandas-de-porto-estrategia.html" target="_blank"><span class="doc-card-nome">Varandas de Porto</span><span class="doc-card-tipo">Estratégia do imóvel</span></a>
+        </div>
+      </div>
+      <div class="block">
+        <h2 class="block-title">Outros documentos</h2>
+        <div class="doc-grid">
+          <a class="doc-card" href="atalhos/" target="_blank"><span class="doc-card-nome">Central de Atalhos</span><span class="doc-card-tipo">Links salvos</span></a>
+        </div>
+      </div>
+    </section>
 
   </main>
 

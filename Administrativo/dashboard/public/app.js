@@ -786,9 +786,26 @@ document.querySelectorAll('.tab').forEach(btn => {
     document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
     btn.classList.add('active');
-    document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
+    const painel = document.getElementById(`tab-${btn.dataset.tab}`);
+    painel.classList.add('active');
+    ativarFrame(painel);
+    location.hash = btn.dataset.tab;
   });
 });
+
+/* Paineis integrados carregam so quando a aba e aberta */
+function ativarFrame(painel) {
+  const f = painel.querySelector('iframe.panel-frame[data-src]');
+  if (f) { f.src = f.dataset.src; f.removeAttribute('data-src'); }
+}
+
+/* Abrir direto numa aba pela URL: /#precificacao */
+(function abrirAbaDaUrl() {
+  const alvo = location.hash.replace('#', '');
+  if (!alvo) return;
+  const btn = document.querySelector(`.tab[data-tab="${alvo}"]`);
+  if (btn) btn.click();
+})();
 
 /* ── Refresh button ─────────────────────────────────────────────── */
 

@@ -1210,3 +1210,61 @@ body {
   .summary-value { font-size: 18px; }
   .status-badge { display: none; }
 }
+
+/* ── Painéis integrados ──────────────────────────────────────────── */
+
+.panel-frame {
+  width: 100%;
+  height: calc(100vh - 190px);
+  min-height: 560px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow);
+  display: block;
+}
+
+/* ── Documentos ──────────────────────────────────────────────────── */
+
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.doc-card {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 14px 16px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: box-shadow .15s, transform .15s, border-left-color .15s;
+}
+
+.doc-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+  border-left-color: var(--petrol);
+}
+
+.doc-card-nome {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark);
+  letter-spacing: .01em;
+}
+
+.doc-card-tipo {
+  font-size: 11.5px;
+  color: var(--light);
+}
+
+@media (max-width: 640px) {
+  .panel-frame { height: calc(100vh - 230px); min-height: 460px; }
+  .doc-grid { grid-template-columns: 1fr; }
+}

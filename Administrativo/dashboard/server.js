@@ -19,13 +19,20 @@ const DATA_FILE = path.join(__dirname, 'data', 'artezian.json');
 // ── Autenticação básica (só em produção) ─────────────────────────────────────
 
 if (process.env.NODE_ENV === 'production') {
-  const DASHBOARD_USER = process.env.DASHBOARD_USER || 'artezian';
-  const DASHBOARD_PASS = process.env.DASHBOARD_PASS || 'artezian2024';
+  const DASHBOARD_USER = process.env.DASHBOARD_USER;
+  const DASHBOARD_PASS = process.env.DASHBOARD_PASS;
+
+  // Sem senha configurada o painel nao sobe. Nao existe credencial padrao:
+  // o repositorio e versionado e o painel expoe receita, custo e dados de parceiros.
+  if (!DASHBOARD_USER || !DASHBOARD_PASS) {
+    console.error('[FATAL] DASHBOARD_USER e DASHBOARD_PASS sao obrigatorios em producao.');
+    process.exit(1);
+  }
 
   app.use(basicAuth({
     users: { [DASHBOARD_USER]: DASHBOARD_PASS },
     challenge: true,
-    realm: 'Artezian Dashboard',
+    realm: 'Artezian',
   }));
 }
 
@@ -36,7 +43,11 @@ const staticOptions = {
 };
 
 app.use(express.static(path.join(__dirname, 'public'), staticOptions));
-app.use('/hospedagens', express.static(path.join(__dirname, 'public', 'hospedagens'), staticOptions));
+
+// ── Redirecionamentos de URLs antigas ─────────────────────────────────────────
+// /hub era um deploy separado; virou a aba Documentos do painel unificado.
+app.get('/hub', (req, res) => res.redirect(301, '/#documentos'));
+app.get('/hub/', (req, res) => res.redirect(301, '/#documentos'));
 
 // ── Data helpers ──────────────────────────────────────────────────────────────
 

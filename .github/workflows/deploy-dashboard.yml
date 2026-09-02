@@ -14,6 +14,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Marcar reinicio do app Node
+        # O LiteSpeed reinicia a aplicacao quando tmp/restart.txt muda. Sem
+        # isso o FTP troca os arquivos e o processo antigo continua servindo
+        # da memoria o codigo do ultimo boot.
+        run: |
+          mkdir -p Administrativo/dashboard/tmp
+          {
+            echo "reinicio: $(date -u +%FT%TZ)"
+            echo "commit:   $GITHUB_SHA"
+          } > Administrativo/dashboard/tmp/restart.txt
+          cat Administrativo/dashboard/tmp/restart.txt
+
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

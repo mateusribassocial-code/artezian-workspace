@@ -1,0 +1,8 @@
+Arquivo-gatilho de reinicio do app Node.
+
+O LiteSpeed (e o Passenger) reiniciam a aplicacao quando a data de
+modificacao deste arquivo muda. O deploy reescreve o conteudo a cada
+execucao, entao subir codigo novo passa a reiniciar o processo sozinho.
+
+Sem isso, o FTP troca os arquivos mas o Node segue servindo da memoria o
+codigo que carregou no ultimo boot — foi o que aconteceu em 02/09/2026.

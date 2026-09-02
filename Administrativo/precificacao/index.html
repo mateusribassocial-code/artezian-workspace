@@ -28,7 +28,7 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
       background: var(--gray-50);
       color: var(--gray-800);
       min-height: 100vh;
@@ -39,370 +39,140 @@
     /* HEADER */
     .header {
       background: var(--navy);
-      padding: 0 24px;
-      height: 60px;
+      padding: 10px 24px;
+      min-height: 60px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
       position: sticky;
       top: 0;
       z-index: 100;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    .header-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .header-brand { display: flex; align-items: center; gap: 12px; }
     .header-logo {
-      width: 32px;
-      height: 32px;
+      width: 32px; height: 32px;
       background: var(--accent);
       border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      color: var(--navy);
-      font-size: 14px;
-      letter-spacing: -0.5px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; color: var(--navy); font-size: 14px; letter-spacing: -0.5px;
     }
-    .header-title {
-      color: var(--white);
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: -0.2px;
-    }
-    .header-subtitle {
-      color: rgba(255,255,255,0.5);
-      font-size: 12px;
-    }
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .header-title { color: var(--white); font-size: 15px; font-weight: 600; letter-spacing: -0.2px; }
+    .header-subtitle { color: rgba(255,255,255,0.5); font-size: 12px; }
+    .header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
     .badge-source {
       background: rgba(255,255,255,0.1);
       color: rgba(255,255,255,0.75);
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 11px; padding: 4px 10px;
+      border-radius: 20px; border: 1px solid rgba(255,255,255,0.15);
     }
-    .last-update {
-      color: rgba(255,255,255,0.45);
-      font-size: 11px;
-    }
+    .last-update { color: rgba(255,255,255,0.45); font-size: 11px; }
 
-    /* MAIN CONTENT */
-    .main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 24px 20px;
+    /* LAYOUT */
+    main { max-width: 1180px; margin: 0 auto; padding: 24px 20px 48px; }
+    .section { margin-bottom: 28px; }
+    .section-head { margin-bottom: 14px; }
+    .section-title {
+      font-size: 16px; font-weight: 700; color: var(--navy);
+      letter-spacing: -0.3px;
     }
+    .section-sub { font-size: 12.5px; color: var(--gray-400); margin-top: 2px; }
 
-    /* CONTROLS BAR */
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    .controls-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--gray-600);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .month-select {
+    .card {
       background: var(--white);
-      border: 1.5px solid var(--gray-200);
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--navy);
-      cursor: pointer;
-      outline: none;
-      transition: border-color 0.15s;
-      min-width: 180px;
-    }
-    .month-select:focus { border-color: var(--blue); }
-    .temporada-badge {
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .badge-alta { background: #fef3c7; color: #92400e; }
-    .badge-baixa { background: #dbeafe; color: #1e40af; }
-
-    /* CAPACITY TABS */
-    .tabs {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 20px;
-      background: var(--white);
-      padding: 5px;
+      border: 1px solid var(--gray-200);
       border-radius: 12px;
-      border: 1.5px solid var(--gray-200);
-      width: fit-content;
+      box-shadow: var(--shadow);
+      padding: 20px;
     }
+
+    /* ALERTA */
+    .alert {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 26px;
+    }
+    .alert-icon { font-size: 20px; line-height: 1.2; }
+    .alert-title { font-weight: 700; color: #92400e; font-size: 14px; margin-bottom: 4px; }
+    .alert-text { color: #78350f; font-size: 13px; }
+    .alert-text strong { font-weight: 700; }
+
+    /* GRID DE IMOVEIS */
+    .grid-imoveis { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 16px; }
+    .imovel-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
+    .imovel-top { padding: 16px 18px 14px; border-bottom: 1px solid var(--gray-100); }
+    .imovel-nome { font-size: 15px; font-weight: 700; color: var(--navy); letter-spacing: -0.2px; }
+    .imovel-meta { font-size: 12px; color: var(--gray-400); margin-top: 1px; }
+    .flag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11.5px; font-weight: 600;
+      padding: 4px 10px; border-radius: 20px; margin-top: 10px;
+    }
+    .flag-azul { background: #e0f2fe; color: #075985; border: 1px solid #7dd3fc; }
+    .flag-vermelho { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+    .flag-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .flag-azul .flag-dot { background: #0284c7; }
+    .flag-vermelho .flag-dot { background: var(--red); }
+    .imovel-nota { font-size: 12.5px; color: var(--gray-600); margin-top: 10px; }
+
+    .kpi-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--gray-100); }
+    .kpi { background: var(--white); padding: 14px 18px; }
+    .kpi-label { font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 600; }
+    .kpi-value { font-size: 20px; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; margin-top: 3px; }
+    .kpi-value span { font-size: 12px; font-weight: 600; color: var(--gray-400); }
+    .kpi-hint { font-size: 11.5px; margin-top: 4px; }
+    .up { color: var(--green); font-weight: 600; }
+    .down { color: var(--red); font-weight: 600; }
+
+    /* TABELAS */
+    .tbl-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 540px; }
+    thead th {
+      text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px;
+      color: var(--gray-400); font-weight: 600;
+      padding: 0 12px 10px; border-bottom: 1px solid var(--gray-200); white-space: nowrap;
+    }
+    tbody td { padding: 11px 12px; border-bottom: 1px solid var(--gray-100); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num { font-variant-numeric: tabular-nums; font-weight: 600; }
+    .pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
+    .pill-alta { background: #fef3c7; color: #92400e; }
+    .pill-ok { background: #d1fae5; color: #065f46; }
+    .pill-baixo { background: #fee2e2; color: #991b1b; }
+
+    /* CHART */
+    .chart-box { position: relative; height: 320px; }
+    .chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    .tabs { display: flex; gap: 6px; background: var(--gray-100); padding: 4px; border-radius: 9px; }
     .tab {
-      padding: 8px 20px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      color: var(--gray-600);
-      transition: all 0.15s;
+      border: none; background: transparent; cursor: pointer;
+      font-family: inherit; font-size: 12.5px; font-weight: 600; color: var(--gray-600);
+      padding: 6px 14px; border-radius: 6px; transition: all .15s;
     }
-    .tab:hover { color: var(--navy); background: var(--gray-100); }
-    .tab.active {
-      background: var(--navy);
-      color: var(--white);
-      box-shadow: 0 2px 6px rgba(15,39,68,0.3);
-    }
-    .tab-icon { margin-right: 5px; font-size: 14px; }
+    .tab:hover { color: var(--navy); }
+    .tab.active { background: var(--white); color: var(--navy); box-shadow: var(--shadow); }
 
-    /* STATS CARDS */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-    .stat-card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 18px 20px;
-      border: 1.5px solid var(--gray-200);
-      box-shadow: var(--shadow);
-    }
-    .stat-label {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--gray-400);
-      margin-bottom: 6px;
-    }
-    .stat-value {
-      font-size: 26px;
-      font-weight: 800;
-      color: var(--navy);
-      letter-spacing: -0.5px;
-    }
-    .stat-value span {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--gray-400);
-    }
-    .stat-sub {
-      font-size: 11px;
-      color: var(--gray-400);
-      margin-top: 3px;
-    }
-    .stat-card.green { border-top: 3px solid var(--green); }
-    .stat-card.amber { border-top: 3px solid var(--accent); }
-    .stat-card.blue { border-top: 3px solid var(--blue); }
-    .stat-card.red { border-top: 3px solid var(--red); }
+    .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 14px; font-size: 12px; color: var(--gray-600); }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-key { width: 12px; height: 3px; border-radius: 2px; }
+    .legend-sq { width: 10px; height: 10px; border-radius: 2px; }
 
-    /* MAIN GRID */
-    .content-grid {
-      display: grid;
-      grid-template-columns: 1fr 400px;
-      gap: 16px;
+    footer {
+      margin-top: 8px; padding-top: 18px; border-top: 1px solid var(--gray-200);
+      font-size: 12px; color: var(--gray-400); line-height: 1.7;
     }
+    footer code { background: var(--gray-100); padding: 1px 6px; border-radius: 4px; font-size: 11.5px; color: var(--gray-600); }
 
-    /* CHART SECTION */
-    .chart-card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 20px;
-      border: 1.5px solid var(--gray-200);
-      box-shadow: var(--shadow);
-    }
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-    .card-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--navy);
-    }
-    .card-sub {
-      font-size: 11px;
-      color: var(--gray-400);
-      margin-top: 2px;
-    }
-    .chart-container {
-      position: relative;
-      height: 360px;
-    }
-
-    /* TABLE SECTION */
-    .table-card {
-      background: var(--white);
-      border-radius: 12px;
-      border: 1.5px solid var(--gray-200);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    .table-header {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--gray-200);
-    }
-    .competitors-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .competitors-table thead tr {
-      background: var(--gray-50);
-    }
-    .competitors-table th {
-      padding: 8px 14px;
-      text-align: left;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--gray-400);
-      border-bottom: 1px solid var(--gray-200);
-    }
-    .competitors-table th:last-child { text-align: right; }
-    .competitors-table tbody tr {
-      border-bottom: 1px solid var(--gray-100);
-      transition: background 0.1s;
-    }
-    .competitors-table tbody tr:hover { background: var(--gray-50); }
-    .competitors-table tbody tr:last-child { border-bottom: none; }
-    .competitors-table td {
-      padding: 10px 14px;
-      font-size: 12px;
-      color: var(--gray-800);
-    }
-    .competitors-table td:last-child { text-align: right; }
-    .property-name {
-      font-weight: 600;
-      color: var(--navy);
-      max-width: 160px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .property-name a {
-      color: inherit;
-      text-decoration: none;
-    }
-    .property-name a:hover { color: var(--blue); }
-    .price-cell {
-      font-weight: 800;
-      font-size: 13px;
-      color: var(--navy);
-    }
-    .price-bar-bg {
-      background: var(--gray-100);
-      height: 4px;
-      border-radius: 2px;
-      margin-top: 3px;
-      width: 100%;
-    }
-    .price-bar-fill {
-      height: 4px;
-      border-radius: 2px;
-      background: var(--blue-light);
-    }
-    .rating-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      background: var(--gray-100);
-      padding: 3px 7px;
-      border-radius: 5px;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--gray-600);
-    }
-    .rating-badge.good { background: #d1fae5; color: #065f46; }
-    .rating-badge.great { background: #a7f3d0; color: #064e3b; }
-    .rank-num {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--gray-400);
-      width: 20px;
-    }
-    .rank-1 { color: var(--accent); }
-    .rank-2 { color: #94a3b8; }
-    .rank-3 { color: #b45309; }
-
-    /* PRICE RANGE INDICATOR */
-    .price-indicator-card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 20px;
-      border: 1.5px solid var(--gray-200);
-      box-shadow: var(--shadow);
-      margin-bottom: 16px;
-    }
-    .price-range-bar {
-      position: relative;
-      height: 8px;
-      background: var(--gray-200);
-      border-radius: 4px;
-      margin: 16px 0 8px;
-    }
-    .price-range-fill {
-      position: absolute;
-      height: 100%;
-      border-radius: 4px;
-      background: linear-gradient(90deg, var(--green), var(--accent), var(--red));
-    }
-    .price-range-labels {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--gray-600);
-    }
-    .price-range-labels span { font-weight: 700; }
-
-    /* FOOTER */
-    .footer {
-      text-align: center;
-      margin-top: 32px;
-      padding: 16px;
-      font-size: 11px;
-      color: var(--gray-400);
-    }
-    .footer strong { color: var(--gray-600); }
-
-    /* EMPTY STATE */
-    .empty-state {
-      text-align: center;
-      padding: 48px 24px;
-      color: var(--gray-400);
-    }
-    .empty-icon { font-size: 40px; margin-bottom: 12px; }
-
-    /* RESPONSIVE */
-    @media (max-width: 900px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .content-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 600px) {
-      .main { padding: 16px; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .stat-value { font-size: 20px; }
+    @media (max-width: 640px) {
+      main { padding: 18px 14px 40px; }
+      .kpi-row { grid-template-columns: 1fr; }
+      .chart-box { height: 280px; }
     }
   </style>
 </head>
@@ -410,421 +180,418 @@
 
 <header class="header">
   <div class="header-brand">
-    <div class="header-logo">AZ</div>
+    <div class="header-logo">A</div>
     <div>
       <div class="header-title">Painel de Precificação</div>
-      <div class="header-subtitle">Porto Seguro & Região · Booking.com</div>
+      <div class="header-subtitle">Porto Seguro · Artezian</div>
     </div>
   </div>
   <div class="header-right">
-    <span class="badge-source">📊 Booking.com</span>
+    <span class="badge-source">Fonte: PriceLabs</span>
     <span class="last-update" id="lastUpdate"></span>
   </div>
 </header>
 
-<main class="main">
+<main>
 
-  <!-- CONTROLS -->
-  <div class="controls">
-    <span class="controls-label">Mês</span>
-    <select class="month-select" id="monthSelect" onchange="onMonthChange()">
-      <option value="2026-07">Julho 2026</option>
-      <option value="2026-08">Agosto 2026</option>
-      <option value="2026-10">Outubro 2026</option>
-    </select>
-    <span class="temporada-badge" id="temporadaBadge">Alta Temporada</span>
-    <span style="font-size:12px; color:var(--gray-400); margin-left:4px;" id="periodoRef"></span>
-  </div>
-
-  <!-- CAPACITY TABS -->
-  <div class="tabs">
-    <button class="tab active" onclick="setTab(2, this)">
-      <span class="tab-icon">👤</span> 2 Pessoas
-    </button>
-    <button class="tab" onclick="setTab(5, this)">
-      <span class="tab-icon">👥</span> Até 5 Pessoas
-    </button>
-    <button class="tab" onclick="setTab(8, this)">
-      <span class="tab-icon">🏠</span> Até 8 Pessoas
-    </button>
-  </div>
-
-  <!-- STATS CARDS -->
-  <div class="stats-grid">
-    <div class="stat-card green">
-      <div class="stat-label">Mínima</div>
-      <div class="stat-value" id="statMin"><span>R$</span> —</div>
-      <div class="stat-sub" id="statMinName">—</div>
-    </div>
-    <div class="stat-card amber">
-      <div class="stat-label">Média do Mercado</div>
-      <div class="stat-value" id="statAvg"><span>R$</span> —</div>
-      <div class="stat-sub" id="statCount">— propriedades</div>
-    </div>
-    <div class="stat-card blue">
-      <div class="stat-label">Mediana</div>
-      <div class="stat-value" id="statMed"><span>R$</span> —</div>
-      <div class="stat-sub">50% abaixo · 50% acima</div>
-    </div>
-    <div class="stat-card red">
-      <div class="stat-label">Máxima</div>
-      <div class="stat-value" id="statMax"><span>R$</span> —</div>
-      <div class="stat-sub" id="statMaxName">—</div>
+  <div class="alert">
+    <div class="alert-icon">⚠️</div>
+    <div>
+      <div class="alert-title">Calendário bloqueado na melhor janela de outubro</div>
+      <div class="alert-text">
+        O mercado sobe <strong>+20,1% no preço</strong> e <strong>+22,6% na ocupação</strong> entre
+        <strong>10 e 15 de outubro</strong>. O <strong>Studio Varandas 03</strong> está bloqueado de
+        <strong>09 a 17/10</strong> — nove noites. No mesmo período o Flat da Mari tem reserva fechada
+        a <strong>R$ 404/noite</strong>, contratada lá em 27/03. Se o bloqueio for manutenção, vale remanejar.
+      </div>
     </div>
   </div>
 
-  <!-- MAIN CONTENT GRID -->
-  <div class="content-grid">
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">Saúde dos imóveis</div>
+      <div class="section-sub">Diagnóstico do PriceLabs e ocupação contra o mercado do bairro</div>
+    </div>
+    <div class="grid-imoveis" id="gridImoveis"></div>
+  </section>
 
-    <!-- CHART -->
-    <div class="chart-card">
-      <div class="card-header">
+  <section class="section">
+    <div class="card">
+      <div class="chart-head">
         <div>
-          <div class="card-title">Diárias por Concorrente</div>
-          <div class="card-sub" id="chartSubtitle">Ordenado do menor para o maior preço · Fonte: Booking.com</div>
+          <div class="section-title">Recomendado vs praticado</div>
+          <div class="section-sub" id="chartSub"></div>
+        </div>
+        <div class="tabs" id="tabsImovel"></div>
+      </div>
+      <div class="chart-box"><canvas id="chartPrecos"></canvas></div>
+      <div class="legend">
+        <div class="legend-item"><span class="legend-key" style="background:#1d6fa4"></span> Recomendado PriceLabs</div>
+        <div class="legend-item"><span class="legend-key" style="background:#f59e0b"></span> Praticado no calendário</div>
+        <div class="legend-item"><span class="legend-key" style="background:#94a3b8"></span> Mediana do mercado</div>
+        <div class="legend-item"><span class="legend-sq" style="background:#e2e8f0"></span> Noite reservada ou bloqueada</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="card">
+      <div class="chart-head">
+        <div>
+          <div class="section-title">Posição no mercado</div>
+          <div class="section-sub" id="mercadoSub"></div>
         </div>
       </div>
-      <div class="chart-container">
-        <canvas id="priceChart"></canvas>
+      <div class="chart-box"><canvas id="chartMercado"></canvas></div>
+      <div class="legend">
+        <div class="legend-item"><span class="legend-sq" style="background:#cbd5e1"></span> Faixas do mercado</div>
+        <div class="legend-item"><span class="legend-sq" style="background:#1d6fa4"></span> Nosso recomendado (média)</div>
+        <div class="legend-item"><span class="legend-sq" style="background:#f59e0b"></span> Nosso praticado (média)</div>
       </div>
     </div>
+  </section>
 
-    <!-- TABLE -->
-    <div class="table-card">
-      <div class="table-header">
-        <div class="card-title">Ranking de Preços</div>
-        <div class="card-sub">Do mais barato ao mais caro</div>
+  <section class="section">
+    <div class="card">
+      <div class="section-head">
+        <div class="section-title">Janelas de alta</div>
+        <div class="section-sub">Datas em que o mercado sobe acima das vizinhas — onde o preço precisa acompanhar</div>
       </div>
-      <table class="competitors-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Propriedade</th>
-            <th>Nota</th>
-            <th>Diária</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-      </table>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Período</th><th>Imóvel</th><th>Preço de mercado</th><th>Ocupação</th><th>Ocasião</th></tr>
+          </thead>
+          <tbody id="tbodySurge"></tbody>
+        </table>
+      </div>
     </div>
+  </section>
 
-  </div>
+  <section class="section">
+    <div class="card">
+      <div class="section-head">
+        <div class="section-title">Ocupação contra o mercado</div>
+        <div class="section-sub">Quanto do calendário está vendido, comparado ao bairro e ao mesmo mês do ano passado</div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Imóvel</th><th>Mês</th><th>Nossa</th><th>Mercado</th><th>Mercado ano passado</th><th>Antecedência da reserva</th></tr>
+          </thead>
+          <tbody id="tbodyOcup"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 
-  <div class="footer">
-    <strong>Artezian Real Estate Atelie</strong> · Dados coletados via Booking.com ·
-    Período de referência: fim de semana representativo do mês ·
-    Airbnb não incluído nesta versão · Para atualizar, peça ao Claude "atualizar precificação para [mês]"
-  </div>
+  <footer id="rodape"></footer>
+
 </main>
 
 <script>
-  // ─── DADOS ──────────────────────────────────────────────────────────────
+  // ─── DADOS (PriceLabs) ───────────────────────────────────────────────────
+  // Gerado pela skill /precificacao. Nao editar a mao — rodar a skill de novo.
+  // status por dia: L = livre · R = reservado · B = bloqueado
   const DADOS = {
-    ultima_atualizacao: "04/06/2026",
-    meses: {
-      "2026-07": {
-        label: "Julho 2026",
-        periodo: "Referência: fin de sem. 04–06 Jul",
-        temporada: "alta",
-        capacidades: {
-          2: [
-            { nome: "Pousada Brisa do Mar", preco: 288, nota: null, url: "https://www.booking.com/hotel/br/pousada-brisa-do-mar-porto-seguro.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Rede Andrade Porto Seguro", preco: 339.15, nota: null, url: "https://www.booking.com/hotel/br/porto-seguro-centro.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Pousada Rio do Prado", preco: 400.20, nota: null, url: "https://www.booking.com/hotel/br/pousada-rio-do-prado-porto-seguro.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Rede Andrade Porto Praia", preco: 427.98, nota: null, url: "https://www.booking.com/hotel/br/porto-seguro-praia-porto-seguro.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Estrela Dalva Praia Hotel", preco: 452.20, nota: 8.5, url: "https://www.booking.com/hotel/br/araruama-praia.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Estrela Dalva Centro Hotel", preco: 460.28, nota: 8.5, url: "https://www.booking.com/hotel/br/oceano-porto.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Hotel Trevo do Porto", preco: 466.56, nota: null, url: "https://www.booking.com/hotel/br/pousada-trevo-do-porto.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Rede Andrade Galeão", preco: 492.58, nota: 7.6, url: "https://www.booking.com/hotel/br/galeao.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Eden Praia Hotel", preco: 567, nota: null, url: "https://www.booking.com/hotel/br/aden-praia.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Hotel Bem Brasil", preco: 646, nota: 8.7, url: "https://www.booking.com/hotel/br/bem-brasil.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=2&selected_currency=BRL" }
-          ],
-          5: [
-            { nome: "Residencial Golfinhos by Federico", preco: 522, nota: 9.7, url: "https://www.booking.com/hotel/br/residencial-golfinhos-by-federico.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Condomínio Triângulo da Embaúba", preco: 598, nota: 9.4, url: "https://www.booking.com/hotel/br/condominio-triangulo-da-embauba-porto-seguro.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Flat Beira Mar Porto Seguro", preco: 630, nota: 8.9, url: "https://www.booking.com/hotel/br/flet-beira-mar-curuipe.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Apto 300m da Praia AxéMoi", preco: 642.60, nota: 9.2, url: "https://www.booking.com/hotel/br/apto-a-300m-da-praia.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Apartamento Praia Taperapuan", preco: 810, nota: 9.0, url: "https://www.booking.com/hotel/br/apto-praia-de-taperapuan-porto-seguro.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Villa das Araras Residence", preco: 823.20, nota: 9.5, url: "https://www.booking.com/hotel/br/villa-das-araras-residence.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Apto Térreo c/ Piscina Taperapuan", preco: 826.50, nota: 9.0, url: "https://www.booking.com/hotel/br/apto-com-piscina-proximo-a-praia-e-axe-moi-golden-dolphin-residence.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Boulevard da Praia Apart Hotel", preco: 896.10, nota: 8.6, url: "https://www.booking.com/hotel/br/boulevard-da-praia-apart-porto-seguro1.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Alto Padrão & Elegância", preco: 1144, nota: 9.3, url: "https://www.booking.com/hotel/br/castal-homes-porto-seguro.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=5&selected_currency=BRL" }
-          ],
-          8: [
-            { nome: "Residencial Mar Da Galileia", preco: 740, nota: 9.6, url: "https://www.booking.com/hotel/br/residencial-mar-da-galileia-porto-seguro2.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Residencial Golfinhos by Federico", preco: 1044, nota: 9.7, url: "https://www.booking.com/hotel/br/residencial-golfinhos-by-federico.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Condomínio Triângulo da Embaúba", preco: 1196, nota: 9.4, url: "https://www.booking.com/hotel/br/condominio-triangulo-da-embauba-porto-seguro.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Apartamento Mont Carmelo", preco: 1254, nota: 7.9, url: "https://www.booking.com/hotel/br/apartamento-mont-carmelo.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Residencial João e Maria", preco: 1529.50, nota: 8.9, url: "https://www.booking.com/hotel/br/residencial-joao-amp-maria-200-metros-da-praia.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Moradas de Israel - Tonziro", preco: 1974.34, nota: 8.8, url: "https://www.booking.com/hotel/br/residencial-moradas-de-israel.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Mont Moriá - Rede Tonziro", preco: 1974.34, nota: 8.6, url: "https://www.booking.com/hotel/br/residencial-mont-moria.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Cond. c/ Piscina 500m Taperapuan", preco: 2095, nota: 8.7, url: "https://www.booking.com/hotel/br/apartamento-confortavel-proximo-as-melhores-praias.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Full-service Casa Trancoso", preco: 2430, nota: null, url: "https://www.booking.com/hotel/br/new-house-10-mins-walk-to-beach-amp-quadrado.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Cond. Tranquilo c/ Piscina", preco: 2460, nota: 8.3, url: "https://www.booking.com/hotel/br/apartamento-luxo-a-350m-da-beira-mar.html?aid=8132308&checkin=2026-07-04&checkout=2026-07-06&no_rooms=1&group_adults=8&selected_currency=BRL" }
-          ]
-        }
+    atualizado: "02/09/2026",
+    sync: "31/08/2026 18:16",
+    janela: "02/09 a 01/11/2026",
+    imoveis: [
+      {
+        id: "6931d3376d8c2b688bb4317c",
+        nome: "Flat da Mari",
+        quartos: 1,
+        flag: "azul",
+        flagTitulo: "Superando o mercado",
+        flagTexto: "Ocupação acima do mercado. O PriceLabs sugere subir um pouco o preço, principalmente em fins de semana e datas de pico.",
+        bloqueios: { qtd: 62, periodo: "03/07 a 02/09/2027" },
+        mercado: { categorias: [
+          { cat: "1 quarto",  n: 85,  p25: 234, p50: 307, p75: 383, p90: 518 },
+          { cat: "2 quartos", n: 237, p25: 329, p50: 414, p75: 561, p90: 721 }
+        ]},
+        medias: { rec: 242, praticado: 331 },
+        ocupacao: [
+          { mes: "Setembro", nossa: 47, mercado: 17, anoPassado: 33, janela: "0 a 10 dias" },
+          { mes: "Outubro",  nossa: 26, mercado: 14, anoPassado: 42, janela: "1 a 35 dias" },
+          { mes: "Novembro", nossa: 0,  mercado: 5,  anoPassado: 32, janela: "3 a 31 dias" }
+        ],
+        surges: [
+          { periodo: "28/12 a 02/01", preco: "44,9", ocup: "14,1", ocasiao: "Réveillon" },
+          { periodo: "06 a 10/02/27", preco: "32,1", ocup: "6,8",  ocasiao: "Carnaval" },
+          { periodo: "23 a 26/03/27", preco: "18,9", ocup: null,   ocasiao: "—" }
+        ],
+        precos: [
+          ["09-02",200,null,"R"],["09-03",200,null,"R"],["09-04",202,null,"R"],["09-05",222,400,"L"],
+          ["09-06",225,400,"L"],["09-07",211,400,"L"],["09-08",212,400,"L"],["09-09",215,285,"L"],
+          ["09-10",212,285,"L"],["09-11",231,285,"L"],["09-12",227,285,"L"],["09-13",217,285,"L"],
+          ["09-14",223,285,"L"],["09-15",225,285,"L"],["09-16",225,285,"L"],["09-17",233,285,"L"],
+          ["09-18",253,null,"R"],["09-19",243,null,"R"],["09-20",234,null,"R"],["09-21",230,285,"L"],
+          ["09-22",223,285,"L"],["09-23",214,285,"L"],["09-24",220,null,"R"],["09-25",234,null,"R"],
+          ["09-26",240,null,"R"],["09-27",224,null,"R"],["09-28",223,null,"R"],["09-29",223,null,"R"],
+          ["09-30",213,null,"R"],["10-01",217,null,"R"],["10-02",225,null,"R"],["10-03",245,null,"R"],
+          ["10-04",232,371,"L"],["10-05",219,371,"L"],["10-06",216,371,"L"],["10-07",216,371,"L"],
+          ["10-08",224,371,"L"],["10-09",296,null,"R"],["10-10",348,null,"R"],["10-11",352,null,"R"],
+          ["10-12",346,null,"R"],["10-13",351,null,"R"],["10-14",352,371,"L"],["10-15",359,371,"L"]
+        ]
       },
-      "2026-08": {
-        label: "Agosto 2026",
-        periodo: "Referência: fin de sem. 01–03 Ago",
-        temporada: "alta",
-        capacidades: {
-          2: [
-            { nome: "Rede Andrade Porto Seguro", preco: 282.63, nota: null, url: "https://www.booking.com/hotel/br/porto-seguro-centro.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Estrela Dalva Centro Hotel", preco: 282.63, nota: 8.5, url: "https://www.booking.com/hotel/br/oceano-porto.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Pousada Brisa do Mar", preco: 288, nota: null, url: "https://www.booking.com/hotel/br/pousada-brisa-do-mar-porto-seguro.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Rede Andrade Porto Praia", preco: 323, nota: null, url: "https://www.booking.com/hotel/br/porto-seguro-praia-porto-seguro.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Rede Andrade Galeão", preco: 347.23, nota: 7.6, url: "https://www.booking.com/hotel/br/galeao.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Hotel Porto Verde JG", preco: 368, nota: 8.5, url: "https://www.booking.com/hotel/br/jg-porto-verde-porto-seguro.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Hotel Vale Verde", preco: 378, nota: 8.3, url: "https://www.booking.com/hotel/br/vale-verde.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Eden Praia Hotel", preco: 477, nota: null, url: "https://www.booking.com/hotel/br/aden-praia.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Hotel Bem Brasil", preco: 646, nota: 8.7, url: "https://www.booking.com/hotel/br/bem-brasil.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Best Western Shalimar Praia", preco: 984, nota: 9.0, url: "https://www.booking.com/hotel/br/best-western-shalimar-praia.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=2&selected_currency=BRL" }
-          ],
-          5: [
-            { nome: "Residencial Golfinhos by Federico", preco: 324, nota: 9.7, url: "https://www.booking.com/hotel/br/residencial-golfinhos-by-federico.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Apt. Centro — Conforto e Praticidade", preco: 363.60, nota: 9.6, url: "https://www.booking.com/hotel/br/apt-aconchegante-melhor-localizacao-do-centro-conforto-e-praticidade.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Condomínio Triângulo da Embaúba", preco: 598, nota: 9.4, url: "https://www.booking.com/hotel/br/condominio-triangulo-da-embauba-porto-seguro.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Flat Beira Mar Porto Seguro", preco: 630, nota: 8.9, url: "https://www.booking.com/hotel/br/flet-beira-mar-curuipe.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Cond. Encantador c/ Piscina", preco: 712.94, nota: 8.6, url: "https://www.booking.com/hotel/br/condominio-encantador-com-piscina-ao-lado-da-praia.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Villa das Araras Residence", preco: 714, nota: 9.5, url: "https://www.booking.com/hotel/br/villa-das-araras-residence.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Ap Praia de Taperapuan Porto Seg", preco: 735, nota: 9.6, url: "https://www.booking.com/hotel/br/ap-praia-de-taperapuan-porto-seg.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Apto Térreo c/ Piscina Taperapuan", preco: 811.30, nota: 9.0, url: "https://www.booking.com/hotel/br/apto-com-piscina-proximo-a-praia-e-axe-moi-golden-dolphin-residence.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Casa Duplex 3 Suítes Cond. Fechado", preco: 1100, nota: 9.2, url: "https://www.booking.com/hotel/br/casa-duplex-em-condominio-fechado-porto-seguro12.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Village Muta", preco: 1531.71, nota: 8.9, url: "https://www.booking.com/hotel/br/village-muta.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=5&selected_currency=BRL" }
-          ],
-          8: [
-            { nome: "Ap Praia de Taperapuan Porto Seg", preco: 735, nota: 9.6, url: "https://www.booking.com/hotel/br/ap-praia-de-taperapuan-porto-seg.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Residencial Golfinhos by Federico", preco: 858.60, nota: 9.7, url: "https://www.booking.com/hotel/br/residencial-golfinhos-by-federico.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Apartamento Mont Carmelo", preco: 1026, nota: 7.9, url: "https://www.booking.com/hotel/br/apartamento-mont-carmelo.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Casa Duplex 3 Suítes Cond. Fechado", preco: 1100, nota: 9.2, url: "https://www.booking.com/hotel/br/casa-duplex-em-condominio-fechado-porto-seguro12.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Casas Residencial Mont Sião", preco: 1212.20, nota: 8.2, url: "https://www.booking.com/hotel/br/belo-condominio-a-250m-da-praia-de-taperapua.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Residencial João e Maria", preco: 1529.50, nota: 8.9, url: "https://www.booking.com/hotel/br/residencial-joao-amp-maria-200-metros-da-praia.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Moradas de Israel - Tonziro", preco: 1974.34, nota: 8.8, url: "https://www.booking.com/hotel/br/residencial-moradas-de-israel.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "BEIRA MAR PRAIA HOTEL Taperapuan", preco: 2178, nota: 7.6, url: "https://www.booking.com/hotel/br/beira-mar-praia-porto-seguro1.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Full-service Casa Trancoso", preco: 2430, nota: null, url: "https://www.booking.com/hotel/br/new-house-10-mins-walk-to-beach-amp-quadrado.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Village Muta", preco: 2579.72, nota: 8.9, url: "https://www.booking.com/hotel/br/village-muta.html?aid=8132308&checkin=2026-08-01&checkout=2026-08-03&no_rooms=1&group_adults=8&selected_currency=BRL" }
-          ]
-        }
-      },
-      "2026-10": {
-        label: "Outubro 2026",
-        periodo: "Referência: fin de sem. 03–05 Out",
-        temporada: "baixa",
-        capacidades: {
-          2: [
-            { nome: "Pousada Brisa do Mar", preco: 255, nota: null, url: "https://www.booking.com/hotel/br/pousada-brisa-do-mar-porto-seguro.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Pousada Rio do Prado", preco: 354.68, nota: null, url: "https://www.booking.com/hotel/br/pousada-rio-do-prado-porto-seguro.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Porto Bahia Hotel", preco: 400, nota: 9.0, url: "https://www.booking.com/hotel/br/mar-a-vista.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Rede Andrade Porto Seguro", preco: 418, nota: null, url: "https://www.booking.com/hotel/br/porto-seguro-centro.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Rede Andrade Porto Praia", preco: 427.50, nota: null, url: "https://www.booking.com/hotel/br/porto-seguro-praia-porto-seguro.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Eden Praia Hotel", preco: 513, nota: null, url: "https://www.booking.com/hotel/br/aden-praia.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Hotel Porto Verde JG", preco: 558, nota: 8.5, url: "https://www.booking.com/hotel/br/jg-porto-verde-porto-seguro.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Hotel Bem Brasil", preco: 684, nota: 8.7, url: "https://www.booking.com/hotel/br/bem-brasil.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Portobello Praia", preco: 995.44, nota: 8.1, url: "https://www.booking.com/hotel/br/portobello-resort.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=2&selected_currency=BRL" },
-            { nome: "Best Western Shalimar Praia", preco: 1083.60, nota: 9.0, url: "https://www.booking.com/hotel/br/best-western-shalimar-praia.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=2&selected_currency=BRL" }
-          ],
-          5: [
-            { nome: "Residencial Golfinhos by Federico", preco: 360, nota: 9.7, url: "https://www.booking.com/hotel/br/residencial-golfinhos-by-federico.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Apt. Centro — Conforto e Praticidade", preco: 486, nota: 9.6, url: "https://www.booking.com/hotel/br/apt-aconchegante-melhor-localizacao-do-centro-conforto-e-praticidade.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Condomínio Triângulo da Embaúba", preco: 598, nota: 9.4, url: "https://www.booking.com/hotel/br/condominio-triangulo-da-embauba-porto-seguro.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Apto 300m da Praia AxéMoi", preco: 630, nota: 9.2, url: "https://www.booking.com/hotel/br/apto-a-300m-da-praia.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Flat Beira Mar Porto Seguro", preco: 630, nota: 8.9, url: "https://www.booking.com/hotel/br/flet-beira-mar-curuipe.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Boulevard da Praia Apart Hotel", preco: 710.70, nota: 8.6, url: "https://www.booking.com/hotel/br/boulevard-da-praia-apart-porto-seguro1.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Cond. Encantador c/ Piscina", preco: 712.94, nota: 8.6, url: "https://www.booking.com/hotel/br/condominio-encantador-com-piscina-ao-lado-da-praia.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Vila Mundaí", preco: 870, nota: 9.3, url: "https://www.booking.com/hotel/br/recanto-do-mundai-porto-seguro.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Casa Duplex 3 Suítes Cond. Fechado", preco: 1180, nota: 9.2, url: "https://www.booking.com/hotel/br/casa-duplex-em-condominio-fechado-porto-seguro12.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=5&selected_currency=BRL" },
-            { nome: "Village Muta", preco: 1496.09, nota: 8.9, url: "https://www.booking.com/hotel/br/village-muta.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=5&selected_currency=BRL" }
-          ],
-          8: [
-            { nome: "Residencial Golfinhos by Federico", preco: 720, nota: 9.7, url: "https://www.booking.com/hotel/br/residencial-golfinhos-by-federico.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Casas Residencial Mont Sião", preco: 1117.20, nota: 8.2, url: "https://www.booking.com/hotel/br/belo-condominio-a-250m-da-praia-de-taperapua.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Casa Duplex 3 Suítes Cond. Fechado", preco: 1180, nota: 9.2, url: "https://www.booking.com/hotel/br/casa-duplex-em-condominio-fechado-porto-seguro12.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Condomínio Triângulo da Embaúba", preco: 1196, nota: 9.4, url: "https://www.booking.com/hotel/br/condominio-triangulo-da-embauba-porto-seguro.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Boulevard da Praia Apart Hotel", preco: 1310.70, nota: 8.6, url: "https://www.booking.com/hotel/br/boulevard-da-praia-apart-porto-seguro1.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Vila Mundaí", preco: 1710, nota: 9.3, url: "https://www.booking.com/hotel/br/recanto-do-mundai-porto-seguro.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "BEIRA MAR PRAIA HOTEL Taperapuan", preco: 2178, nota: 7.6, url: "https://www.booking.com/hotel/br/beira-mar-praia-porto-seguro1.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Full-service Casa Trancoso", preco: 2430, nota: null, url: "https://www.booking.com/hotel/br/new-house-10-mins-walk-to-beach-amp-quadrado.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Village Muta", preco: 2519.74, nota: 8.9, url: "https://www.booking.com/hotel/br/village-muta.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=8&selected_currency=BRL" },
-            { nome: "Alto Padrão & Elegância", preco: 2734, nota: 9.3, url: "https://www.booking.com/hotel/br/castal-homes-porto-seguro.html?aid=8132308&checkin=2026-10-03&checkout=2026-10-05&no_rooms=1&group_adults=8&selected_currency=BRL" }
-          ]
-        }
+      {
+        id: "69fe24499ce59aa2220b7a25",
+        nome: "Studio Varandas 03",
+        quartos: 1,
+        flag: "vermelho",
+        flagTitulo: "Precisa de atenção",
+        flagTexto: "Menos reservas do que o mercado. O PriceLabs recomenda revisar o anúncio e abrir as 31 datas bloqueadas.",
+        bloqueios: { qtd: 31, periodo: "inclui 09 a 17/10/2026" },
+        mercado: { categorias: [
+          { cat: "1 quarto",  n: 143, p25: 262, p50: 309, p75: 364, p90: 430 },
+          { cat: "2 quartos", n: 172, p25: 347, p50: 451, p75: 556, p90: 703 }
+        ]},
+        medias: { rec: 185, praticado: 199 },
+        ocupacao: [
+          { mes: "Setembro", nossa: 7,  mercado: 14, anoPassado: 31, janela: "0 a 9 dias" },
+          { mes: "Outubro",  nossa: 29, mercado: 12, anoPassado: 40, janela: "0 a 25 dias" },
+          { mes: "Novembro", nossa: 7,  mercado: 6,  anoPassado: 30, janela: "2 a 15 dias" }
+        ],
+        surges: [
+          { periodo: "28/12 a 01/01", preco: "54,0", ocup: "19,7", ocasiao: "Réveillon" },
+          { periodo: "06 a 10/02/27", preco: "43,0", ocup: null,   ocasiao: "Carnaval" },
+          { periodo: "10 a 15/10",    preco: "20,1", ocup: "22,6", ocasiao: "Feriado de outubro" }
+        ],
+        precos: [
+          ["09-02",170,null,"B"],["09-03",170,150,"L"],["09-04",170,228,"L"],["09-05",170,350,"L"],
+          ["09-06",170,350,"L"],["09-07",170,350,"L"],["09-08",170,150,"L"],["09-09",170,150,"L"],
+          ["09-10",170,150,"L"],["09-11",170,150,"L"],["09-12",170,150,"L"],["09-13",170,150,"L"],
+          ["09-14",170,150,"L"],["09-15",170,150,"L"],["09-16",170,150,"L"],["09-17",170,150,"L"],
+          ["09-18",170,150,"L"],["09-19",170,150,"L"],["09-20",170,150,"L"],["09-21",170,150,"L"],
+          ["09-22",170,150,"L"],["09-23",170,150,"L"],["09-24",170,150,"L"],["09-25",170,150,"L"],
+          ["09-26",170,150,"L"],["09-27",170,150,"L"],["09-28",170,150,"L"],["09-29",170,150,"L"],
+          ["09-30",170,150,"L"],["10-01",170,221,"L"],["10-02",170,221,"L"],["10-03",170,221,"L"],
+          ["10-04",170,221,"L"],["10-05",170,221,"L"],["10-06",170,221,"L"],["10-07",170,221,"L"],
+          ["10-08",175,221,"L"],["10-09",192,null,"B"],["10-10",237,null,"B"],["10-11",261,null,"B"],
+          ["10-12",272,null,"B"],["10-13",269,null,"B"],["10-14",266,null,"B"],["10-15",242,null,"B"],
+          ["10-16",228,null,"B"],["10-17",218,null,"B"],["10-18",188,296,"L"],["10-19",189,208,"L"],
+          ["10-20",186,208,"L"],["10-21",183,208,"L"],["10-22",186,208,"L"],["10-23",192,208,"L"],
+          ["10-24",191,208,"L"],["10-25",188,208,"L"],["10-26",184,208,"L"],["10-27",185,208,"L"],
+          ["10-28",170,208,"L"],["10-29",170,208,"L"],["10-30",183,208,"L"],["10-31",200,455,"L"],
+          ["11-01",225,250,"L"]
+        ]
       }
-    }
+    ]
   };
 
-  // ─── STATE ───────────────────────────────────────────────────────────────
-  let currentMonth = "2026-07";
-  let currentCap = 2;
-  let chart = null;
-
   // ─── HELPERS ─────────────────────────────────────────────────────────────
-  const fmt = v => v.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-  const fmtR = v => 'R$ ' + fmt(v);
-  const shortName = (n, max=22) => n.length > max ? n.slice(0, max) + '…' : n;
+  const fmt  = v => Math.round(v).toLocaleString("pt-BR");
+  const fmtR = v => "R$ " + fmt(v);
+  const catDoImovel = im => im.mercado.categorias.find(c => c.cat.indexOf(String(im.quartos)) === 0) || im.mercado.categorias[0];
 
-  function getBarColor(val, min, max) {
-    const pct = (val - min) / (max - min || 1);
-    if (pct < 0.33) return '#10b981';
-    if (pct < 0.66) return '#f59e0b';
-    return '#ef4444';
+  function posicao(valor, cat) {
+    if (valor < cat.p25) return { txt: "abaixo do P25", cls: "pill-baixo" };
+    if (valor < cat.p50) return { txt: "entre P25 e mediana", cls: "pill-alta" };
+    if (valor < cat.p75) return { txt: "entre mediana e P75", cls: "pill-ok" };
+    return { txt: "acima do P75", cls: "pill-ok" };
   }
 
-  function calcStats(arr) {
-    const vals = arr.map(a => a.preco).sort((a,b) => a-b);
-    const sum = vals.reduce((s,v) => s+v, 0);
-    const avg = sum / vals.length;
-    const mid = Math.floor(vals.length/2);
-    const med = vals.length % 2 ? vals[mid] : (vals[mid-1]+vals[mid])/2;
-    return { min: vals[0], max: vals[vals.length-1], avg, med, count: vals.length };
+  let idx = 0, chartPrecos = null, chartMercado = null;
+
+  // ─── SAUDE ───────────────────────────────────────────────────────────────
+  function renderImoveis() {
+    const el = document.getElementById("gridImoveis");
+    el.innerHTML = "";
+    DADOS.imoveis.forEach(im => {
+      const cat = catDoImovel(im);
+      const posRec = posicao(im.medias.rec, cat);
+      const posPra = posicao(im.medias.praticado, cat);
+      const set = im.ocupacao[0];
+      const div = document.createElement("div");
+      div.className = "imovel-card";
+      div.innerHTML =
+        '<div class="imovel-top">' +
+          '<div class="imovel-nome">' + im.nome + '</div>' +
+          '<div class="imovel-meta">' + im.quartos + ' quarto · mercado de ' + cat.n + ' anúncios comparáveis</div>' +
+          '<div class="flag flag-' + im.flag + '"><span class="flag-dot"></span>' + im.flagTitulo + '</div>' +
+          '<div class="imovel-nota">' + im.flagTexto + '</div>' +
+        '</div>' +
+        '<div class="kpi-row">' +
+          '<div class="kpi">' +
+            '<div class="kpi-label">Recomendado (média)</div>' +
+            '<div class="kpi-value">' + fmtR(im.medias.rec) + '</div>' +
+            '<div class="kpi-hint"><span class="pill ' + posRec.cls + '">' + posRec.txt + '</span></div>' +
+          '</div>' +
+          '<div class="kpi">' +
+            '<div class="kpi-label">Praticado (média)</div>' +
+            '<div class="kpi-value">' + fmtR(im.medias.praticado) + '</div>' +
+            '<div class="kpi-hint"><span class="pill ' + posPra.cls + '">' + posPra.txt + '</span></div>' +
+          '</div>' +
+          '<div class="kpi">' +
+            '<div class="kpi-label">Ocupação de setembro</div>' +
+            '<div class="kpi-value">' + set.nossa + '<span>%</span></div>' +
+            '<div class="kpi-hint ' + (set.nossa >= set.mercado ? "up" : "down") + '">mercado ' + set.mercado + '%</div>' +
+          '</div>' +
+          '<div class="kpi">' +
+            '<div class="kpi-label">Datas bloqueadas</div>' +
+            '<div class="kpi-value">' + im.bloqueios.qtd + '</div>' +
+            '<div class="kpi-hint" style="color:var(--gray-400)">' + im.bloqueios.periodo + '</div>' +
+          '</div>' +
+        '</div>';
+      el.appendChild(div);
+    });
   }
 
-  // ─── RENDER ──────────────────────────────────────────────────────────────
-  function render() {
-    const mes = DADOS.meses[currentMonth];
-    if (!mes) return;
-    const data = [...mes.capacidades[currentCap]].sort((a,b) => a.preco - b.preco);
-    const stats = calcStats(data);
-
-    // Header info
-    document.getElementById('lastUpdate').textContent = 'Atualizado: ' + DADOS.ultima_atualizacao;
-    document.getElementById('periodoRef').textContent = mes.periodo;
-
-    // Temporada badge
-    const badge = document.getElementById('temporadaBadge');
-    badge.textContent = mes.temporada === 'alta' ? '🌞 Alta Temporada' : '🌊 Baixa Temporada';
-    badge.className = 'temporada-badge ' + (mes.temporada === 'alta' ? 'badge-alta' : 'badge-baixa');
-
-    // Stats cards
-    document.getElementById('statMin').innerHTML = `<span>R$</span> ${fmt(stats.min)}`;
-    document.getElementById('statMinName').textContent = data[0].nome;
-    document.getElementById('statAvg').innerHTML = `<span>R$</span> ${fmt(stats.avg)}`;
-    document.getElementById('statCount').textContent = `${stats.count} propriedades`;
-    document.getElementById('statMed').innerHTML = `<span>R$</span> ${fmt(stats.med)}`;
-    document.getElementById('statMax').innerHTML = `<span>R$</span> ${fmt(stats.max)}`;
-    document.getElementById('statMaxName').textContent = data[data.length-1].nome;
-
-    document.getElementById('chartSubtitle').textContent =
-      `${currentCap === 2 ? '2 pessoas' : 'Até ' + currentCap + ' pessoas'} · ${mes.label} · Fonte: Booking.com`;
-
-    // Chart
-    renderChart(data, stats);
-
-    // Table
-    renderTable(data, stats);
+  // ─── ABAS ────────────────────────────────────────────────────────────────
+  function renderTabs() {
+    const el = document.getElementById("tabsImovel");
+    el.innerHTML = "";
+    DADOS.imoveis.forEach((im, i) => {
+      const b = document.createElement("button");
+      b.className = "tab" + (i === idx ? " active" : "");
+      b.textContent = im.nome;
+      b.onclick = () => { idx = i; renderTabs(); renderChartPrecos(); renderChartMercado(); };
+      el.appendChild(b);
+    });
   }
 
-  function renderChart(data, stats) {
-    const ctx = document.getElementById('priceChart').getContext('2d');
-    const labels = data.map(d => shortName(d.nome, 20));
-    const values = data.map(d => d.preco);
-    const colors = values.map(v => getBarColor(v, stats.min, stats.max));
-    const colorsBg = colors.map(c => c + '33');
+  // ─── GRAFICO: RECOMENDADO VS PRATICADO ───────────────────────────────────
+  function renderChartPrecos() {
+    const im  = DADOS.imoveis[idx];
+    const cat = catDoImovel(im);
+    document.getElementById("chartSub").textContent =
+      im.nome + " · " + DADOS.janela + " · mediana do mercado " + fmtR(cat.p50);
 
-    if (chart) { chart.destroy(); }
+    const labels = im.precos.map(p => p[0].split("-").reverse().join("/"));
+    const rec    = im.precos.map(p => p[1]);
+    const prat   = im.precos.map(p => p[2]);
+    const med    = im.precos.map(() => cat.p50);
+    const teto   = Math.max(cat.p90, Math.max.apply(null, rec)) * 1.05;
+    const bloco  = im.precos.map(p => p[3] === "L" ? null : teto);
 
-    chart = new Chart(ctx, {
-      type: 'bar',
+    if (chartPrecos) chartPrecos.destroy();
+    chartPrecos = new Chart(document.getElementById("chartPrecos").getContext("2d"), {
+      type: "line",
       data: {
-        labels,
-        datasets: [{
-          data: values,
-          backgroundColor: colorsBg,
-          borderColor: colors,
-          borderWidth: 2,
-          borderRadius: 6,
-          borderSkipped: false
-        }]
+        labels: labels,
+        datasets: [
+          { label: "Indisponível", data: bloco, backgroundColor: "#e2e8f0aa", borderWidth: 0,
+            fill: "start", pointRadius: 0, stepped: true, order: 4 },
+          { label: "Mediana do mercado", data: med, borderColor: "#94a3b8", borderWidth: 1.5,
+            borderDash: [5,4], pointRadius: 0, fill: false, order: 3 },
+          { label: "Recomendado", data: rec, borderColor: "#1d6fa4", backgroundColor: "#1d6fa41a",
+            borderWidth: 2.5, pointRadius: 0, pointHoverRadius: 4, tension: .25, fill: true, order: 1 },
+          { label: "Praticado", data: prat, borderColor: "#f59e0b", borderWidth: 2.5,
+            pointRadius: 0, pointHoverRadius: 4, tension: .25, fill: false, order: 2 }
+        ]
       },
       options: {
-        indexAxis: 'y',
-        responsive: true,
-        maintainAspectRatio: false,
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
         plugins: {
           legend: { display: false },
           tooltip: {
+            backgroundColor: "#0f2744", titleColor: "#fff", bodyColor: "#cbd5e1",
+            padding: 10, cornerRadius: 8,
+            filter: it => it.datasetIndex !== 0 && it.raw != null,
             callbacks: {
-              label: ctx => ' R$ ' + fmt(ctx.raw) + '/noite'
-            },
-            backgroundColor: '#0f2744',
-            titleColor: '#fff',
-            bodyColor: '#94a3b8',
-            padding: 10,
-            cornerRadius: 8
+              label: it => " " + it.dataset.label + ": " + fmtR(it.raw),
+              afterBody: it => {
+                const s = im.precos[it[0].dataIndex][3];
+                return s === "R" ? "Noite reservada" : s === "B" ? "Noite bloqueada" : "";
+              }
+            }
           }
         },
         scales: {
-          x: {
-            grid: { color: '#f1f5f9' },
-            ticks: {
-              color: '#94a3b8',
-              font: { size: 11 },
-              callback: v => 'R$ ' + fmt(v)
-            },
-            border: { display: false }
-          },
-          y: {
-            grid: { display: false },
-            ticks: {
-              color: '#475569',
-              font: { size: 11, weight: '500' }
-            },
-            border: { display: false }
-          }
+          x: { grid: { display: false }, ticks: { color: "#94a3b8", font: { size: 10 }, maxTicksLimit: 14 }, border: { display: false } },
+          y: { grid: { color: "#f1f5f9" }, ticks: { color: "#94a3b8", font: { size: 11 }, callback: v => "R$ " + fmt(v) }, border: { display: false } }
         }
       }
     });
   }
 
-  function renderTable(data, stats) {
-    const tbody = document.getElementById('tableBody');
-    tbody.innerHTML = '';
-    data.forEach((item, i) => {
-      const rank = i + 1;
-      const pct = ((item.preco - stats.min) / (stats.max - stats.min || 1)) * 100;
-      const color = getBarColor(item.preco, stats.min, stats.max);
-      const rankClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : '';
-      const notaClass = item.nota ? (item.nota >= 9 ? 'great' : item.nota >= 8 ? 'good' : '') : '';
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td><span class="rank-num ${rankClass}">${rank}</span></td>
-        <td>
-          <div class="property-name">
-            <a href="${item.url}" target="_blank" title="${item.nome}">${shortName(item.nome, 26)}</a>
-          </div>
-        </td>
-        <td>
-          ${item.nota
-            ? `<span class="rating-badge ${notaClass}">★ ${item.nota}</span>`
-            : `<span class="rating-badge">—</span>`
+  // ─── GRAFICO: POSICAO NO MERCADO ─────────────────────────────────────────
+  function renderChartMercado() {
+    const im  = DADOS.imoveis[idx];
+    const cat = catDoImovel(im);
+    document.getElementById("mercadoSub").textContent =
+      im.nome + " · " + cat.n + " anúncios de " + cat.cat + " no bairro · diária em reais";
+
+    const cores = ["#cbd5e1", "#cbd5e1", "#cbd5e1", "#cbd5e1", "#1d6fa4", "#f59e0b"];
+    if (chartMercado) chartMercado.destroy();
+    chartMercado = new Chart(document.getElementById("chartMercado").getContext("2d"), {
+      type: "bar",
+      data: {
+        labels: ["P25", "Mediana", "P75", "P90", "Recomendado", "Praticado"],
+        datasets: [{
+          data: [cat.p25, cat.p50, cat.p75, cat.p90, im.medias.rec, im.medias.praticado],
+          backgroundColor: cores.map(c => c + "cc"),
+          borderColor: cores, borderWidth: 2, borderRadius: 6, borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: "#0f2744", titleColor: "#fff", bodyColor: "#cbd5e1",
+            padding: 10, cornerRadius: 8,
+            callbacks: { label: c => " " + fmtR(c.raw) + " / noite" }
           }
-        </td>
-        <td>
-          <div class="price-cell">${fmtR(item.preco)}</div>
-          <div class="price-bar-bg">
-            <div class="price-bar-fill" style="width:${pct}%;background:${color};"></div>
-          </div>
-        </td>
-      `;
-      tbody.appendChild(tr);
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: "#475569", font: { size: 11, weight: "500" } }, border: { display: false } },
+          y: { grid: { color: "#f1f5f9" }, ticks: { color: "#94a3b8", font: { size: 11 }, callback: v => "R$ " + fmt(v) }, border: { display: false } }
+        }
+      }
     });
   }
 
-  // ─── EVENTS ──────────────────────────────────────────────────────────────
-  function onMonthChange() {
-    currentMonth = document.getElementById('monthSelect').value;
-    render();
+  // ─── TABELAS ─────────────────────────────────────────────────────────────
+  function renderSurges() {
+    const tb = document.getElementById("tbodySurge");
+    tb.innerHTML = "";
+    DADOS.imoveis.forEach(im => im.surges.forEach(s => {
+      const tr = document.createElement("tr");
+      tr.innerHTML =
+        '<td><strong>' + s.periodo + '</strong></td>' +
+        '<td style="color:var(--gray-600)">' + im.nome + '</td>' +
+        '<td class="num"><span class="pill pill-alta">+' + s.preco + '%</span></td>' +
+        '<td class="num">' + (s.ocup ? "+" + s.ocup + "%" : "—") + '</td>' +
+        '<td style="color:var(--gray-600)">' + s.ocasiao + '</td>';
+      tb.appendChild(tr);
+    }));
   }
 
-  function setTab(cap, el) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-    currentCap = cap;
-    render();
+  function renderOcupacao() {
+    const tb = document.getElementById("tbodyOcup");
+    tb.innerHTML = "";
+    DADOS.imoveis.forEach(im => im.ocupacao.forEach((o, i) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML =
+        '<td>' + (i === 0 ? '<strong style="color:var(--navy)">' + im.nome + '</strong>' : "") + '</td>' +
+        '<td>' + o.mes + '</td>' +
+        '<td class="num"><span class="pill ' + (o.nossa >= o.mercado ? "pill-ok" : "pill-baixo") + '">' + o.nossa + '%</span></td>' +
+        '<td class="num" style="color:var(--gray-600)">' + o.mercado + '%</td>' +
+        '<td class="num" style="color:var(--gray-400)">' + o.anoPassado + '%</td>' +
+        '<td style="color:var(--gray-600)">' + o.janela + '</td>';
+      tb.appendChild(tr);
+    }));
   }
 
-  // ─── INIT ────────────────────────────────────────────────────────────────
-  render();
+  function renderRodape() {
+    document.getElementById("lastUpdate").textContent = "Atualizado: " + DADOS.atualizado;
+    document.getElementById("rodape").innerHTML =
+      "Dados do PriceLabs, sincronizados com a Stays em " + DADOS.sync + ". " +
+      "Cobre apenas os imóveis mapeados no PriceLabs — hoje " + DADOS.imoveis.length + ", de uma carteira maior. " +
+      "As faixas de mercado vêm de anúncios comparáveis no bairro de cada imóvel, por isso diferem entre eles.<br>" +
+      "Para atualizar, peça ao Claude: <code>/precificacao</code>";
+  }
+
+  renderImoveis();
+  renderTabs();
+  renderChartPrecos();
+  renderChartMercado();
+  renderSurges();
+  renderOcupacao();
+  renderRodape();
 </script>
 </body>
 </html>

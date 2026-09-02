@@ -18,15 +18,27 @@ const DATA_FILE = path.join(__dirname, 'data', 'artezian.json');
 
 // ── Autenticação básica (só em produção) ─────────────────────────────────────
 
-if (process.env.NODE_ENV === 'production') {
+(function configurarAuth() {
+  if (process.env.NODE_ENV !== 'production') return;
+
   const DASHBOARD_USER = process.env.DASHBOARD_USER;
   const DASHBOARD_PASS = process.env.DASHBOARD_PASS;
 
-  // Sem senha configurada o painel nao sobe. Nao existe credencial padrao:
-  // o repositorio e versionado e o painel expoe receita, custo e dados de parceiros.
+  // Nao existe credencial padrao: o repositorio e versionado e o painel expoe
+  // receita, custo e contato de parceiros. Sem senha configurada, o painel nao
+  // libera nada — mas continua de pe respondendo por que, em vez de morrer
+  // silenciosamente e deixar o time sem saber o que aconteceu.
   if (!DASHBOARD_USER || !DASHBOARD_PASS) {
-    console.error('[FATAL] DASHBOARD_USER e DASHBOARD_PASS sao obrigatorios em producao.');
-    process.exit(1);
+    console.error('[CONFIG] Defina DASHBOARD_USER e DASHBOARD_PASS nas variaveis de ambiente.');
+    app.use((req, res) => res.status(503).type('text/plain; charset=utf-8').send(
+      [
+        'Painel Artezian sem credenciais configuradas.',
+        '',
+        'Defina DASHBOARD_USER e DASHBOARD_PASS nas variaveis de ambiente',
+        'do app Node e reinicie. Nenhum dado e servido ate la.',
+      ].join(String.fromCharCode(10))
+    ));
+    return;
   }
 
   app.use(basicAuth({
@@ -34,7 +46,7 @@ if (process.env.NODE_ENV === 'production') {
     challenge: true,
     realm: 'Artezian',
   }));
-}
+})();
 
 app.use(express.json());
 

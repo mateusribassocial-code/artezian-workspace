@@ -1273,3 +1273,29 @@ body {
 .receita-row.receita-sub { padding-left: 16px; opacity: .8; }
 .receita-row.receita-sub .receita-name { font-size: 12.5px; font-weight: 500; }
 .receita-row.receita-sub .receita-value { font-size: 13px; }
+
+/* ── Metas da carteira ───────────────────────────────────────────── */
+
+.meta-nome { font-weight: 600; color: var(--dark); }
+.meta-nota { font-size: 11.5px; color: var(--light); margin-top: 1px; }
+
+.meta-row-geral { background: rgba(194,161,78,.06); }
+.meta-row-geral .meta-nome { color: var(--petrol); }
+
+.meta-input-cell {
+  width: 100%;
+  max-width: 120px;
+  padding: 6px 9px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--dark);
+  background: var(--white);
+  text-align: right;
+}
+.meta-input-cell:focus { outline: none; border-color: var(--gold); }
+
+.meta-receita { font-weight: 700; color: var(--petrol); text-align: right; white-space: nowrap; }
+
+.meta-ajuda { margin-top: 10px; font-size: 11.5px; color: var(--light); }

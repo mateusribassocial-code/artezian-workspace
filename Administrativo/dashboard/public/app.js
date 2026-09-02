@@ -2,7 +2,7 @@
 
 const state = {
   currentMonth: todayMonth(),   // "2026-05"
-  appData: { parceiros: [], custos: {} },
+  appData: { parceiros: [], metasCarteira: {} },
   stays: [],
   reservas: [],
   staysReservas: [],
@@ -190,14 +190,13 @@ function renderAll() {
 
   // Update all month labels
   document.getElementById('monthLabel').textContent = ml;
-  document.getElementById('custo-period').textContent = ml;
   document.getElementById('receita-period').textContent = ml;
   document.getElementById('reservas-period').textContent = ml;
   document.getElementById('parceiro-mes-label').textContent = `(${ml.split(' ')[0]})`;
   document.querySelectorAll('.pt-mes').forEach(el => (el.textContent = ml.split(' ')[0]));
   document.getElementById('modal-mes-label').textContent = ml;
 
-  renderCustos();
+  renderMetas();
   renderReceitas();
   renderSummary();
   renderChart();
@@ -210,65 +209,59 @@ function renderAll() {
   initRelatorio();
 }
 
-/* ── Bloco 1 — Custos ───────────────────────────────────────────── */
+/* ── Bloco 1 — Metas da carteira ─────────────────────────────────── */
 
-function getCustosFixos() {
-  return (state.appData.custosFixos || []).map(c => ({ ...c, natureza: 'Fixo' }));
+// Alvos fixos: valem ate serem alterados, nao mudam ao navegar entre meses.
+const CARTEIRAS = [
+  { id: 'geral',       nome: 'Meta Geral',        nota: 'Carteira inteira' },
+  { id: 'montCarmelo', nome: 'Mont Carmelo',      nota: 'Empreendimento' },
+  { id: 'varandas',    nome: 'Varandas de Porto', nota: 'Empreendimento' },
+  { id: 'avulsos',     nome: 'Avulsos',           nota: 'Apartamentos e casas' },
+];
+
+function getMetasCarteira() {
+  const salvo = state.appData.metasCarteira || {};
+  return CARTEIRAS.map(c => {
+    const unidades = parseFloat(salvo[c.id]?.unidades) || 0;
+    const ticket   = parseFloat(salvo[c.id]?.ticket)   || 0;
+    return { ...c, unidades, ticket, receita: unidades * ticket };
+  });
 }
 
-function getCustosVariaveisDoMes() {
-  const raw = state.appData.custos?.[state.currentMonth];
-  if (!raw) return [];
-  if (Array.isArray(raw)) return raw.map(c => ({ ...c, natureza: c.natureza || 'Variável' }));
-  // legado: objeto simples
-  const legado = [];
-  if (raw.ferramentas)    legado.push({ id: uid(), tipo: 'Ferramentas',    titulo: 'Ferramentas',    frequencia: 'Mensal', valor: raw.ferramentas,    natureza: 'Variável' });
-  if (raw.administrativo) legado.push({ id: uid(), tipo: 'Administrativo', titulo: 'Administrativo', frequencia: 'Mensal', valor: raw.administrativo, natureza: 'Variável' });
-  if (raw.midiaPaga)      legado.push({ id: uid(), tipo: 'Mídia Paga',     titulo: 'Mídia Paga',     frequencia: 'Mensal', valor: raw.midiaPaga,      natureza: 'Variável' });
-  return legado;
+function metaGeral() {
+  return getMetasCarteira().find(m => m.id === 'geral') || { unidades: 0, ticket: 0, receita: 0 };
 }
 
-function getCustosDoMes() {
-  return [...getCustosFixos(), ...getCustosVariaveisDoMes()];
-}
+function renderMetas() {
+  const tbody = document.getElementById('metasBody');
+  if (!tbody) return;
 
-function renderCustos() {
-  const custos = getCustosDoMes();
-  const tbody  = document.getElementById('custosBody');
+  tbody.innerHTML = getMetasCarteira().map(m => `
+    <tr${m.id === 'geral' ? ' class="meta-row-geral"' : ''}>
+      <td>
+        <div class="meta-nome">${escHtml(m.nome)}</div>
+        <div class="meta-nota">${escHtml(m.nota)}</div>
+      </td>
+      <td><input type="number" class="meta-input-cell" data-meta="${m.id}" data-campo="unidades"
+                 min="0" step="1" value="${m.unidades || ''}" placeholder="0" /></td>
+      <td><input type="number" class="meta-input-cell" data-meta="${m.id}" data-campo="ticket"
+                 min="0" step="0.01" value="${m.ticket || ''}" placeholder="0,00" /></td>
+      <td class="meta-receita">${m.receita ? brl(m.receita) : '—'}</td>
+    </tr>
+  `).join('');
 
-  if (!custos.length) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Nenhum custo cadastrado neste mês</td></tr>';
-    document.getElementById('custo-total').textContent = brl(0);
-    return;
-  }
-
-  tbody.innerHTML = custos.map(c => {
-    const tipoCls = c.tipo === 'Ferramentas' ? 'ferramentas'
-                  : c.tipo === 'Administrativo' ? 'administrativo'
-                  : c.tipo === 'Mídia Paga' ? 'midia' : 'outro';
-    const nat    = c.natureza || 'Variável';
-    const natCls = nat === 'Fixo' ? 'fixo' : 'variavel';
-    return `
-      <tr>
-        <td><span class="tipo-badge ${natCls}">${nat}</span></td>
-        <td><span class="tipo-badge ${tipoCls}">${escHtml(c.tipo)}</span></td>
-        <td>${escHtml(c.titulo)}</td>
-        <td>${escHtml(c.frequencia)}</td>
-        <td><strong>${brl(c.valor)}</strong></td>
-        <td><button class="edit-btn" onclick="openEditCusto('${c.id}', '${nat}')">✎</button></td>
-      </tr>
-    `;
-  }).join('');
-
-  updateCustoTotal();
-}
-
-function updateCustoTotal() {
-  const fixos     = getCustosFixos().reduce((s, c) => s + (parseFloat(c.valor) || 0), 0);
-  const variaveis = getCustosVariaveisDoMes().reduce((s, c) => s + (parseFloat(c.valor) || 0), 0);
-  document.getElementById('custo-total').textContent = brl(fixos + variaveis);
-  const sub = document.getElementById('custo-subtotals');
-  if (sub) sub.innerHTML = `<span>Fixos: <strong>${brl(fixos)}</strong></span><span>Variáveis: <strong>${brl(variaveis)}</strong></span>`;
+  tbody.querySelectorAll('.meta-input-cell').forEach(inp => {
+    inp.addEventListener('change', async () => {
+      const { meta, campo } = inp.dataset;
+      if (!state.appData.metasCarteira) state.appData.metasCarteira = {};
+      if (!state.appData.metasCarteira[meta]) state.appData.metasCarteira[meta] = {};
+      state.appData.metasCarteira[meta][campo] = parseFloat(inp.value) || 0;
+      await saveData(state.appData);
+      renderMetas();
+      renderSummary();
+      renderChart();
+    });
+  });
 }
 
 /* ── Bloco 1 — Receitas ─────────────────────────────────────────── */
@@ -325,18 +318,18 @@ function renderSummary() {
   const { totalReservas, totalMensalidades } = calcReceitas();
   const receita = totalReservas + totalMensalidades;
 
-  const custo = getCustosDoMes().reduce((s, c) => s + (parseFloat(c.valor) || 0), 0);
-
-  const resultado = receita - custo;
-  const margem = receita > 0 ? ((resultado / receita) * 100).toFixed(1) : null;
-
-  const elRes = document.getElementById('s-resultado');
-  elRes.textContent = brl(resultado);
-  elRes.className = 'summary-value ' + (resultado >= 0 ? 'green' : 'red');
+  const meta   = metaGeral().receita;
+  const falta  = Math.max(0, meta - receita);
+  const pct    = meta > 0 ? (receita / meta) * 100 : null;
 
   document.getElementById('s-receita').textContent = brl(receita);
-  document.getElementById('s-custos').textContent  = brl(custo);
-  document.getElementById('s-margem').textContent  = margem !== null ? `${margem}%` : '—%';
+  document.getElementById('s-meta').textContent    = meta ? brl(meta) : '—';
+
+  const elPct = document.getElementById('s-atingido');
+  elPct.textContent = pct !== null ? pct.toFixed(1).replace('.', ',') + '%' : '—%';
+  elPct.className = 'summary-value ' + (pct === null ? '' : pct >= 100 ? 'green' : 'red');
+
+  document.getElementById('s-falta').textContent = meta ? (falta ? brl(falta) : 'meta batida') : '—';
 }
 
 /* ── Formatação de data ───────────────────────────────────────── */
@@ -792,8 +785,6 @@ function ativarFrame(painel) {
 
 document.getElementById('btnRefresh').addEventListener('click', loadAll);
 
-/* ── Cost form — removido (agora usa modal) ─────────────────────── */
-
 /* ── Unit filters ───────────────────────────────────────────────── */
 
 document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -902,124 +893,6 @@ document.getElementById('btnDeleteParceiro').addEventListener('click', async () 
   renderSummary();
 });
 
-/* ── Modal — Custo ──────────────────────────────────────────────── */
-
-let editingCustoId = null;
-let editingCustoNatureza = null;
-
-function openCustoModal(id = null, natureza = null) {
-  editingCustoId = id;
-  editingCustoNatureza = natureza;
-  const deleteBtn = document.getElementById('btnDeleteCusto');
-
-  if (id) {
-    const c = natureza === 'Fixo'
-      ? getCustosFixos().find(x => x.id === id)
-      : getCustosVariaveisDoMes().find(x => x.id === id);
-    document.getElementById('custoModalTitle').textContent = 'Editar Custo';
-    document.getElementById('c-natureza').value   = c.natureza || 'Variável';
-    document.getElementById('c-tipo').value       = c.tipo;
-    document.getElementById('c-titulo').value     = c.titulo;
-    document.getElementById('c-frequencia').value = c.frequencia;
-    document.getElementById('c-valor').value      = c.valor;
-    deleteBtn.style.display = 'inline-flex';
-  } else {
-    document.getElementById('custoModalTitle').textContent = 'Novo Custo';
-    document.getElementById('c-natureza').value   = 'Variável';
-    document.getElementById('c-tipo').value       = 'Ferramentas';
-    document.getElementById('c-titulo').value     = '';
-    document.getElementById('c-frequencia').value = 'Mensal';
-    document.getElementById('c-valor').value      = '';
-    deleteBtn.style.display = 'none';
-  }
-
-  document.getElementById('custoModal').classList.add('open');
-}
-
-function closeCustoModal() {
-  document.getElementById('custoModal').classList.remove('open');
-  editingCustoId = null;
-  editingCustoNatureza = null;
-}
-
-window.openEditCusto = function(id, natureza) { openCustoModal(id, natureza); };
-
-document.getElementById('btnAddCusto').addEventListener('click', () => openCustoModal());
-document.getElementById('btnCloseCustoModal').addEventListener('click', closeCustoModal);
-document.getElementById('btnCancelCustoModal').addEventListener('click', closeCustoModal);
-document.getElementById('custoModal').addEventListener('click', (e) => {
-  if (e.target === e.currentTarget) closeCustoModal();
-});
-
-document.getElementById('btnSalvarCusto').addEventListener('click', async () => {
-  const titulo = document.getElementById('c-titulo').value.trim();
-  const valor  = parseFloat(document.getElementById('c-valor').value);
-  if (!titulo) { alert('Informe o título do custo'); return; }
-  if (!valor)  { alert('Informe o valor'); return; }
-
-  const natureza   = document.getElementById('c-natureza').value;
-  const tipo       = document.getElementById('c-tipo').value;
-  const frequencia = document.getElementById('c-frequencia').value;
-
-  if (!state.appData.custosFixos) state.appData.custosFixos = [];
-  if (!state.appData.custos)      state.appData.custos = {};
-
-  if (editingCustoId) {
-    const prevNat = editingCustoNatureza;
-
-    if (prevNat === 'Fixo' && natureza === 'Fixo') {
-      const idx = state.appData.custosFixos.findIndex(c => c.id === editingCustoId);
-      if (idx >= 0) state.appData.custosFixos[idx] = { ...state.appData.custosFixos[idx], tipo, titulo, frequencia, valor };
-
-    } else if (prevNat === 'Variável' && natureza === 'Variável') {
-      let lista = getCustosVariaveisDoMes();
-      const idx = lista.findIndex(c => c.id === editingCustoId);
-      if (idx >= 0) lista[idx] = { ...lista[idx], tipo, titulo, frequencia, valor };
-      state.appData.custos[state.currentMonth] = lista;
-
-    } else if (prevNat === 'Variável' && natureza === 'Fixo') {
-      // promove para fixo
-      state.appData.custos[state.currentMonth] = getCustosVariaveisDoMes().filter(c => c.id !== editingCustoId);
-      state.appData.custosFixos.push({ id: uid(), tipo, titulo, frequencia, valor });
-
-    } else if (prevNat === 'Fixo' && natureza === 'Variável') {
-      // rebaixa para variável do mês
-      state.appData.custosFixos = state.appData.custosFixos.filter(c => c.id !== editingCustoId);
-      let lista = getCustosVariaveisDoMes();
-      lista.push({ id: uid(), tipo, titulo, frequencia, valor, natureza: 'Variável' });
-      state.appData.custos[state.currentMonth] = lista;
-    }
-  } else {
-    if (natureza === 'Fixo') {
-      state.appData.custosFixos.push({ id: uid(), tipo, titulo, frequencia, valor });
-    } else {
-      let lista = getCustosVariaveisDoMes();
-      lista.push({ id: uid(), tipo, titulo, frequencia, valor, natureza: 'Variável' });
-      state.appData.custos[state.currentMonth] = lista;
-    }
-  }
-
-  await saveData(state.appData);
-  closeCustoModal();
-  renderCustos();
-  renderSummary();
-});
-
-document.getElementById('btnDeleteCusto').addEventListener('click', async () => {
-  if (!confirm('Excluir este custo?')) return;
-
-  if (editingCustoNatureza === 'Fixo') {
-    state.appData.custosFixos = (state.appData.custosFixos || []).filter(c => c.id !== editingCustoId);
-  } else {
-    state.appData.custos[state.currentMonth] = getCustosVariaveisDoMes().filter(c => c.id !== editingCustoId);
-  }
-
-  await saveData(state.appData);
-  closeCustoModal();
-  renderCustos();
-  renderSummary();
-});
-
 /* ── Histórico — snapshot automático ────────────────────────────── */
 
 const HISTORICO_INICIO = '2026-05'; // não registrar meses anteriores
@@ -1033,9 +906,9 @@ async function saveMonthSnapshot() {
 
   const { totalReservas, totalMensalidades } = calcReceitas();
   const receita = totalReservas + totalMensalidades;
-  const custo   = getCustosDoMes().reduce((s, c) => s + (parseFloat(c.valor) || 0), 0);
-  const resultado = receita - custo;
-  const margem    = receita > 0 ? +((resultado / receita) * 100).toFixed(1) : 0;
+  const meta      = metaGeral().receita;
+  const resultado = receita - meta;                       // acima ou abaixo da meta
+  const margem    = meta > 0 ? +((receita / meta) * 100).toFixed(1) : 0;   // % da meta atingida
 
   if (!state.appData.historico) state.appData.historico = {};
   state.appData.historico[state.currentMonth] = {
@@ -1045,7 +918,7 @@ async function saveMonthSnapshot() {
     // diferentes sem perceber ao olhar o grafico historico.
     fonteReceita: 'stays',
     receita:    { reservas: totalReservas, mensalidades: totalMensalidades, total: receita },
-    custo,
+    meta,
     resultado,
     margem,
   };
@@ -1082,7 +955,7 @@ function renderHistorico() {
         <td>${brl(d.receita.reservas)}</td>
         <td>${brl(d.receita.mensalidades)}</td>
         <td><strong>${brl(d.receita.total)}</strong></td>
-        <td>${brl(d.custo)}</td>
+        <td>${d.meta != null ? brl(d.meta) : (d.custo != null ? brl(d.custo) : '—')}</td>
         <td>${res}</td>
         <td>${margem}</td>
       </tr>
@@ -1090,7 +963,7 @@ function renderHistorico() {
   }).join('');
 }
 
-/* ── Gráfico receita × custo ────────────────────────────────────── */
+/* ── Gráfico receita × meta ─────────────────────────────────────── */
 
 let chartInstance = null;
 
@@ -1102,9 +975,12 @@ function renderChart() {
 
   const labels   = meses.map(m => monthLabel(m));
   const receitas = meses.map(m => hist[m].receita.total);
-  const custos   = meses.map(m => hist[m].custo);
+  // Meses gravados antes da mudanca guardam 'custo' e nao 'meta'. Para eles,
+  // usamos a meta vigente — ela e um alvo fixo, entao vale para tras tambem.
+  const alvo   = metaGeral().receita;
+  const metas  = meses.map(m => (hist[m].meta != null ? hist[m].meta : alvo) || null);
 
-  const ctx = document.getElementById('receitaCustoChart');
+  const ctx = document.getElementById('receitaMetaChart');
   if (!ctx) return;
 
   if (chartInstance) chartInstance.destroy();
@@ -1123,12 +999,17 @@ function renderChart() {
           borderRadius: 4,
         },
         {
-          label: 'Custos',
-          data: custos,
-          backgroundColor: 'rgba(192,57,43,0.65)',
-          borderColor: '#c0392b',
-          borderWidth: 1,
-          borderRadius: 4,
+          label: 'Meta',
+          data: metas,
+          type: 'line',
+          borderColor: '#c2a14e',
+          backgroundColor: 'rgba(194,161,78,0.12)',
+          borderWidth: 2,
+          borderDash: [6, 4],
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          tension: 0,
+          fill: false,
         },
       ],
     },

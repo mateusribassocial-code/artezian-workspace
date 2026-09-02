@@ -60,71 +60,56 @@
           <span class="summary-value green" id="s-receita">R$ —</span>
         </div>
         <div class="summary-card">
-          <span class="summary-label">Custos</span>
-          <span class="summary-value red" id="s-custos">R$ —</span>
+          <span class="summary-label">Meta Geral</span>
+          <span class="summary-value" id="s-meta">R$ —</span>
         </div>
         <div class="summary-card highlight">
-          <span class="summary-label">Resultado</span>
-          <span class="summary-value" id="s-resultado">R$ —</span>
+          <span class="summary-label">Atingido</span>
+          <span class="summary-value" id="s-atingido">—%</span>
         </div>
         <div class="summary-card">
-          <span class="summary-label">Margem</span>
-          <span class="summary-value" id="s-margem">—%</span>
+          <span class="summary-label">Falta</span>
+          <span class="summary-value" id="s-falta">R$ —</span>
         </div>
       </div>
 
       <!-- Chart -->
       <div class="block chart-block">
         <div class="block-header">
-          <h2 class="block-title">Receitas × Custos</h2>
+          <h2 class="block-title">Receita × Meta</h2>
           <span class="block-period">Histórico mensal</span>
         </div>
         <div class="chart-wrap">
-          <canvas id="receitaCustoChart"></canvas>
+          <canvas id="receitaMetaChart"></canvas>
         </div>
       </div>
 
       <!-- Two columns -->
       <div class="two-col">
 
-        <!-- CUSTOS -->
+        <!-- METAS DA CARTEIRA -->
         <div class="block">
           <div class="block-header">
-            <h2 class="block-title">Custo Operacional</h2>
-            <span class="block-period" id="custo-period">Mai 2026</span>
+            <h2 class="block-title">Metas</h2>
+            <span class="block-period">Alvo fixo · vale até ser alterado</span>
           </div>
 
-          <div class="cost-form">
-            <div class="table-wrap">
-              <table class="data-table" id="custosTable">
-                <thead>
-                  <tr>
-                    <th>Natureza</th>
-                    <th>Tipo</th>
-                    <th>Título</th>
-                    <th>Frequência</th>
-                    <th>Valor</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody id="custosBody">
-                  <tr class="empty-row">
-                    <td colspan="6">Nenhum custo cadastrado</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="custo-subtotals" id="custo-subtotals"></div>
-            <div class="cost-total-row" style="margin-top:8px">
-              <span class="cost-label">Total Custos</span>
-              <span class="cost-total-value" id="custo-total">R$ 0,00</span>
-            </div>
-            <button class="btn-outline w-full" id="btnAddCusto" style="margin-top:10px">+ Adicionar Custo</button>
-            <p class="save-feedback" id="custo-feedback"></p>
+          <div class="table-wrap">
+            <table class="data-table" id="metasTable">
+              <thead>
+                <tr>
+                  <th>Carteira</th>
+                  <th>Unidades</th>
+                  <th>Ticket médio</th>
+                  <th>Meta de receita</th>
+                </tr>
+              </thead>
+              <tbody id="metasBody"></tbody>
+            </table>
           </div>
+          <p class="meta-ajuda">Meta de receita = unidades × ticket médio. Editar salva na hora.</p>
         </div>
 
-        <!-- RECEITAS -->
         <div class="block">
           <div class="block-header">
             <h2 class="block-title">Receitas</h2>
@@ -529,7 +514,7 @@
                 <th>Reservas (DC)</th>
                 <th>Mensalidades</th>
                 <th>Receita Total</th>
-                <th>Custos</th>
+                <th>Meta</th>
                 <th>Resultado</th>
                 <th>Margem</th>
               </tr>
@@ -644,58 +629,7 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════
-       MODAL — CUSTO
-  ════════════════════════════════════════════════ -->
-  <div class="modal-overlay" id="custoModal">
-    <div class="modal">
-      <div class="modal-header">
-        <h3 id="custoModalTitle">Novo Custo</h3>
-        <button class="btn-close" id="btnCloseCustoModal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label>Natureza *</label>
-          <select id="c-natureza" class="form-select">
-            <option value="Variável">Variável — lançar apenas neste mês</option>
-            <option value="Fixo">Fixo — aparece em todos os meses</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Tipo *</label>
-          <select id="c-tipo" class="form-select">
-            <option value="Ferramentas">Ferramentas</option>
-            <option value="Administrativo">Administrativo</option>
-            <option value="Mídia Paga">Mídia Paga</option>
-            <option value="Outro">Outro</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Título *</label>
-          <input type="text" id="c-titulo" placeholder="Ex: Notion, Contador, Meta Ads" />
-        </div>
-        <div class="form-group">
-          <label>Frequência</label>
-          <select id="c-frequencia" class="form-select">
-            <option value="Mensal">Mensal</option>
-            <option value="Anual">Anual</option>
-            <option value="Único">Único</option>
-            <option value="Semanal">Semanal</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Valor (R$) *</label>
-          <input type="number" id="c-valor" min="0" step="0.01" placeholder="0,00" />
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn-ghost" id="btnCancelCustoModal">Cancelar</button>
-        <button class="btn-danger" id="btnDeleteCusto" style="display:none">Excluir</button>
-        <button class="btn-primary" id="btnSalvarCusto">Salvar</button>
-      </div>
-    </div>
-  </div>
-
+  
   
   <!-- MODAL — RESERVA DO RELATÓRIO -->
   <div class="modal-overlay" id="reservaRelatorioModal">

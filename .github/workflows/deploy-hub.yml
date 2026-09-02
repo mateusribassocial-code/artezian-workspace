@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "operacoes/hub/**"
+      - "Administrativo/hub/**"
       - ".github/workflows/deploy-hub.yml"
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
           server: 72.60.153.200
           username: u432659370.ojoaomendonca.com.br
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: operacoes/hub/
+          local-dir: Administrativo/hub/
           server-dir: nodejs/public/hub/
           exclude: |
             **/.git*

@@ -196,11 +196,13 @@ footer{
 </div>
 
 <footer>
-  <span>Progresso salvo automaticamente neste navegador (localStorage).</span>
+  <span id="syncStatus">Conectando ao Firestore…</span>
   <span>Baseado no levantamento do workspace — atualize conforme a operação evoluir.</span>
 </footer>
 
-<script>
+<script type="module">
+import { documentoSincronizado } from '../az-store.js';
+
 // ---------------------------------------------------------------------------
 // SEED — mapeamento inicial (área > subárea > tarefa)
 // ---------------------------------------------------------------------------
@@ -408,18 +410,40 @@ function migrateOld(tree){
   return tree;
 }
 
-function loadTree(){
+// O que este navegador ja tinha: vira semente caso o Firestore ainda esteja vazio.
+function sementeLocal(){
   const raw = localStorage.getItem(LS_TREE);
   if(raw){
     try{ return JSON.parse(raw); }catch(e){}
   }
-  let t = migrateOld(buildSeedTree());
-  saveTree(t);
-  return t;
+  return migrateOld(buildSeedTree());
 }
-function saveTree(t){ localStorage.setItem(LS_TREE, JSON.stringify(t)); }
 
-let tree = loadTree();
+const ROTULO_STATUS = {
+  sincronizado: 'Sincronizado — visível em qualquer dispositivo',
+  salvando:     'Salvando…',
+  migrado:      'Checklist migrado para o Firestore',
+  offline:      'Offline — salvo só neste navegador',
+};
+
+function mostrarStatus(estado, detalhe){
+  const el = document.getElementById('syncStatus');
+  if(!el) return;
+  el.textContent = (ROTULO_STATUS[estado] || estado) + (detalhe ? ' (' + detalhe + ')' : '');
+  el.style.color = estado === 'offline' ? '#e0a458' : '';
+}
+
+const store = documentoSincronizado({
+  caminho:   'paineis/checklist',
+  chaveLocal: LS_TREE,
+  aoReceber(dados){ tree = dados; render(); },   // edicao vinda de outro dispositivo
+  aoMudarStatus: mostrarStatus,
+});
+
+// Assinatura preservada: os 15 pontos que chamavam saveTree seguem iguais.
+function saveTree(t){ store.salvar(t); }
+
+let tree = await store.iniciar(sementeLocal());
 
 // ---------------------------------------------------------------------------
 // RENDER

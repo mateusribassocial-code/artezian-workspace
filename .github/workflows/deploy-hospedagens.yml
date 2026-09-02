@@ -4,8 +4,9 @@ on:
   push:
     branches: [main]
     paths:
-      - "locacao/gestao-hospedagens/**"
+      - "Setor de Locação/gestao-hospedagens/**"
       - ".github/workflows/deploy-hospedagens.yml"
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -19,7 +20,7 @@ jobs:
           server: 72.60.153.200
           username: u432659370.ojoaomendonca.com.br
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: locacao/gestao-hospedagens/
+          local-dir: "Setor de Locação/gestao-hospedagens/"
           server-dir: nodejs/public/hospedagens/
           exclude: |
             **/.git*

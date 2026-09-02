@@ -10,7 +10,7 @@ const path       = require('path');
 
 // Carrega .env local do dashboard (produção) ou o do CRM (dev local)
 const localEnv = path.join(__dirname, '.env');
-require('dotenv').config({ path: fs.existsSync(localEnv) ? localEnv : path.join(__dirname, '../CRM_datacrazy/.env') });
+require('dotenv').config({ path: fs.existsSync(localEnv) ? localEnv : path.join(__dirname, '../../CRM/Datacrazy/.env') });
 
 const app  = express();
 const PORT = process.env.PORT || 3131;

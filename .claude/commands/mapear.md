@@ -134,7 +134,7 @@ Se encontrar ferramenta relevante, incorporar na skill e avisar o usuário:
 Ao criar a skill (seja a partir de template ou do zero), garantir:
 
 1. O frontmatter tem `name` e `description` claros
-2. A skill lê o contexto relevante (`_contexto/preferencias.md`, `marca/design-guide.md` se for visual)
+2. A skill lê o contexto relevante (`_contexto/preferencias.md`, `Marca/design-guide.md` se for visual)
 3. O passo a passo reflete o que o usuário descreveu, não um fluxo genérico
 4. Se gera arquivo, a skill indica onde salvar
 5. O tom e formato seguem as preferências do usuário

@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "operacoes/dashboard/**"
+      - "Administrativo/dashboard/**"
       - ".github/workflows/deploy-dashboard.yml"
   workflow_dispatch:
 
@@ -20,7 +20,7 @@ jobs:
           server: 72.60.153.200
           username: u432659370.ojoaomendonca.com.br
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: operacoes/dashboard/
+          local-dir: Administrativo/dashboard/
           server-dir: nodejs/
           exclude: |
             **/.git*

@@ -25,7 +25,7 @@ dados/*.json
 # Pastas de trabalho do usuário (geradas pelo /setup, conteúdo pessoal)
 clientes/
 propostas/
-conteudo/
+Conteúdo/
 projetos/
 briefings/
 trabalho/

@@ -3,7 +3,7 @@ name: atualizar
 description: >
   Varre o estado atual do projeto e atualiza os arquivos de contexto que ficaram
   desatualizados. Compara o que existe nas pastas, skills e configurações com o que
-  está documentado em CLAUDE.md, _contexto/ e marca/design-guide.md.
+  está documentado em CLAUDE.md, _contexto/ e Marca/design-guide.md.
   Use quando o usuário chamar /atualizar, quando disser "atualiza o contexto",
   "os arquivos tão desatualizados", "sincroniza a memória", ou no fim de uma sessão
   longa com muitas mudanças.
@@ -33,7 +33,7 @@ Ler cada um dos arquivos abaixo (se existir):
 2. `_contexto/empresa.md` — foco em: equipe, ferramentas, entregas, clientes
 3. `_contexto/estrategia.md` — foco em: prioridade principal, fase, o que pode esperar
 4. `_contexto/preferencias.md` — foco em: tom de voz, o que evitar
-5. `marca/design-guide.md` — foco em: cores, fontes, estilo
+5. `Marca/design-guide.md` — foco em: cores, fontes, estilo
 
 ## Passo 3: Comparar e identificar gaps
 
@@ -57,7 +57,7 @@ Para cada arquivo de contexto, verificar:
 ### _contexto/preferencias.md
 - (Esse raramente muda, mas verificar se tem algo contraditório com o uso recente)
 
-### marca/design-guide.md
+### Marca/design-guide.md
 - Está preenchido ou ainda é template vazio?
 - Se tem logo referenciado, o arquivo existe?
 

@@ -6,7 +6,7 @@
 
 Tom descontraído, direto, provocador e focado em ROI. Estilo João Mendonça.
 
-> Referência completa com padrões reais verificados em conversas: `marca/voz-joao.md`
+> Referência completa com padrões reais verificados em conversas: `Marca/voz-joao.md`
 
 **Como escrever:**
 - Curto e de alto impacto — textos longos não convertem

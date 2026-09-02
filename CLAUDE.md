@@ -5,17 +5,24 @@
 Workspace de operações da Artezian. Aqui ficam as três linhas de negócio: venda de studios para investidores, gestão de locação por temporada e consultoria de CRM para equipes comerciais.
 
 **Estrutura de pastas:**
+
+Sete pastas de trabalho (uma por frente da operação):
+- `Administrativo/` — dashboard, precificação, estratégias por imóvel, checklist operacional, hub
+- `Financeiro/` — contas, notas, fluxo de caixa, fechamentos
+- `CRM/` — integração Datacrazy, agentes e chatbots de atendimento, consultoria de CRM para clientes externos
+- `Setor de Vendas/` — investidores: leads, propostas, simulações de ROI, landing pages, produto
+- `Setor de Locação/` — imóveis, temporadas, campanhas, gestão de hospedagens, onboarding de proprietário
+- `Marca/` — identidade visual, logos, design-guide, voz do João
+- `Planejamento/` — mapas mentais, estruturas e projetos em estudo
+- `Conteúdo/` — carrosséis, roteiros, anúncios, SEO/GEO, YouTube
+
+Infraestrutura do sistema (não são pastas de trabalho, não mover):
 - `_contexto/` — memória do sistema (não apagar)
-- `investidores/` — leads, propostas de studios, simulações de ROI
-- `locacao/` — imóveis cadastrados, atendimento, temporadas
-- `consultoria/` — clientes de CRM, propostas, materiais de treinamento
-- `conteudo/` — posts, carrosseis, roteiros, anúncios
-- `operacoes/` — relatórios internos, análises, processos
-- `operacoes/CRM_datacrazy/` — integração com o CRM Datacrazy (investidores e locação)
 - `dados/` — arquivos para análise (CSV, PDF, planilhas)
-- `tarefas.md` — lista de tarefas corrente
 - `templates/skills/` — templates de skills prontos pra personalizar com /mapear
 - `templates/ferramentas/catalogo.md` — APIs e ferramentas disponíveis pra usar em skills
+- `.claude/` — comandos e skills do workspace
+- `tarefas.md` — lista de tarefas corrente
 
 ## Sobre o negócio
 
@@ -66,9 +73,9 @@ No início de toda conversa, ler os seguintes arquivos (se existirem e estiverem
 
 Usar essas informações como base pra qualquer resposta ou decisão. Ao sugerir prioridades, formatos ou abordagens, considerar o foco atual descrito em `estrategia.md`.
 
-Para qualquer tarefa visual (carrossel, proposta, slide, landing page), consultar `marca/design-guide.md` como referência de estilo.
+Para qualquer tarefa visual (carrossel, proposta, slide, landing page), consultar `Marca/design-guide.md` como referência de estilo.
 
-Para qualquer copy, mensagem de WhatsApp, roteiro de vídeo ou anúncio no estilo João Mendonça, consultar `marca/voz-joao.md` — padrão de voz baseado em conversas reais.
+Para qualquer copy, mensagem de WhatsApp, roteiro de vídeo ou anúncio no estilo João Mendonça, consultar `Marca/voz-joao.md` — padrão de voz baseado em conversas reais.
 
 Não é necessário listar o que foi lido nem confirmar a leitura. Apenas usar o contexto naturalmente.
 

@@ -18,7 +18,7 @@ Sem datas definidas. Foco em estruturar a base operacional antes de escalar as o
 
 ## Ferramentas de acompanhamento
 
-- `operacoes/checklist-operacional.html` — checklist mapeado por área x subárea (Locação, Venda, Consultoria, Conteúdo, Operações) com o que já existe vs. o que falta criar. Referência de progresso pra essas prioridades.
+- `Administrativo/checklist-operacional.html` — checklist mapeado por área x subárea (Locação, Venda, Consultoria, Conteúdo, Operações) com o que já existe vs. o que falta criar. Referência de progresso pra essas prioridades.
 
 ---
 *Atualize esse arquivo quando suas prioridades mudarem.*

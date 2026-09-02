@@ -160,14 +160,26 @@ app.get('/api/stays/reservations', async (req, res) => {
     const raw = await response.json();
     const lista = Array.isArray(raw) ? raw : (Array.isArray(raw.value) ? raw.value : []);
 
-    const reservas = lista.map(r => {
+    // A listagem em lote não traz o nome do hóspede — só o detalhe de cada reserva tem guestsDetails.list
+    const detalhes = await Promise.all(lista.map(r =>
+      fetch(`${base}/external/v1/booking/reservations/${r._id}`, { headers })
+        .then(resp => (resp.ok ? resp.json() : null))
+        .catch(() => null)
+    ));
+
+    const reservas = lista.map((r, i) => {
       const fees = (r.price && r.price.hostingDetails) ? (r.price.hostingDetails.fees || []) : [];
       let taxaLimpeza = 0;
       fees.forEach(f => { if ((f.name || '').toLowerCase().includes('limpeza')) taxaLimpeza += (f._f_val || 0); });
 
+      const detalhe = detalhes[i];
+      const guestList = (detalhe && detalhe.guestsDetails && detalhe.guestsDetails.list) ? detalhe.guestsDetails.list : [];
+      const titular = guestList.length > 0 ? (guestList[0].name || '') : '';
+
       return {
         id: r.id,
         _idlisting: r._idlisting,
+        titular,
         checkin: r.checkInDate,
         checkout: r.checkOutDate,
         noites: diffNoites(r.checkInDate, r.checkOutDate),

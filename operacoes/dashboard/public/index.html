@@ -373,17 +373,91 @@
             <thead>
               <tr>
                 <th>Imóvel</th>
+                <th>Hóspede</th>
+                <th>Código</th>
                 <th>Check-in</th>
                 <th>Check-out</th>
                 <th>Noites</th>
                 <th>Hóspedes</th>
                 <th>Valor</th>
                 <th>Pago</th>
+                <th>Criada em</th>
               </tr>
             </thead>
             <tbody id="staysReservasBody">
               <tr class="empty-row">
-                <td colspan="7">Carregando dados da Stays...</td>
+                <td colspan="10">Carregando dados da Stays...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── RESERVAS CRIADAS NO MÊS (STAYS) ── -->
+      <div class="block">
+        <div class="block-header">
+          <h2 class="block-title">Reservas Criadas no Mês</h2>
+          <span class="block-period" id="stays-criadas-period">Mai 2026</span>
+        </div>
+
+        <div class="reservas-filtros">
+          <div class="form-group">
+            <label>De</label>
+            <input type="date" id="stays-criadas-de" />
+          </div>
+          <div class="form-group">
+            <label>Até</label>
+            <input type="date" id="stays-criadas-ate" />
+          </div>
+          <div class="form-group" style="min-width:220px">
+            <label>Imóvel</label>
+            <select id="stays-criadas-imovel" class="form-select">
+              <option value="">Todos os imóveis</option>
+            </select>
+          </div>
+          <button class="btn-outline" id="btnFiltrarStaysReservasCriadas">Filtrar</button>
+        </div>
+
+        <div class="reservas-stats">
+          <div class="res-stat">
+            <span class="res-stat-num" id="stays-criadas-total-valor">R$ —</span>
+            <span class="res-stat-label">Receita Total</span>
+          </div>
+          <div class="res-stat">
+            <span class="res-stat-num" id="stays-criadas-total-qtd">—</span>
+            <span class="res-stat-label">Reservas</span>
+          </div>
+          <div class="res-stat">
+            <span class="res-stat-num" id="stays-criadas-ticket-medio">R$ —</span>
+            <span class="res-stat-label">Ticket Médio</span>
+          </div>
+          <div class="res-stat">
+            <span class="res-stat-num" id="stays-criadas-total-pago">R$ —</span>
+            <span class="res-stat-label">Total Pago</span>
+          </div>
+        </div>
+
+        <div class="api-status" id="stays-criadas-status"></div>
+
+        <div class="table-wrap">
+          <table class="data-table" id="staysReservasCriadasTable">
+            <thead>
+              <tr>
+                <th>Imóvel</th>
+                <th>Hóspede</th>
+                <th>Código</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Noites</th>
+                <th>Hóspedes</th>
+                <th>Valor</th>
+                <th>Pago</th>
+                <th>Criada em</th>
+              </tr>
+            </thead>
+            <tbody id="staysReservasCriadasBody">
+              <tr class="empty-row">
+                <td colspan="10">Carregando dados da Stays...</td>
               </tr>
             </tbody>
           </table>

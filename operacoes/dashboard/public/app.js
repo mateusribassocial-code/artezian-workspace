@@ -6,6 +6,7 @@ const state = {
   stays: [],
   reservas: [],
   staysReservas: [],
+  staysReservasCriadas: [],
   unitFilter: 'all',
   editingParceiroId: null,
   editingUnitCode: null,
@@ -103,17 +104,20 @@ async function fetchReservas(month) {
 }
 
 async function fetchStaysReservas(params) {
+  const statusElId = params.statusElId || 'stays-res-status';
   try {
-    const qs = params.from && params.to
-      ? `from=${params.from}&to=${params.to}`
-      : `month=${params.month}`;
-    const r = await fetch(`/api/stays/reservations?${qs}`);
+    const qs = new URLSearchParams();
+    if (params.from && params.to) { qs.set('from', params.from); qs.set('to', params.to); }
+    else qs.set('month', params.month);
+    if (params.dateType) qs.set('dateType', params.dateType);
+
+    const r = await fetch(`/api/stays/reservations?${qs.toString()}`);
     const d = await r.json();
     if (d.error) {
-      showApiStatus('stays-res-status', d.error + (d.detail ? ` — ${d.detail.slice(0, 120)}` : ''), true);
+      showApiStatus(statusElId, d.error + (d.detail ? ` — ${d.detail.slice(0, 120)}` : ''), true);
       return [];
     }
-    hideApiStatus('stays-res-status');
+    hideApiStatus(statusElId);
     return Array.isArray(d.reservas) ? d.reservas : [];
   } catch (e) {
     console.error('Stays reservations fetch failed:', e);
@@ -142,17 +146,19 @@ async function loadAll() {
 
   setStaysReservasDateInputs(state.currentMonth);
 
-  const [appData, stays, reservas, staysReservas] = await Promise.all([
+  const [appData, stays, reservas, staysReservas, staysReservasCriadas] = await Promise.all([
     fetchData(),
     fetchStays(),
     fetchReservas(state.currentMonth),
     fetchStaysReservas({ month: state.currentMonth }),
+    fetchStaysReservas({ month: state.currentMonth, dateType: 'creation', statusElId: 'stays-criadas-status' }),
   ]);
 
   state.appData = appData;
   state.stays   = stays;
   state.reservas = reservas;
   state.staysReservas = staysReservas;
+  state.staysReservasCriadas = staysReservasCriadas;
 
   populateStaysImovelFilter();
   updateStatusBadge(stays, reservas);
@@ -200,6 +206,7 @@ function renderAll() {
   renderUnidades();
   renderReservas();
   renderStaysReservas();
+  renderStaysReservasCriadas();
   renderTarefas();
   initRelatorio();
 }
@@ -591,10 +598,12 @@ function setStaysReservasDateInputs(month) {
   const { from, to } = monthRange(month);
   document.getElementById('stays-res-de').value  = from;
   document.getElementById('stays-res-ate').value = to;
+  document.getElementById('stays-criadas-de').value  = from;
+  document.getElementById('stays-criadas-ate').value = to;
 }
 
-function populateStaysImovelFilter() {
-  const sel = document.getElementById('stays-res-imovel');
+function populateImovelSelect(selectId) {
+  const sel = document.getElementById(selectId);
   const previousValue = sel.value;
 
   const options = state.stays
@@ -607,7 +616,13 @@ function populateStaysImovelFilter() {
   if (options.some(o => o.id === previousValue)) sel.value = previousValue;
 }
 
+function populateStaysImovelFilter() {
+  populateImovelSelect('stays-res-imovel');
+  populateImovelSelect('stays-criadas-imovel');
+}
+
 document.getElementById('stays-res-imovel').addEventListener('change', () => renderStaysReservas());
+document.getElementById('stays-criadas-imovel').addEventListener('change', () => renderStaysReservasCriadas());
 
 document.getElementById('btnFiltrarStaysReservas').addEventListener('click', async () => {
   const from = document.getElementById('stays-res-de').value;
@@ -619,6 +634,54 @@ document.getElementById('btnFiltrarStaysReservas').addEventListener('click', asy
   renderStaysReservas();
 });
 
+document.getElementById('btnFiltrarStaysReservasCriadas').addEventListener('click', async () => {
+  const from = document.getElementById('stays-criadas-de').value;
+  const to   = document.getElementById('stays-criadas-ate').value;
+  if (!from || !to) { alert('Informe as duas datas do período'); return; }
+  if (from > to) { alert('A data "De" não pode ser depois da data "Até"'); return; }
+
+  state.staysReservasCriadas = await fetchStaysReservas({ from, to, dateType: 'creation', statusElId: 'stays-criadas-status' });
+  renderStaysReservasCriadas();
+});
+
+function renderStaysReservaRow(r) {
+  const { code, nome } = getListingLabel(r._idlisting);
+  return `
+    <tr>
+      <td><span class="unit-code" style="font-size:11px">${escHtml(code)}</span> ${escHtml(nome)}</td>
+      <td>${escHtml(r.titular || '—')}</td>
+      <td>${escHtml(r.id || '—')}</td>
+      <td>${formatDate(r.checkin)}</td>
+      <td>${formatDate(r.checkout)}</td>
+      <td>${r.noites || '—'}</td>
+      <td>${r.hospedes || '—'}</td>
+      <td><strong>${brl(r.total)}</strong></td>
+      <td>${brl(r.totalPago)}</td>
+      <td>${formatDateBR(r.criadaEm)}</td>
+    </tr>
+  `;
+}
+
+function renderStaysReservasTable(reservas, ids) {
+  const tbody = document.getElementById(ids.tbody);
+
+  const totalValor  = reservas.reduce((s, r) => s + (parseFloat(r.total || 0)), 0);
+  const totalPago   = reservas.reduce((s, r) => s + (parseFloat(r.totalPago || 0)), 0);
+  const ticketMedio = reservas.length > 0 ? totalValor / reservas.length : 0;
+
+  document.getElementById(ids.statValor).textContent  = brl(totalValor);
+  document.getElementById(ids.statQtd).textContent    = String(reservas.length);
+  document.getElementById(ids.statTicket).textContent = brl(ticketMedio);
+  document.getElementById(ids.statPago).textContent   = brl(totalPago);
+
+  if (!reservas.length) {
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="10">${ids.emptyMsg}</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = reservas.map(renderStaysReservaRow).join('');
+}
+
 function renderStaysReservas() {
   const de  = document.getElementById('stays-res-de').value;
   const ate = document.getElementById('stays-res-ate').value;
@@ -628,36 +691,35 @@ function renderStaysReservas() {
   const reservas = imovelFiltro
     ? state.staysReservas.filter(r => r._idlisting === imovelFiltro)
     : state.staysReservas;
-  const tbody = document.getElementById('staysReservasBody');
 
-  const totalValor  = reservas.reduce((s, r) => s + (parseFloat(r.total || 0)), 0);
-  const totalPago   = reservas.reduce((s, r) => s + (parseFloat(r.totalPago || 0)), 0);
-  const ticketMedio = reservas.length > 0 ? totalValor / reservas.length : 0;
+  renderStaysReservasTable(reservas, {
+    tbody: 'staysReservasBody',
+    statValor: 'stays-res-total-valor',
+    statQtd: 'stays-res-total-qtd',
+    statTicket: 'stays-res-ticket-medio',
+    statPago: 'stays-res-total-pago',
+    emptyMsg: 'Sem reservas confirmadas na Stays neste período',
+  });
+}
 
-  document.getElementById('stays-res-total-valor').textContent = brl(totalValor);
-  document.getElementById('stays-res-total-qtd').textContent   = String(reservas.length);
-  document.getElementById('stays-res-ticket-medio').textContent = brl(ticketMedio);
-  document.getElementById('stays-res-total-pago').textContent  = brl(totalPago);
+function renderStaysReservasCriadas() {
+  const de  = document.getElementById('stays-criadas-de').value;
+  const ate = document.getElementById('stays-criadas-ate').value;
+  if (de && ate) document.getElementById('stays-criadas-period').textContent = `${formatDateBR(de)} – ${formatDateBR(ate)}`;
 
-  if (!reservas.length) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="7">Sem reservas confirmadas na Stays neste período</td></tr>';
-    return;
-  }
+  const imovelFiltro = document.getElementById('stays-criadas-imovel').value;
+  const reservas = imovelFiltro
+    ? state.staysReservasCriadas.filter(r => r._idlisting === imovelFiltro)
+    : state.staysReservasCriadas;
 
-  tbody.innerHTML = reservas.map(r => {
-    const { code, nome } = getListingLabel(r._idlisting);
-    return `
-      <tr>
-        <td><span class="unit-code" style="font-size:11px">${escHtml(code)}</span> ${escHtml(nome)}</td>
-        <td>${formatDate(r.checkin)}</td>
-        <td>${formatDate(r.checkout)}</td>
-        <td>${r.noites || '—'}</td>
-        <td>${r.hospedes || '—'}</td>
-        <td><strong>${brl(r.total)}</strong></td>
-        <td>${brl(r.totalPago)}</td>
-      </tr>
-    `;
-  }).join('');
+  renderStaysReservasTable(reservas, {
+    tbody: 'staysReservasCriadasBody',
+    statValor: 'stays-criadas-total-valor',
+    statQtd: 'stays-criadas-total-qtd',
+    statTicket: 'stays-criadas-ticket-medio',
+    statPago: 'stays-criadas-total-pago',
+    emptyMsg: 'Nenhuma reserva criada na Stays neste período',
+  });
 }
 
 function formatDate(str) {
@@ -698,9 +760,10 @@ function mapStatus(s) {
 document.getElementById('prevMonth').addEventListener('click', async () => {
   state.currentMonth = prevMonth(state.currentMonth);
   setStaysReservasDateInputs(state.currentMonth);
-  [state.reservas, state.staysReservas] = await Promise.all([
+  [state.reservas, state.staysReservas, state.staysReservasCriadas] = await Promise.all([
     fetchReservas(state.currentMonth),
     fetchStaysReservas({ month: state.currentMonth }),
+    fetchStaysReservas({ month: state.currentMonth, dateType: 'creation', statusElId: 'stays-criadas-status' }),
   ]);
   renderAll();
 });
@@ -708,9 +771,10 @@ document.getElementById('prevMonth').addEventListener('click', async () => {
 document.getElementById('nextMonth').addEventListener('click', async () => {
   state.currentMonth = nextMonth(state.currentMonth);
   setStaysReservasDateInputs(state.currentMonth);
-  [state.reservas, state.staysReservas] = await Promise.all([
+  [state.reservas, state.staysReservas, state.staysReservasCriadas] = await Promise.all([
     fetchReservas(state.currentMonth),
     fetchStaysReservas({ month: state.currentMonth }),
+    fetchStaysReservas({ month: state.currentMonth, dateType: 'creation', statusElId: 'stays-criadas-status' }),
   ]);
   renderAll();
 });

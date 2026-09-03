@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Importar tarefas do Firestore — Artezian</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: #14161b; color: #e8eaee; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+  }
+  .caixa {
+    width: 100%; max-width: 440px; background: #1c1f26;
+    border: 1px solid #2b2f38; border-radius: 10px; padding: 30px 28px;
+  }
+  h1 { font-size: 17px; font-weight: 700; letter-spacing: .04em; color: #c2a14e; }
+  .sub { font-size: 12.5px; color: #7d8493; margin-top: 5px; line-height: 1.5; }
+  .aviso {
+    margin-top: 18px; padding: 11px 13px; border-radius: 6px;
+    background: rgba(194,161,78,.09); border: 1px solid rgba(194,161,78,.3);
+    font-size: 12.5px; color: #d4b56a; line-height: 1.5;
+  }
+  label { display: block; margin-top: 15px; }
+  label span {
+    display: block; font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+    color: #7d8493; margin-bottom: 5px; font-weight: 600;
+  }
+  input {
+    width: 100%; background: #14161b; border: 1px solid #2b2f38; border-radius: 6px;
+    padding: 10px 12px; color: #e8eaee; font-size: 14px; font-family: inherit;
+  }
+  input:focus { outline: none; border-color: #c2a14e; }
+  button {
+    width: 100%; margin-top: 18px; padding: 11px; background: #c2a14e; color: #14161b;
+    border: none; border-radius: 6px; font-family: inherit; font-size: 14px;
+    font-weight: 700; cursor: pointer;
+  }
+  button:disabled { opacity: .5; cursor: default; }
+  button.secundario { background: transparent; color: #9aa1ae; border: 1px solid #2b2f38; }
+  #saida {
+    margin-top: 18px; font-size: 12.5px; line-height: 1.7; color: #9aa1ae;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .erro { color: #e0705f; }
+  .ok   { color: #7ec699; }
+</style>
+</head>
+<body>
+
+<div class="caixa">
+  <h1>IMPORTAR TAREFAS</h1>
+  <div class="sub">
+    Traz as tarefas e etiquetas que ficaram no Firestore para o armazenamento
+    local do painel. Use uma vez e pode esquecer esta página.
+  </div>
+
+  <div class="aviso">
+    Abra esta página pelo mesmo endereço do painel
+    (<strong>localhost:3131</strong>). O armazenamento local é por endereço —
+    aberta de outro lugar, os dados não chegam ao painel.
+  </div>
+
+  <form id="form">
+    <label>
+      <span>E-mail da conta Firebase</span>
+      <input type="email" name="email" autocomplete="username" required />
+    </label>
+    <label>
+      <span>Senha</span>
+      <input type="password" name="senha" autocomplete="current-password" required />
+    </label>
+    <button type="submit" id="btn">Entrar e importar</button>
+  </form>
+
+  <div id="saida"></div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, collection, getDocs }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const CHAVE = 'artezian_tarefas_v1';
+
+const app  = initializeApp({
+  apiKey: "AIzaSyCyJB9Yxvi8H-6WK1xNIVSDpcuU8Vqgn1U",
+  authDomain: "artezian-fluxo.firebaseapp.com",
+  projectId: "artezian-fluxo",
+  storageBucket: "artezian-fluxo.firebasestorage.app",
+  messagingSenderId: "477718266482",
+  appId: "1:477718266482:web:ead3191890c2d45518b8eb"
+});
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+const form  = document.getElementById('form');
+const btn   = document.getElementById('btn');
+const saida = document.getElementById('saida');
+
+const escreve = (txt, cls) => {
+  const p = document.createElement('div');
+  if (cls) p.className = cls;
+  p.textContent = txt;
+  saida.appendChild(p);
+};
+
+const ERROS = {
+  'auth/invalid-credential':    'E-mail ou senha incorretos.',
+  'auth/user-not-found':        'E-mail ou senha incorretos.',
+  'auth/wrong-password':        'E-mail ou senha incorretos.',
+  'auth/invalid-email':         'E-mail inválido.',
+  'auth/too-many-requests':     'Tentativas demais. Espere alguns minutos.',
+  'auth/network-request-failed':'Sem conexão com a internet.',
+  'permission-denied':          'A conta entrou, mas as regras do Firestore negaram a leitura.',
+};
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  saida.innerHTML = '';
+  btn.disabled = true;
+  btn.textContent = 'Importando…';
+
+  try {
+    await signInWithEmailAndPassword(auth, form.email.value.trim(), form.senha.value);
+    escreve('Autenticado.', 'ok');
+
+    const [snapTarefas, snapTags] = await Promise.all([
+      getDocs(collection(db, 'tarefas')),
+      getDocs(collection(db, 'tags')),
+    ]);
+
+    const paraObjeto = (d) => {
+      const dados = d.data();
+      // criadoEm vem como Timestamp do Firestore; local usa numero.
+      if (dados.criadoEm && typeof dados.criadoEm.toMillis === 'function') {
+        dados.criadoEm = dados.criadoEm.toMillis();
+      }
+      return { id: d.id, ...dados };
+    };
+
+    const vindas = {
+      tarefas: snapTarefas.docs.map(paraObjeto),
+      tags:    snapTags.docs.map(paraObjeto),
+    };
+    escreve(`No Firestore: ${vindas.tarefas.length} tarefas, ${vindas.tags.length} etiquetas.`);
+
+    // Mescla pelo id, sem duplicar o que ja estiver local.
+    let atual = { tarefas: [], tags: [] };
+    try { atual = JSON.parse(localStorage.getItem(CHAVE)) || atual; } catch (_) {}
+    if (!Array.isArray(atual.tarefas)) atual.tarefas = [];
+    if (!Array.isArray(atual.tags))    atual.tags    = [];
+
+    let novasT = 0, novasG = 0;
+    for (const t of vindas.tarefas) {
+      if (!atual.tarefas.some(x => x.id === t.id)) { atual.tarefas.push(t); novasT++; }
+    }
+    for (const g of vindas.tags) {
+      if (!atual.tags.some(x => x.id === g.id)) { atual.tags.push(g); novasG++; }
+    }
+
+    localStorage.setItem(CHAVE, JSON.stringify(atual));
+
+    escreve(`Importadas ${novasT} tarefas e ${novasG} etiquetas novas.`, 'ok');
+    if (novasT === 0 && vindas.tarefas.length) {
+      escreve('Todas já estavam no painel — nada foi duplicado.');
+    }
+    escreve('Pronto. Abra a aba Tarefas do painel para conferir.', 'ok');
+
+    btn.textContent = 'Importação concluída';
+    btn.className = 'secundario';
+
+  } catch (err) {
+    const codigo = (err && err.code) || '';
+    escreve(ERROS[codigo] || ('Falhou' + (codigo ? ` (${codigo})` : '') + '.'), 'erro');
+    btn.disabled = false;
+    btn.textContent = 'Tentar de novo';
+  }
+});
+</script>
+</body>
+</html>

@@ -433,24 +433,49 @@ header{
 </div>
 
 <script type="module">
-import { initializeApp }       from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, query, orderBy,
-         onSnapshot, addDoc, updateDoc,
-         doc, serverTimestamp }  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { documentoSincronizado } from '../az-store.js';
 
-// ── Firebase ──────────────────────────────────────────────────
-const firebaseConfig = {
-  apiKey: "AIzaSyCyJB9Yxvi8H-6WK1xNIVSDpcuU8Vqgn1U",
-  authDomain: "artezian-fluxo.firebaseapp.com",
-  projectId: "artezian-fluxo",
-  storageBucket: "artezian-fluxo.firebasestorage.app",
-  messagingSenderId: "477718266482",
-  appId: "1:477718266482:web:ead3191890c2d45518b8eb"
-};
-const app    = initializeApp(firebaseConfig);
-const db     = getFirestore(app);
-const colRef = collection(db, 'tarefas');
-const tagsRef= collection(db, 'tags');
+/* Persistencia local. Antes isto vivia no Firestore; o painel passou a rodar
+   so na maquina, entao os dados ficam no proprio navegador.
+
+   Os atalhos abaixo imitam a interface do Firestore (doc/updateDoc/addDoc)
+   de proposito: assim os pontos que criam e editam tarefas seguem escritos
+   do mesmo jeito, e a troca ficou contida neste bloco. */
+
+const store = documentoSincronizado({
+  chaveLocal: 'artezian_tarefas_v1',
+  aoMudarStatus: (estado) => setSync(estado),
+});
+
+let dados = { tarefas: [], tags: [] };
+
+const novoId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+
+const db      = null;                  // mantido so para as chamadas doc(db, ...)
+const colRef  = { nome: 'tarefas' };
+const tagsRef = { nome: 'tags' };
+
+const doc = (_db, nome, id) => ({ nome, id });
+const serverTimestamp = () => Date.now();
+
+function persistir() {
+  store.salvar(dados);
+  recarregarDoEstado();
+}
+
+async function updateDoc(ref, patch) {
+  const lista = dados[ref.nome];
+  const alvo  = lista.find(x => x.id === ref.id);
+  if (alvo) Object.assign(alvo, patch);
+  persistir();
+}
+
+async function addDoc(ref, obj) {
+  const id = novoId();
+  dados[ref.nome].push({ id, ...obj });
+  persistir();
+  return { id };
+}
 
 // ── Tags padrão ───────────────────────────────────────────────
 const TAGS_DEFAULT = [
@@ -470,22 +495,25 @@ let viewAtual        = 'ativas';
 
 const todasTags = () => [...TAGS_DEFAULT, ...tagsCustom];
 
-// ── Listeners ─────────────────────────────────────────────────
-onSnapshot(query(colRef, orderBy('criadoEm','desc')), snap => {
-  tarefas = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+// ── Carga ─────────────────────────────────────────────────────
+function recarregarDoEstado() {
+  tarefas    = [...dados.tarefas].sort((a, b) => (b.criadoEm || 0) - (a.criadoEm || 0));
+  tagsCustom = [...dados.tags].sort((a, b) => (a.criadoEm || 0) - (b.criadoEm || 0));
   render();
-  setSync(true);
-}, () => setSync(false));
-
-onSnapshot(query(tagsRef, orderBy('criadoEm','asc')), snap => {
-  tagsCustom = snap.docs.map(d => ({ id: d.id, ...d.data() }));
   renderTagsPicker();
-});
+}
+
+dados = await store.iniciar({ tarefas: [], tags: [] });
+if (!Array.isArray(dados.tarefas)) dados.tarefas = [];
+if (!Array.isArray(dados.tags))    dados.tags    = [];
+recarregarDoEstado();
 
 // ── Sync ──────────────────────────────────────────────────────
-function setSync(online) {
-  document.getElementById('syncDot').className = 'sync-dot' + (online ? ' online' : '');
-  document.getElementById('syncLabel').textContent = online ? 'sincronizado' : 'sem conexão';
+function setSync(estado) {
+  const ok = estado !== 'erro';
+  document.getElementById('syncDot').className = 'sync-dot' + (ok ? ' online' : '');
+  document.getElementById('syncLabel').textContent =
+    estado === 'salvando' ? 'salvando…' : ok ? 'salvo neste navegador' : 'não foi possível salvar';
 }
 
 // ── Render principal ──────────────────────────────────────────

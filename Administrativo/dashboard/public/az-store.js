@@ -1,45 +1,27 @@
 /* ───────────────────────────────────────────────────────────────────────────
-   Camada de dados compartilhada dos painéis Artezian.
+   Camada de dados dos painéis Artezian.
 
-   Firestore é a fonte da verdade; o localStorage segue como cache local e
-   rede de segurança. Se o Firestore não responder, o painel continua
-   funcionando offline com o que estiver em cache — só para de sincronizar.
+   O painel roda local, na máquina do usuário, então a persistência é local:
+   localStorage do navegador, sem nuvem e sem login.
 
-   Usado por: checklist. A migrar: atalhos, tarefas, parceiros/custos.
+   A interface é a mesma que a versão sincronizada usava (iniciar / salvar /
+   online), então trocar o armazenamento por um backend não exige mexer em
+   quem consome — só neste arquivo.
    ─────────────────────────────────────────────────────────────────────────── */
 
-import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import {
-  getFirestore, doc, getDoc, setDoc, onSnapshot
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-import { firebaseConfig } from './az-config.js';
-import { usuarioResolvido } from './az-auth.js';
-
-const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-
-/* Agrupa edições seguidas numa escrita só. */
-const ATRASO_ESCRITA = 700;
-
-/* Firestore recusa documento acima de 1 MiB. Avisamos antes de chegar lá. */
-const LIMITE_ALERTA = 800 * 1024;
+/* Agrupa edições seguidas numa gravação só. */
+const ATRASO_ESCRITA = 400;
 
 /**
- * Mantém um documento único do Firestore em sincronia com um cache local.
+ * Mantém um documento no armazenamento local do navegador.
  *
- * @param {string}   caminho       ex.: 'paineis/checklist'
- * @param {string}   chaveLocal    chave de localStorage que já guardava o dado
- * @param {function} aoReceber     recebe dados novos vindos de outro dispositivo
- * @param {function} aoMudarStatus recebe ('sincronizado'|'salvando'|'offline'|'migrado', detalhe)
+ * @param {string}   chaveLocal    chave usada no localStorage
+ * @param {function} aoMudarStatus recebe ('salvo'|'salvando'|'erro', detalhe)
+ * @param {function} aoReceber     mantido por compatibilidade; sem uso local
  */
-export function documentoSincronizado({ caminho, chaveLocal, aoReceber, aoMudarStatus }) {
-  const partes = caminho.split('/');
-  const ref = doc(db, partes[0], partes[1]);
-
-  let ultimoJson = null;   // última versão que nós mesmos gravamos (mata o eco)
+export function documentoSincronizado({ chaveLocal, aoMudarStatus }) {
   let timer = null;
-  let online = true;
+  let ok = true;
 
   const status = (estado, detalhe) => {
     try { if (aoMudarStatus) aoMudarStatus(estado, detalhe); } catch (_) {}
@@ -53,100 +35,44 @@ export function documentoSincronizado({ caminho, chaveLocal, aoReceber, aoMudarS
   }
 
   function gravarLocal(dados) {
-    try { localStorage.setItem(chaveLocal, JSON.stringify(dados)); } catch (_) {}
+    localStorage.setItem(chaveLocal, JSON.stringify(dados));
   }
 
   return {
-    /**
-     * Devolve os dados iniciais. Na primeira execução, sobe o que já existia
-     * em localStorage para o Firestore — é a migração, e ela acontece uma vez só.
-     */
+    /** Devolve o que já estava salvo, ou a semente na primeira execução. */
     async iniciar(semente) {
       const local = lerLocal();
-      let inicial;
-
-      try {
-        // As regras exigem usuario autenticado. Sem login, nem tenta ler:
-        // o painel roda no cache local ate a pessoa entrar.
-        const usuario = await usuarioResolvido();
-        if (!usuario) {
-          inicial = local !== null ? local : semente;
-          ultimoJson = JSON.stringify(inicial);
-          online = false;
-          status('offline', 'entre na sua conta para sincronizar');
-          return inicial;
-        }
-
-        const snap = await getDoc(ref);
-        const conteudo = snap.exists() ? snap.data() : null;
-
-        if (conteudo && conteudo.dados !== undefined) {
-          inicial = conteudo.dados;
-          gravarLocal(inicial);
-          status('sincronizado');
-        } else {
-          inicial = local !== null ? local : semente;
-          await setDoc(ref, { dados: inicial, atualizadoEm: Date.now() });
-          gravarLocal(inicial);
-          status('migrado', local !== null ? 'dados locais enviados' : 'iniciado do zero');
-        }
-
-        ultimoJson = JSON.stringify(inicial);
-        online = true;
-
-        onSnapshot(ref, (s) => {
-          if (!s.exists()) return;
-          const d = s.data() && s.data().dados;
-          if (d === undefined) return;
-          const json = JSON.stringify(d);
-          if (json === ultimoJson) return;   // eco da nossa própria escrita
-          ultimoJson = json;
-          gravarLocal(d);
-          online = true;
-          status('sincronizado');
-          try { if (aoReceber) aoReceber(d); } catch (_) {}
-        }, (err) => {
-          online = false;
-          status('offline', (err && err.code) || 'conexão perdida');
-        });
-
-      } catch (err) {
-        // Sem Firestore o painel não para: cai pro cache local.
-        online = false;
-        inicial = local !== null ? local : semente;
-        ultimoJson = JSON.stringify(inicial);
-        status('offline', (err && err.code) || 'falha ao ler');
+      if (local !== null) {
+        status('salvo');
+        return local;
       }
-
-      return inicial;
+      try {
+        gravarLocal(semente);
+        status('salvo');
+      } catch (err) {
+        ok = false;
+        status('erro', (err && err.name) || 'não foi possível salvar');
+      }
+      return semente;
     },
 
-    /** Grava local na hora; no Firestore com atraso, agrupando edições seguidas. */
+    /** Grava com um pequeno atraso, agrupando edições seguidas. */
     salvar(dados) {
-      gravarLocal(dados);
-
-      const json = JSON.stringify(dados);
-      ultimoJson = json;
-
-      if (json.length > LIMITE_ALERTA) {
-        status('offline', 'documento grande demais para o Firestore');
-        return;
-      }
-
       status('salvando');
       clearTimeout(timer);
-      timer = setTimeout(async () => {
+      timer = setTimeout(() => {
         try {
-          await setDoc(ref, { dados, atualizadoEm: Date.now() });
-          online = true;
-          status('sincronizado');
+          gravarLocal(dados);
+          ok = true;
+          status('salvo');
         } catch (err) {
-          online = false;
-          status('offline', (err && err.code) || 'falha ao gravar');
+          // Estouro de cota ou navegador em modo restrito.
+          ok = false;
+          status('erro', (err && err.name) || 'não foi possível salvar');
         }
       }, ATRASO_ESCRITA);
     },
 
-    get online() { return online; }
+    get online() { return ok; }
   };
 }

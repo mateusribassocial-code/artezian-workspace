@@ -202,11 +202,7 @@ footer{
 
 <script type="module">
 import { documentoSincronizado } from '../az-store.js';
-import { exigirLogin } from '../az-login.js';
 
-// Aberto direto (fora do painel), pede login igual. Dentro do iframe,
-// a sessao ja existe e a tela nem chega a aparecer.
-exigirLogin({});
 
 // ---------------------------------------------------------------------------
 // SEED — mapeamento inicial (área > subárea > tarefa)
@@ -425,23 +421,20 @@ function sementeLocal(){
 }
 
 const ROTULO_STATUS = {
-  sincronizado: 'Sincronizado — visível em qualquer dispositivo',
-  salvando:     'Salvando…',
-  migrado:      'Checklist migrado para o Firestore',
-  offline:      'Offline — salvo só neste navegador',
+  salvo:    'Progresso salvo neste navegador',
+  salvando: 'Salvando…',
+  erro:     'Não foi possível salvar',
 };
 
 function mostrarStatus(estado, detalhe){
   const el = document.getElementById('syncStatus');
   if(!el) return;
   el.textContent = (ROTULO_STATUS[estado] || estado) + (detalhe ? ' (' + detalhe + ')' : '');
-  el.style.color = estado === 'offline' ? '#e0a458' : '';
+  el.style.color = estado === 'erro' ? '#e0705f' : '';
 }
 
 const store = documentoSincronizado({
-  caminho:   'paineis/checklist',
   chaveLocal: LS_TREE,
-  aoReceber(dados){ tree = dados; render(); },   // edicao vinda de outro dispositivo
   aoMudarStatus: mostrarStatus,
 });
 

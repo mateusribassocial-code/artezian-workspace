@@ -50,9 +50,8 @@ Premium, minimalista, clean. A identidade transmite sofisticação acessível �
 
 ## Logo
 
-- **Arquivo:** *(adicionar logo na pasta `marca/` — ex: marca/logo-artezian.png)*
-- **Versão pra fundo claro:** logo em dourado `#c2a14e`
-- **Versão pra fundo escuro:** logo em branco `#ffffff`
+- **Versão pra fundo claro:** `Marca/Logo Amarela.png` (dourado `#c2a14e`)
+- **Versão pra fundo escuro:** `Marca/Logo-Branca.png` (branco `#ffffff`)
 - **Onde usar:** slide final do carrossel (CTA), header de propostas, slides de apresentação
 - **Tamanho sugerido:** largura entre 120–200px nos HTMLs
 

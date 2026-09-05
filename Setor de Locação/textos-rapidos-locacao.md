@@ -145,7 +145,7 @@ Se quiser ver algum cômodo específico me fala que eu mando ☀️
 ```
 Aqui estão as principais formas de pagamento:
 
-✅ Pix à vista: **5% de desconto**
+✅ Pix à vista: *5% de desconto*
 ✅ Pix parcelado: de 30% a 50% agora pra garantir a reserva e o restante em até 3X (precisa estar quitado antes do check-in)
 ✅ Cartão: até 12X com o juros da máquina
 ```
@@ -153,7 +153,7 @@ Aqui estão as principais formas de pagamento:
 ### `DV5 "Tem desconto?"` ✅
 > Não existia template pra isso e é a pergunta que abre a porta pro pagamento à vista — o cenário melhor pra Artezian.
 ```
-Tem sim, {Primeiro nome do lead}! Pagando à vista no Pix, **5% de desconto** no valor total ✅
+Tem sim, {Primeiro nome do lead}! Pagando à vista no Pix, *5% de desconto* no valor total ✅
 
 Se preferir parcelar também dá: 30% a 50% agora pra garantir e o restante em até 3x.
 ```

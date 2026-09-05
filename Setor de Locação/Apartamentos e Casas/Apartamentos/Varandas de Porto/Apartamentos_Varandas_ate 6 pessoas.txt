@@ -38,6 +38,6 @@ Estrutura do condomínio:
 **Tipo B — Apartamentos 1 quarto (JR05J, JR06J, JR07J, JR08J)**
 * Capacidade: até 5 pessoas
 * Quarto e sala, sofá cama, cama de casal, beliche, ar-condicionado, cozinha completa, tanquinho
-* Mínimo: 3 noites
+* Mínimo: 3 noites (5 em feriados)
 * IDs Stays: JR05J, JR06J, JR07J, JR08J
 

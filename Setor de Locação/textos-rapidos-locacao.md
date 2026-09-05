@@ -145,26 +145,34 @@ Se quiser ver algum cômodo específico me fala que eu mando ☀️
 ```
 Aqui estão as principais formas de pagamento:
 
-✅ Pix à Vista
-✅ Pix Parcelado: de 30% a 50% agora pra garantir a reserva e o restante em até 3X (precisa estar quitado antes do check-in)
+✅ Pix à vista: **5% de desconto**
+✅ Pix parcelado: de 30% a 50% agora pra garantir a reserva e o restante em até 3X (precisa estar quitado antes do check-in)
 ✅ Cartão: até 12X com o juros da máquina
 ```
 
-### `DV5 "No cartão tem juros?"` ✅
+### `DV5 "Tem desconto?"` ✅
+> Não existia template pra isso e é a pergunta que abre a porta pro pagamento à vista — o cenário melhor pra Artezian.
+```
+Tem sim, {Primeiro nome do lead}! Pagando à vista no Pix, **5% de desconto** no valor total ✅
+
+Se preferir parcelar também dá: 30% a 50% agora pra garantir e o restante em até 3x.
+```
+
+### `DV6 "No cartão tem juros?"` ✅
 ```
 Tem sim, {Primeiro nome do lead} — no cartão é o juros da máquina, até 12x.
 
-No Pix sai melhor: você garante com 30% a 50% agora e parcela o restante em até 3x, sem juros. Só precisa estar quitado antes do check-in ✅
+No Pix sai bem melhor: à vista você ganha 5% de desconto, ou parcela sem juros (30% a 50% agora e o resto em até 3x, quitado antes do check-in) ✅
 ```
 
-### `DV6 "Só aceita Pix?"` ✅
+### `DV7 "Só aceita Pix?"` ✅
 ```
 Não! Pix ou cartão, os dois 👍
 
-Pix você garante com 30% a 50% e parcela o resto em até 3x. Cartão vai até 12x com o juros da máquina.
+No Pix à vista tem 5% de desconto. Parcelado, você garante com 30% a 50% e paga o resto em até 3x. No cartão vai até 12x com o juros da máquina.
 ```
 
-### `DV7 "Tem café da manhã?"` ✅
+### `DV8 "Tem café da manhã?"` ✅
 *(mantém o atual, com uma linha a mais)*
 ```
 Todas as unidades são individuais e sem café da manhã. Como são airbnbs eles funcionam um pouco diferente de hotel.
@@ -172,13 +180,23 @@ Todas as unidades são individuais e sem café da manhã. Como são airbnbs eles
 Mas a cozinha é completa e tem mercado bem perto ☀️
 ```
 
-### `DV8 "Qual o mínimo de noites?"` ⚠️ *decidir o número antes de publicar*
+### `DV9 "Qual o mínimo de noites?" — data normal` ✅
 ```
-Pra esse período o mínimo é de [X] noites.
-```
-> ⚠️ O template atual (`Pacote Mínimo`) diz **5 dias**. A base de conhecimento e o FAQ dizem **3 noites em todos os imóveis, sem exceção**. Um dos dois está errado — ver seção 9.
+O mínimo é de 3 diárias, {Primeiro nome do lead} ✅
 
-### `DV9 "Aceita pet?"` ✅
+Me passa as datas que eu confiro a disponibilidade.
+```
+
+### `DV10 "Qual o mínimo de noites?" — feriado` ✅
+> Em feriado o mínimo sobe pra 5. São dois textos separados de propósito: se for um só, o atendente tem que editar toda vez e acaba não usando.
+```
+Pra esse período o mínimo é de 5 diárias, {Primeiro nome do lead} — é feriado, e os proprietários só fecham a partir disso.
+
+Se você tiver flexibilidade pra pegar dias fora do feriado, o mínimo cai pra 3 e a diária fica bem mais em conta ☀️
+```
+> Os períodos de feriado estão no calendário do `prompt-unico-reservas.md` (seção CALENDÁRIO). Na dúvida, confere lá antes de responder.
+
+### `DV11 "Aceita pet?"` ✅
 ```
 Aceita em alguns, {Primeiro nome do lead}! 🐶
 
@@ -187,14 +205,14 @@ Studio do João (porte pequeno) e todos os apartamentos do Condomínio do Max, e
 Qual deles vc curtiu? Eu confirmo pra você.
 ```
 
-### `DV10 "Que horas é o check-in?"` ✅
+### `DV12 "Que horas é o check-in?"` ✅
 ```
 Check-in a partir das 15h e check-out até as 12h ✅
 
 Entrar mais cedo ou sair mais tarde a gente tenta, mas depende da reserva anterior — não dá pra garantir antes.
 ```
 
-### `DV11 "Como sei que vocês são de confiança?"` ✅
+### `DV13 "Como sei que vocês são de confiança?"` ✅
 > ⚠️ O template atual (`Não é Golpe`) tem só um vídeo e o corpo em branco — literalmente "Crie sua nova mensagem". Está quebrado. Aqui vai o texto pra acompanhar o vídeo.
 ```
 Pergunta justa, {Primeiro nome do lead} — e boa que você perguntou 👊
@@ -206,14 +224,14 @@ Site: artezian.com.br
 Qualquer coisa, dá uma olhada no perfil e nos vídeos dos imóveis 💙
 ```
 
-### `DV12 "Vocês são do Airbnb?"` ✅
+### `DV14 "Vocês são do Airbnb?"` ✅
 ```
 Não, o atendimento é direto com a Artezian 💙
 
 Por isso é mais ágil e você não paga taxa de plataforma. A gente faz a gestão completa dos imóveis.
 ```
 
-### `DV13 "Posso cancelar?"` ⚠️ *validar contra o contrato antes de publicar*
+### `DV15 "Posso cancelar?"` ✅
 ```
 Pode sim, {Primeiro nome do lead}. As regras são as do contrato:
 
@@ -460,24 +478,35 @@ Tá chegando a época que vocês vieram ano passado. Se estiverem pensando em vo
 
 ---
 
-## 9. Precisa da tua decisão antes de publicar
+## 9. Regras oficiais — decididas em 05/09/2026
 
-Achei 4 contradições entre a base documentada, os templates atuais e o que a equipe realmente fala nas conversas. Não dá pra publicar template com informação em conflito.
+| Assunto | Regra oficial |
+|---|---|
+| **Desconto** | **5% no pagamento à vista** (Pix) |
+| **Mínimo de noites** | **3 diárias** em datas normais · **5 diárias** em feriados |
+| **Cancelamento** | As 4 regras do contrato: 72h integral · até 30 dias, retenção de 15% · abaixo de 30 dias, sem reembolso · no-show, sem reembolso |
 
-| # | Assunto | Documentação | Template atual | Conversas reais (fev–jul/26) |
-|---|---|---|---|---|
-| 1 | **Desconto Pix** | `base-conhecimento-art.md` e `faq-reservas.md`: **10%**. `### Dúvidas frequentes.txt`: **5%** | não menciona | **não aparece desconto nenhum** — só "Pix parcelado" |
-| 2 | **Cartão** | até **6x com 13%** de acréscimo | até **12x com juros da máquina** | **12x com juros da máquina** |
-| 3 | **Mínimo de noites** | **3 noites**, "em todos os imóveis, sem exceção" | `Pacote Mínimo`: **5 dias** | — |
-| 4 | **Cancelamento** | ">30 dias reembolso total, <30 sem reembolso" | não tem template | contrato tem 4 regras (72h integral / 15% até 30 dias / nada abaixo de 30 / no-show) |
+Já aplicado em `DV4`, `DV5`, `DV6`, `DV7`, `DV9`, `DV10` e `DV15`, e propagado pra base de conhecimento (ver seção 10).
 
-**Minha recomendação:** vale o que a equipe pratica e o que está no contrato assinado — ou seja, **cartão 12x com juros da máquina** e **as 4 regras do contrato pra cancelamento** (já escrevi `DV4`, `DV5`, `DV6` e `DV13` assim). Nos itens 1 e 3 eu não tenho como decidir por você: o desconto Pix existe ou não, e o mínimo é 3 ou 5?
+Nota: o `Pacote Mínimo` que estava lá ("no mínimo 5 dias") não estava errado — era a regra de feriado sem o contexto. Por isso separei em dois textos: `DV9` pra data normal e `DV10` pra feriado.
 
-Assim que você responder, eu fecho `DV8` e atualizo a base de conhecimento pra parar de divergir.
+### ⚠️ Ainda em aberto: cartão de crédito
+
+Essa eu não mexi, porque é mudança de política comercial e você não confirmou:
+
+| Onde | O que diz |
+|---|---|
+| Base de conhecimento e prompts do bot | até **6x com 13%** de acréscimo |
+| Template no Datacrazy (`[LOC] Formas de Pagamento`) | até **12x com o juros da máquina** |
+| O que a equipe fala nas conversas reais | **12x com o juros da máquina** |
+
+Escrevi os templates com **12x/juros da máquina**, que é o que a equipe pratica e o que já está publicado no Datacrazy. Mas **não alterei os prompts do bot** — hoje o Art responde "6x com 13%" e o humano responde "12x com juros da máquina", pro mesmo lead. Me confirma qual vale que eu alinho os dois.
 
 ---
 
 ## 10. Arrumar no que já existe
+
+### No Datacrazy
 
 | Ação | Item | Motivo |
 |---|---|---|
@@ -486,6 +515,23 @@ Assim que você responder, eu fecho `DV8` e atualizo a base de conhecimento pra 
 | 🟡 **Renomear** | `Sondagem_Enviada`, `Pós - João`, `Café da manhã`, `Pacote Mínimo`, `Não é Golpe` | Sem prefixo, quebram a busca |
 | 🟡 **Reescrever** | `Sem Disponibilidade`, `Fora do Orçamento` | Encerram a conversa sem oferecer saída |
 | 🟡 **Reescrever** | `Sondagem_Enviada` | Esqueleto vazio, obriga o atendente a montar tudo na mão |
+
+### Na base de conhecimento — ✅ já feito em 05/09/2026
+
+As regras oficiais da seção 9 foram propagadas pra **27 arquivos, 104 linhas**:
+
+| Correção | Volume | Onde |
+|---|---|---|
+| Desconto **10% → 5%** | **21 linhas / 14 arquivos** | `base-conhecimento-art.md`, `faq-reservas.md`, `prompt-unico-reservas.md`, `base-imoveis.md` (3 cópias), `agente-01/03/04/05` (2 cópias cada) |
+| Mínimo **3 noites → 3 noites (5 em feriados)** | **83 linhas / 25 arquivos** | os acima + `system-prompt-apresentacao.md` (2 cópias), `catalogo-imoveis.md`, `agente-02`, `### Dúvidas frequentes.txt`, os 3 prompts do ART e as 4 descrições do Varandas de Porto |
+
+Os prompts em `Setor de Locação/` (`PROMPT — ART V2`, `PROMPT_ART_GEMINI`, `prompt_ART_BASE NÃO DEPENADO`) já traziam os 5% corretos — só receberam a regra de feriado.
+
+### 🔴 Achado: pasta duplicada
+
+`CRM/agentes/` e os `agente-0X.md` dentro de `CRM/Atendimento IA/` são **cópias byte a byte** (conferido com `diff`). São 5 arquivos mantidos em dois lugares — toda correção precisa ser feita duas vezes, e é assim que a base desanda.
+
+Fiz a correção nas duas cópias pra não deixar divergência agora, mas vale apagar uma das pastas e deixar só uma fonte. Me fala qual você quer manter que eu faço.
 
 ---
 

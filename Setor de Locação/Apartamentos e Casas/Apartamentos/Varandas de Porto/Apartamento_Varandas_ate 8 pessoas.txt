@@ -36,6 +36,6 @@ Estrutura do condomínio:
 * Capacidade: até 5 pessoas
 * Quarto e sala, sofá cama, cama de casal, beliche, ar-condicionado, cozinha completa, tanquinho
 * Taxa de limpeza: R$ 100
-* Mínimo: 3 noites
+* Mínimo: 3 noites (5 em feriados)
 * IDs Stays: JR05J, JR06J, JR07J, JR08J
 

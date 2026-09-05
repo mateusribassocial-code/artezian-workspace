@@ -84,8 +84,8 @@ Condomínio fechado com portaria 24h. Estrutura superior à maioria das hospedag
 | Outubro (+30%) | R$ 325 | R$ 325 | R$ 325 |
 | Janeiro | R$ 600 | R$ 600 | R$ 600 |
 
-**Desconto:** 10% para pagamento à vista (Pix)  
-**Mínimo:** 3 noites
+**Desconto:** 5% para pagamento à vista (Pix)  
+**Mínimo:** 3 noites (5 em feriados)
 
 Preços acima são referência. Use a ferramenta Stays para consultar o valor exato nas datas do lead.
 
@@ -142,7 +142,7 @@ Use a ferramenta com os IDs DS03J, DS04J ou DS05J conforme o grupo.
 ## Regras
 
 - Check-in: a partir das 15h | Checkout: até as 12h
-- Mínimo 3 noites
+- Mínimo 3 noites (5 em feriados)
 - Sem café da manhã — cada apê tem cozinha equipada
 - Sempre informe a taxa de limpeza e o total da estadia, sem surpresa
 - Não invente disponibilidade. Se não conseguir verificar na hora: "Deixa eu confirmar e já te retorno ✅"

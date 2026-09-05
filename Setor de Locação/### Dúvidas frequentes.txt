@@ -14,7 +14,7 @@ r: Direto aqui no Whatsapp, vou precisar de algumas informações
 # Fazem contrato?
 r: Sim. Enviado por e-mail antes do pagamento.
 # Qual o mínimo de noites?
-r: 3 noites em todos os imóveis.
+r: 3 noites em datas normais e 5 noites em feriados.
 # Vocês são do Airbnb?
 r: Não. Atendimento direto pela Artezian — mais ágil e sem taxa de plataforma.
 

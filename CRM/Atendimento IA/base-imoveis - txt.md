@@ -71,7 +71,7 @@
 - **Quartos:** 1 suíte | **Camas:** 2 | **Banheiros:** 1
 - **Diárias:** Baixa R$190 | Feriados R$320 | Janeiro R$500 | Carnaval R$580 | Carnaporto R$390 | Réveillon R$900
 - **Taxa de limpeza:** R$150
-- **Mínimo de diárias:** 3 noites
+- **Mínimo de diárias:** 3 noites (5 em feriados)
 - **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
 
 ---
@@ -84,7 +84,7 @@
 - **Quartos:** 1 suíte | **Camas:** 2 | **Banheiros:** 1
 - **Diárias:** Baixa R$190 | Feriados R$320 | Janeiro R$500 | Carnaval R$580 | Carnaporto R$390 | Réveillon R$900
 - **Taxa de limpeza:** R$150
-- **Mínimo de diárias:** 3 noites
+- **Mínimo de diárias:** 3 noites (5 em feriados)
 - **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
 
 ---
@@ -97,7 +97,7 @@
 - **Quartos:** 1 suíte | **Camas:** 2 | **Banheiros:** 1
 - **Diárias:** Baixa R$190 | Feriados R$320 | Janeiro R$500 | Carnaval R$580 | Carnaporto R$390 | Réveillon R$900
 - **Taxa de limpeza:** R$150
-- **Mínimo de diárias:** 3 noites
+- **Mínimo de diárias:** 3 noites (5 em feriados)
 - **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
 
 ---
@@ -110,7 +110,7 @@
 - **Quartos:** 1 suíte | **Camas:** 2 | **Banheiros:** 1
 - **Diárias:** Baixa R$190 | Feriados R$320 | Janeiro R$500 | Carnaval R$580 | Carnaporto R$390 | Réveillon R$900
 - **Taxa de limpeza:** R$150
-- **Mínimo de diárias:** 3 noites
+- **Mínimo de diárias:** 3 noites (5 em feriados)
 - **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
 
 ---
@@ -123,7 +123,7 @@
 - **Quartos:** 1 suíte | **Camas:** 3 | **Banheiros:** 1
 - **Diárias:** Baixa R$250 | Feriados R$400 | Janeiro R$600 | Carnaval R$580 | Carnaporto R$450 | Réveillon R$1.100
 - **Taxa de limpeza:** R$150
-- **Mínimo de diárias:** 3 noites
+- **Mínimo de diárias:** 3 noites (5 em feriados)
 - **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
 
 ---
@@ -136,7 +136,7 @@
 - **Quartos:** 1 suíte | **Camas:** 3 | **Banheiros:** 1
 - **Diárias:** Baixa R$250 | Feriados R$400 | Janeiro R$600 | Carnaval R$580 | Carnaporto R$450 | Réveillon R$1.100
 - **Taxa de limpeza:** R$150
-- **Mínimo de diárias:** 3 noites
+- **Mínimo de diárias:** 3 noites (5 em feriados)
 - **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
 
 ---
@@ -149,7 +149,7 @@
 - **Quartos:** 1 suíte | **Camas:** 3 | **Banheiros:** 1
 - **Diárias:** Baixa R$250 | Feriados R$400 | Janeiro R$600 | Carnaval R$580 | Carnaporto R$450 | Réveillon R$1.100
 - **Taxa de limpeza:** R$150
-- **Mínimo de diárias:** 3 noites
+- **Mínimo de diárias:** 3 noites (5 em feriados)
 - **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
 
 ---
@@ -162,7 +162,7 @@
 - **Quartos:** 1 suíte | **Camas:** 3 | **Banheiros:** 1
 - **Diárias:** Baixa R$250 | Feriados R$400 | Janeiro R$600 | Carnaval R$580 | Carnaporto R$450 | Réveillon R$1.100
 - **Taxa de limpeza:** R$150
-- **Mínimo de diárias:** 3 noites
+- **Mínimo de diárias:** 3 noites (5 em feriados)
 - **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
 
 ---
@@ -175,7 +175,7 @@
 - **Quartos:** 2 suítes | **Camas:** 5 | **Banheiros:** 1
 - **Diárias:** Baixa R$400 | Feriados R$600 | Janeiro R$1.000 | Carnaval R$880 | Carnaporto R$650 | Réveillon R$1.600
 - **Taxa de limpeza:** R$200
-- **Mínimo de diárias:** 3 noites
+- **Mínimo de diárias:** 3 noites (5 em feriados)
 - **Destaques:** Ar-condicionado, cozinha equipada, piscina do condomínio
 
 ---
@@ -270,7 +270,7 @@
 - **Capacidade:** até 27 pessoas
 - **Quartos:** 6 (4 suítes, 2 quartos) | **Camas:** 5 casal + 6 solteiros | **Banheiros:** 4
 - **Diárias:** Baixa R$1.600 | Alta R$3.000 | Feriados R$2.500
-- **Mínimo de diárias:** 3 noites
+- **Mínimo de diárias:** 3 noites (5 em feriados)
 - **Destaques:** Piscina, área gourmet com churrasqueira, suítes amplas — melhor custo-benefício entre as casas
 - **Vizinhança:** Beach clubs: Tôa Tôa, Axé Moi, Boa Beach, Beat Beach · Restaurantes: Colher de Pau, Orla Center · Passeios: Reserva da Jaqueira (1,4km), Praia do Mutá (4,4km), Centro Histórico de Porto Seguro (8km)
 
@@ -284,7 +284,7 @@
 - **Capacidade:** até 31 pessoas
 - **Quartos:** 6 | **Camas:** 12 beliches + 4 casal | **Banheiros:** 4
 - **Diárias:** Baixa R$1.800 | Alta R$2.700 | Feriados R$2.200
-- **Mínimo de diárias:** 3 noites
+- **Mínimo de diárias:** 3 noites (5 em feriados)
 - **Destaques:** Piscina, área de festas, churrasqueira, freezer externo, próximo à Orla Center e Dengo Bar
 - **Vizinhança:** Beach clubs: Tôa Tôa, Axé Moi, Boa Beach, Beat Beach · Restaurantes: Orla Center (complexo gastronômico), Colher de Pau, Dengo Bar · Passeios: Reserva da Jaqueira (1,4km), Praia do Mutá (4,4km), Centro Histórico de Porto Seguro (8km)
 
@@ -306,7 +306,7 @@
 
 ## REGRAS GERAIS
 
-- **Mínimo de diárias:** 3 noites
+- **Mínimo de diárias:** 3 noites (5 em feriados)
 - **Taxa de limpeza:** R$150 para imóveis de 1 quarto | R$200 para imóveis de 2 quartos ou mais
 - **Outubro (alta temporada):** aplicar acréscimo de 30% sobre a diária de baixa temporada
 - **Café da manhã:** Nenhuma unidade inclui café da manhã
@@ -316,7 +316,7 @@
 ## FORMAS DE PAGAMENTO
 
 - **Pix:** 30-50% de entrada, restante na chegada
-- **À Vista** 10% OFF à vista
+- **À Vista** 5% OFF à vista
 
 ---
 

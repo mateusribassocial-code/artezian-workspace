@@ -132,7 +132,7 @@ Use para identificar o preço correto de acordo com as datas informadas.
 - Link base: https://www.artezian.com.br/pt/apartment/JR01J (ajustar número)
 - Quartos: 1 suíte | Camas: 2 | Banheiros: 1
 - Diárias: Baixa R$190 | Feriados R$320 | Janeiro R$500 | Carnaval R$580 | Carnaporto R$390 | Réveillon R$900
-- Taxa limpeza: R$150 | Mínimo: 3 noites
+- Taxa limpeza: R$150 | Mínimo: 3 noites (5 em feriados)
 
 **VP-03 e VP-04** (JR03J, JR04J) — Capacidade até 4 pessoas (mesmos valores acima)
 
@@ -140,13 +140,13 @@ Use para identificar o preço correto de acordo com as datas informadas.
 - Link base: https://www.artezian.com.br/pt/apartment/JR05J (ajustar número)
 - Quartos: 1 suíte | Camas: 3 | Banheiros: 1
 - Diárias: Baixa R$250 | Feriados R$400 | Janeiro R$600 | Carnaval R$580 | Carnaporto R$450 | Réveillon R$1.100
-- Taxa limpeza: R$150 | Mínimo: 3 noites
+- Taxa limpeza: R$150 | Mínimo: 3 noites (5 em feriados)
 
 **VP-09** (JR09J) — Capacidade até 8 pessoas
 - Link: https://www.artezian.com.br/pt/apartment/JR09J
 - Quartos: 2 suítes | Camas: 5 | Banheiros: 1
 - Diárias: Baixa R$400 | Feriados R$600 | Janeiro R$1.000 | Carnaval R$880 | Carnaporto R$650 | Réveillon R$1.600
-- Taxa limpeza: R$200 | Mínimo: 3 noites
+- Taxa limpeza: R$200 | Mínimo: 3 noites (5 em feriados)
 
 ---
 
@@ -206,35 +206,35 @@ Use para identificar o preço correto de acordo com as datas informadas.
 - Link: https://www.artezian.com.br/pt/apartment/GF02J
 - Capacidade: até 27 pessoas | 300m da praia — Taperapuã
 - Quartos: 6 (4 suítes + 2) | Camas: 5 casal + 6 solteiros | Banheiros: 4
-- Diárias: Baixa R$1.600 | Alta R$3.000 | Feriados R$2.500 | Mínimo: 3 noites
+- Diárias: Baixa R$1.600 | Alta R$3.000 | Feriados R$2.500 | Mínimo: 3 noites (5 em feriados)
 - Destaques: Piscina, área gourmet com churrasqueira — melhor custo-benefício entre as casas
 
 **Casa da Laureana** (GF04J)
 - Link: https://www.artezian.com.br/pt/apartment/GF04J
 - Capacidade: até 13 pessoas — Arraial D'Ajuda
 - Quartos: 4 suítes (1 master vista pro mar) | Camas: 9 | Banheiros: 4
-- Diárias: Baixa R$1.800 | Alta R$3.000 | Feriados R$2.500 | Taxa limpeza: R$250 | Mínimo: 3 noites
+- Diárias: Baixa R$1.800 | Alta R$3.000 | Feriados R$2.500 | Taxa limpeza: R$250 | Mínimo: 3 noites (5 em feriados)
 - Destaques: Vista mar completa, piscina privativa, área gourmet externa, limpeza diária
 
 **Casa da Moana** (GF06J)
 - Link: https://www.artezian.com.br/pt/apartment/GF06J
 - Capacidade: até 16 pessoas | 5 min da praia — Taperapuã
 - Quartos: 5 suítes (3 no térreo) | Camas: 5 casal + 6 solteiros | Banheiros: 4
-- Diárias: Baixa R$1.500 | Alta R$3.000 | Feriados R$2.500 | Mínimo: 3 noites
+- Diárias: Baixa R$1.500 | Alta R$3.000 | Feriados R$2.500 | Mínimo: 3 noites (5 em feriados)
 - Destaques: Piscina com espreguiçadeiras, área gourmet, próximo ao Axé Moi e Beat Beach
 
 **Casa do John** (GG08J)
 - Link: https://www.artezian.com.br/pt/apartment/GG08J
 - Capacidade: até 31 pessoas | 600m da praia — Taperapuã
 - Quartos: 6 | Camas: 12 beliches + 4 casal | Banheiros: 4
-- Diárias: Baixa R$1.800 | Alta R$2.700 | Feriados R$2.200 | Mínimo: 3 noites
+- Diárias: Baixa R$1.800 | Alta R$2.700 | Feriados R$2.200 | Mínimo: 3 noites (5 em feriados)
 - Destaques: Piscina, área de festas, churrasqueira, próximo à Orla Center
 
 **Casa do Euller** (GG06J)
 - Link: https://www.artezian.com.br/pt/apartment/GG06J
 - Capacidade: até 58 pessoas — Taperapuã
 - Quartos: 9 | Camas: 9 casal + 19 solteiros | Banheiros: 9
-- Diárias: Baixa R$2.500 | Alta R$3.500 | Feriados R$3.500 | Mínimo: 3 noites
+- Diárias: Baixa R$2.500 | Alta R$3.500 | Feriados R$3.500 | Mínimo: 3 noites (5 em feriados)
 - Destaques: Maior casa do catálogo, piscina grande, área de jogos, ideal pra grupos e eventos
 
 ---

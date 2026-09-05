@@ -38,6 +38,6 @@ Estrutura do condomínio:
 *Tipo A — Studios (JR01J, JR02J, JR03J, JR04J)**
 - Capacidade: até 4 pessoas
 - Cama de casal + cama adicional, frigobar, TV, ar-condicionado, banheiro, cozinha compacta
-- Mínimo: 3 noites
+- Mínimo: 3 noites (5 em feriados)
 - IDs Stays: JR01J, JR02J, JR03J, JR04J
 

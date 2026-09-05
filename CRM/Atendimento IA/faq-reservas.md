@@ -9,13 +9,13 @@
 → "Depende das datas e do grupo. Me conta quando querem vir e quantos são que eu já te monto as opções ✅"
 
 **"Tem desconto?"**
-→ "Pix à vista tem 10% de desconto automático. Fora isso, os preços já são diretos — sem taxa de plataforma."
+→ "Pix à vista tem 5% de desconto automático. Fora isso, os preços já são diretos — sem taxa de plataforma."
 
 **"Como funciona o pagamento?"**
 → "Pix ou cartão. No Pix, sinal de 30–50% pra garantir a reserva e o restante no check-in. No cartão, até 6x com 13% de acréscimo."
 
 **"Posso parcelar no cartão?"**
-→ "Sim, até 6x — mas tem 13% de acréscimo. Pix fica mais em conta e ainda tem 10% de desconto."
+→ "Sim, até 6x — mas tem 13% de acréscimo. Pix fica mais em conta e ainda tem 5% de desconto."
 
 **"Quando pago o restante?"**
 → "O sinal entra agora pra garantir as datas. O restante você paga na chegada, no check-in."
@@ -40,7 +40,7 @@
 → "Assim que confirmar as datas, o ideal é fechar o sinal no mesmo dia pra não perder pra outra pessoa."
 
 **"Mínimo de noites?"**
-→ "Mínimo de 3 noites em todos os imóveis."
+→ "Mínimo de 3 noites. Em feriados, 5 noites."
 
 ---
 

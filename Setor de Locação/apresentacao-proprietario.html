@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposta de Parceria — Artezian</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #ffffff;
+      --color-surface: #f9f8f5;
+      --color-text: #2a2a2a;
+      --color-text-soft: #5c5c5c;
+      --color-text-mute: #9a958c;
+      --color-border: #ddd8cc;
+      --color-accent: #c2a14e;
+      --color-accent-text: #a8873a;
+      --color-accent-soft: #f5f0e8;
+      --color-accent-border: #d9c89a;
+      --color-card-strong: #264653;
+      --color-card-strong-text: #ffffff;
+      --color-card-soft: #f5f0e8;
+      --color-card-dark: #264653;
+      --font-main: 'Montserrat', system-ui, sans-serif;
+      --font-accent: 'Montserrat', system-ui, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      background: var(--color-bg);
+      overflow: hidden;
+      font-family: var(--font-main);
+    }
+    .slide-container { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .slide-wrapper { position: relative; overflow: hidden; flex-shrink: 0; }
+    .slide-container iframe {
+      border: none; width: 1280px; height: 720px;
+      transform-origin: top left; display: block;
+      position: absolute; top: 0; left: 0;
+    }
+    .slide-container.hidden { display: none; }
+    .slide-container.active { display: flex; }
+    .counter {
+      position: fixed; bottom: 16px; left: 20px;
+      font-family: var(--font-main); font-size: 14px; font-weight: 500;
+      color: rgba(0,0,0,0.25); z-index: 100; user-select: none; pointer-events: none;
+    }
+    .hint {
+      position: fixed; bottom: 16px; right: 20px;
+      font-family: var(--font-main); font-size: 12px; font-weight: 400;
+      color: rgba(0,0,0,0.15); z-index: 100; user-select: none; pointer-events: none;
+      transition: opacity 0.5s;
+    }
+    @media print {
+      @page { size: 1280px 720px; margin: 0; }
+      html, body {
+        width: 1280px !important; height: auto !important;
+        background: transparent !important; overflow: visible !important;
+        margin: 0 !important; padding: 0 !important;
+      }
+      .counter, .hint, .rotate-hint { display: none !important; }
+      .slide-container {
+        position: relative !important; inset: auto !important; display: block !important;
+        width: 1280px !important; height: 720px !important;
+        page-break-after: always !important; break-after: page !important; overflow: hidden !important;
+      }
+      .slide-container.hidden { display: block !important; }
+      .slide-container:last-child { page-break-after: auto !important; break-after: auto !important; }
+      .slide-wrapper { width: 1280px !important; height: 720px !important; position: static !important; overflow: visible !important; }
+      .slide-container iframe {
+        transform: none !important; width: 1280px !important; height: 720px !important;
+        display: block !important; position: static !important; top: auto !important; left: auto !important;
+      }
+    }
+    @media (orientation: portrait) and (max-width: 900px) {
+      .counter, .hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="counter" id="counter">1/16</div>
+<div class="hint" id="hint">← → navegar · F fullscreen</div>
+
+<script>
+const TOTAL = 16;
+let current = 0;
+
+const HEAD = `<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=1280,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-bg: #ffffff;
+  --color-surface: #f9f8f5;
+  --color-text: #2a2a2a;
+  --color-text-soft: #5c5c5c;
+  --color-text-mute: #9a958c;
+  --color-border: #ddd8cc;
+  --color-accent: #c2a14e;
+  --color-accent-text: #a8873a;
+  --color-accent-soft: #f5f0e8;
+  --color-accent-border: #d9c89a;
+  --color-card-strong: #264653;
+  --color-card-strong-text: #ffffff;
+  --color-card-soft: #f5f0e8;
+  --color-card-dark: #264653;
+  --font-main: 'Montserrat', system-ui, sans-serif;
+  --font-accent: 'Montserrat', system-ui, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font-main); background: var(--color-bg); overflow: hidden; color: var(--color-text); }
+.slide { width: 1280px; height: 720px; padding: 80px 100px; position: relative; display: flex; flex-direction: column; justify-content: center; }
+.slide-label { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--color-text-mute); margin-bottom: 24px; }
+.act-title { font-family: var(--font-accent); font-style: italic; font-weight: 300; color: var(--color-text-mute); }
+.ph { color: var(--color-accent-text); background: rgba(194,161,78,0.14); border: 1px dashed var(--color-accent-border); border-radius: 6px; padding: 0 .22em; font-weight: 600; }
+</style>`;
+
+const slides = [
+
+// ── 1 · CAPA (bookend abertura) ──────────────────────────────
+HEAD + `<style>
+body { background: var(--color-card-dark); }
+.slide { align-items: flex-start; justify-content: flex-end; padding: 100px; overflow: hidden; }
+.slide::before { content:''; position:absolute; top:-90px; right:-90px; width:340px; height:340px; border-radius:50%; background:rgba(194,161,78,0.10); }
+.slide::after { content:''; position:absolute; bottom:-120px; left:-120px; width:420px; height:420px; border-radius:50%; background:rgba(194,161,78,0.06); }
+.meta { font-size: 12px; color: var(--color-accent); margin-bottom: 28px; letter-spacing: 4px; text-transform: uppercase; font-weight: 600; position:relative; }
+.title { font-size: 88px; font-weight: 800; color: #fff; letter-spacing: -3px; line-height: 1.02; max-width: 900px; position:relative; }
+.title .accent { color: var(--color-accent); }
+.sub { font-size: 19px; color: rgba(255,255,255,0.55); font-weight: 300; line-height: 1.5; margin-top: 28px; position:relative; }
+.footer { position: absolute; bottom: 60px; right: 100px; text-align: right; }
+.footer .brand { font-size: 17px; color: #fff; font-weight: 600; letter-spacing: 1px; }
+.footer .brand-sub { font-size: 11px; color: var(--color-accent); letter-spacing: 3px; text-transform: uppercase; margin-top: 5px; }
+</style></head><body><div class="slide">
+  <div class="meta">Proposta de parceria</div>
+  <div class="title">Seu imóvel<br><span class="accent">ocupado o ano inteiro.</span></div>
+  <div class="sub">Gestão completa de locação por temporada<br>em Porto Seguro, Coroa Vermelha e Arraial D'Ajuda.</div>
+  <div class="footer">
+    <div class="brand">Artezian</div>
+    <div class="brand-sub">Real Estate Atelie</div>
+  </div>
+</div></body></html>`,
+
+// ── 2 · CHAMADO (o proprietário fala primeiro) ───────────────
+HEAD + `<style>
+body { background: var(--color-surface); }
+.slide { padding: 100px; align-items: center; justify-content: center; }
+.box { border: 2px dashed var(--color-border); border-radius: 24px; padding: 76px 92px; background: var(--color-bg); max-width: 1000px; }
+.question { font-size: 40px; font-weight: 700; line-height: 1.38; color: var(--color-text); text-align: center; letter-spacing: -0.5px; }
+.highlight { color: var(--color-accent-text); }
+.who { text-align: center; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--color-text-mute); margin-top: 40px; font-weight: 500; }
+</style></head><body><div class="slide">
+  <div>
+    <div class="box">
+      <div class="question">“Tenho um apartamento<br>em Coroa Vermelha.<br><span class="highlight">Fica parado quase o ano todo</span><br>e eu não tenho tempo de cuidar disso.”</div>
+    </div>
+    <div class="who">o que a gente mais escuta de proprietário</div>
+  </div>
+</div></body></html>`,
+
+// ── 3 · DESCOBERTA (a conta do imóvel parado) ────────────────
+HEAD + `<style>
+body { background: var(--color-surface); }
+.slide { padding: 100px; }
+.act-title { font-size: 44px; text-align: center; margin-bottom: 76px; }
+.stats { display: flex; justify-content: center; gap: 130px; align-items: flex-start; }
+.stat { text-align: left; }
+.stat-number { font-size: 150px; font-weight: 800; line-height: 0.9; letter-spacing: -6px; color: var(--color-accent-text); }
+.stat-number.alt { color: var(--color-text); }
+.stat-desc { font-size: 26px; font-weight: 500; color: var(--color-text); line-height: 1.25; margin-top: 20px; max-width: 300px; }
+.stat .ph { font-size: 104px; letter-spacing: -4px; }
+</style></head><body><div class="slide">
+  <div class="act-title">a conta do imóvel parado</div>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number"><span class="ph">N</span></div>
+      <div class="stat-desc">meses ocupados<br>no último ano</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number alt"><span class="ph">R$ __</span></div>
+      <div class="stat-desc">de custo fixo,<br>cobrado nos 12</div>
+    </div>
+  </div>
+</div></body></html>`,
+
+// ── 4 · PERFIL (quem procura a região) ───────────────────────
+HEAD + `<style>
+body { background: var(--color-surface); }
+.slide { padding: 80px 100px; }
+h1 { font-size: 46px; font-weight: 800; color: var(--color-text); text-align: center; letter-spacing: -1.5px; margin-bottom: 24px; }
+.lead { text-align:center; font-size: 18px; color: var(--color-text-soft); margin-bottom: 54px; line-height:1.5; }
+.row { display: flex; align-items: center; gap: 24px; margin-bottom: 24px; }
+.row-label { font-size: 12px; color: var(--color-text-mute); font-weight: 600; writing-mode: vertical-rl; transform: rotate(180deg); min-width: 30px; text-align: center; letter-spacing: 2px; text-transform: uppercase; }
+.cards { display: flex; gap: 18px; flex: 1; justify-content: space-around; }
+.card { flex: 1; padding: 24px 26px; border-radius: 8px; text-align: center; font-size: 21px; font-weight: 700; color: var(--color-text); }
+.card.strong { background: var(--color-accent-soft); border: 1.5px dashed var(--color-accent-border); }
+.card.soft { background: transparent; border: 1.5px dashed var(--color-border); font-size: 18px; font-weight: 600; color: var(--color-text-soft); }
+</style></head><body><div class="slide">
+  <h1>Quem procura a região</h1>
+  <div class="lead">A demanda existe o ano inteiro. Ela muda de perfil<br>conforme o mês e o tipo de imóvel.</div>
+  <div class="row">
+    <div class="row-label">perfil</div>
+    <div class="cards">
+      <div class="card strong">Família com crianças</div>
+      <div class="card strong">Casal</div>
+      <div class="card strong">Grupo de amigos</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="row-label">quando</div>
+    <div class="cards">
+      <div class="card soft">Julho e janeiro</div>
+      <div class="card soft">Baixa temporada</div>
+      <div class="card soft">Réveillon e Carnaval</div>
+      <div class="card soft">Feriado prolongado</div>
+    </div>
+  </div>
+</div></body></html>`,
+
+// ── 5 · PUNCHLINE (tensão) ───────────────────────────────────
+HEAD + `<style>
+body { background: var(--color-surface); }
+.slide { padding: 100px; align-items: center; justify-content: center; }
+.box { border: 2px dashed var(--color-border); border-radius: 24px; padding: 76px 92px; background: var(--color-bg); max-width: 1000px; text-align: center; }
+.line1 { font-size: 44px; font-weight: 800; color: var(--color-text); line-height: 1.3; letter-spacing: -1px; margin-bottom: 18px; }
+.line2 { font-size: 44px; font-weight: 800; color: var(--color-accent-text); line-height: 1.3; letter-spacing: -1px; }
+</style></head><body><div class="slide">
+  <div class="box">
+    <div class="line1">O imóvel já é bom.</div>
+    <div class="line2">O que falta é alguém<br>operando ele todo dia.</div>
+  </div>
+</div></body></html>`,
+
+// ── 6 · TESE (sozinho x com operação) ────────────────────────
+HEAD + `<style>
+.slide { padding: 70px 100px; align-items: center; justify-content: center; flex-direction: row; gap: 32px; }
+.card { flex: 1; border-radius: 8px; padding: 50px 44px; min-height: 470px; display: flex; flex-direction: column; }
+.card.strong { background: var(--color-card-strong); }
+.card.strong .card-title { color: #fff; }
+.card.strong .pill { background: var(--color-accent); color: var(--color-card-strong); }
+.card.strong li { color: rgba(255,255,255,0.82); border-color: rgba(255,255,255,0.14); }
+.card.soft { background: var(--color-accent-soft); border: 1.5px dashed var(--color-accent-border); }
+.pill { display: inline-block; background: var(--color-text); color: var(--color-bg); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 7px 15px; border-radius: 999px; margin-bottom: 26px; width: fit-content; }
+.card-title { font-size: 46px; font-weight: 800; color: var(--color-text); letter-spacing: -1.5px; line-height: 1; margin-bottom: 26px; }
+ul { list-style: none; }
+li { font-size: 18px; line-height: 1.45; color: var(--color-text-soft); padding: 13px 0; border-bottom: 1px solid var(--color-accent-border); }
+li:last-child { border-bottom: none; }
+</style></head><body><div class="slide">
+  <div class="card soft">
+    <span class="pill">Sozinho</span>
+    <div class="card-title">Autogestão</div>
+    <ul>
+      <li>Foto tirada no celular</li>
+      <li>Preço definido no chute</li>
+      <li>Hóspede respondido de madrugada</li>
+      <li>Anúncio esquecido na baixa temporada</li>
+    </ul>
+  </div>
+  <div class="card strong">
+    <span class="pill">Com a Artezian</span>
+    <div class="card-title">Operação</div>
+    <ul>
+      <li>Captação profissional de foto e vídeo</li>
+      <li>Tabela de preço por temporada</li>
+      <li>Equipe atendendo todo dia</li>
+      <li>Campanha rodando o ano inteiro</li>
+    </ul>
+  </div>
+</div></body></html>`,
+
+// ── 7 · OBJETIVO (tese em uma linha) ─────────────────────────
+HEAD + `<style>
+body { background: var(--color-surface); }
+.slide { padding: 100px; align-items: center; justify-content: center; text-align: center; }
+.meta { font-family: var(--font-accent); font-style: italic; font-weight: 300; font-size: 30px; color: var(--color-text-mute); margin-bottom: 36px; }
+.big-title { font-size: 96px; font-weight: 800; line-height: 1.02; letter-spacing: -4px; color: var(--color-text); }
+.big-title .accent { color: var(--color-accent-text); }
+</style></head><body><div class="slide">
+  <div class="meta">o objetivo</div>
+  <div class="big-title">Ocupado o ano inteiro,<br><span class="accent">no preço certo.</span></div>
+</div></body></html>`,
+
+// ── 8 · PROGRAMA (as 6 etapas — mapa antes do detalhe) ───────
+HEAD + `<style>
+.slide { padding: 70px 100px; }
+h1 { font-size: 44px; font-weight: 800; color: var(--color-text); margin-bottom: 12px; letter-spacing: -1.5px; }
+.lead { font-size: 17px; color: var(--color-text-soft); margin-bottom: 44px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 40px; }
+.item { border-left: 3px solid var(--color-accent); padding-left: 18px; }
+.item-num { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--color-accent-text); margin-bottom: 5px; }
+.item-title { font-size: 20px; font-weight: 700; color: var(--color-text); margin-bottom: 4px; }
+.item-desc { font-size: 14px; color: var(--color-text-soft); line-height: 1.45; }
+</style></head><body><div class="slide">
+  <h1>Como a parceria funciona</h1>
+  <div class="lead">Seis etapas, do contrato até o imóvel rodando sozinho.</div>
+  <div class="grid">
+    <div class="item"><div class="item-num">01</div><div class="item-title">Contrato</div><div class="item-desc">Responsabilidades de cada parte, modelo de repasse<br>e padrão mínimo de qualidade do imóvel.</div></div>
+    <div class="item"><div class="item-num">02</div><div class="item-title">Captação</div><div class="item-desc">Fotos profissionais de todos os ambientes<br>e vídeo walkthrough para redes e anúncios.</div></div>
+    <div class="item"><div class="item-num">03</div><div class="item-title">Precificação</div><div class="item-desc">Tabela por temporada, pesquisa de concorrência<br>e desconto progressivo contra ociosidade.</div></div>
+    <div class="item"><div class="item-num">04</div><div class="item-title">Metas</div><div class="item-desc">Ocupação esperada, faturamento projetado<br>e nota mínima nas plataformas.</div></div>
+    <div class="item"><div class="item-num">05</div><div class="item-title">Início</div><div class="item-desc">Publicação nos canais, campanha de Meta Ads<br>e disparo na base ativa de WhatsApp.</div></div>
+    <div class="item"><div class="item-num">06</div><div class="item-title">Continuidade</div><div class="item-desc">Relatório mensal, revisão de preço por sazonalidade<br>e gestão de avaliações.</div></div>
+  </div>
+</div></body></html>`,
+
+// ── 9 · DETALHE (as duas etapas que mexem no bolso) ──────────
+HEAD + `<style>
+.slide { padding: 70px 100px; align-items: center; justify-content: center; flex-direction: row; gap: 40px; }
+.card { flex: 1; border-radius: 8px; padding: 50px 44px; min-height: 440px; display: flex; flex-direction: column; }
+.card.strong { background: var(--color-card-strong); }
+.card.strong .card-title { color: #fff; }
+.card.strong .card-desc { color: rgba(255,255,255,0.78); }
+.card.strong .pill { background: var(--color-accent); color: var(--color-card-strong); }
+.card.soft { background: var(--color-accent-soft); border: 1.5px dashed var(--color-accent-border); }
+.pill { display: inline-block; background: var(--color-text); color: var(--color-bg); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 7px 15px; border-radius: 999px; margin-bottom: 26px; width: fit-content; }
+.card-title { font-size: 46px; font-weight: 800; color: var(--color-text); letter-spacing: -1.5px; line-height: 1; margin-bottom: 22px; }
+.card-desc { font-size: 19px; color: var(--color-text-soft); line-height: 1.55; font-weight: 400; }
+.plus { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 40px; font-weight: 800; color: var(--color-accent); z-index: 10; background: var(--color-bg); width: 62px; height: 62px; border-radius: 50%; display:flex; align-items:center; justify-content:center; }
+</style></head><body><div class="slide">
+  <div class="card soft">
+    <span class="pill">Etapa 02</span>
+    <div class="card-title">Captação</div>
+    <div class="card-desc">Fotos profissionais de todos os ambientes, com preparação de decoração e iluminação, mais um vídeo walkthrough para o Instagram e para os anúncios.<br><br>Imóvel bem fotografado converte mais, e a gente vê isso na prática todo mês.</div>
+  </div>
+  <div class="card strong">
+    <span class="pill">Etapa 03</span>
+    <div class="card-title">Precificação</div>
+    <div class="card-desc">Tabela dividida em baixa, média e alta temporada, calibrada por localização, estrutura de lazer e pesquisa da concorrência direta na região.<br><br>Desconto progressivo entra quando a data se aproxima vazia.</div>
+  </div>
+  <div class="plus">+</div>
+</div></body></html>`,
+
+// ── 10 · EQUAÇÃO (a máquina de ocupação) ─────────────────────
+HEAD + `<style>
+body { background: var(--color-bg); }
+.slide { padding: 80px 100px; align-items: center; justify-content: center; }
+h1 { text-align:center; font-size: 42px; font-weight: 800; letter-spacing: -1.2px; margin-bottom: 56px; }
+.equation { display: flex; align-items: stretch; gap: 14px; justify-content: center; margin: 0 auto; }
+.term { flex: 1; max-width: 230px; display:flex; align-items:center; justify-content:center; background: var(--color-accent-soft); border: 1.5px dashed var(--color-accent-border); border-radius: 8px; padding: 22px 18px; font-size: 19px; font-weight: 700; color: var(--color-text); text-align:center; line-height:1.35; }
+.op { display:flex; align-items:center; font-size: 26px; font-weight: 800; color: var(--color-accent); }
+.equals { text-align:center; font-size: 30px; font-weight: 800; color: var(--color-accent); margin: 22px 0 18px; }
+.result { display:inline-block; background: var(--color-card-strong); color: #fff; border-radius: 8px; padding: 24px 46px; font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+.subtitle { text-align: center; font-size: 19px; color: var(--color-text-soft); margin: 50px auto 0; max-width: 860px; line-height: 1.55; }
+</style></head><body><div class="slide">
+  <div style="width: 100%;">
+    <h1>A máquina de ocupação</h1>
+    <div class="equation">
+      <div class="term">Anúncio<br>profissional</div>
+      <div class="op">+</div>
+      <div class="term">Meta Ads<br>segmentado</div>
+      <div class="op">+</div>
+      <div class="term">Base ativa<br>de WhatsApp</div>
+      <div class="op">+</div>
+      <div class="term">Instagram<br>95k seguidores</div>
+    </div>
+    <div class="equals">=</div>
+    <div style="text-align:center;"><span class="result">Reserva</span></div>
+    <div class="subtitle">O imóvel entra no site da Artezian, no Airbnb e nos canais parceiros,<br>com campanha paga e conteúdo orgânico no @ojoaomendonca sustentando a demanda.</div>
+  </div>
+</div></body></html>`,
+
+// ── 11 · DIVISÃO DE RESPONSABILIDADE ─────────────────────────
+HEAD + `<style>
+body { background: var(--color-surface); }
+.slide { padding: 70px 100px; align-items: center; justify-content: center; flex-direction: row; gap: 32px; }
+.card { flex: 1; border-radius: 8px; padding: 46px 42px; min-height: 450px; }
+.card.soft { background: var(--color-bg); border: 1.5px dashed var(--color-accent-border); }
+.card.strong { background: var(--color-card-strong); }
+.card.strong .card-title { color: #fff; }
+.card.strong .pill { background: var(--color-accent); color: var(--color-card-strong); }
+.card.strong li { color: rgba(255,255,255,0.82); border-color: rgba(255,255,255,0.14); }
+.pill { display: inline-block; background: var(--color-text); color: var(--color-bg); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 7px 15px; border-radius: 999px; margin-bottom: 24px; }
+.card-title { font-size: 40px; font-weight: 800; color: var(--color-text); letter-spacing: -1.2px; line-height: 1.05; margin-bottom: 24px; }
+ul { list-style: none; }
+li { font-size: 17px; line-height: 1.4; color: var(--color-text-soft); padding: 11px 0; border-bottom: 1px solid var(--color-border); }
+li:last-child { border-bottom: none; }
+</style></head><body><div class="slide">
+  <div class="card soft">
+    <span class="pill">Você</span>
+    <div class="card-title">Entrega<br>a chave</div>
+    <ul>
+      <li>Deixa o imóvel no padrão mínimo de qualidade</li>
+      <li>Aprova a tabela de preço e as metas</li>
+      <li>Acompanha o relatório todo mês</li>
+      <li>Recebe o repasse</li>
+    </ul>
+  </div>
+  <div class="card strong">
+    <span class="pill">A Artezian</span>
+    <div class="card-title">Opera<br>o resto</div>
+    <ul>
+      <li>Captação de foto e vídeo</li>
+      <li>Anúncio, campanha e conteúdo</li>
+      <li>Atendimento ao hóspede e reservas</li>
+      <li>Check-in, avaliações e reputação</li>
+      <li>Relatório e revisão de preço</li>
+    </ul>
+  </div>
+</div></body></html>`,
+
+// ── 12 · PROVA ───────────────────────────────────────────────
+HEAD + `<style>
+body { background: var(--color-surface); }
+.slide { padding: 90px 100px; }
+.act-title { font-size: 42px; text-align: center; margin-bottom: 66px; }
+.stats { display: flex; justify-content: center; gap: 130px; align-items: flex-start; }
+.stat { text-align: left; }
+.stat-number { font-size: 140px; font-weight: 800; line-height: 0.9; letter-spacing: -6px; color: var(--color-accent-text); }
+.stat-number.alt { color: var(--color-text); }
+.stat-desc { font-size: 24px; font-weight: 500; color: var(--color-text); line-height: 1.25; margin-top: 20px; max-width: 360px; }
+.footnote { text-align: center; margin-top: 66px; font-size: 18px; color: var(--color-text-soft); line-height: 1.55; }
+</style></head><body><div class="slide">
+  <div class="act-title">quem vai operar o seu imóvel</div>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number">4.9</div>
+      <div class="stat-desc">avaliação como<br>Superhost no Airbnb</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number alt">95k</div>
+      <div class="stat-desc">seguidores no @ojoaomendonca<br>gerando demanda direta</div><!--wrap-ok-->
+    </div>
+  </div>
+  <div class="footnote"><span class="ph">N</span> imóveis sob gestão hoje em Porto Seguro,<br>Coroa Vermelha e Arraial D'Ajuda.</div>
+</div></body></html>`,
+
+// ── 13 · INVESTIMENTO ────────────────────────────────────────
+HEAD + `<style>
+body { background: var(--color-card-dark); }
+.slide { padding: 80px 100px; align-items: center; justify-content: center; text-align: center; }
+.act-title { font-size: 15px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 44px; color: var(--color-accent); font-style: normal; font-weight: 600; }
+.price { font-size: 150px; font-weight: 800; letter-spacing: -6px; line-height: 0.9; color: #fff; margin-bottom: 22px; }
+.price .ph { background: none; border: none; border-radius: 0; padding: 0; color: var(--color-accent); }
+.price-meta { font-size: 21px; color: rgba(255,255,255,0.6); margin-bottom: 66px; line-height: 1.5; font-weight: 300; }
+.includes { display: flex; gap: 60px; justify-content: center; max-width: 1000px; margin: 0 auto; }
+.include-item { text-align: left; }
+.include-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent); margin-bottom: 8px; font-weight: 600; }
+.include-value { font-size: 17px; color: #fff; font-weight: 500; line-height:1.4; }
+.include-value .ph { background: rgba(194,161,78,0.20); border-color: rgba(194,161,78,0.5); color: var(--color-accent); }
+</style></head><body><div class="slide">
+  <div style="width: 100%;">
+    <div class="act-title">investimento</div>
+    <div class="price"><span class="ph">XX</span>%</div>
+    <div class="price-meta">sobre a receita gerada pelo imóvel.<br>Sem mensalidade e sem taxa de adesão.</div>
+    <div class="includes">
+      <div class="include-item">
+        <div class="include-label">inclui</div>
+        <div class="include-value">Captação, anúncio,<br>campanha e atendimento</div>
+      </div>
+      <div class="include-item">
+        <div class="include-label">repasse</div>
+        <div class="include-value"><span class="ph">periodicidade</span></div>
+      </div>
+      <div class="include-item">
+        <div class="include-label">contrato</div>
+        <div class="include-value"><span class="ph">prazo</span></div>
+      </div>
+    </div>
+  </div>
+</div></body></html>`,
+
+// ── 14 · FECHAMENTO POSITIVO (o que chega até você) ──────────
+HEAD + `<style>
+.slide { padding: 80px 100px; }
+.act-title { font-size: 42px; margin-bottom: 6px; text-align: left; }
+h1 { font-size: 36px; font-weight: 800; color: var(--color-text); margin-bottom: 46px; letter-spacing: -1px; }
+.cards { display: flex; gap: 20px; }
+.card { flex: 1; border: 1.5px dashed var(--color-border); border-radius: 8px; padding: 32px 28px; background: var(--color-bg); }
+.card-number { font-family: var(--font-accent); font-style: italic; font-weight: 400; font-size: 30px; color: var(--color-accent-text); margin-bottom: 16px; }
+.card-title { font-size: 21px; font-weight: 700; color: var(--color-text); margin-bottom: 12px; letter-spacing: -0.3px; }
+.card-desc { font-size: 15px; color: var(--color-text-soft); line-height: 1.55; }
+</style></head><body><div class="slide">
+  <div class="act-title">todo mês</div>
+  <h1>O que chega até você</h1>
+  <div class="cards">
+    <div class="card">
+      <div class="card-number">01</div>
+      <div class="card-title">Relatório de desempenho</div>
+      <div class="card-desc">Ocupação, faturamento e avaliações do mês fechado, comparados com a meta que a gente definiu junto.</div>
+    </div>
+    <div class="card">
+      <div class="card-number">02</div>
+      <div class="card-title">Revisão de preço</div>
+      <div class="card-desc">Tabela ajustada conforme a sazonalidade e a demanda real, antes de cada virada de temporada.</div>
+    </div>
+    <div class="card">
+      <div class="card-number">03</div>
+      <div class="card-title">Repasse</div>
+      <div class="card-desc">Valor líquido na conta, com o extrato de cada reserva do período.</div>
+    </div>
+  </div>
+</div></body></html>`,
+
+// ── 15 · CTA ─────────────────────────────────────────────────
+HEAD + `<style>
+body { background: var(--color-surface); }
+.slide { padding: 100px; align-items: center; justify-content: center; text-align: center; }
+.question { font-size: 86px; font-weight: 800; color: var(--color-text); letter-spacing: -3px; line-height: 1; margin-bottom: 54px; }
+.question .accent { color: var(--color-accent-text); }
+.steps { display: flex; justify-content: center; align-items: center; gap: 26px; margin-bottom: 52px; }
+.step { font-size: 16px; color: var(--color-text-soft); font-weight: 500; }
+.step-number { display: inline-block; background: var(--color-accent); color: #fff; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: 700; margin-right: 10px; font-size: 14px; }
+.arrow { color: var(--color-text-mute); }
+.contact { font-size: 16px; color: var(--color-text-soft); }
+.contact .strong { color: var(--color-text); font-weight: 700; }
+</style></head><body><div class="slide">
+  <div style="width: 100%;">
+    <div class="question">o próximo <span class="accent">passo</span></div>
+    <div class="steps">
+      <div class="step"><span class="step-number">1</span>Visita de captação</div>
+      <span class="arrow">→</span>
+      <div class="step"><span class="step-number">2</span>Contrato assinado</div>
+      <span class="arrow">→</span>
+      <div class="step"><span class="step-number">3</span>Anúncio no ar em <span class="ph">N</span> dias</div>
+    </div>
+    <div class="contact">
+      <span class="strong">artezian.com.br</span> · @ojoaomendonca
+    </div>
+  </div>
+</div></body></html>`,
+
+// ── 16 · CAPA FINAL (bookend) ────────────────────────────────
+HEAD + `<style>
+body { background: var(--color-card-dark); }
+.slide { align-items: center; justify-content: center; text-align: center; padding: 100px; overflow: hidden; }
+.slide::before { content:''; position:absolute; top:-90px; right:-90px; width:340px; height:340px; border-radius:50%; background:rgba(194,161,78,0.10); }
+.slide::after { content:''; position:absolute; bottom:-120px; left:-120px; width:420px; height:420px; border-radius:50%; background:rgba(194,161,78,0.06); }
+.title { font-size: 72px; font-weight: 800; color: #fff; letter-spacing: -2.5px; line-height: 1.08; position:relative; }
+.title .accent { color: var(--color-accent); }
+.brand { margin-top: 76px; position:relative; }
+.brand .name { font-size: 18px; color: #fff; font-weight: 600; letter-spacing: 2px; }
+.brand .sub { font-size: 11px; color: var(--color-accent); letter-spacing: 4px; text-transform: uppercase; margin-top: 7px; }
+</style></head><body><div class="slide">
+  <div>
+    <div class="title">Você entrega a chave.<br><span class="accent">A gente cuida do resto.</span></div>
+    <div class="brand">
+      <div class="name">Artezian</div>
+      <div class="sub">Real Estate Atelie</div>
+    </div>
+  </div>
+</div></body></html>`
+
+];
+
+const body = document.body;
+const containers = [];
+
+let touchStartX = 0, touchStartY = 0;
+
+function handleSwipeEnd(dx, dy) {
+  const isPortraitMobile = window.innerHeight > window.innerWidth && window.innerWidth < 900;
+  if (isPortraitMobile) {
+    if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 50) {
+      if (dy < 0) { next(); } else { prev(); }
+    }
+  } else {
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+      if (dx < 0) { next(); } else { prev(); }
+    }
+  }
+}
+
+slides.forEach((html, i) => {
+  const container = document.createElement('div');
+  container.className = 'slide-container' + (i === 0 ? ' active' : ' hidden');
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'slide-wrapper';
+
+  const iframe = document.createElement('iframe');
+  iframe.srcdoc = html;
+  iframe.setAttribute('scrolling', 'no');
+  iframe.style.overflow = 'hidden';
+
+  iframe.addEventListener('load', () => {
+    try {
+      const doc = iframe.contentDocument;
+      try {
+        const bg = getComputedStyle(doc.body).backgroundColor;
+        container.dataset.bg = bg;
+        if (i === current) applyActiveBg();
+      } catch(e) {}
+      doc.addEventListener('keydown', (e) => {
+        document.dispatchEvent(new KeyboardEvent('keydown', {
+          key: e.key, code: e.code, bubbles: true
+        }));
+      });
+      doc.addEventListener('click', (e) => {
+        document.dispatchEvent(new MouseEvent('click', {
+          clientX: e.clientX,
+          clientY: e.clientY,
+          bubbles: true
+        }));
+      });
+      doc.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+      doc.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].screenX - touchStartX;
+        const dy = e.changedTouches[0].screenY - touchStartY;
+        handleSwipeEnd(dx, dy);
+      }, { passive: true });
+    } catch(err) {}
+  });
+
+  wrapper.appendChild(iframe);
+  container.appendChild(wrapper);
+  body.appendChild(container);
+  containers.push(container);
+});
+
+function scaleIframes() {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const isMobile = vw < 900 || vh < 500;
+  const isPortrait = vh > vw;
+
+  let scale, rotate = false;
+  if (isMobile && isPortrait) {
+    scale = Math.min(vh / 1280, vw / 720);
+    rotate = true;
+  } else if (isMobile) {
+    scale = Math.min(vw / 1280, vh / 720);
+  } else {
+    scale = Math.min(vw / 1280, vh / 720);
+  }
+
+  const slideW = 1280 * scale;
+  const slideH = 720 * scale;
+
+  containers.forEach(c => {
+    const wrapper = c.querySelector('.slide-wrapper');
+    const iframe = c.querySelector('iframe');
+    if (rotate) {
+      wrapper.style.width = slideH + 'px';
+      wrapper.style.height = slideW + 'px';
+      iframe.style.transform = 'translate(' + slideH + 'px, 0) rotate(90deg) scale(' + scale + ')';
+    } else {
+      wrapper.style.width = slideW + 'px';
+      wrapper.style.height = slideH + 'px';
+      iframe.style.transform = 'scale(' + scale + ')';
+    }
+  });
+}
+
+function isDarkBg(color) {
+  const match = color && color.match(/\d+/g);
+  if (!match || match.length < 3) return false;
+  const r = Number(match[0]), g = Number(match[1]), b = Number(match[2]);
+  return (r*0.299 + g*0.587 + b*0.114) < 128;
+}
+
+function applyActiveBg() {
+  const bg = containers[current] && containers[current].dataset.bg;
+  if (!bg) return;
+  document.documentElement.style.background = bg;
+  document.body.style.background = bg;
+  const dark = isDarkBg(bg);
+  const counter = document.getElementById('counter');
+  const hint = document.getElementById('hint');
+  if (counter) counter.style.color = dark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.25)';
+  if (hint) hint.style.color = dark ? 'rgba(255,255,255,0.22)' : 'rgba(0,0,0,0.15)';
+}
+
+function showSlide(index) {
+  if (index < 0 || index >= TOTAL) return;
+  containers[current].className = 'slide-container hidden';
+  current = index;
+  containers[current].className = 'slide-container active';
+  document.getElementById('counter').textContent = (current + 1) + '/' + TOTAL;
+  applyActiveBg();
+}
+
+function next() { showSlide(current + 1); }
+function prev() { showSlide(current - 1); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+    e.preventDefault(); next();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    e.preventDefault(); prev();
+  } else if (e.key === 'f' || e.key === 'F') {
+    e.preventDefault();
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else { document.exitFullscreen(); }
+  } else if (e.key === 'Home') {
+    e.preventDefault(); showSlide(0);
+  } else if (e.key === 'End') {
+    e.preventDefault(); showSlide(TOTAL - 1);
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if (e.target.closest('.counter, .hint')) return;
+  const x = e.clientX / window.innerWidth;
+  if (x < 0.33) { prev(); } else { next(); }
+});
+
+document.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+document.addEventListener('touchend', (e) => {
+  const dx = e.changedTouches[0].screenX - touchStartX;
+  const dy = e.changedTouches[0].screenY - touchStartY;
+  handleSwipeEnd(dx, dy);
+}, { passive: true });
+
+scaleIframes();
+applyActiveBg();
+window.addEventListener('resize', scaleIframes);
+window.addEventListener('orientationchange', () => setTimeout(scaleIframes, 200));
+
+setTimeout(() => {
+  document.getElementById('hint').style.opacity = '0';
+}, 5000);
+</script>
+</body>
+</html>

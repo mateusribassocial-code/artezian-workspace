@@ -43,14 +43,14 @@ João Mendonça mora a 1 km da hospedagem e conhece o proprietário pessoalmente
 - Capacidade: até 4 pessoas
 - Cama de casal + cama adicional, frigobar, TV, ar-condicionado, banheiro, cozinha compacta
 - Taxa de limpeza: R$ 150
-- Mínimo: 3 noites
+- Mínimo: 3 noites (5 em feriados)
 - IDs Stays: JR01J, JR02J, JR03J, JR04J
 
 **Tipo B — Apartamentos 1 quarto (VP-05, VP-06, VP-07, VP-08)**
 - Capacidade: até 5 pessoas
 - Quarto e sala, sofá cama, cama de casal, beliche, ar-condicionado, cozinha completa, tanquinho
 - Taxa de limpeza: R$ 150
-- Mínimo: 3 noites
+- Mínimo: 3 noites (5 em feriados)
 - IDs Stays: JR05J, JR06J, JR07J, JR08J
 
 **Tipo C — Apartamento premium (VP-09)**
@@ -58,7 +58,7 @@ João Mendonça mora a 1 km da hospedagem e conhece o proprietário pessoalmente
 - 2 quartos (andar superior) + sala com sofá cama (térreo) + cozinha + lavabo + tanquinho + sacada com vista para a piscina
 - Único com lavabo separado e sacada
 - Taxa de limpeza: R$ 200
-- Mínimo: 3 noites
+- Mínimo: 3 noites (5 em feriados)
 - ID Stays: JR09J
 
 ---

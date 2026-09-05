@@ -119,7 +119,7 @@ Exemplo:
 Link do vídeo (URL na base de conhecimento)
 [1 destaque em até 10 palavras]
 Até X pessoas | [camas resumido]
-R$X/noite (mín. 3 noites) 
+R$X/noite (mín. 3 noites, 5 em feriados) 
 
 Após o envio, termine com uma tentativa de resposta dele:
 Ex:

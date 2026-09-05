@@ -36,7 +36,7 @@ Porto Seguro fica no sul da Bahia, com praias de água quente e transparente o a
 - Entrada antecipada ou saída tardia estão sujeitas à disponibilidade e não são garantidas previamente.
 
 ### Mínimo de Noites
-Mínimo de **3 noites** em todos os imóveis, sem exceção.
+Mínimo de **3 noites (5 em feriados)** em datas normais e **5 noites** em feriados.
 
 ### Café da Manhã
 Não está incluso em nenhum imóvel. Todos possuem cozinha equipada (geladeira, fogão, microondas, utensílios).
@@ -60,7 +60,7 @@ A capacidade indicada em cada imóvel é o limite máximo de pessoas. Não é pe
 ## PAGAMENTO
 
 ### Formas de pagamento aceitas
-- **Pix:** com 10% de desconto sobre o valor total
+- **Pix:** com 5% de desconto sobre o valor total
 - **Cartão de crédito:** até 6x com 13% de acréscimo (onde disponível — verificar por imóvel)
 - **Condomínio do Max:** Pix ou cartão até 3x sem juros; acima de 3x depende de autorização do gerente
 
@@ -553,10 +553,10 @@ As diárias variam conforme o período. Os períodos e seus tipos são:
 O preço varia conforme o imóvel e o período. Para saber o valor exato, informe as datas e o tamanho do grupo.
 
 **Tem desconto?**
-Pix à vista tem 10% de desconto automático. Os preços já são diretos, sem taxa de plataforma.
+Pix à vista tem 5% de desconto automático. Os preços já são diretos, sem taxa de plataforma.
 
 **Posso parcelar no cartão?**
-Sim, até 6 vezes com 13% de acréscimo (onde disponível). No Pix ainda sai mais barato, com 10% de desconto.
+Sim, até 6 vezes com 13% de acréscimo (onde disponível). No Pix ainda sai mais barato, com 5% de desconto.
 
 **Como funciona o pagamento?**
 Um sinal de 30% a 50% via Pix garante a reserva. O restante é pago no check-in. A porcentagem varia por imóvel.
@@ -575,7 +575,7 @@ Confirme as datas e o grupo pelo WhatsApp. A equipe envia o contrato e o link de
 Sim. Um contrato simples é enviado por e-mail antes do pagamento. Garante o hóspede e o imóvel.
 
 **Qual o mínimo de noites?**
-3 noites em todos os imóveis.
+3 noites em datas normais e 5 noites em feriados.
 
 **Vocês são do Airbnb?**
 Não. Atendimento direto pela Artezian — mais ágil e sem taxa de plataforma.

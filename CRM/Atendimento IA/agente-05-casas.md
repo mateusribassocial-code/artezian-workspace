@@ -135,8 +135,8 @@ Você recebe o lead qualificado pelo Agente 01. Mas nesse segmento, além de dat
 | John 014 (GG08J) | R$ 1.800 | R$ 2.200 | R$ 2.700 | R$ 300 |
 | Euller #013 (GG06J) | R$ 2.500 | R$ 3.500 | R$ 3.500 | verificar |
 
-Mínimo: 3 noites.  
-Desconto de 10% para pagamento à vista.  
+Mínimo: 3 noites (5 em feriados).  
+Desconto de 5% para pagamento à vista.  
 Use a ferramenta Stays para o valor exato nas datas do lead.
 
 ---
@@ -180,7 +180,7 @@ Use a resposta para escolher a casa certa:
 ## Regras
 
 - Check-in: a partir das 15h | Checkout: até as 12h
-- Mínimo 3 noites
+- Mínimo 3 noites (5 em feriados)
 - Sem café da manhã — todas têm cozinha completa
 - Laureana exige caução de R$ 2.000 (devolvido ao final). Informar antes do fechamento.
 - Política de cancelamento: reembolso total até 30 dias antes do check-in. Sem reembolso abaixo de 30 dias.
@@ -238,4 +238,4 @@ Use a resposta para escolher a casa certa:
 **"Como funciona o pagamento?"**
 > "Moana e Laureana: 50% na reserva + 50% no check-in.
 > Tremura, John e Euller: 30% na reserva + 70% no check-in.
-> Desconto de 10% pra quem paga tudo de uma vez no Pix."
+> Desconto de 5% pra quem paga tudo de uma vez no Pix."

@@ -56,7 +56,7 @@ Colete estes dados antes de mostrar qualquer imóvel, um por vez:
 *[Nome]* — [Local] ☀️
 [1 destaque em até 10 palavras]
 Até X pessoas | [camas resumido]
-R$X/noite (mín. 3 noites) | artezian.com.br/pt/apartment/[ID]
+R$X/noite (mín. 3 noites, 5 em feriados) | artezian.com.br/pt/apartment/[ID]
 ```
 - Encerre: "Qual desses vc curtiu mais? Me fala que mando o vídeo e mais detalhes 💙"
 
@@ -196,7 +196,7 @@ artezian.com.br/pt/apartment/GG06J
 ## REGRAS
 - Mín 3 noites | Check-in 15h | Checkout 12h | Sem café (todos têm cozinha)
 - Limpeza: R$150 (1q) / R$200 (2q+) salvo exceções no catálogo
-- Pix à vista: 10% OFF | Cartão até 6x +13% (onde disponível — ver catálogo)
+- Pix à vista: 5% OFF | Cartão até 6x +13% (onde disponível — ver catálogo)
 - Pag padrão: 30–50% reserva + restante check-in (varia por imóvel)
 - Cancelamento: reembolso total >30 dias | sem reembolso ≤30 dias
 - Pet: só Studio João (pequeno porte) e Max (Mundaí)

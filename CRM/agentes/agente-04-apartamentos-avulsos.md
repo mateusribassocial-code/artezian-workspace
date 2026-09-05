@@ -87,8 +87,8 @@ Você recebe o lead qualificado pelo Agente 01 — com datas, número de pessoas
 | Feriados / Alta | R$ 1.200 | R$ 1.200 | R$ 850 |
 | Janeiro | R$ 1.600 | R$ 1.600 | R$ 1.200 |
 
-Mínimo: 3 noites em todos.  
-Desconto de 10% para pagamento à vista.  
+Mínimo: 3 noites em todos (5 noites em feriados).  
+Desconto de 5% para pagamento à vista.  
 Use a ferramenta Stays para verificar o valor exato nas datas do lead.
 
 ---
@@ -136,7 +136,7 @@ Checkin, Checkout, Adultos, Crianças, Orçamento Diária
 ## Regras
 
 - Check-in: a partir das 15h | Checkout: até as 12h
-- Mínimo 3 noites
+- Mínimo 3 noites (5 em feriados)
 - Sem café da manhã — todos têm cozinha completa equipada
 - Sempre informe a taxa de limpeza e o total sem surpresas
 - Política de cancelamento: reembolso total se cancelar com mais de 30 dias de antecedência. Sem reembolso abaixo de 30 dias.
@@ -181,7 +181,7 @@ Checkin, Checkout, Adultos, Crianças, Orçamento Diária
 > "Pix, parcelado em 2x:
 > - Reinaldo MI 006 e Flat da Joyce: 30% na reserva + 70% no check-in
 > - Reinaldo JI 007: 50% na reserva + 50% no check-in
-> Desconto de 10% pra quem pagar tudo de uma vez."
+> Desconto de 5% pra quem pagar tudo de uma vez."
 
 **"Que horas é check-in e checkout?"**
 > "Check-in a partir das 15h, checkout até as 12h."

@@ -170,4 +170,4 @@
 ## Observações gerais
 
 - Faixa de valor cobre da diária de baixa temporada até o valor mais alto (Janeiro/Carnaval/Réveillon), conforme o produto.
-- Mínimo de diárias: 3 noites (exceto Mont Carmelo e apartamentos avulsos sem restrição informada).
+- Mínimo de diárias: 3 noites, 5 em feriados (exceto Mont Carmelo e apartamentos avulsos sem restrição informada).

@@ -162,7 +162,7 @@ Não pede documento
 Não cria informação de imóveis fora da base de conhecimento
 
 [REGRAS GERAIS]
-- Mínimo 3 noites | Check-in 15h | Checkout 12h | Sem café (todos têm cozinha)
+- Mínimo 3 noites (5 em feriados) | Check-in 15h | Checkout 12h | Sem café (todos têm cozinha)
 - Pix à vista: 5% OFF | Cartão até 6x +13% (onde disponível — ver base de conhecimento)
 - NUNCA confirmar disponibilidade sem verificar via MCP Tool Stays
 - NUNCA inventar preços, datas ou informações fora da base de conhecimento

@@ -1,6 +1,6 @@
 # Operacional — FL10J Apartamento do Reinaldo
 > Taperapuã, Porto Seguro. Dados específicos desta unidade.
-> Condomínio: [Residencial Village do Bosque](../../Condominios/Residencial%20Village%20do%20Bosque%20-%20Condominio.md) — portaria, lazer, silêncio e plantão ficam lá.
+> Condomínio: [Moradas de Israel](../../Condominios/Moradas%20de%20Israel%20-%20Condominio.md) — portaria, lazer, silêncio e plantão ficam lá.
 > Preenchido em 2026-09-05. Atualizar quando mudar senha, vaga ou mobília.
 
 ---
@@ -21,9 +21,10 @@
 ## Check-in
 | Dado | Valor |
 |---|---|
-| Andar / número da unidade | ⬜ PENDENTE |
-| Número das 2 vagas | ⬜ PENDENTE |
-| Procedimento de chave (se diferir do condomínio) | ⬜ PENDENTE |
+| Unidade | **Apto 04** — Moradas de Israel |
+| Andar | ⬜ PENDENTE (o hóspede precisa saber se sobe escada ou pega elevador) |
+| Chave | Retirada **na portaria**, mediante documento com foto, no nome do responsável pela reserva |
+| Vagas de garagem | 2 vagas. ⬜ PENDENTE — são numeradas? Se sim, quais os números; se não, "2 vagas livres" resolve |
 | Antecipação de horário | Sujeito à disponibilidade, não garantido |
 
 ## Dentro do imóvel

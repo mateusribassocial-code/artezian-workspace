@@ -1,8 +1,10 @@
-# Condomínio — Residencial Village do Bosque
+# Condomínio — Moradas de Israel
 > Taperapuã, Porto Seguro (BA). Dados compartilhados por todas as unidades do prédio.
 > Preenchido em 2026-09-05. Atualizar quando mudar procedimento de portaria, horário de lazer ou plantão.
 
-**Unidades que herdam este bloco:** FL10J — Apartamento do Reinaldo
+**Unidades que herdam este bloco:** FL10J — Apartamento do Reinaldo (Apto 04)
+
+> ⚠️ **Divergência no repo:** `vizinhanca-imoveis.md` (linha 16) registra o FL10J como *Residencial Village do Bosque*. O nome confirmado pelo Mateus em 05/09/2026 é **Moradas de Israel**. Corrigir o `vizinhanca-imoveis.md` — ou, se forem dois nomes do mesmo lugar (nome de registro x nome de placa), anotar os dois, porque o hóspede vai procurar pelo que está na fachada.
 
 ---
 
@@ -13,24 +15,24 @@
 | Cidade / UF / CEP | Porto Seguro / BA / 45810-000 | descrição FL10J |
 | Praia mais próxima | Taperapuã — 180m | vizinhanca-imoveis.md |
 | Ponto de referência | Próximo ao Axé Moi | vizinhanca-imoveis.md |
+| Do aeroporto | **10 minutos de carro** | Mateus, 05/09/2026 |
 | Centro histórico | ~8 km | descrição FL10J |
-| Do aeroporto | ⬜ PENDENTE (tempo de carro) | — |
+| Acesso à praia | ⬜ PENDENTE — descrição diz "acesso direto", vizinhança diz 180m. Atravessa rua ou sai na areia? | — |
 
 ## Chegada e portaria
 | Dado | Valor |
 |---|---|
 | Portaria 24h | Sim |
-| Nome que vai na lista | ⬜ PENDENTE |
-| Exige documento com foto | ⬜ PENDENTE |
-| Precisa autorização prévia | ⬜ PENDENTE |
-| Procedimento de retirada da chave | ⬜ PENDENTE |
-| Onde fica o cofre / fechadura eletrônica | ⬜ PENDENTE |
-| Senha do cofre / fechadura | ⬜ PENDENTE |
+| Retirada da chave | **Na portaria** |
+| Nome que vai na lista | **Nome do responsável pela reserva** |
+| Exige documento com foto | **Sim, obrigatório** |
+| Cofre / fechadura eletrônica | Não tem |
+| Autorização prévia enviada pela Artezian | ⬜ PENDENTE — a portaria já recebe a lista de vocês, ou o hóspede chega e a portaria confere na hora? |
 
 ## Plantão Artezian
 | Dado | Valor |
 |---|---|
-| WhatsApp do plantão | ⬜ PENDENTE |
+| WhatsApp de Reservas | +55 73 9937-3474 ⬜ **CONFERIR** — celular brasileiro tem 9 dígitos após o DDD, este veio com 8. Provável: (73) 99937-3474 |
 | Horário de atendimento | ⬜ PENDENTE (padrão sugerido: 8h–22h, emergência 24h) |
 
 ## Área de lazer

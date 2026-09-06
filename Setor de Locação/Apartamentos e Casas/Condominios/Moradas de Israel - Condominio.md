@@ -36,7 +36,7 @@
 ## Plantão Artezian
 | Dado | Valor |
 |---|---|
-| WhatsApp de Reservas | +55 73 9937-3474 ⬜ **CONFERIR** — celular brasileiro tem 9 dígitos após o DDD, este veio com 8. Provável: (73) 99937-3474 |
+| WhatsApp de Reservas | **+55 73 9937-3474** — confirmado pelo Mateus em 06/09/2026. Link usado no manual: `wa.me/557399373474` |
 | Horário de atendimento | ⬜ PENDENTE (padrão sugerido: 8h–22h, emergência 24h) |
 
 ## Área de lazer

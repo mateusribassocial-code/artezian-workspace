@@ -22,9 +22,9 @@
 | Dado | Valor |
 |---|---|
 | Unidade | **Apto 04** — Moradas de Israel |
-| Andar | ⬜ PENDENTE (o hóspede precisa saber se sobe escada ou pega elevador) |
+| Andar | **1º andar** (confirmado 06/09/2026) |
 | Chave | Retirada **na portaria**, mediante documento com foto, no nome do responsável pela reserva |
-| Vagas de garagem | 2 vagas. ⬜ PENDENTE — são numeradas? Se sim, quais os números; se não, "2 vagas livres" resolve |
+| Vagas de garagem | **2 vagas, sem numeração fixa** (confirmado 06/09/2026) |
 | Antecipação de horário | Sujeito à disponibilidade, não garantido |
 
 ## Dentro do imóvel

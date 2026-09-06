@@ -184,7 +184,7 @@ S10 = '''<section class="sec">
     lugar("Praia do Espelho e Trancoso", "dia inteiro", "Saída pela manhã, volta à noite. Falésias, vilarejo histórico e o Quadrado de Trancoso."),
 ])
 
-S12 = '''<section class="sec">
+S12 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">12</span> Se precisar</h2>
     <table class="tab">
       <tr><th>Plantão Artezian</th><td><a href="https://wa.me/%s">%s</a></td></tr>

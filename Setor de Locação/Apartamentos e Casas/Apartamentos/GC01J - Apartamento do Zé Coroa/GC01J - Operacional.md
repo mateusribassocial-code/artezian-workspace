@@ -8,7 +8,13 @@
 
 ---
 
-## ⚠️ Divergências a resolver antes de gerar o manual
+## ✅ Divergências resolvidas em 06/09/2026
+
+Decisões do Mateus, já aplicadas no manual: **11 pessoas** · **2 vagas** · **3 camas de casal e 5 de solteiro** · **usar a distância medida no Maps** (3 min a pé, não "4 metros") · nome correto é **Apartamento do Zé Coroa**.
+
+O bloco de características da descrição continua sendo cópia do FL10J — vale corrigir o `.txt` de origem para não reintroduzir os números errados numa próxima geração.
+
+<details><summary>Registro do que divergia</summary>
 
 | # | Item | Descrição local | Site da Artezian | Observação |
 |---|---|---|---|---|
@@ -19,6 +25,8 @@
 | 5 | **Configuração** | "Sala e 3 Quartos" num trecho, "3 Suítes/1 no térreo" no outro | 3 suítes | O bloco de características é idêntico ao do FL10J — provável cópia. |
 | 6 | **Município** | Santa Cruz Cabrália, CEP 45807-000 | — | A página do condomínio diz Porto Seguro/45810-000, que é o CEP de Taperapuã. **A descrição está certa.** |
 | 7 | **Distância da praia** | "na porta do condomínio" | "a 4 metros" | Medição por coordenada: 194m do marcador central até a costa. Ver nota no arquivo do condomínio. |
+
+</details>
 
 ---
 
@@ -38,23 +46,23 @@
 | Dado | Valor |
 |---|---|
 | Horário | Das 15h às 22h |
-| Número da unidade | ⬜ PENDENTE |
-| Andar / é duplex? | ⬜ PENDENTE — as fotos mostram escada interna |
-| Retirada da chave | ⬜ PENDENTE (ver arquivo do condomínio) |
-| Vagas | ⬜ PENDENTE — 2 ou 3? (divergência nº 3) |
+| Número da unidade | **Apartamento 13** (Mateus, 06/09/2026) |
+| Andar / é duplex? | **Duplex.** 1 suíte no térreo (no nível da entrada) + 2 no andar de cima, por escada interna (Mateus, 06/09/2026) |
+| Retirada da chave | **Na portaria** (Mateus, 06/09/2026) |
+| Vagas | **2 vagas** (Mateus, 06/09/2026) |
 
 ## Dentro do imóvel
 | Item | Tem? | Detalhe |
 |---|---|---|
-| Wi-Fi | ⬜ PENDENTE | rede e senha, ou "pegar na portaria" |
-| Toalhas de banho | ⬜ PENDENTE | |
+| Wi-Fi | **Senha na portaria** (Mateus, 06/09/2026) | |
+| Toalhas de banho | **Já no apartamento**, junto com a roupa de cama (Mateus, 06/09/2026) | |
 | Máquina de lavar | ⬜ PENDENTE | |
 | Secadora | ⬜ PENDENTE | |
 | Ferro e tábua | ⬜ PENDENTE | |
 | Secador de cabelo | ⬜ PENDENTE | |
 | Kit de chegada | ⬜ PENDENTE | |
 | Carvão pra churrasqueira privativa | ⬜ PENDENTE | |
-| Voltagem | ⬜ PENDENTE | 220V como no FL10J? |
+| Voltagem | **220V** (Mateus, 06/09/2026) | avisado em destaque no manual |
 
 ## O que o hóspede precisa levar
 ⬜ PENDENTE — confirmado até agora: **não há berço** no condomínio.
@@ -63,7 +71,7 @@
 | Dado | Valor |
 |---|---|
 | Horário | Das 6h às 12h |
-| O que fazer com a chave | ⬜ PENDENTE |
+| O que fazer com a chave | **Devolver na recepção do condomínio** (Mateus, 06/09/2026) |
 | Onde deixar o lixo | ⬜ PENDENTE |
 
 ## Fotos

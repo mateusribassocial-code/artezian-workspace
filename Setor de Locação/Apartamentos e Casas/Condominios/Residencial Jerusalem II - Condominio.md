@@ -25,7 +25,9 @@
 | Do aeroporto de Porto Seguro | 13,1 km — cerca de 25 a 30 min de carro | medido via OSM |
 | Do centro de Porto Seguro | ~12,5 km — cerca de 25 min de carro | medido via OSM |
 
-> ⚠️ **Divergência sobre a praia.** O site da Artezian e a página do condomínio dizem "a 4 metros da praia"; a descrição diz "na porta do condomínio". A medição por coordenada dá 194m do marcador central até a linha de costa — mas o condomínio é de frente pro mar e o marcador fica no meio do terreno, então a borda pode estar de fato colada na areia.
+> ✅ **Resolvido:** usar a distância medida no Maps — **3 minutos a pé**. Não usar "4 metros".
+>
+> ⚠️ Registro da divergência: O site da Artezian e a página do condomínio dizem "a 4 metros da praia"; a descrição diz "na porta do condomínio". A medição por coordenada dá 194m do marcador central até a linha de costa — mas o condomínio é de frente pro mar e o marcador fica no meio do terreno, então a borda pode estar de fato colada na areia.
 > **Confirmar com quem conhece:** o hóspede sai do portão na areia, ou atravessa alguma rua? Foi exatamente esse tipo de imprecisão que gerou o problema no FL10J.
 
 ## Estrutura
@@ -55,16 +57,16 @@
 ## Chegada e portaria
 | Dado | Valor |
 |---|---|
-| Retirada da chave | ⬜ PENDENTE — é na portaria, como no Moradas de Israel? |
-| Nome na lista | ⬜ PENDENTE |
-| Documento com foto | ⬜ PENDENTE |
-| Wi-Fi | ⬜ PENDENTE — senha na portaria também? |
-| Voltagem | ⬜ PENDENTE — 220V como no outro? |
-| Toalhas de banho | ⬜ PENDENTE — fornecidas pelo condomínio? |
-| Horário da piscina | ⬜ PENDENTE |
-| Churrasqueira coletiva precisa agendar | ⬜ PENDENTE |
+| Retirada da chave | **Na portaria** (Mateus, 06/09/2026) |
+| Nome na lista | **Responsável pela reserva** (Mateus, 06/09/2026) |
+| Documento com foto | **Sim, obrigatório** (Mateus, 06/09/2026) |
+| Wi-Fi | **Senha na portaria** (Mateus, 06/09/2026) |
+| Voltagem | **220V** (Mateus, 06/09/2026) |
+| Toalhas de banho | **Já no apartamento** (Mateus, 06/09/2026) |
+| Horário da piscina | **9h às 22h** (Mateus, 06/09/2026) |
+| Churrasqueira coletiva precisa agendar | **Sim, na portaria** (Mateus, 06/09/2026) |
 | Onde deixar o lixo | ⬜ PENDENTE |
-| Devolução da chave no check-out | ⬜ PENDENTE — na recepção? |
+| Devolução da chave no check-out | **Na recepção do condomínio** (Mateus, 06/09/2026) |
 | Telefone da portaria | ⬜ PENDENTE |
 
 ## Contato do condomínio (não vai no manual do hóspede)

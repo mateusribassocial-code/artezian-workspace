@@ -98,7 +98,7 @@ S01 = '''<section class="sec">
     </table>
   </section>''' % (WPP_LINK, WPP_FMT)
 
-S02 = '''<section class="sec">
+S02 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">02</span> Como chegar</h2>
     <div class="mapa-linha">
       <div class="mapa-txt">
@@ -135,7 +135,7 @@ S04 = '''<section class="sec">
     </div>
   </section>''' % GALERIA
 
-S05 = '''<section class="sec">
+S05 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">05</span> O que tem aqui</h2>
     <div class="col2">
       <div class="col-tem">

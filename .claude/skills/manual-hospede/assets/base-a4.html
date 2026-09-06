@@ -213,6 +213,8 @@ a { color: var(--ouro-esc); }
 
   .sec { padding: 0 0 9mm; border-bottom: none; break-inside: auto; }
   .sec-h { font-size: 15pt; margin-bottom: 5mm; break-after: avoid; }
+  /* o titulo nao pode ficar sozinho no rodape: prende o primeiro bloco a ele */
+  .sec-h + * { break-before: avoid; }
   .quebra-antes { break-before: page; }
 
   /* nada pode partir ao meio */

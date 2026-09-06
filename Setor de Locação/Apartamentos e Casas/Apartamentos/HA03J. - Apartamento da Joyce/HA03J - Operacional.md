@@ -7,7 +7,15 @@
 
 ---
 
-## 🚫 Bloqueio: não dá pra gerar a seção da região ainda
+## ✅ Localização resolvida em 06/09/2026
+
+**Coordenada: `-16.402411, -39.046452`** — trecho sul da Rua do Telégrafo, junto ao Tôa Tôa.
+
+Como nenhum geocoder resolve o número 1833, a posição foi triangulada (ponto da rua a ~500m da Cabana Malibu) e o Mateus confirmou pelo perfil de vizinhança: Tôa Tôa a 4 min a pé, Axé Moi e farmácia longe.
+
+Distâncias medidas a partir daí: costa 315m (5 min a pé), Tôa Tôa 277m, Cabana Malibu 484m, Posto Mundaí 525m (24h), Farmácia Taperapuan 1.071m, Haddasa e Frossad 1.108m, Axé Moi 1.161m, Colher de Pau 1,4 km, aeroporto 5,4 km.
+
+<details><summary>Por que foi difícil</summary>
 
 O endereço da descrição é **Rua do Telégrafo, 1833**. O geocoder só resolve o centro da rua (`-16.3891476, -39.0408377`), que fica a **99m do FL10J** — e isso não pode estar certo:
 
@@ -20,6 +28,8 @@ Se a Malibu está a 500m de verdade, a unidade fica **cerca de 800m ao sul** do 
 
 **Preciso do link do Google Maps do condomínio**, como nos outros dois. Sem ele, as seções 08 (mercado e farmácia), 09 (onde comer) e 10 (o que fazer) não podem ser escritas com número nenhum.
 
+</details>
+
 ---
 
 ## ⚠️ Divergências entre a descrição e o site
@@ -28,7 +38,7 @@ Se a Malibu está a 500m de verdade, a unidade fica **cerca de 800m ao sul** do 
 |---|---|---|---|
 | 1 | **Quartos** | "2 Suítes + 1 Quarto" e "Sala e 3 Quartos" | "3 suítes (1 no térreo)", **4 banheiros** |
 | 2 | **Número na rua** | 1833 | 1800 |
-| 3 | **Praia** | "Taperapuã (acesso direto)" | **~400m da praia** |
+| 3 | **Praia** | "Taperapuã (acesso direto)" | ~400m — **medido: 315m, 5 min a pé.** O site está certo, a descrição não. |
 | 4 | **Camas** | 2 casal + 4 solteiro + sofá-cama | 2 casal + 4 solteiro |
 
 > A frase "acesso direto à praia" é a mesma que apareceu errada no FL10J (lá deu 392m). Aqui o **próprio site da Artezian** já contradiz a descrição. Vale corrigir o `.txt` de origem.
@@ -75,9 +85,9 @@ Se a Malibu está a 500m de verdade, a unidade fica **cerca de 800m ao sul** do 
 |---|---|
 | **Link do Maps** | ⚠️ O link enviado (`share.google/4ymRn0vK1hC5uxdsk`) é uma **busca de endereço**, não um pin de lugar: resolve para `R. do Telégrafo, 1833 - Porto Seguro, BA, 45810-000` e o Google devolve CAPTCHA. Nenhum geocoder (Nominatim, Photon) resolve o número 1833 — a Rua do Telégrafo tem **6,3 km** e o OSM não tem pontos de endereço nela. Preciso de um link `maps.app.goo.gl/...` ou das coordenadas. |
 | **Nome do condomínio** | Vai na tabela da reserva e na referência do "Como chegar" |
-| **Tem portaria 24h?** | A descrição **não** lista portaria na área de lazer, ao contrário do FL10J e do GC01J. Se não tiver, o check-in não pode dizer "retire a chave na portaria" — muda o passo a passo inteiro |
-| Retirada da chave | Mateus disse: *"a chave é liberada mediante campanha digital"*. ⬜ **Não entendi o termo** — ver bloco abaixo. |
-| Nome na lista / documento | Se houver portaria |
+| ~~Portaria 24h~~ | ✅ **Não tem portaria.** Confirmado pelo Mateus em 06/09/2026. O check-in foi reescrito: sem porteiro, sem chave física. |
+| ~~Retirada da chave~~ | ✅ **Fechadura digital com senha.** Confirmado pelo Mateus em 06/09/2026. |
+| ~~Nome na lista / documento~~ | Não se aplica — não há portaria. |
 | Número da unidade e andar | Site diz "1 suíte no térreo" — é duplex como os outros? |
 | Wi-Fi | Rede e senha, ou "pegar na portaria" |
 | Toalhas de banho e roupa de cama | Inclusas? |
@@ -93,11 +103,13 @@ Se a Malibu está a 500m de verdade, a unidade fica **cerca de 800m ao sul** do 
 
 ---
 
-## ⬜ "Chave liberada mediante campanha digital"
+## ✅ Resolvido: fechadura digital com senha
 
-Essa é a instrução mais importante do manual inteiro: se o hóspede não conseguir entrar, é o único erro que não tem contorno às 22h de um domingo. Não vou escrever um passo a passo baseado em palpite.
+O termo "campanha digital" era **fechadura digital**. O check-in do manual foi reescrito em 4 passos, sem portaria e sem chave física, e a senha ganhou o bloco dourado dedicado do scaffold — hoje em branco.
 
-Leituras possíveis do termo:
+**⬜ Decisão pendente:** a senha muda a cada reserva? Se sim, o manual não deve trazê-la impressa — melhor dizer "sua senha chega por WhatsApp no dia da chegada", assim o PDF serve pra todos os hóspedes. Se for fixa, imprimo.
+
+<details><summary>Hipóteses que eu havia levantado</summary>
 
 | Hipótese | O que iria pro manual |
 |---|---|
@@ -107,3 +119,5 @@ Leituras possíveis do termo:
 | **Confirmação de pagamento** | "A chave é liberada depois que o pagamento restante for confirmado no Pix." |
 
 As quatro geram passos completamente diferentes — e a última tem implicação a mais: seria a única das três unidades onde o hóspede precisa resolver algo **antes** de chegar.
+
+</details>

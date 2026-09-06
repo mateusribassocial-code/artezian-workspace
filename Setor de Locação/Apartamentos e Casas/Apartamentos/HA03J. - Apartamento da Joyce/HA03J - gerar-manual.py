@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """Gera o Manual do Hospede do HA03J (Apartamento da Joyce).
 
-PARCIAL: 9 secoes. As secoes de regiao (mercado, onde comer, o que fazer)
-so podem ser escritas quando chegar a coordenada exata do imovel — a Rua do
-Telegrafo tem 6,3 km e nenhum geocoder resolve o numero 1833.
+Coordenada confirmada pelo Mateus em 06/09/2026: -16.402411, -39.046452
+(trecho sul da Rua do Telegrafo, proximo ao Toa Toa). Nenhum geocoder resolve
+o numero 1833 — a rua tem 6,3 km — entao a posicao foi triangulada por
+referencias locais e confirmada por ele.
 
 Fontes:
   HA03J - Descricao_Joyce.txt            -> caracteristicas, endereco, video
@@ -39,7 +40,6 @@ def datauri(nome, larg=1200, q=78):
 SELECAO = [
     ("1.png", "Piscina e área externa", True),
     ("HA03J-2.png", "Sala de estar com TV", False),
-    ("HA03J-5.png", "Sala e bancada da cozinha americana", False),
     ("HA03J-1.png", "Cozinha completa", False),
     ("9.png", "Suíte com cama de casal", False),
     ("10.png", "Quarto com duas camas de solteiro", False),
@@ -57,6 +57,29 @@ for nome, leg, larga in SELECAO:
     fotos_html.append(
         '<figure class="%s"><img src="%s" alt="%s"><figcaption>%s</figcaption></figure>' % (cls, uri, leg, leg))
 GALERIA = "\n      ".join(fotos_html)
+
+
+NL = chr(10)
+
+
+def lugar(nome, dist, desc):
+    return (NL.join([
+        '      <div class="lugar">',
+        '        <div class="lugar-topo"><span class="lugar-nome">' + nome + '</span>'
+        '<span class="lugar-dist">' + dist + '</span></div>',
+        '        <div class="lugar-desc">' + desc + '</div>',
+        '      </div>']))
+
+
+def grupo(titulo, itens):
+    return (NL.join([
+        '    <div class="grupo-lugares">',
+        '      <h3>' + titulo + '</h3>',
+        '      <div class="lugares">',
+        NL.join(itens),
+        '      </div>',
+        '    </div>']))
+
 
 CAPA = '''<header class="capa">
     <div class="capa-tag">Manual do hóspede</div>
@@ -81,19 +104,22 @@ S01 = '''<section class="sec">
       <tr><th>Capacidade</th><td>Até 8 pessoas — 3 suítes e 4 banheiros, mais sofá-cama na sala</td></tr>
       <tr><th>Camas</th><td>2 de casal e 4 de solteiro</td></tr>
       <tr><th>Garagem</th><td>2 vagas</td></tr>
-      <tr><th>Praia</th><td>Taperapuã, cerca de 400m — 6 minutos a pé</td></tr>
+      <tr><th>Praia</th><td>Taperapuã, 5 minutos a pé</td></tr>
       <tr><th>Plantão Artezian</th><td><a href="https://wa.me/%s">%s</a></td></tr>
     </table>
     <div class="aviso"><strong>Este imóvel não tem portaria.</strong> A entrada é por fechadura digital e o plantão da Artezian é o seu contato para tudo — chegada, dúvida, problema. Salve o número antes de viajar.</div>
   </section>''' % (WPP_LINK, WPP_FMT)
 
-S02 = '''<section class="sec">
+S02 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">02</span> Como chegar</h2>
     <div class="mapa-linha">
       <div class="mapa-txt">
         <p class="end">Rua do Telégrafo, 1833 — Taperapuã, Porto Seguro (BA)</p>
-        <p class="ref">A Praia de Taperapuã fica a cerca de 400 metros, uns 6 minutos a pé.</p>
+        <p class="ref">Referência: o Tôa Tôa fica a 4 minutos a pé. A Praia de Taperapuã, a 5 minutos.</p>
         <ul class="lista">
+          <li><strong>Do aeroporto:</strong> 12 minutos de carro</li>
+          <li><strong>Do centro de Porto Seguro:</strong> cerca de 12 minutos de carro</li>
+          <li><strong>Da Praia de Taperapuã:</strong> 5 minutos a pé</li>
           <li>Como não há portaria, vá direto ao apartamento — ninguém precisa liberar sua entrada.</li>
           <li>Se vier de táxi ou aplicativo, confira o número na fachada antes de dispensar o carro.</li>
         </ul>
@@ -121,7 +147,7 @@ S04 = '''<section class="sec">
     </div>
   </section>''' % GALERIA
 
-S05 = '''<section class="sec">
+S05 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">05</span> O que tem aqui</h2>
     <div class="col2">
       <div class="col-tem">
@@ -172,8 +198,8 @@ S06 = '''<section class="sec">
     <div class="aviso"><strong>Confira a voltagem antes de ligar aparelhos trazidos de casa</strong> <span class="ph">confirmar se é 220V</span>. Secador de cabelo e chapinha são os que queimam. Carregador de celular e notebook costumam ser bivolt, mas vale conferir na etiqueta.</div>
   </section>'''
 
-S07 = '''<section class="sec junto">
-    <h2 class="sec-h"><span class="sec-n">07</span> Regras da casa e check-out</h2>
+S10 = '''<section class="sec junto">
+    <h2 class="sec-h"><span class="sec-n">10</span> Regras da casa e check-out</h2>
     <ul class="lista">
       <li>Silêncio das 22h às 6h.</li>
       <li>Não é permitido fumar dentro do imóvel.</li>
@@ -191,11 +217,18 @@ S07 = '''<section class="sec junto">
     </ul>
   </section>'''
 
-S08 = '''<section class="sec junto">
-    <h2 class="sec-h"><span class="sec-n">08</span> Se precisar</h2>
+S11 = '''<section class="sec junto">
+    <h2 class="sec-h"><span class="sec-n">11</span> Se precisar</h2>
     <table class="tab">
       <tr><th>Plantão Artezian</th><td><a href="https://wa.me/%s">%s</a> — seu único contato no local</td></tr>
       <tr><th>Emergências</th><td>190 polícia · 192 Samu · 193 bombeiros</td></tr>
+      <tr><th>Farmácia</th><td>Farmácia Taperapuan — 3 min de carro</td></tr>
+      <tr><th>Hospital Regional</th><td>Deputado Luís Eduardo Magalhães — 14 min de carro</td></tr>
+      <tr><th>Policlínica Municipal</th><td>11 min de carro</td></tr>
+      <tr><th>Delegacia de Proteção ao Turista</th><td>13 min de carro</td></tr>
+      <tr><th>Banco e caixa 24h</th><td>Banco do Brasil e Banco24Horas — 11 min de carro</td></tr>
+      <tr><th>Posto de combustível</th><td>Posto Mundaí, aberto 24h — 7 min a pé</td></tr>
+      <tr><th>Shopping</th><td>Porto Plaza Shopping — 11 min de carro</td></tr>
     </table>
     <div class="fecho">
       <p class="fecho-t">Boa estadia.</p>
@@ -203,7 +236,59 @@ S08 = '''<section class="sec junto">
     </div>
   </section>''' % (WPP_LINK, WPP_FMT)
 
-SECOES = "\n\n  ".join([S01, S02, S03, S04, S05, S06, S07, S08])
+S07 = '''<section class="sec">
+    <h2 class="sec-h"><span class="sec-n">07</span> Mercado e farmácia</h2>
+    <div class="aviso"><strong>Aqui não há mercado nem farmácia que dê para ir a pé.</strong> O mais próximo fica a 3 minutos de carro. Se você não alugou carro, vale fazer a compra da chegada no caminho do aeroporto — ou pedir por aplicativo de entrega, que atende a região.</div>
+    <div class="lugares">
+%s
+    </div>
+  </section>'''
+
+S08 = '''<section class="sec">
+    <h2 class="sec-h"><span class="sec-n">08</span> Onde comer e beber</h2>
+%s
+%s
+  </section>'''
+
+S09 = '''<section class="sec">
+    <h2 class="sec-h"><span class="sec-n">09</span> O que fazer</h2>
+    <div class="lugares">
+%s
+    </div>
+  </section>'''
+
+S07 = S07 % "\n".join([
+    lugar("Posto Mundaí", "7 min a pé", "Posto de combustível aberto 24h. A loja de conveniência resolve o esquecido de madrugada — água, gelo, café."),
+    lugar("Haddasa e Frossad", "3 min de carro", "O supermercado mais próximo. A pé dá uns 15 minutos."),
+    lugar("Farmácia Taperapuan", "3 min de carro", "A farmácia da faixa da praia."),
+    lugar("Litoral Supermercado", "4 min de carro", "Alternativa, um pouco maior."),
+    lugar("BigStop", "5 min de carro", "O maior do entorno, para a compra da semana. Todo dia, das 8h às 22h."),
+])
+
+S08 = S08 % (
+    grupo("Pé na areia", [
+        lugar("Tôa Tôa", "4 min a pé", "O beach club mais famoso de Porto Seguro fica logo ali. Axé ao vivo durante o dia e luau nas sextas, das 21h às 3h. É o vizinho deste apartamento."),
+        lugar("Cabana Malibu", "6 min a pé", "Clima mais familiar e tranquilo, cardápio de frutos do mar."),
+        lugar("Restaurante Estrela do Mar", "8 min a pé", "Na mesma faixa da orla, seguindo a pé."),
+    ]),
+    grupo("Vale pegar o carro", [
+        lugar("Axé Moi", "3 min de carro", "Complexo de praia com dois palcos e programação das 10h às 17h30."),
+        lugar("Colher de Pau", "3 min de carro", "Comida baiana na areia — moqueca, carne de sol, peixe. Música ao vivo à noite."),
+        lugar("Cabana Jubarte", "6 min de carro", "Barraca tradicional, mais adiante na orla."),
+        lugar("Barramares", "7 min de carro", "Estrutura grande de praia, com programação de shows."),
+    ]),
+)
+
+S09 = S09 % "\n".join([
+    lugar("Praia de Taperapuã", "5 min a pé", "Mar calmo e 3 km de orla. Vôlei, frescobol, aulas de dança e barracas ao longo de toda a faixa."),
+    lugar("Reserva Pataxó da Jaqueira", "8 min de carro", "Aldeia na Mata Atlântica — danças, ritos e cultura indígena. Bom programa de manhã."),
+    lugar("Centro Histórico", "12 min de carro", "Marco do Descobrimento, museus e vista da cidade alta. Vá no fim da tarde."),
+    lugar("Passarela do Álcool", "12 min de carro", "Vida noturna, artesanato e barracas de drink. Abre no fim da tarde."),
+    lugar("Praia do Mutá", "20 min de carro", "Águas rasas e quentes, piscinas naturais na maré baixa. Boa com crianças pequenas."),
+    lugar("Trancoso e Praia do Espelho", "dia inteiro", "Saída pela manhã, volta à noite. O Quadrado de Trancoso e as falésias do Espelho."),
+])
+
+SECOES = "\n\n  ".join([S01, S02, S03, S04, S05, S06, S07, S08, S09, S10, S11])
 
 html = io.open(SCAFFOLD, encoding="utf-8").read()
 html = (html.replace("{{NOME_UNIDADE}}", NOME)
@@ -215,4 +300,4 @@ io.open(SAIDA, "w", encoding="utf-8").write(html)
 print("gerado:", SAIDA)
 print("fotos: %d | peso das fotos: %.1f MB | arquivo final: %.1f MB"
       % (len(SELECAO), total / 1048576, os.path.getsize(SAIDA) / 1048576))
-print("PARCIAL — faltam as secoes de regiao (dependem da coordenada exata)")
+print("11 secoes — regiao incluida (coordenada confirmada em 06/09/2026)")

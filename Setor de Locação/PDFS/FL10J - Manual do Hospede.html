@@ -213,6 +213,8 @@ a { color: var(--ouro-esc); }
 
   .sec { padding: 0 0 9mm; border-bottom: none; break-inside: auto; }
   .sec-h { font-size: 15pt; margin-bottom: 5mm; break-after: avoid; }
+  /* o titulo nao pode ficar sozinho no rodape: prende o primeiro bloco a ele */
+  .sec-h + * { break-before: avoid; }
   .quebra-antes { break-before: page; }
 
   /* nada pode partir ao meio */
@@ -270,7 +272,7 @@ a { color: var(--ouro-esc); }
     </table>
   </section>
 
-  <section class="sec">
+  <section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">02</span> Como chegar</h2>
     <div class="mapa-linha">
       <div class="mapa-txt">
@@ -314,7 +316,7 @@ a { color: var(--ouro-esc); }
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">05</span> O que tem aqui</h2>
     <div class="col2">
       <div class="col-tem">

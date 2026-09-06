@@ -56,7 +56,7 @@ Se a Malibu está a 500m de verdade, a unidade fica **cerca de 800m ao sul** do 
 | Fumar dentro | Proibido |
 | Festas e eventos | Proibidos |
 | Crianças | De 2 a 12 anos aceitas; bebês aceitos; **sem berço** |
-| **Pets** | **NÃO permitidos** ⚠️ diferente do GC01J |
+| **Pets** | **NÃO permitidos** — confirmado pelo Mateus em 06/09/2026. Diferente do GC01J. |
 | Vagas de garagem | 2, gratuitas |
 | Ar-condicionado | Em todos os quartos |
 | Cozinha | Completa — fogão, forno, micro-ondas, geladeira |
@@ -73,10 +73,10 @@ Se a Malibu está a 500m de verdade, a unidade fica **cerca de 800m ao sul** do 
 
 | Item | Pergunta |
 |---|---|
-| **Link do Maps** | Bloqueia toda a seção da região |
+| **Link do Maps** | ⚠️ O link enviado (`share.google/4ymRn0vK1hC5uxdsk`) é uma **busca de endereço**, não um pin de lugar: resolve para `R. do Telégrafo, 1833 - Porto Seguro, BA, 45810-000` e o Google devolve CAPTCHA. Nenhum geocoder (Nominatim, Photon) resolve o número 1833 — a Rua do Telégrafo tem **6,3 km** e o OSM não tem pontos de endereço nela. Preciso de um link `maps.app.goo.gl/...` ou das coordenadas. |
 | **Nome do condomínio** | Vai na tabela da reserva e na referência do "Como chegar" |
 | **Tem portaria 24h?** | A descrição **não** lista portaria na área de lazer, ao contrário do FL10J e do GC01J. Se não tiver, o check-in não pode dizer "retire a chave na portaria" — muda o passo a passo inteiro |
-| Retirada da chave | Portaria, anfitrião, cofre com senha? |
+| Retirada da chave | Mateus disse: *"a chave é liberada mediante campanha digital"*. ⬜ **Não entendi o termo** — ver bloco abaixo. |
 | Nome na lista / documento | Se houver portaria |
 | Número da unidade e andar | Site diz "1 suíte no térreo" — é duplex como os outros? |
 | Wi-Fi | Rede e senha, ou "pegar na portaria" |
@@ -89,3 +89,21 @@ Se a Malibu está a 500m de verdade, a unidade fica **cerca de 800m ao sul** do 
 
 ## Fotos
 12 arquivos em `Fotos/`. Selecionadas 8: piscina com área externa (capa), sala com TV e cozinha americana, estar com bancada, cozinha, suíte de casal, quarto com duas camas de solteiro, banheiro e churrasqueira privativa.
+
+
+---
+
+## ⬜ "Chave liberada mediante campanha digital"
+
+Essa é a instrução mais importante do manual inteiro: se o hóspede não conseguir entrar, é o único erro que não tem contorno às 22h de um domingo. Não vou escrever um passo a passo baseado em palpite.
+
+Leituras possíveis do termo:
+
+| Hipótese | O que iria pro manual |
+|---|---|
+| **Fechadura digital** | "O apartamento tem fechadura digital. Sua senha é X, enviada no dia da chegada." |
+| **Campainha digital / interfone** | "Toque a campainha na entrada e a gente libera remotamente." |
+| **Caução digital** | "A chave é liberada após a confirmação da caução, feita por link antes da chegada." |
+| **Confirmação de pagamento** | "A chave é liberada depois que o pagamento restante for confirmado no Pix." |
+
+As quatro geram passos completamente diferentes — e a última tem implicação a mais: seria a única das três unidades onde o hóspede precisa resolver algo **antes** de chegar.

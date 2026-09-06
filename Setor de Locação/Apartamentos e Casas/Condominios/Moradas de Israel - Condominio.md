@@ -2,11 +2,12 @@
 > Taperapuã, Porto Seguro (BA). Dados compartilhados por todas as unidades do prédio.
 > Preenchido em 2026-09-05. Atualizar quando mudar procedimento de portaria, horário de lazer ou plantão.
 
-**Unidades que herdam este bloco:** FL10J — Apartamento do Reinaldo (Apto 04, 1º andar)
+**Unidades que herdam este bloco:** FL10J — Apartamento do Reinaldo (Apto 04, térreo)
 
 **Wi-Fi do condomínio:** senha entregue na portaria junto com a chave.
 **Voltagem:** 220V.
 **Check-out:** chave devolvida na recepção do condomínio.
+**Toalhas de banho:** fornecidas pelo condomínio.
 
 **Nome oficial no Google Maps:** Residencial Moradas de Israel — Tonziro
 **Coordenadas:** `-16.3898988, -39.040346`

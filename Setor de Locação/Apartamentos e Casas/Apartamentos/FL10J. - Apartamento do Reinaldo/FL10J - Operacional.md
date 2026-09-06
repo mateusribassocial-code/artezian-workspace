@@ -22,7 +22,7 @@
 | Dado | Valor |
 |---|---|
 | Unidade | **Apto 04** — Moradas de Israel |
-| Andar | **1º andar** (confirmado 06/09/2026) |
+| Andar | **Térreo** (confirmado 06/09/2026) — entrada sem escada. Duplex: 1 suíte no nível da entrada, 2 no andar de cima por escada interna.<br>⚠️ Corrigido: constava "1º andar" na primeira coleta. |
 | Chave | Retirada **na portaria**, mediante documento com foto, no nome do responsável pela reserva |
 | Vagas de garagem | **2 vagas, sem numeração fixa** (confirmado 06/09/2026) |
 | Antecipação de horário | Sujeito à disponibilidade, não garantido |
@@ -35,7 +35,7 @@
 | Secadora | ⬜ PENDENTE | — |
 | Ferro e tábua | ⬜ PENDENTE | — |
 | Roupa de cama | **Completa, inclusa** (confirmado 06/09/2026) | hóspede não precisa levar |
-| Toalhas | ⬜ PENDENTE | quantas por pessoa |
+| Toalhas de banho | **Fornecidas pelo condomínio** (confirmado 06/09/2026) | ⬜ confirmar se já ficam no apartamento ou se retiram na recepção |
 | Secador de cabelo | ⬜ PENDENTE | — |
 | Kit de chegada (papel higiênico, sabonete, café) | ⬜ PENDENTE | quantidade |
 | Carvão pra churrasqueira privativa | ⬜ PENDENTE | — |

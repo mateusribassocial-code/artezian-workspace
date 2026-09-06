@@ -134,8 +134,8 @@ S04 = '''<section class="sec">
     </div>
   </section>''' % GALERIA
 
-S05 = '''<section class="sec">
-    <h2 class="sec-h"><span class="sec-n">05</span> Mercado e farmácia</h2>
+S08 = '''<section class="sec">
+    <h2 class="sec-h"><span class="sec-n">08</span> Mercado e farmácia</h2>
     <p class="ref">Chegando às 15h, essa costuma ser a primeira saída. Tudo abaixo dá para fazer a pé.</p>
     <div class="lugares">
 %s
@@ -148,8 +148,8 @@ S05 = '''<section class="sec">
     lugar("Farmácia Taperapuan", "8 min a pé", "A farmácia da faixa da praia."),
 ])
 
-S06 = '''<section class="sec">
-    <h2 class="sec-h"><span class="sec-n">06</span> Onde comer e beber</h2>
+S09 = '''<section class="sec">
+    <h2 class="sec-h"><span class="sec-n">09</span> Onde comer e beber</h2>
 %s
 %s
 %s
@@ -170,8 +170,8 @@ S06 = '''<section class="sec">
     ]),
 )
 
-S07 = '''<section class="sec">
-    <h2 class="sec-h"><span class="sec-n">07</span> O que fazer</h2>
+S10 = '''<section class="sec">
+    <h2 class="sec-h"><span class="sec-n">10</span> O que fazer</h2>
     <div class="lugares">
 %s
     </div>
@@ -184,8 +184,8 @@ S07 = '''<section class="sec">
     lugar("Praia do Espelho e Trancoso", "dia inteiro", "Saída pela manhã, volta à noite. Falésias, vilarejo histórico e o Quadrado de Trancoso."),
 ])
 
-S08 = '''<section class="sec">
-    <h2 class="sec-h"><span class="sec-n">08</span> Se precisar</h2>
+S12 = '''<section class="sec">
+    <h2 class="sec-h"><span class="sec-n">12</span> Se precisar</h2>
     <table class="tab">
       <tr><th>Plantão Artezian</th><td><a href="https://wa.me/%s">%s</a></td></tr>
       <tr><th>Emergências</th><td>190 polícia · 192 Samu · 193 bombeiros</td></tr>
@@ -202,7 +202,74 @@ S08 = '''<section class="sec">
     </div>
   </section>''' % (WPP_LINK, WPP_FMT)
 
-SECOES = "\n\n  ".join([S01, S02, S03, S04, S05, S06, S07, S08])
+S05 = '''<section class="sec">
+    <h2 class="sec-h"><span class="sec-n">05</span> O que tem aqui</h2>
+    <div class="col2">
+      <div class="col-tem">
+        <h3 class="col-h">Está no imóvel</h3>
+        <div class="grupo"><h4>Cozinha</h4><ul class="lista-check">
+          <li>Cozinha completa e equipada</li>
+          <li>Geladeira e fogão</li>
+        </ul></div>
+        <div class="grupo"><h4>Quartos</h4><ul class="lista-check">
+          <li>3 suítes, todas com ar-condicionado</li>
+          <li>2 camas de casal e 6 de solteiro</li>
+          <li>Sofá-cama na sala</li>
+          <li>Roupa de cama completa — não precisa levar</li>
+        </ul></div>
+        <div class="grupo"><h4>Área externa</h4><ul class="lista-check">
+          <li>Churrasqueira privativa</li>
+        </ul></div>
+      </div>
+      <div class="col-levar">
+        <h3 class="col-h">Leve você</h3>
+        <ul class="lista-levar">
+          <li>Toalhas de banho <span class="ph">confirmar</span></li>
+          <li>Toalha de praia</li>
+          <li>Itens de higiene pessoal</li>
+        </ul>
+      </div>
+    </div>
+  </section>'''
+
+S06 = '''<section class="sec">
+    <h2 class="sec-h"><span class="sec-n">06</span> Wi-Fi e eletrônicos</h2>
+    <div class="wifi">
+      <div class="wifi-item"><div class="wifi-l">Wi-Fi</div><div class="wifi-v">Senha na portaria</div></div>
+    </div>
+    <ul class="lista">
+      <li>A senha do Wi-Fi é entregue na portaria, junto com a chave. Se esquecer de pegar na chegada, é só descer e pedir.</li>
+    </ul>
+    <div class="aviso"><strong>As tomadas do apartamento são 220V.</strong> Se você vem de Minas Gerais, do Espírito Santo ou de qualquer lugar onde a rede é 127V, confira a voltagem antes de ligar secador de cabelo, chapinha ou qualquer aparelho trazido de casa. Carregador de celular e notebook costumam ser bivolt, mas vale conferir na etiqueta.</div>
+  </section>'''
+
+S07 = '''<section class="sec junto">
+    <h2 class="sec-h"><span class="sec-n">07</span> Área de lazer</h2>
+    <table class="tab">
+      <tr><th>Piscina</th><td>Das 9h às 22h — piscina adulto e infantil</td></tr>
+      <tr><th>Churrasqueira</th><td>Precisa ser agendada. Fale com a portaria com antecedência.</td></tr>
+      <tr><th>Sauna</th><td>Disponível no condomínio</td></tr>
+      <tr><th>Portaria</th><td>24 horas</td></tr>
+    </table>
+  </section>'''
+
+S11 = '''<section class="sec junto">
+    <h2 class="sec-h"><span class="sec-n">11</span> Regras da casa e check-out</h2>
+    <ul class="lista">
+      <li>Piscina liberada das 9h às 22h.</li>
+      <li>Churrasqueira precisa ser agendada antes, na portaria.</li>
+      <li>O apartamento acomoda até 11 pessoas — é o limite do condomínio.</li>
+    </ul>
+    <h3 class="sub-h">Antes de sair, até as 12h</h3>
+    <ul class="lista-check">
+      <li>Devolva a chave na recepção do condomínio</li>
+      <li>Feche as janelas e desligue os ares-condicionados</li>
+      <li>Confira gavetas, tomadas e o banheiro — carregador esquecido é o campeão</li>
+      <li>Avise o plantão que você já saiu</li>
+    </ul>
+  </section>'''
+
+SECOES = "\n\n  ".join([S01, S02, S03, S04, S05, S06, S07, S08, S09, S10, S11, S12])
 
 html = io.open(SCAFFOLD, encoding="utf-8").read()
 html = (html.replace("{{NOME_UNIDADE}}", NOME)

@@ -30,16 +30,16 @@
 ## Dentro do imóvel
 | Item | Tem? | Detalhe |
 |---|---|---|
-| Wi-Fi — nome da rede | ⬜ PENDENTE | — |
-| Wi-Fi — senha | ⬜ PENDENTE | — |
+| Wi-Fi | **Senha entregue na portaria**, junto com a chave (confirmado 06/09/2026) | rede e senha não ficam no manual |
 | Máquina de lavar | ⬜ PENDENTE | — |
 | Secadora | ⬜ PENDENTE | — |
 | Ferro e tábua | ⬜ PENDENTE | — |
-| Roupa de cama | ⬜ PENDENTE | quantos jogos |
+| Roupa de cama | **Completa, inclusa** (confirmado 06/09/2026) | hóspede não precisa levar |
 | Toalhas | ⬜ PENDENTE | quantas por pessoa |
 | Secador de cabelo | ⬜ PENDENTE | — |
 | Kit de chegada (papel higiênico, sabonete, café) | ⬜ PENDENTE | quantidade |
 | Carvão pra churrasqueira privativa | ⬜ PENDENTE | — |
+| Voltagem | **220V** (confirmado 06/09/2026) | avisado em destaque no manual — público de BH/ES é 127V |
 
 ## O que o hóspede precisa levar
 > Lista do que NÃO tem. Tão importante quanto o que tem — evita chamado no plantão.
@@ -50,6 +50,6 @@
 | Dado | Valor |
 |---|---|
 | Horário | Até as 12h |
-| O que fazer com a chave | ⬜ PENDENTE |
+| O que fazer com a chave | **Devolver na recepção do condomínio** (confirmado 06/09/2026) |
 | Onde deixar o lixo | ⬜ PENDENTE (ou herdar do condomínio) |
 | Precisa avisar alguém antes de sair | ⬜ PENDENTE |

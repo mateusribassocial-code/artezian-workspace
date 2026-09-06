@@ -2,7 +2,11 @@
 > Taperapuã, Porto Seguro (BA). Dados compartilhados por todas as unidades do prédio.
 > Preenchido em 2026-09-05. Atualizar quando mudar procedimento de portaria, horário de lazer ou plantão.
 
-**Unidades que herdam este bloco:** FL10J — Apartamento do Reinaldo (Apto 04)
+**Unidades que herdam este bloco:** FL10J — Apartamento do Reinaldo (Apto 04, 1º andar)
+
+**Wi-Fi do condomínio:** senha entregue na portaria junto com a chave.
+**Voltagem:** 220V.
+**Check-out:** chave devolvida na recepção do condomínio.
 
 **Nome oficial no Google Maps:** Residencial Moradas de Israel — Tonziro
 **Coordenadas:** `-16.3898988, -39.040346`
@@ -42,10 +46,10 @@
 ## Área de lazer
 | Facilidade | Existe | Horário / regra |
 |---|---|---|
-| Piscina adulto | Sim | ⬜ PENDENTE |
-| Piscina infantil | Sim | ⬜ PENDENTE |
+| Piscina adulto | Sim | **Das 9h às 22h** (confirmado 06/09/2026) |
+| Piscina infantil | Sim | **Das 9h às 22h** (confirmado 06/09/2026) |
 | Sauna | Sim | ⬜ PENDENTE |
-| Churrasqueira coletiva | Sim | ⬜ PENDENTE (precisa reservar? tem carvão?) |
+| Churrasqueira | Sim | **Precisa ser agendada na portaria** (confirmado 06/09/2026). ⬜ Confirmar se a regra vale também para a churrasqueira privativa do FL10J |
 
 ## Regras do condomínio
 | Regra | Valor |

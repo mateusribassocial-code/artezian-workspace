@@ -166,6 +166,8 @@ Wi-Fi em destaque grande: é a primeira coisa que perguntam ao entrar.
 
 O que o condomínio oferece, com **horário**. Piscina sem horário gera hóspede barrado às 22h.
 
+Seção curta: usar `class="sec junto"`. Sem isso a tabela parte no PDF e as linhas de sauna e portaria caem na página seguinte sem cabeçalho. Vale o mesmo para a seção 12 (regras e check-out).
+
 ```html
 <section class="sec">
   <h2 class="sec-h"><span class="sec-n">07</span> Área de lazer</h2>

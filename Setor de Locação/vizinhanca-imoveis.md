@@ -1,7 +1,7 @@
 # Vizinhança dos Imóveis — Artezian Real Estate
 
 > Levantamento de restaurantes, pontos turísticos, beach clubs e distâncias da praia por região.
-> Atualizado: junho/2026.
+> Atualizado: junho/2026. Bloco de conveniência de Taperapuã levantado em 05/09/2026 (OpenStreetMap + verificação web).
 
 ---
 
@@ -24,6 +24,38 @@
 
 ### Praia
 - **Praia de Taperapuã** — a praia mais famosa e movimentada de Porto Seguro. Mar calmo, orla longa, ideal para famílias e grupos.
+
+---
+
+### Mercados e Farmácias
+
+> Distâncias medidas em linha reta a partir do **Residencial Moradas de Israel** (`-16.3898988, -39.040346`), via OpenStreetMap em 05/09/2026.
+> As unidades DS03J/04J/05J (Mont Carmelo) e JR01J–JR09J (Varandas de Porto) ficam na mesma faixa de Taperapuã — recalcular a âncora antes de reusar em manual de outra unidade.
+
+| Nome | Tipo | Distância | Observação |
+|------|------|-----------|------------|
+| Litoral Supermercado | Supermercado | 290m — 5 min a pé | O mais perto |
+| O Sampa | Supermercado | 325m — 5 min a pé | |
+| Haddasa e Frossad | Supermercado | 440m — 7 min a pé | |
+| Farmácia Taperapuan | Farmácia | 525m — 8 min a pé | A única farmácia na faixa da praia |
+| BigStop | Supermercado | 890m — 3 min de carro | Aberto todo dia, 8h às 22h — o maior do entorno |
+| Posto Mundaí | Posto de combustível | 2,1 km — 5 min de carro | Aberto 24h |
+| Porto Plaza Shopping | Shopping | 6,3 km — ~15 min de carro | Praça de alimentação, Lojas Americanas (9h–20h) |
+
+> ⚠️ **Não há farmácia 24h em Taperapuã.** A mais próxima com plantão fica no centro (~7 km). Vale avisar o hóspede que chega tarde com criança.
+
+---
+
+### Saúde, Banco e Serviços
+
+| Nome | Tipo | Distância |
+|------|------|-----------|
+| Policlínica Municipal | Atendimento público | 6,4 km — ~15 min de carro |
+| Hospital Regional Deputado Luís Eduardo Magalhães | Hospital | 7,4 km — ~18 min de carro |
+| Banco do Brasil | Banco / caixa 24h | 6,5 km — ~15 min de carro |
+| Banco24Horas | Caixa eletrônico | 6,6 km — ~15 min de carro |
+| Delegacia de Proteção ao Turista | Polícia | 7,2 km — ~18 min de carro |
+| Aeroporto de Porto Seguro | Aeroporto | 6,9 km — 10 min de carro |
 
 ---
 

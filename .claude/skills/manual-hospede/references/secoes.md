@@ -63,6 +63,8 @@ Check-in e check-out em destaque. Endereço completo. WhatsApp de plantão clic�
 
 Endereço, ponto de referência que o taxista conhece, e QR code do Google Maps (SVG inline, sem biblioteca — precisa funcionar no papel).
 
+O QR vai **dentro de um `<a>`** apontando pro mesmo link. No papel ele é escaneado; na tela do celular, onde escanear é impossível, ele vira botão. Use sempre o link curto do próprio place (`maps.app.goo.gl/...`), não uma busca por endereço montada à mão — busca por endereço erra o portão em condomínio.
+
 Incluir a vinda do aeroporto: é o trajeto real da maioria.
 
 ```html
@@ -77,7 +79,7 @@ Incluir a vinda do aeroporto: é o trajeto real da maioria.
         <li><strong>Do centro histórico:</strong> {{TEMPO_CENTRO}}</li>
       </ul>
     </div>
-    <div class="qr">{{QR_SVG}}<div class="qr-cap">Abrir no Maps</div></div>
+    <a class="qr" href="{{LINK_MAPS}}">{{QR_SVG}}<div class="qr-cap">Toque ou escaneie</div></a>
   </div>
 </section>
 ```

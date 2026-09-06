@@ -4,7 +4,11 @@
 
 **Unidades que herdam este bloco:** FL10J — Apartamento do Reinaldo (Apto 04)
 
-> ⚠️ **Divergência no repo:** `vizinhanca-imoveis.md` (linha 16) registra o FL10J como *Residencial Village do Bosque*. O nome confirmado pelo Mateus em 05/09/2026 é **Moradas de Israel**. Corrigir o `vizinhanca-imoveis.md` — ou, se forem dois nomes do mesmo lugar (nome de registro x nome de placa), anotar os dois, porque o hóspede vai procurar pelo que está na fachada.
+**Nome oficial no Google Maps:** Residencial Moradas de Israel — Tonziro
+**Coordenadas:** `-16.3898988, -39.040346`
+**Link:** https://maps.app.goo.gl/JUioonaZvquy4N9QA
+
+> ⚠️ **Corrigir o `vizinhanca-imoveis.md` (linha 16):** ele registra o FL10J como *Residencial Village do Bosque*, e o Maps confirma **Moradas de Israel — Tonziro**. Nome errado no manual manda o hóspede pra portaria errada.
 
 ---
 
@@ -13,11 +17,11 @@
 |---|---|---|
 | Endereço | R. dos Ipês, 85 — Taperapuã | descrição FL10J |
 | Cidade / UF / CEP | Porto Seguro / BA / 45810-000 | descrição FL10J |
-| Praia mais próxima | Taperapuã — 180m | vizinhanca-imoveis.md |
-| Ponto de referência | Próximo ao Axé Moi | vizinhanca-imoveis.md |
+| Praia mais próxima | Taperapuã — **392m em linha reta (~6 min a pé)** | medido via OSM, 05/09/2026 |
+| Ponto de referência | Axé Moi, a 470m (~7 min a pé) | medido via OSM |
 | Do aeroporto | **10 minutos de carro** | Mateus, 05/09/2026 |
 | Centro histórico | ~8 km | descrição FL10J |
-| Acesso à praia | ⬜ PENDENTE — descrição diz "acesso direto", vizinhança diz 180m. Atravessa rua ou sai na areia? | — |
+| Acesso à praia | ~6 min a pé. ⚠️ **A descrição comercial diz "acesso direto à praia" e a vizinhança diz 180m — os dois estão errados.** Medição por coordenada dá 392m até a linha de costa. Corrigir na descrição: hóspede que chega esperando sair do portão na areia reclama. | medido via OSM |
 
 ## Chegada e portaria
 | Dado | Valor |

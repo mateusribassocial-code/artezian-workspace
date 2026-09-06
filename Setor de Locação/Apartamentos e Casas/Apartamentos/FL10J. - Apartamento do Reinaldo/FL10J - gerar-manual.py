@@ -15,7 +15,7 @@ import segno
 BASE = "Setor de Locação/Apartamentos e Casas/Apartamentos/FL10J. - Apartamento do Reinaldo"
 FOTOS = os.path.join(BASE, "Fotos")
 SCAFFOLD = ".claude/skills/manual-hospede/assets/base-a4.html"
-SAIDA = os.path.join(BASE, "FL10J - Manual do Hospede.html")
+SAIDA = "Setor de Locação/PDFS/FL10J - Manual do Hospede.html"  # entregáveis ficam em PDFS
 
 NOME = "Apartamento do Reinaldo"
 CODIGO = "FL10J"
@@ -127,7 +127,7 @@ S03 = '''<section class="sec">
     <div class="aviso">Qualquer coisa fora do previsto — atraso no voo, portaria sem a sua reserva, chave que não abre — chame o plantão da Artezian no WhatsApp <strong>%s</strong> <span class="ph">conferir número</span>. Não fique esperando na portaria sem falar com a gente.</div>
   </section>''' % WPP_FMT
 
-S04 = '''<section class="sec quebra-antes">
+S04 = '''<section class="sec">
     <h2 class="sec-h"><span class="sec-n">04</span> O imóvel</h2>
     <div class="galeria">
       %s

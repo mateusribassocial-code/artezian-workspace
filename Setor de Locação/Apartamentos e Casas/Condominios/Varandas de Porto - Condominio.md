@@ -67,7 +67,7 @@ Caminho usado:
 | Estacionamento | 3 vagas internas + 4 externas |
 | **Rampa de acessibilidade** | Sim, para cadeirante |
 | Ducha externa | Sim |
-| Portaria | ⬜ O site cita "porteiro"; falta confirmar se é 24h |
+| Portaria | **Sim** — entrega a chave e a senha do Wi-Fi (Mateus, 07/09/2026). ⬜ Falta confirmar se é 24h |
 | Café da manhã | Não há — cada unidade tem cozinha equipada |
 | Ambiente | Familiar e tranquilo |
 
@@ -87,7 +87,7 @@ Caminho usado:
 
 | Código | Nome | Tipo | Capacidade | Manual |
 |---|---|---|---|---|
-| JR01J | Studio Varandas 01 | A — Studio | até 3 ou 4 ⬜ | ✅ 07/09/2026 |
+| JR01J | Studio Varandas 01 — **Studio 01** | A — Studio | **até 3** | ✅ 07/09/2026, sem pendências |
 | JR03J | Studio Varandas 03 | A — Studio | até 4 | ⬜ |
 | JR04J | Studio Varandas 04 | A — Studio | até 4 | ⬜ |
 | JR05J | Apto Varandas 01 | B | até 6 | ⬜ |
@@ -97,13 +97,24 @@ Caminho usado:
 
 > O `Descrição Varandas de Porto.txt` cita JR02J, que **não tem pasta** no repositório. Conferir se essa unidade existe ou se saiu da operação.
 
-## ⬜ Pendente
+## Operacional — confirmado em 07/09/2026
+
+**Vale para as sete unidades.** O Mateus confirmou:
+
+| Item | Valor |
+|---|---|
+| Retirada da chave | **Na portaria** |
+| Wi-Fi | **Senha entregue na portaria** — não há rede/senha por unidade impressa no manual |
+| Voltagem | **220V** |
+| Devolução da chave no check-out | **Na portaria** |
+
+> Isso simplifica bastante os outros seis manuais: como o Wi-Fi é resolvido na portaria, **não é preciso levantar rede e senha unidade por unidade** — diferente do Mont Carmelo, onde cada apartamento tem a sua.
+
+## ⬜ Ainda pendente
 | Item | |
 |---|---|
-| Retirada da chave | Como funciona? O site cita "porteiro", mas não se sabe se é 24h nem se a chave sai dali |
-| Wi-Fi | Rede e senha, por unidade |
-| Voltagem | 220V como nos outros? |
-| Devolução da chave no check-out | |
+| Portaria é 24h? | O check-in vai até 22h; se a portaria fechar antes, o manual precisa dizer |
 | Horário da piscina | |
 | Churrasqueira precisa agendar | |
 | Onde deixar o lixo | |
+| JR02J | Citado na descrição, sem pasta no repositório — existe? |

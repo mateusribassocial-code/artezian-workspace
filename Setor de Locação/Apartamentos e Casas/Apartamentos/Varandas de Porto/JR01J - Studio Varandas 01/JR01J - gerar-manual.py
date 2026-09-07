@@ -99,7 +99,7 @@ S01 = '''<section class="sec">
       <tr><th>Endereço</th><td>Rua Araray, 55 — Paraíso dos Pataxós, Taperapuã<br>Porto Seguro, BA · CEP 45810-000</td></tr>
       <tr><th>Condomínio</th><td>Varandas de Porto</td></tr>
       <tr><th>Unidade</th><td>Studio 01</td></tr>
-      <tr><th>Capacidade</th><td><span class="ph">confirmar</span> — 1 cama de casal e 1 adicional</td></tr>
+      <tr><th>Capacidade</th><td>Até 3 pessoas — 1 cama de casal e 1 adicional</td></tr>
       <tr><th>Estacionamento</th><td>Gratuito no condomínio — 3 vagas internas e 4 externas</td></tr>
       <tr><th>Praia</th><td>Taperapuã, 6 minutos a pé</td></tr>
       <tr><th>Plantão Artezian</th><td><a href="https://wa.me/%s">%s</a></td></tr>
@@ -127,7 +127,7 @@ S03 = '''<section class="sec">
     <ol class="passos">
       <li><strong>Chegue entre 14h e 22h.</strong> Antes das 14h a gente tenta liberar, mas depende da saída do hóspede anterior — não dá para garantir. Se o voo atrasar e você for chegar depois das 22h, avise o plantão.</li>
       <li><strong>Estacione no condomínio.</strong> São 3 vagas internas e 4 externas, sem custo, por ordem de chegada.</li>
-      <li><strong>Retirada da chave:</strong> <span class="ph">confirmar como funciona</span></li>
+      <li><strong>Retire a chave na portaria.</strong> A senha do Wi-Fi é entregue ali também.</li>
       <li><strong>Seu studio é o 01.</strong> O número está na porta, do lado da varanda.</li>
     </ol>
     <div class="aviso">Qualquer coisa fora do previsto, chame o plantão da Artezian no WhatsApp <strong>%s</strong>.</div>
@@ -178,10 +178,12 @@ S05 = '''<section class="sec junto">
 S06 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">06</span> Wi-Fi e eletrônicos</h2>
     <div class="wifi">
-      <div class="wifi-item"><div class="wifi-l">Rede</div><div class="wifi-v"><span class="ph">preencher</span></div></div>
-      <div class="wifi-item"><div class="wifi-l">Senha</div><div class="wifi-v"><span class="ph">preencher</span></div></div>
+      <div class="wifi-item"><div class="wifi-l">Wi-Fi</div><div class="wifi-v">Senha na portaria</div></div>
     </div>
-    <div class="aviso"><strong>Confira a voltagem antes de ligar aparelhos trazidos de casa</strong> <span class="ph">confirmar</span>. Secador de cabelo e chapinha são os que queimam. Carregador de celular e notebook costumam ser bivolt, mas vale conferir na etiqueta.</div>
+    <ul class="lista">
+      <li>A senha do Wi-Fi é entregue na portaria, junto com a chave. Se esquecer de pegar na chegada, é só passar lá e pedir.</li>
+    </ul>
+    <div class="aviso"><strong>As tomadas são 220V.</strong> Se você vem de Minas Gerais, do Espírito Santo ou de qualquer lugar onde a rede é 127V, confira a voltagem antes de ligar secador de cabelo, chapinha ou qualquer aparelho trazido de casa. Carregador de celular e notebook costumam ser bivolt, mas vale conferir na etiqueta.</div>
   </section>'''
 
 S07 = '''<section class="sec junto">
@@ -253,7 +255,7 @@ S11 = '''<section class="sec junto">
     </ul>
     <h3 class="sub-h">Antes de sair, até as 12h</h3>
     <ul class="lista-check">
-      <li>Devolva a chave <span class="ph">confirmar onde</span></li>
+      <li>Devolva a chave na portaria</li>
       <li>Feche as janelas e desligue o ar-condicionado</li>
       <li>Confira o guarda-roupa, o varal e as tomadas</li>
       <li>Avise o plantão que você já saiu</li>

@@ -24,6 +24,7 @@ CODIGO = "DS04J"
 WPP_FMT = "(73) 9937-3474"
 WPP_LINK = "557399373474"
 MAPS = "https://maps.app.goo.gl/wLqA4YoLh6ZVHu7R6"
+WIFI_REDE = "APTO 6"
 WIFI_SENHA = "portoseguro"
 
 
@@ -182,14 +183,14 @@ S05 = '''<section class="sec junto">
 S06 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">06</span> Wi-Fi e eletrônicos</h2>
     <div class="wifi">
-      <div class="wifi-item"><div class="wifi-l">Rede</div><div class="wifi-v"><span class="ph">preencher</span></div></div>
+      <div class="wifi-item"><div class="wifi-l">Rede</div><div class="wifi-v">%s</div></div>
       <div class="wifi-item"><div class="wifi-l">Senha</div><div class="wifi-v">%s</div></div>
     </div>
     <ul class="lista">
-      <li>O nome da rede não acompanha o número da unidade — confira com a portaria se não achar.</li>
+      <li>Se não achar a rede na lista, confira com a portaria.</li>
     </ul>
     <div class="aviso"><strong>As tomadas são 220V.</strong> Se você vem de Minas Gerais, do Espírito Santo ou de qualquer lugar onde a rede é 127V, confira a voltagem antes de ligar secador de cabelo, chapinha ou qualquer aparelho trazido de casa. Carregador de celular e notebook costumam ser bivolt, mas vale conferir na etiqueta.</div>
-  </section>''' % WIFI_SENHA
+  </section>''' % (WIFI_REDE, WIFI_SENHA)
 
 S07 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">07</span> Área de lazer e serviços</h2>

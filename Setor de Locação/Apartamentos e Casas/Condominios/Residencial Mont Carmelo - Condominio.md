@@ -13,7 +13,7 @@
 | Código | Nome | Capacidade | Manual |
 |---|---|---|---|
 | DS03J | Studio do João — **Unidade 3** | até 5 pessoas | ✅ gerado em 07/09/2026, sem pendências |
-| DS04J | Flat da Mari — **Apto 06** | até 5 pessoas | ✅ gerado em 07/09/2026 — falta só o nome da rede Wi-Fi |
+| DS04J | Flat da Mari — **Apto 06** | até 5 pessoas | ✅ gerado em 07/09/2026, sem pendências |
 | DS05J | Apartamento do Emanoel | até 8 pessoas | ⬜ |
 
 > Terceiro condomínio operado pela **Tonziro**, junto com [Moradas de Israel](Moradas%20de%20Israel%20-%20Condominio.md) e [Residencial Jerusalém II](Residencial%20Jerusalem%20II%20-%20Condominio.md).
@@ -85,15 +85,18 @@ Confirmado pelo Mateus em 07/09/2026: **iguais às do FL10J (Reinaldo).**
 | **Pets** | **Permitidos** (pequeno porte) — diferente do HA03J |
 | Idade mínima da reserva | 18 anos |
 
-## ⚠️ Nome da rede Wi-Fi não acompanha o número da unidade
+## ⚠️ Suspeita: a rede do DS03J pode estar errada
 
-O DS03J é a **Unidade 3**, mas a rede Wi-Fi se chama **APTO 13**. Isso é comum (o roteador guarda o nome antigo), mas confunde o hóspede, que procura por "APTO 3" e não acha.
+O padrão do condomínio parece ser `APTO <número da unidade>`:
 
-O manual do DS03J avisa isso explicitamente. **Ao levantar o Wi-Fi do DS04J e do DS05J, não deduza o nome da rede pelo número da unidade** — confira no roteador.
+| Unidade | Nº | Rede informada | Bate? |
+|---|---|---|---|
+| DS04J — Flat da Mari | Apto 06 | `APTO 6` | ✅ sim |
+| DS03J — Studio do João | Unidade 3 | `APTO 13` | ❌ não |
 
-> ⬜ Vale conferir se a rede é mesmo `APTO 13` e não `APTO 3` — se estiver trocado no manual, o hóspede não conecta.
->
-> **Não deduzir a rede do DS04J como "APTO 06".** O DS03J prova que o nome não segue o número da unidade.
+Com o DS04J seguindo o padrão, o `APTO 13` do DS03J vira exceção — e a hipótese mais simples é que seja **`APTO 3`**, com um "1" digitado a mais.
+
+> ⬜ **Conferir no roteador do DS03J.** O manual dele hoje imprime `APTO 13` e ainda traz uma frase dizendo que "o nome não acompanha o número do studio" — se a rede for `APTO 3`, as duas coisas estão erradas e o hóspede não conecta.
 
 ## Chegada e portaria
 | Dado | Valor |
@@ -103,7 +106,7 @@ O manual do DS03J avisa isso explicitamente. **Ao levantar o Wi-Fi do DS04J e do
 | Nome na lista | Responsável pela reserva (mesmo padrão) |
 | Documento com foto | Sim (mesmo padrão) |
 | Devolução da chave | Recepção do condomínio (mesmo padrão do Reinaldo) |
-| Wi-Fi | **Senha `portoseguro` nas duas unidades já levantadas** — parece ser padrão do condomínio. O **nome da rede é por unidade**: DS03J (Unidade 3) usa `APTO 13`. ⬜ Falta a rede do DS04J e a do DS05J. |
+| Wi-Fi | **Senha `portoseguro`** nas duas unidades levantadas — padrão do condomínio. Rede por unidade: **DS04J (Apto 06) → `APTO 6`** · **DS03J (Unidade 3) → `APTO 13`**. ⬜ Falta a rede do DS05J. |
 | Voltagem | 220V |
 | Toalhas de banho e roupa de cama | **Inclusas** (Mateus, 07/09/2026) |
 | Onde deixar o lixo | ⬜ PENDENTE |

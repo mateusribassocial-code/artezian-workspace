@@ -13,7 +13,7 @@
 | Código | Nome | Capacidade | Manual |
 |---|---|---|---|
 | DS03J | Studio do João — **Unidade 3** | até 5 pessoas | ✅ gerado em 07/09/2026, sem pendências |
-| DS04J | Flat da Mari | até 5 pessoas | ⬜ |
+| DS04J | Flat da Mari | até 5 pessoas | ✅ gerado em 07/09/2026 — faltam nº da unidade, Wi-Fi e distribuição dos quartos |
 | DS05J | Apartamento do Emanoel | até 8 pessoas | ⬜ |
 
 > Terceiro condomínio operado pela **Tonziro**, junto com [Moradas de Israel](Moradas%20de%20Israel%20-%20Condominio.md) e [Residencial Jerusalém II](Residencial%20Jerusalem%20II%20-%20Condominio.md).
@@ -68,6 +68,9 @@ Confirmado pelo Mateus em 07/09/2026: **iguais às do FL10J (Reinaldo).**
 | Churrasqueira | Precisa ser agendada na portaria |
 | Sauna | Disponível |
 | Restaurante | **O condomínio tem restaurante próprio** |
+| Guarda-volumes | **Sim** — o condomínio guarda a bagagem. Fonte: página do DS04J. Resolve o intervalo entre o check-out e o voo. |
+| Aluguel de carro | **Sim**, pelo condomínio. Fonte: página do DS04J. |
+| Chuveiro externo | Existe um no muro do condomínio, virado para a rua (visto nas fotos do DS04J). ⬜ Confirmar se é de uso dos hóspedes antes de citar em manual. |
 | Portaria | 24 horas |
 
 ## Regras (do site da Artezian, por unidade)

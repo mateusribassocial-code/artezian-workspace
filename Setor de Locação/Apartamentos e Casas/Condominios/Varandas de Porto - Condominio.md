@@ -88,14 +88,14 @@ Caminho usado:
 | Código | Nome | Tipo | Capacidade | Manual |
 |---|---|---|---|---|
 | JR01J | Studio Varandas 01 — **Studio 01** | A — Studio | **até 3** | ✅ 07/09/2026, sem pendências |
-| JR03J | Studio Varandas 03 | A — Studio | até 4 | ⬜ |
+| JR03J | Studio Varandas 03 — **Studio 03** | A — Studio | **até 4** (casal + beliche) ⬜ conferir | ✅ 07/09/2026 |
 | JR04J | Studio Varandas 04 | A — Studio | até 4 | ⬜ |
 | JR05J | Apto Varandas 01 | B | até 6 | ⬜ |
 | JR07J | Apto Varandas 03 | B | até 6 | ⬜ |
 | JR08J | Apto Varandas 04 | B | até 6 | ⬜ |
 | JR09J | Apto Duplex Varandas 01 | C | até 8 | ⬜ |
 
-> O `Descrição Varandas de Porto.txt` cita JR02J, que **não tem pasta** no repositório. Conferir se essa unidade existe ou se saiu da operação.
+> **JR02J:** existe, mas está **incompleto** — Mateus, 07/09/2026. Não tem pasta no repositório e ficou fora da fila de manuais.
 
 ## Operacional — confirmado em 07/09/2026
 
@@ -117,4 +117,5 @@ Caminho usado:
 | Horário da piscina | |
 | Churrasqueira precisa agendar | |
 | Onde deixar o lixo | |
-| JR02J | Citado na descrição, sem pasta no repositório — existe? |
+| Capacidade real dos studios | JR01J = 3 (confirmado). JR03J: o site diz "até 3" no título e "4 pessoas" no corpo; o beliche nas fotos indica 4. Conferir se os studios variam entre si. |
+

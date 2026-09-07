@@ -37,11 +37,15 @@ Se a Malibu está a 500m de verdade, a unidade fica **cerca de 800m ao sul** do 
 | # | Item | Descrição local | Site da Artezian |
 |---|---|---|---|
 | 1 | **Quartos** | "2 Suítes + 1 Quarto" e "Sala e 3 Quartos" | "3 suítes (1 no térreo)", **4 banheiros** |
-| 2 | **Número na rua** | 1833 | 1800 |
+| 2 | **Número na rua** | **1833 ✅ correto** | 1800 ❌ |
 | 3 | **Praia** | "Taperapuã (acesso direto)" | ~400m — **medido: 315m, 5 min a pé.** O site está certo, a descrição não. |
 | 4 | **Camas** | 2 casal + 4 solteiro + sofá-cama | 2 casal + 4 solteiro |
 
 > A frase "acesso direto à praia" é a mesma que apareceu errada no FL10J (lá deu 392m). Aqui o **próprio site da Artezian** já contradiz a descrição. Vale corrigir o `.txt` de origem.
+>
+> ✅ **Número da rua resolvido em 07/09/2026:** o HA03J fica no **1833**; o **1800 é o Residencial Mont Carmelo**, outro imóvel. O site da Artezian publica 1800 para o HA03J — **está errado e deve ser corrigido lá**. O manual já usa 1833.
+>
+> Isso também encerra a dúvida sobre a localização: são endereços distintos, e o Mateus confirmou o trecho sul (junto ao Tôa Tôa) pelo perfil de vizinhança.
 
 ---
 

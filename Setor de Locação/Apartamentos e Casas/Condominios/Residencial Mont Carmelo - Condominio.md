@@ -86,12 +86,12 @@ Confirmado pelo Mateus em 07/09/2026: **iguais às do FL10J (Reinaldo).**
 | Dado | Valor |
 |---|---|
 | Portaria 24h | Sim |
-| Retirada da chave | ⬜ **CONFIRMAR** — o manual do DS03J assume "na portaria", por ser o padrão dos outros dois condomínios da Tonziro. O Mateus confirmou "regras e área de lazer" iguais ao Reinaldo, o que não cobre explicitamente a retirada da chave. |
+| Retirada da chave | **Na portaria** (Mateus, 07/09/2026) — confirmado. Mesmo padrão dos outros dois condomínios da Tonziro. |
 | Nome na lista | Responsável pela reserva (mesmo padrão) |
 | Documento com foto | Sim (mesmo padrão) |
 | Devolução da chave | Recepção do condomínio (mesmo padrão do Reinaldo) |
 | Wi-Fi | Senha **portoseguro** (informada pelo Mateus). ⬜ Falta o nome da rede. |
 | Voltagem | 220V |
-| Toalhas de banho | ⬜ Confirmar. As fotos profissionais mostram toalhas sobre as camas, e o site lista roupa de cama, cobertores e travesseiros — mas não cita toalha. |
+| Toalhas de banho e roupa de cama | **Inclusas** (Mateus, 07/09/2026) |
 | Onde deixar o lixo | ⬜ PENDENTE |
 | Telefone da portaria | ⬜ PENDENTE |

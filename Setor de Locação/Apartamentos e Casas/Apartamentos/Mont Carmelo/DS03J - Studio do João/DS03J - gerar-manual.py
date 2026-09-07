@@ -135,7 +135,7 @@ S03 = '''<section class="sec">
       <li><strong>Chegue entre 15h e 22h.</strong> Antes das 15h a gente tenta liberar, mas depende da saída do hóspede anterior — não dá para garantir. Se o voo atrasar e você for chegar depois das 22h, avise o plantão.</li>
       <li><strong>Pare na portaria e informe o nome do responsável pela reserva.</strong> Seu nome já está na lista.</li>
       <li><strong>Apresente um documento com foto.</strong> RG, CNH ou passaporte.</li>
-      <li><strong>Retire a chave na portaria.</strong> <span class="ph">confirmar</span></li>
+      <li><strong>Retire a chave na portaria.</strong></li>
       <li><strong>Estacione na vaga do studio.</strong> É uma vaga por unidade.</li>
     </ol>
     <div class="aviso">O acesso ao studio é <strong>sem degraus</strong> — não há escada entre a vaga e a porta. Qualquer coisa fora do previsto, chame o plantão da Artezian no WhatsApp <strong>%s</strong>.</div>
@@ -158,7 +158,7 @@ S05 = '''<section class="sec junto">
           <li>1 colchão avulso, para a quinta pessoa</li>
           <li>Ar-condicionado e ventilador de teto</li>
           <li>Roupa de cama, cobertores e travesseiros inclusos</li>
-          <li>Toalhas de banho <span class="ph">confirmar</span></li>
+          <li>Toalhas de banho inclusas</li>
         </ul></div>
         <div class="grupo"><h4>Cozinha</h4><ul class="lista-check">
           <li>Cozinha equipada — fogão, micro-ondas e geladeira</li>

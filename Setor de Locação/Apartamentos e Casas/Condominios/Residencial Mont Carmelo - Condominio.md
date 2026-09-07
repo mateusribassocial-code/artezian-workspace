@@ -12,7 +12,7 @@
 
 | Código | Nome | Capacidade | Manual |
 |---|---|---|---|
-| DS03J | Studio do João | até 5 pessoas | ✅ gerado em 07/09/2026 |
+| DS03J | Studio do João — **Unidade 3** | até 5 pessoas | ✅ gerado em 07/09/2026, sem pendências |
 | DS04J | Flat da Mari | até 5 pessoas | ⬜ |
 | DS05J | Apartamento do Emanoel | até 8 pessoas | ⬜ |
 
@@ -82,6 +82,14 @@ Confirmado pelo Mateus em 07/09/2026: **iguais às do FL10J (Reinaldo).**
 | **Pets** | **Permitidos** (pequeno porte) — diferente do HA03J |
 | Idade mínima da reserva | 18 anos |
 
+## ⚠️ Nome da rede Wi-Fi não acompanha o número da unidade
+
+O DS03J é a **Unidade 3**, mas a rede Wi-Fi se chama **APTO 13**. Isso é comum (o roteador guarda o nome antigo), mas confunde o hóspede, que procura por "APTO 3" e não acha.
+
+O manual do DS03J avisa isso explicitamente. **Ao levantar o Wi-Fi do DS04J e do DS05J, não deduza o nome da rede pelo número da unidade** — confira no roteador.
+
+> ⬜ Vale conferir se a rede é mesmo `APTO 13` e não `APTO 3` — se estiver trocado no manual, o hóspede não conecta.
+
 ## Chegada e portaria
 | Dado | Valor |
 |---|---|
@@ -90,7 +98,7 @@ Confirmado pelo Mateus em 07/09/2026: **iguais às do FL10J (Reinaldo).**
 | Nome na lista | Responsável pela reserva (mesmo padrão) |
 | Documento com foto | Sim (mesmo padrão) |
 | Devolução da chave | Recepção do condomínio (mesmo padrão do Reinaldo) |
-| Wi-Fi | Senha **portoseguro** (informada pelo Mateus). ⬜ Falta o nome da rede. |
+| Wi-Fi | Rede e senha **por unidade**, não do condomínio. DS03J: rede `APTO 13`, senha `portoseguro` (Mateus, 07/09/2026). ⬜ Levantar as redes do DS04J e DS05J separadamente. |
 | Voltagem | 220V |
 | Toalhas de banho e roupa de cama | **Inclusas** (Mateus, 07/09/2026) |
 | Onde deixar o lixo | ⬜ PENDENTE |

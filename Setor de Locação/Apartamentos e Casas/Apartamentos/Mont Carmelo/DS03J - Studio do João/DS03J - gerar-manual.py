@@ -27,6 +27,7 @@ CODIGO = "DS03J"
 WPP_FMT = "(73) 9937-3474"
 WPP_LINK = "557399373474"
 MAPS = "https://maps.app.goo.gl/wLqA4YoLh6ZVHu7R6"
+WIFI_REDE = "APTO 13"
 WIFI_SENHA = "portoseguro"
 
 
@@ -103,7 +104,7 @@ S01 = '''<section class="sec">
     <table class="tab">
       <tr><th>Endereço</th><td>Rua do Telégrafo, 1800 — Taperapuã<br>Porto Seguro, BA · CEP 45810-000</td></tr>
       <tr><th>Condomínio</th><td>Residencial Mont Carmelo</td></tr>
-      <tr><th>Unidade</th><td><span class="ph">confirmar número</span></td></tr>
+      <tr><th>Unidade</th><td>Unidade 3</td></tr>
       <tr><th>Capacidade</th><td>Até 5 pessoas — studio de cômodo único</td></tr>
       <tr><th>Camas</th><td>1 king size, 2 de solteiro e 1 colchão avulso</td></tr>
       <tr><th>Garagem</th><td>1 vaga</td></tr>
@@ -136,7 +137,7 @@ S03 = '''<section class="sec">
       <li><strong>Pare na portaria e informe o nome do responsável pela reserva.</strong> Seu nome já está na lista.</li>
       <li><strong>Apresente um documento com foto.</strong> RG, CNH ou passaporte.</li>
       <li><strong>Retire a chave na portaria.</strong></li>
-      <li><strong>Estacione na vaga do studio.</strong> É uma vaga por unidade.</li>
+      <li><strong>Estacione na vaga e siga para a Unidade 3.</strong> É uma vaga por studio.</li>
     </ol>
     <div class="aviso">O acesso ao studio é <strong>sem degraus</strong> — não há escada entre a vaga e a porta. Qualquer coisa fora do previsto, chame o plantão da Artezian no WhatsApp <strong>%s</strong>.</div>
   </section>''' % WPP_FMT
@@ -185,14 +186,15 @@ S05 = '''<section class="sec junto">
 S06 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">06</span> Wi-Fi e eletrônicos</h2>
     <div class="wifi">
-      <div class="wifi-item"><div class="wifi-l">Rede</div><div class="wifi-v"><span class="ph">preencher</span></div></div>
+      <div class="wifi-item"><div class="wifi-l">Rede</div><div class="wifi-v">%s</div></div>
       <div class="wifi-item"><div class="wifi-l">Senha</div><div class="wifi-v">%s</div></div>
     </div>
     <ul class="lista">
+      <li>A rede se chama <strong>APTO 13</strong> — o nome não acompanha o número do studio, então procure por ela mesmo estando na Unidade 3.</li>
       <li>A TV é a cabo — não precisa de conta de streaming para assistir.</li>
     </ul>
     <div class="aviso"><strong>As tomadas são 220V.</strong> Se você vem de Minas Gerais, do Espírito Santo ou de qualquer lugar onde a rede é 127V, confira a voltagem antes de ligar secador de cabelo, chapinha ou qualquer aparelho trazido de casa. Carregador de celular e notebook costumam ser bivolt, mas vale conferir na etiqueta.</div>
-  </section>''' % WIFI_SENHA
+  </section>''' % (WIFI_REDE, WIFI_SENHA)
 
 S07 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">07</span> Área de lazer</h2>

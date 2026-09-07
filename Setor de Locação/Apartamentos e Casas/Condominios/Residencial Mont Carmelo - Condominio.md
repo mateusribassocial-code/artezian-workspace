@@ -14,7 +14,7 @@
 |---|---|---|---|
 | DS03J | Studio do João — **Unidade 3** | até 5 pessoas | ✅ gerado em 07/09/2026, sem pendências |
 | DS04J | Flat da Mari — **Apto 06** | até 5 pessoas | ✅ gerado em 07/09/2026, sem pendências |
-| DS05J | Apartamento do Emanoel | até 8 pessoas | ⬜ |
+| DS05J | Apartamento do Emanoel | até 8 pessoas | ✅ gerado em 07/09/2026 — faltam nº da unidade e Wi-Fi |
 
 > Terceiro condomínio operado pela **Tonziro**, junto com [Moradas de Israel](Moradas%20de%20Israel%20-%20Condominio.md) e [Residencial Jerusalém II](Residencial%20Jerusalem%20II%20-%20Condominio.md).
 
@@ -58,6 +58,20 @@
 | GC01J — Apartamento do Zé Coroa | 6,9 km |
 
 ---
+
+## Configuração das três unidades
+
+| | DS03J — João | DS04J — Mari | DS05J — Emanoel |
+|---|---|---|---|
+| Capacidade | 5 | 5 | 8 |
+| Formato | Studio, cômodo único | Flat duplex | Apartamento duplex |
+| Quartos | — (cômodo único) | 1 suíte | **2 suítes** |
+| Camas | 1 king + 2 solteiro + colchão | 1 king + 2 solteiro + sofá-cama | 2 casal + 4 solteiro + sofá-cama |
+| Banheiros | 1 | 2 | **3** |
+| Quarto no térreo | acesso sem degraus | entrada sem degraus | **quarto e banheiro no térreo** |
+| Churrasqueira privativa | não | não | **sim** |
+
+> **O Emanoel é o único que serve dois núcleos familiares** — as duas suítes têm a mesma configuração (casal + 2 solteiros), então ninguém abre mão de privacidade. E é o único com quarto e banheiro no térreo, o que resolve hóspede com dificuldade de locomoção.
 
 ## Área de lazer e regras
 Confirmado pelo Mateus em 07/09/2026: **iguais às do FL10J (Reinaldo).**

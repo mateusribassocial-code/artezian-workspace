@@ -91,10 +91,10 @@ Se a Malibu está a 500m de verdade, a unidade fica **cerca de 800m ao sul** do 
 | Número da unidade e andar | Site diz "1 suíte no térreo" — é duplex como os outros? |
 | Wi-Fi | Rede e senha, ou "pegar na portaria" |
 | Toalhas de banho e roupa de cama | Inclusas? |
-| Voltagem | 220V? |
+| ~~Voltagem~~ | ✅ **220V.** Confirmado pelo Mateus em 07/09/2026. Aviso em destaque no manual. |
 | Piscina | Horário |
 | Churrasqueira coletiva | Existe? Precisa agendar? |
-| Check-out | O que fazer com a chave |
+| Check-out | ⬜ Onde devolver a chave? Como a campainha entrega chave física, existe devolução — o manual está com o campo em branco. |
 | Lixo | Onde deixar |
 
 ## Fotos
@@ -103,11 +103,18 @@ Se a Malibu está a 500m de verdade, a unidade fica **cerca de 800m ao sul** do 
 
 ---
 
-## ✅ Resolvido: fechadura digital com senha
+## ✅ Resolvido: campainha eletrônica
 
-O termo "campanha digital" era **fechadura digital**. O check-in do manual foi reescrito em 4 passos, sem portaria e sem chave física, e a senha ganhou o bloco dourado dedicado do scaffold — hoje em branco.
+O termo era **campainha eletrônica**. O Mateus corrigiu em 07/09/2026 — a primeira leitura (fechadura digital) estava errada e chegou a ser publicada; o manual foi refeito.
 
-**⬜ Decisão pendente:** a senha muda a cada reserva? Se sim, o manual não deve trazê-la impressa — melhor dizer "sua senha chega por WhatsApp no dia da chegada", assim o PDF serve pra todos os hóspedes. Se for fixa, imprimo.
+**Como funciona:** o hóspede toca a campainha eletrônica na entrada, informa o nome do responsável pela reserva, e a entrada é liberada com a chave entregue ali.
+
+Isso tem duas consequências que o manual precisou absorver:
+
+1. **Existe chave física.** A versão anterior dizia "não há chave para devolver" no check-out — errado. O item de devolução voltou, com o local em branco.
+2. **Avisar atraso importa mais aqui.** Sem portaria 24h, chegar depois das 22h sem avisar significa ninguém para atender a campainha. O passo 1 do check-in fala isso explicitamente.
+
+**⬜ Duas pendências novas:** quem atende a campainha (zelador? vizinho? a própria Artezian remotamente?) e até que horas. E onde a chave é devolvida no check-out.
 
 <details><summary>Hipóteses que eu havia levantado</summary>
 

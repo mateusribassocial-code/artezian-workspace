@@ -64,8 +64,8 @@ Se a Malibu está a 500m de verdade, a unidade fica **cerca de 800m ao sul** do 
 ## Já confirmado pelo site (não precisa perguntar)
 | Item | Valor |
 |---|---|
-| Check-in | Das 15h às 22h |
-| Check-out | Das 6h às 12h |
+| Check-in | **A partir das 14h** (Mateus, 07/09/2026) ⚠️ o site publica 15h–22h |
+| Check-out | **Até as 10h** (Mateus, 07/09/2026) ⚠️ o site publica 6h–12h |
 | Silêncio | Das 22h às 6h |
 | Fumar dentro | Proibido |
 | Festas e eventos | Proibidos |
@@ -92,14 +92,26 @@ Se a Malibu está a 500m de verdade, a unidade fica **cerca de 800m ao sul** do 
 | ~~Portaria 24h~~ | ✅ **Não tem portaria.** Confirmado pelo Mateus em 06/09/2026. O check-in foi reescrito: sem porteiro, sem chave física. |
 | ~~Retirada da chave~~ | ✅ **Fechadura digital com senha.** Confirmado pelo Mateus em 06/09/2026. |
 | ~~Nome na lista / documento~~ | Não se aplica — não há portaria. |
-| Número da unidade e andar | Site diz "1 suíte no térreo" — é duplex como os outros? |
+| Número da unidade | **Apto 13** (Mateus, 07/09/2026) |
 | Wi-Fi | Rede e senha, ou "pegar na portaria" |
-| Toalhas de banho e roupa de cama | Inclusas? |
+| Toalhas de banho e roupa de cama | **Inclusas** (Mateus, 07/09/2026) |
 | ~~Voltagem~~ | ✅ **220V.** Confirmado pelo Mateus em 07/09/2026. Aviso em destaque no manual. |
 | Piscina | Horário |
 | Churrasqueira coletiva | Existe? Precisa agendar? |
 | Check-out | ⬜ Onde devolver a chave? Como a campainha entrega chave física, existe devolução — o manual está com o campo em branco. |
 | Lixo | Onde deixar |
+
+## ⚠️ Horários do HA03J divergem de tudo o que está publicado
+
+| Fonte | Check-in | Check-out |
+|---|---|---|
+| **Mateus, 07/09/2026 — vale este** | a partir das 14h | até as 10h |
+| artezian.com.br/pt/apartment/HA03J | 15h às 22h | 6h às 12h |
+| `### Dúvidas frequentes.txt` (regra geral) | 15h | 12h |
+
+O manual usa 14h / 10h. **Duas horas a menos de estadia que o publicado** — se o hóspede reservou lendo o site e o contrato repete 15h/12h, ele vai chegar às 15h achando que perdeu uma hora, ou pior, ser cobrado por sair às 11h.
+
+Corrigir no site e conferir o que vai no contrato. O check-out às 10h é o ponto mais sensível: é cedo e pega gente desprevenida, então o manual traz um aviso destacado sugerindo deixar a mala pronta na véspera.
 
 ## Fotos
 12 arquivos em `Fotos/`. Selecionadas 8: piscina com área externa (capa), sala com TV e cozinha americana, estar com bancada, cozinha, suíte de casal, quarto com duas camas de solteiro, banheiro e churrasqueira privativa.

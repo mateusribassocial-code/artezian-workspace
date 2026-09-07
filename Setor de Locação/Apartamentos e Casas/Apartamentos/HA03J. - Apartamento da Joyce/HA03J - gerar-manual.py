@@ -95,12 +95,12 @@ CAPA = '''<header class="capa">
 S01 = '''<section class="sec">
     <h2 class="sec-h"><span class="sec-n">01</span> Sua reserva</h2>
     <div class="destaque-duplo">
-      <div class="destaque"><div class="destaque-l">Check-in</div><div class="destaque-v">das 15h às 22h</div></div>
-      <div class="destaque"><div class="destaque-l">Check-out</div><div class="destaque-v">até as 12h</div></div>
+      <div class="destaque"><div class="destaque-l">Check-in</div><div class="destaque-v">a partir das 14h</div></div>
+      <div class="destaque"><div class="destaque-l">Check-out</div><div class="destaque-v">até as 10h</div></div>
     </div>
     <table class="tab">
       <tr><th>Endereço</th><td>Rua do Telégrafo, 1833 — Taperapuã<br>Porto Seguro, BA · CEP 45810-000</td></tr>
-      <tr><th>Unidade</th><td><span class="ph">confirmar número</span></td></tr>
+      <tr><th>Unidade</th><td>Apto 13</td></tr>
       <tr><th>Capacidade</th><td>Até 8 pessoas — 3 suítes e 4 banheiros, mais sofá-cama na sala</td></tr>
       <tr><th>Camas</th><td>2 de casal e 4 de solteiro</td></tr>
       <tr><th>Garagem</th><td>2 vagas</td></tr>
@@ -130,7 +130,7 @@ S02 = '''<section class="sec junto">
 S03 = '''<section class="sec">
     <h2 class="sec-h"><span class="sec-n">03</span> Check-in passo a passo</h2>
     <ol class="passos">
-      <li><strong>Chegue entre 15h e 22h.</strong> Antes das 15h a gente tenta liberar, mas depende da saída do hóspede anterior — não dá para garantir. Se o voo atrasar e você for chegar depois das 22h, <strong>avise o plantão com antecedência</strong> — aqui isso importa mais que nos outros imóveis, porque não há porteiro esperando.</li>
+      <li><strong>Chegue a partir das 14h.</strong> Antes disso a gente tenta liberar, mas depende da saída do hóspede anterior — não dá para garantir. Se for chegar à noite, <strong>avise o plantão com antecedência</strong> — aqui isso importa mais que nos outros imóveis, porque não há portaria esperando.</li>
       <li><strong>Estacione na garagem.</strong> O apartamento tem 2 vagas.</li>
       <li><strong>Toque a campainha eletrônica na entrada</strong> e informe o nome do responsável pela reserva.</li>
       <li><strong>Sua entrada é liberada e a chave, entregue ali mesmo.</strong> <span class="ph">confirmar quem atende</span></li>
@@ -156,7 +156,7 @@ S05 = '''<section class="sec junto">
           <li>2 camas de casal e 4 de solteiro</li>
           <li>Sofá-cama na sala</li>
           <li>Ventiladores de teto</li>
-          <li>Roupa de cama e toalhas <span class="ph">confirmar</span></li>
+          <li>Roupa de cama e toalhas de banho inclusas</li>
         </ul></div>
         <div class="grupo"><h4>Cozinha</h4><ul class="lista-check">
           <li>Cozinha completa — fogão, forno, micro-ondas e geladeira</li>
@@ -205,7 +205,8 @@ S10 = '''<section class="sec junto">
       <li><strong>Pets não são aceitos neste imóvel.</strong></li>
       <li>Crianças de 2 a 12 anos e bebês são bem-vindos — mas não há berço.</li>
     </ul>
-    <h3 class="sub-h">Antes de sair, até as 12h</h3>
+    <div class="aviso"><strong>O check-out aqui é às 10h</strong>, mais cedo que o costume. Se o seu voo é à tarde, planeje a manhã contando com isso — vale deixar a mala pronta na véspera.</div>
+    <h3 class="sub-h">Antes de sair, até as 10h</h3>
     <ul class="lista-check">
       <li>Devolva a chave <span class="ph">confirmar onde</span></li>
       <li>Feche bem a porta ao sair</li>

@@ -14,7 +14,7 @@
 |---|---|---|---|
 | DS03J | Studio do João — **Unidade 3** | até 5 pessoas | ✅ gerado em 07/09/2026, sem pendências |
 | DS04J | Flat da Mari — **Apto 06** | até 5 pessoas | ✅ gerado em 07/09/2026, sem pendências |
-| DS05J | Apartamento do Emanoel | até 8 pessoas | ✅ gerado em 07/09/2026 — faltam nº da unidade e Wi-Fi |
+| DS05J | Apartamento do Emanoel — **Unidade 09** | até 8 pessoas | ✅ gerado em 07/09/2026, sem pendências |
 
 > Terceiro condomínio operado pela **Tonziro**, junto com [Moradas de Israel](Moradas%20de%20Israel%20-%20Condominio.md) e [Residencial Jerusalém II](Residencial%20Jerusalem%20II%20-%20Condominio.md).
 
@@ -106,9 +106,10 @@ O padrão do condomínio parece ser `APTO <número da unidade>`:
 | Unidade | Nº | Rede informada | Bate? |
 |---|---|---|---|
 | DS04J — Flat da Mari | Apto 06 | `APTO 6` | ✅ sim |
+| DS05J — Emanoel | Unidade 09 | `Apto 9` | ✅ sim |
 | DS03J — Studio do João | Unidade 3 | `APTO 13` | ❌ não |
 
-Com o DS04J seguindo o padrão, o `APTO 13` do DS03J vira exceção — e a hipótese mais simples é que seja **`APTO 3`**, com um "1" digitado a mais.
+**Duas de três unidades seguem o padrão `Apto <número>` exatamente.** O `APTO 13` do DS03J é a única exceção, e a hipótese mais simples continua sendo **`APTO 3`** com um "1" digitado a mais.
 
 > ⬜ **Conferir no roteador do DS03J.** O manual dele hoje imprime `APTO 13` e ainda traz uma frase dizendo que "o nome não acompanha o número do studio" — se a rede for `APTO 3`, as duas coisas estão erradas e o hóspede não conecta.
 
@@ -120,7 +121,7 @@ Com o DS04J seguindo o padrão, o `APTO 13` do DS03J vira exceção — e a hip�
 | Nome na lista | Responsável pela reserva (mesmo padrão) |
 | Documento com foto | Sim (mesmo padrão) |
 | Devolução da chave | Recepção do condomínio (mesmo padrão do Reinaldo) |
-| Wi-Fi | **Senha `portoseguro`** nas duas unidades levantadas — padrão do condomínio. Rede por unidade: **DS04J (Apto 06) → `APTO 6`** · **DS03J (Unidade 3) → `APTO 13`**. ⬜ Falta a rede do DS05J. |
+| Wi-Fi | **Senha `portoseguro` nas três unidades** — padrão do condomínio. Rede por unidade: **DS04J (Apto 06) → `APTO 6`** · **DS05J (Unidade 09) → `Apto 9`** · **DS03J (Unidade 3) → `APTO 13`** ⚠️ |
 | Voltagem | 220V |
 | Toalhas de banho e roupa de cama | **Inclusas** (Mateus, 07/09/2026) |
 | Onde deixar o lixo | ⬜ PENDENTE |

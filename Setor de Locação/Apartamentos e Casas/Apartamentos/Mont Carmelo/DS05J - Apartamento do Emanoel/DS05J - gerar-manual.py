@@ -25,6 +25,8 @@ CODIGO = "DS05J"
 WPP_FMT = "(73) 9937-3474"
 WPP_LINK = "557399373474"
 MAPS = "https://maps.app.goo.gl/wLqA4YoLh6ZVHu7R6"
+WIFI_REDE = "Apto 9"
+WIFI_SENHA = "portoseguro"
 
 
 def datauri(nome, larg=1200, q=78):
@@ -100,7 +102,7 @@ S01 = '''<section class="sec">
     <table class="tab">
       <tr><th>Endereço</th><td>Rua do Telégrafo, 1800 — Taperapuã<br>Porto Seguro, BA · CEP 45810-000</td></tr>
       <tr><th>Condomínio</th><td>Residencial Mont Carmelo</td></tr>
-      <tr><th>Unidade</th><td><span class="ph">confirmar número</span></td></tr>
+      <tr><th>Unidade</th><td>Unidade 09</td></tr>
       <tr><th>Capacidade</th><td>Até 8 pessoas — 2 suítes e 3 banheiros</td></tr>
       <tr><th>Camas</th><td>2 de casal e 4 de solteiro, mais sofá-cama na sala</td></tr>
       <tr><th>Garagem</th><td>1 vaga</td></tr>
@@ -133,7 +135,7 @@ S03 = '''<section class="sec">
       <li><strong>Pare na portaria e informe o nome do responsável pela reserva.</strong> Seu nome já está na lista.</li>
       <li><strong>Apresente um documento com foto.</strong> RG, CNH ou passaporte.</li>
       <li><strong>Retire a chave na portaria.</strong></li>
-      <li><strong>Estacione na vaga do apartamento.</strong> É uma vaga por unidade. Se vierem dois carros, há estacionamento na rua.</li>
+      <li><strong>Estacione na vaga e siga para a Unidade 09.</strong> É uma vaga por apartamento. Se vierem dois carros, há estacionamento na rua.</li>
     </ol>
     <div class="aviso">A entrada é <strong>no térreo, sem degraus</strong>, e há um quarto e um banheiro nesse mesmo nível. Uma escada interna leva ao andar de cima. Qualquer coisa fora do previsto, chame o plantão da Artezian no WhatsApp <strong>%s</strong>.</div>
   </section>''' % WPP_FMT
@@ -182,14 +184,14 @@ S05 = '''<section class="sec junto">
 S06 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">06</span> Wi-Fi e eletrônicos</h2>
     <div class="wifi">
-      <div class="wifi-item"><div class="wifi-l">Rede</div><div class="wifi-v"><span class="ph">preencher</span></div></div>
-      <div class="wifi-item"><div class="wifi-l">Senha</div><div class="wifi-v"><span class="ph">preencher</span></div></div>
+      <div class="wifi-item"><div class="wifi-l">Rede</div><div class="wifi-v">%s</div></div>
+      <div class="wifi-item"><div class="wifi-l">Senha</div><div class="wifi-v">%s</div></div>
     </div>
     <ul class="lista">
       <li>Se não achar a rede na lista, confira com a portaria.</li>
     </ul>
     <div class="aviso"><strong>As tomadas são 220V.</strong> Se você vem de Minas Gerais, do Espírito Santo ou de qualquer lugar onde a rede é 127V, confira a voltagem antes de ligar secador de cabelo, chapinha ou qualquer aparelho trazido de casa. Carregador de celular e notebook costumam ser bivolt, mas vale conferir na etiqueta.</div>
-  </section>'''
+  </section>''' % (WIFI_REDE, WIFI_SENHA)
 
 S07 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">07</span> Área de lazer e serviços</h2>

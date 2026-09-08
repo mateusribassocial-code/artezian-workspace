@@ -96,16 +96,24 @@ Todos com ar-condicionado.
 |---|---|
 | Check-in | Das 15h às 22h |
 | Check-out | Das 6h às 12h |
-| **Eventos** | **Permitidos** — única casa do portfólio |
+| Silêncio | **A partir das 22h** (Mateus, 07/09/2026) — o site publicava 21h, errado |
+| **Eventos** | **Permitidos, mas avisados antes e combinados no contrato** (Mateus, 07/09/2026) — única casa do portfólio |
 | Fumar nos quartos | Proibido |
 | **Pets** | Permitidos |
 | Crianças | De 2 a 12 anos e bebês; **sem berço** |
+
+## ✅ Eventos e silêncio — resolvido em 07/09/2026
+
+O site publicava silêncio a partir das **21h**, o que contradizia a proposta de casa de festas. O correto é **22h**.
+
+E "eventos permitidos" não é livre: precisam ser **avisados antes e combinados no contrato**. O manual foi ajustado nos dois lugares onde o hóspede encontra o assunto — na regra da seção 11 e na linha "área de festas" da seção 07, que antes podia dar a entender uso livre.
+
+> A frase no manual: *"Se você pretende fazer um evento aqui, fale com a gente na reserva, não na véspera."*
 
 ## ⬜ Pendente
 
 | Item | |
 |---|---|
-| **Silêncio a partir das 21h** | O site informa 21h–6h, mas a casa é vendida como casa de festas com área de eventos. **Som cortado às 21h contradiz a proposta** e muda o que o cliente está comprando. É a única marca que sobrou no manual. |
 | "5 quartos" x 6 espaços | Ver acima |
 | 25 pessoas x 26 lugares | Ver acima |
 | Link do Google Maps | Para fechar a coordenada |

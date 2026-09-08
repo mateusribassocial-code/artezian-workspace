@@ -136,11 +136,12 @@ S02 = '''<section class="sec junto">
 S03 = '''<section class="sec">
     <h2 class="sec-h"><span class="sec-n">03</span> Check-in passo a passo</h2>
     <ol class="passos">
-      <li><strong>Chegue entre 15h e 22h.</strong> Antes das 15h a gente tenta liberar, mas depende da saída do hóspede anterior — não dá para garantir. Se o voo atrasar e você for chegar depois das 22h, avise o plantão.</li>
-      <li><strong>Retirada da chave:</strong> <span class="ph">confirmar como funciona</span></li>
+      <li><strong>Combine o horário da sua chegada com antecedência.</strong> Quem recebe você é o proprietário, pessoalmente — ele precisa saber a que horas esperar. Mande mensagem para o plantão assim que tiver o horário do voo.</li>
+      <li><strong>Chegue entre 15h e 22h.</strong> Antes das 15h a gente tenta liberar, mas depende da saída do hóspede anterior — não dá para garantir.</li>
+      <li><strong>O proprietário entrega as chaves na chegada.</strong></li>
       <li><strong>Estacione na garagem da casa.</strong> Cabem até 6 carros.</li>
     </ol>
-    <div class="aviso"><strong>Esta é uma casa, não um condomínio — não há portaria.</strong> O plantão da Artezian é o seu contato para tudo: chegada, dúvida, problema. Salve o número antes de viajar.</div>
+    <div class="aviso"><strong>Esta é uma casa, não um condomínio — não há portaria 24h.</strong> Por isso o horário combinado importa mais aqui: se o voo atrasar ou o trajeto render, <strong>avise na hora</strong>, para o proprietário não esperar à toa nem você chegar e não encontrar ninguém. O plantão da Artezian é o seu contato para tudo.</div>
   </section>'''
 
 S04 = '''<section class="sec">
@@ -201,9 +202,10 @@ S06 = '''<section class="sec junto">
       <div class="wifi-item"><div class="wifi-l">Senha</div><div class="wifi-v">%s</div></div>
     </div>
     <ul class="lista">
-      <li>Confira a voltagem antes de ligar aparelhos trazidos de casa <span class="ph">confirmar</span>. A casa já tem secador de cabelo, então talvez você nem precise levar o seu.</li>
+      <li>A casa já tem secador de cabelo, então talvez você nem precise levar o seu.</li>
     </ul>
-    <div class="aviso"><strong>A energia elétrica está inclusa até um limite de consumo</strong> — acima de 200 <span class="ph">confirmar unidade</span>, o excedente é cobrado à parte.<br><br>Numa casa com ar-condicionado em seis quartos isso sobe rápido. A dica que resolve: <strong>desligue o ar dos quartos vazios</strong> e não deixe os aparelhos ligados quando o grupo sair para a praia.</div>
+    <div class="aviso"><strong>As tomadas são 220V.</strong> Se você vem de Minas Gerais, do Espírito Santo ou de qualquer lugar onde a rede é 127V, confira a voltagem antes de ligar chapinha ou aparelho trazido de casa.</div>
+    <div class="aviso"><strong>A energia elétrica está inclusa até um limite de consumo.</strong> Só o que passar disso é cobrado à parte, no fim da estadia.<br><br>Numa casa com ar-condicionado em seis quartos e até 25 pessoas, o consumo sobe rápido. A dica que resolve: <strong>desligue o ar dos quartos vazios</strong> e não deixe os aparelhos ligados quando o grupo sair para a praia.</div>
   </section>''' % (WIFI_REDE, WIFI_SENHA)
 
 S07 = '''<section class="sec junto">
@@ -276,7 +278,7 @@ S11 = '''<section class="sec junto">
     </ul>
     <h3 class="sub-h">Antes de sair, até as 12h</h3>
     <ul class="lista-check">
-      <li>Devolva a chave <span class="ph">confirmar onde</span></li>
+      <li>Devolva as chaves ao proprietário <span class="ph">confirmar</span></li>
       <li>Feche as janelas e desligue os ares-condicionados</li>
       <li>Apague bem a churrasqueira, se tiver usado</li>
       <li>Confira os seis quartos e os quatro banheiros — num grupo grande, sempre fica alguma coisa</li>

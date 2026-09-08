@@ -12,7 +12,7 @@
 | | Apartamentos | Esta casa |
 |---|---|---|
 | Portaria | 24h nos três condomínios | **Não existe** |
-| Chave | Retirada e devolução na portaria | ⬜ **A definir** |
+| Chave | Retirada e devolução na portaria | **O proprietário recebe o hóspede e entrega as chaves** (Mateus, 07/09/2026) |
 | Piscina | Do condomínio, com horário | **Privativa**, sem horário |
 | Churrasqueira | Coletiva, precisa agendar | **Privativa**, uso livre |
 | Estacionamento | 1 a 2 vagas | **Garagem para 6 carros** |
@@ -102,9 +102,17 @@ A seção 07 do manual deixou de ser "Área de lazer" (do condomínio) e virou *
 
 ## Cobrança de energia (Mateus, 07/09/2026)
 
-**O consumo de energia é cobrado à parte acima de 200** ⬜ (unidade a confirmar).
+**Política:** o consumo até 200 durante a estadia está incluso; só o excedente é cobrado (Mateus, 07/09/2026).
 
-Entrou no manual como aviso destacado na seção de eletrônicos, **sem valor em reais** — a skill proíbe preço no manual, mas o hóspede precisa saber que existe a cobrança para não ser surpreendido no check-out. Acrescentei a orientação prática: desligar o ar dos quartos vazios e não deixar aparelhos ligados quando o grupo sai para a praia.
+### Decisão: o número não vai no manual
+
+O Mateus escreveu "200w" duas vezes. **200 watts é menos que um secador de cabelo** — como limite de consumo de uma estadia inteira não faz sentido físico; quase certamente são **200 kWh**.
+
+Como se trata de uma cobrança, imprimir a unidade errada num documento do hóspede pode virar discussão no check-out. E o número, sozinho, não é acionável: o hóspede não tem como medir o próprio consumo.
+
+Então o manual diz **"a energia está inclusa até um limite de consumo; só o que passar disso é cobrado à parte"** e entrega o que de fato resolve: desligar o ar dos quartos vazios e não deixar aparelhos ligados quando o grupo sai para a praia.
+
+> ⬜ **Confirmando que são 200 kWh, o número entra no manual.**
 
 > Numa casa com ar-condicionado em seis quartos e até 25 pessoas, esse limite é fácil de estourar. É a primeira unidade do portfólio com cobrança de consumo — se valer para as outras casas, o aviso deve ser replicado.
 
@@ -122,10 +130,10 @@ Entrou no manual como aviso destacado na seção de eletrônicos, **sem valor em
 | Item | |
 |---|---|
 | **Onde dormem os 3 extras?** | 22 lugares em cama para capacidade 25 |
-| **Unidade do limite de energia** | O Mateus disse "acima de 200w". 200W é menos que um secador de cabelo — quase certamente são **200 kWh**. O manual está com a unidade tracejada. |
-| **Retirada da chave** | Sem portaria, como o hóspede entra? Anfitrião, cofre, fechadura digital? |
-| **Devolução da chave** | |
+| Número e unidade do limite de energia | ⬜ O manual **não imprime o número** — ver decisão abaixo |
+| ~~Retirada da chave~~ | ✅ **Recepção e entrega das chaves pelo proprietário** (Mateus, 07/09/2026) |
+| Devolução da chave | ⬜ O manual diz "devolva ao proprietário" com marca de conferência — é o desdobramento natural, mas não foi confirmado |
 | ~~Wi-Fi~~ | ✅ Rede **Tremura**, senha **act12345** (Mateus, 07/09/2026) |
-| Voltagem | 220V como os outros? |
+| ~~Voltagem~~ | ✅ **220V** (Mateus, 07/09/2026) |
 | Link do Google Maps | Para fechar a coordenada exata |
 | Manutenção da piscina | Há dia de limpeza? Se alguém vem à casa durante a estadia, o hóspede precisa saber |

@@ -64,6 +64,7 @@ Caminho usado:
 | Piscina | **Com cascata** |
 | Área de churrasco | Com churrasqueira |
 | Guarda-sóis e espreguiçadeiras | Sim |
+| Guarda-volumes | **Sim** — citado na página do JR09J. Resolve o intervalo entre o check-out e o voo. |
 | Estacionamento | 3 vagas internas + 4 externas |
 | **Rampa de acessibilidade** | Sim, para cadeirante |
 | Ducha externa | Sim |
@@ -93,9 +94,11 @@ Caminho usado:
 | JR05J | Apto Varandas 01 — **porta nº 05** | B | **até 5** (casal + beliche + sofá-cama) ⬜ conferir | ✅ 07/09/2026, 2 pendências |
 | JR07J | Apto Varandas 03 — **porta nº 07** | B | **até 5** (casal + beliche + cama auxiliar) ⬜ conferir | ✅ 07/09/2026, 1 pendência |
 | JR08J | Apto Varandas 04 — **porta nº 08** | B | **até 6** (casal + beliche + sofá-cama, os dois últimos com auxiliar) ⬜ conferir | ✅ 07/09/2026, 1 pendência |
-| JR09J | Apto Duplex Varandas 01 | C | até 8 | ⬜ |
+| JR09J | Apto Duplex Varandas 01 — **Apto 09** | C | **até 8** (2 quartos, **1 banheiro**) | ✅ 07/09/2026, sem pendências |
 
 > **JR02J:** existe, mas está **incompleto** — Mateus, 07/09/2026. Não tem pasta no repositório e ficou fora da fila de manuais.
+>
+> ⬜ **JR06J:** o `Apartamento_Varandas_ate 8 pessoas.txt` lista o tipo B como "JR05J, JR06J, JR07J, JR08J". O JR06J não tem pasta e nunca foi citado. Existe?
 
 ## Por unidade — confirmado pelo Mateus em 07/09/2026
 
@@ -130,4 +133,6 @@ Caminho usado:
 | ~~Numeração x nome comercial~~ | **Resolvido.** O nome comercial é sempre dois números atrás da porta: 05→"Varandas 01", 07→"Varandas 03", 08→"Varandas 04" (confirmado nas fotos das três). Os três manuais avisam o hóspede no passo 4 do check-in. |
 | Barra de apoio no box | JR01J e JR03J **têm**; **JR04J, JR05J, JR07J e JR08J não têm** (fotos JR04J-5 e 6, 11 do JR05J, 6 e 8 do JR07J, 12 e 13 do JR08J). Só falta o JR09J — os quatro manuais já avisam o hóspede. |
 | Camas auxiliares | JR07J e JR08J têm cama auxiliar embaixo do beliche, e o JR08J tem outra embaixo do sofá-cama. Se todas forem usadas o 08 dorme 7, mas o material diz "até 6". Definir o número oficial de cada um — os manuais estão com o campo tracejado. |
+| "Duplex" no nome do JR09J | A pasta chama "Apto Duplex Varandas 01", mas **nenhuma foto mostra escada interna** e o site descreve só 2 quartos e 1 banheiro num nível. O que as fotos mostram é uma **escada externa** de acesso. O manual não afirma que é duplex. Conferir se o nome está errado ou se há um segundo pavimento não fotografado. |
+| Acesso do JR09J | É por escada externa, então a rampa do condomínio não serve para essa unidade. O manual avisa. |
 

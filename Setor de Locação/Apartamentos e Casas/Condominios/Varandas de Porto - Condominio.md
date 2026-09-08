@@ -46,7 +46,15 @@ Caminho usado:
 
 > **Perfil oposto ao do Mont Carmelo.** Aqui o supermercado fica a **1 minuto a pé** (o melhor de todas as unidades), mas **não há farmácia caminhável** — a mais perto está a 3 min de carro. O Axé Moi e o Tôa Tôa, que no Mont Carmelo são caminhada, aqui exigem carro. Em compensação, Barraca do Gaúcho, Jubarte e Barramares ficam a pé.
 
-> ⚠️ **Duas afirmações do site estão erradas:** "Axé Moi a 7 minutos a pé" (são 1,25 km, 17 min a pé) e "Cabana Jubarte a 1 km" (são 487m). O material do condomínio, esse sim, está correto.
+> ⚠️ **O site erra em três pontos nas Varandas:**
+>
+> | O site diz | O correto |
+> |---|---|
+> | JR09J tem 1 banheiro | **2 banheiros** (Mateus, 07/09/2026) |
+> | Axé Moi a 7 minutos a pé | 1,25 km — 17 min a pé, ou 3 de carro |
+> | Cabana Jubarte a 1 km | 487m — 6 min a pé |
+>
+> O material do condomínio, esse sim, está correto nas distâncias.
 
 ## Distância para as outras unidades da Artezian
 | | |
@@ -94,7 +102,7 @@ Caminho usado:
 | JR05J | Apto Varandas 01 — **porta nº 05** | B | **até 5** (casal + beliche + sofá-cama) ⬜ conferir | ✅ 07/09/2026, 2 pendências |
 | JR07J | Apto Varandas 03 — **porta nº 07** | B | **até 5** (casal + beliche + cama auxiliar) ⬜ conferir | ✅ 07/09/2026, 1 pendência |
 | JR08J | Apto Varandas 04 — **porta nº 08** | B | **até 6** (casal + beliche + sofá-cama, os dois últimos com auxiliar) ⬜ conferir | ✅ 07/09/2026, 1 pendência |
-| JR09J | Apto Duplex Varandas 01 — **Apto 09** | C | **até 8** (2 quartos, **1 banheiro**) | ✅ 07/09/2026, sem pendências |
+| JR09J | Apto Duplex Varandas 01 — **Apto 09** | C | **até 8** (2 quartos, **2 banheiros**) | ✅ 07/09/2026, sem pendências |
 
 > **JR02J:** existe, mas está **incompleto** — Mateus, 07/09/2026. Não tem pasta no repositório e ficou fora da fila de manuais.
 >

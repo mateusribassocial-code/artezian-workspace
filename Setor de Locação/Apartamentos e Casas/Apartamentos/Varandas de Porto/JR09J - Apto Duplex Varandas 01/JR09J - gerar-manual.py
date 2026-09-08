@@ -8,6 +8,7 @@ Fontes:
   Apartamento_Varandas_ate 8 pessoas.txt   -> capacidade, "JR09J - Apto 09"
   artezian.com.br/pt/apartment/JR09J       -> camas por quarto, 1 banheiro, guarda-volumes
   fotos da unidade                         -> numero 09 na porta, escada externa, sem barra no box
+  Mateus, 07/09/2026                       -> sao 2 banheiros (o site diz 1, esta errado)
 Rodar da raiz do workspace.
 """
 import io, os, base64
@@ -98,7 +99,7 @@ S01 = '''<section class="sec">
       <tr><th>Endereço</th><td>Rua Araray, 55 — Paraíso dos Pataxós, Taperapuã<br>Porto Seguro, BA · CEP 45810-000</td></tr>
       <tr><th>Condomínio</th><td>Varandas de Porto</td></tr>
       <tr><th>Unidade</th><td>Apto 09</td></tr>
-      <tr><th>Capacidade</th><td>Até 8 pessoas — 2 quartos e 1 banheiro</td></tr>
+      <tr><th>Capacidade</th><td>Até 8 pessoas — 2 quartos e 2 banheiros</td></tr>
       <tr><th>Camas</th><td>Quarto 1: casal e beliche · Quarto 2: casal e solteiro · Sala: sofá-cama</td></tr>
       <tr><th>Estacionamento</th><td>Gratuito no condomínio — 3 vagas internas e 4 externas</td></tr>
       <tr><th>Praia</th><td>Taperapuã, 6 minutos a pé</td></tr>
@@ -160,7 +161,7 @@ S05 = '''<section class="sec junto">
           <li>Panelas, louça e utensílios básicos</li>
         </ul></div>
         <div class="grupo"><h4>Banheiro e mais</h4><ul class="lista-check">
-          <li><strong>Um banheiro</strong>, com água quente</li>
+          <li>2 banheiros, com água quente</li>
           <li>Varanda</li>
           <li>TV</li>
         </ul></div>
@@ -174,7 +175,7 @@ S05 = '''<section class="sec junto">
         </ul>
       </div>
     </div>
-    <div class="aviso"><strong>São oito pessoas para um banheiro só.</strong> É o ponto a combinar antes de chegar — vale organizar a ordem do banho, principalmente na manhã de um passeio com hora marcada.<br><br>O acesso ao apartamento é por <strong>escada externa</strong>. A rampa de acessibilidade do condomínio atende a área comum, mas não chega até esta porta.</div>
+    <div class="aviso"><strong>O acesso ao apartamento é por escada externa.</strong> A rampa de acessibilidade do condomínio atende a área comum, mas não chega até esta porta — vale considerar isso se alguém do grupo tem dificuldade de locomoção.<br><br>Das oito pessoas, sete dormem nos dois quartos e uma no sofá-cama da sala. Vale combinar antes quem fica onde.</div>
   </section>'''
 
 S06 = '''<section class="sec junto">

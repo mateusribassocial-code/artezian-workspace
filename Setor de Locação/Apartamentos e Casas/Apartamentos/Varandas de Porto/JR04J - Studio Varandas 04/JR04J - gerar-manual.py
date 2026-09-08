@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Gera o Manual do Hospede do JR03J (Studio Varandas 03) — Varandas de Porto.
+"""Gera o Manual do Hospede do JR04J (Studio Varandas 04) — Varandas de Porto.
 
 Coordenada do condominio: -16.383751, -39.035304 (Rua Araray, 79m do BigStop).
 Ver "Varandas de Porto - Condominio.md" para como ela foi obtida.
@@ -7,20 +7,21 @@ Ver "Varandas de Porto - Condominio.md" para como ela foi obtida.
 Fontes:
   Descrição Varandas de Porto.txt          -> estrutura do condominio, tipo A
   Studios_Varandas_ate 4 pessoas.txt       -> capacidade e equipamentos do tipo A
-  artezian.com.br/pt/apartment/JR03J       -> capacidade, camas, enxoval, banheiro
-  fotos da unidade                         -> beliche, numero 03 na parede, barra no box
+  Varandas de Porto - Condominio.md        -> operacional das sete unidades
+  fotos da unidade                         -> casal + solteiro, numero 04 na porta e na parede,
+                                              box SEM barra de apoio, banheiro com janela
 Rodar da raiz do workspace.
 """
 import io, os, base64
 from PIL import Image
 import segno
 
-BASE = "Setor de Locação/Apartamentos e Casas/Apartamentos/Varandas de Porto/JR03J - Studio Varandas 03"
+BASE = "Setor de Locação/Apartamentos e Casas/Apartamentos/Varandas de Porto/JR04J - Studio Varandas 04"
 SCAFFOLD = ".claude/skills/manual-hospede/assets/base-a4.html"
-SAIDA = "Setor de Locação/PDFS/JR03J - Manual do Hospede.html"
+SAIDA = "Setor de Locação/PDFS/JR04J - Manual do Hospede.html"
 
-NOME = "Studio Varandas 03"
-CODIGO = "JR03J"
+NOME = "Studio Varandas 04"
+CODIGO = "JR04J"
 WPP_FMT = "(73) 9937-3474"
 WPP_LINK = "557399373474"
 MAPS = "https://share.google/BFndo5AKzwBT2JUxF"
@@ -36,11 +37,11 @@ def datauri(nome, larg=1200, q=78):
 
 
 SELECAO = [
-    ("JR03J-1.png", "O studio, com cama de casal e beliche", True),
-    ("JR03J-4.png", "A janela dá para a área da piscina", False),
-    ("JR03J-3.png", "Cama de casal, com ar-condicionado", False),
-    ("3.png", "Cozinha compacta, com micro-ondas", False),
-    ("10.png", "Box com barra de apoio", False),
+    ("JR04J-2.png", "O studio, com cama de casal e cama adicional", True),
+    ("JR04J-1.png", "O número 04 na parede, com a cozinha e o banheiro ao fundo", False),
+    ("JR04J-4.png", "Cozinha compacta, com cooktop, micro-ondas e frigobar", False),
+    ("JR04J-3.png", "Roupa de cama e toalhas já no quarto", False),
+    ("JR04J-5.png", "Banheiro com box de vidro", False),
 ]
 
 qr_svg = segno.make(MAPS, error="m").svg_inline(scale=4, border=2, dark="#264653")
@@ -96,8 +97,8 @@ S01 = '''<section class="sec">
     <table class="tab">
       <tr><th>Endereço</th><td>Rua Araray, 55 — Paraíso dos Pataxós, Taperapuã<br>Porto Seguro, BA · CEP 45810-000</td></tr>
       <tr><th>Condomínio</th><td>Varandas de Porto</td></tr>
-      <tr><th>Unidade</th><td>Studio 03</td></tr>
-      <tr><th>Capacidade</th><td>Até 4 pessoas — 1 cama de casal e 1 beliche</td></tr>
+      <tr><th>Unidade</th><td>Studio 04</td></tr>
+      <tr><th>Capacidade</th><td>Até 3 pessoas <span class="ph">confirmar</span> — 1 cama de casal e 1 cama de solteiro</td></tr>
       <tr><th>Estacionamento</th><td>Gratuito no condomínio — 3 vagas internas e 4 externas</td></tr>
       <tr><th>Praia</th><td>Taperapuã, 6 minutos a pé</td></tr>
       <tr><th>Plantão Artezian</th><td><a href="https://wa.me/%s">%s</a></td></tr>
@@ -126,7 +127,7 @@ S03 = '''<section class="sec">
       <li><strong>Chegue entre 14h e 22h.</strong> Antes das 14h a gente tenta liberar, mas depende da saída do hóspede anterior — não dá para garantir. Se o voo atrasar e você for chegar depois das 22h, avise o plantão.</li>
       <li><strong>Estacione no condomínio.</strong> São 3 vagas internas e 4 externas, sem custo, por ordem de chegada.</li>
       <li><strong>Retire a chave na portaria.</strong> A senha do Wi-Fi é entregue ali também.</li>
-      <li><strong>Seu studio é o 03.</strong> O número está pintado na parede, ao lado da TV.</li>
+      <li><strong>Seu studio é o 04.</strong> O número está na porta e pintado na parede, do lado de dentro.</li>
     </ol>
     <div class="aviso">Qualquer coisa fora do previsto, chame o plantão da Artezian no WhatsApp <strong>%s</strong>.</div>
   </section>''' % WPP_FMT
@@ -144,20 +145,21 @@ S05 = '''<section class="sec junto">
       <div class="col-tem">
         <h3 class="col-h">Está no studio</h3>
         <div class="grupo"><h4>Dormir</h4><ul class="lista-check">
-          <li>Cômodo único, com uma cama de casal e um beliche</li>
+          <li>Cômodo único, com uma cama de casal e uma cama de solteiro</li>
           <li>Ar-condicionado</li>
           <li>Roupa de cama, cobertores, travesseiros e toalhas inclusos</li>
-          <li>Guarda-roupa, arara e varal</li>
+          <li>Guarda-roupa aberto, arara e varal</li>
+          <li>Cortina blackout na janela</li>
         </ul></div>
         <div class="grupo"><h4>Cozinha</h4><ul class="lista-check">
-          <li>Cozinha compacta, com fogão e micro-ondas</li>
-          <li>Geladeira</li>
-          <li>Panelas, louça e utensílios básicos</li>
+          <li>Cozinha compacta, com cooktop de duas bocas e micro-ondas</li>
+          <li>Frigobar</li>
+          <li>Panelas, chaleira, louça e utensílios básicos</li>
         </ul></div>
-        <div class="grupo"><h4>Banheiro e varanda</h4><ul class="lista-check">
-          <li>Banheiro com água quente</li>
-          <li><strong>Box com barra de apoio</strong></li>
-          <li>Janela com vista para a área da piscina</li>
+        <div class="grupo"><h4>Banheiro e TV</h4><ul class="lista-check">
+          <li>Banheiro com água quente e janela</li>
+          <li>Box de vidro</li>
+          <li>Armário com bancada de granito</li>
           <li>TV</li>
         </ul></div>
       </div>
@@ -170,7 +172,7 @@ S05 = '''<section class="sec junto">
         </ul>
       </div>
     </div>
-    <div class="aviso"><strong>É um studio de cômodo único</strong> — a cama de casal e o beliche dividem o mesmo espaço, sem parede entre eles. Funciona bem para uma família; para dois casais, vale saber disso antes de reservar. A cozinha é compacta: resolve café da manhã e refeição simples, não um jantar para quatro.</div>
+    <div class="aviso"><strong>É um studio de cômodo único</strong> — as camas dividem o mesmo espaço, sem parede entre elas. E a cozinha é compacta: resolve café da manhã e refeição simples, não um jantar para quatro. <strong>O box deste studio não tem barra de apoio</strong> — se você precisa dela, avise o plantão antes da chegada, porque outras unidades do condomínio têm.</div>
   </section>'''
 
 S06 = '''<section class="sec junto">

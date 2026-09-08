@@ -88,14 +88,22 @@ Caminho usado:
 | Código | Nome | Tipo | Capacidade | Manual |
 |---|---|---|---|---|
 | JR01J | Studio Varandas 01 — **Studio 01** | A — Studio | **até 3** | ✅ 07/09/2026, sem pendências |
-| JR03J | Studio Varandas 03 — **Studio 03** | A — Studio | **até 4** (casal + beliche) ⬜ conferir | ✅ 07/09/2026 |
-| JR04J | Studio Varandas 04 | A — Studio | até 4 | ⬜ |
-| JR05J | Apto Varandas 01 | B | até 6 | ⬜ |
-| JR07J | Apto Varandas 03 | B | até 6 | ⬜ |
-| JR08J | Apto Varandas 04 | B | até 6 | ⬜ |
+| JR03J | Studio Varandas 03 — **Studio 03** | A — Studio | **até 4** (casal + beliche) | ✅ 07/09/2026, sem pendências |
+| JR04J | Studio Varandas 04 | A — Studio | **até 3** (casal + solteiro) ⬜ conferir | ✅ 07/09/2026, 1 pendência |
+| JR05J | Apto Varandas 01 — **porta nº 05** | B | **até 5** (casal + beliche + sofá-cama) ⬜ conferir | ✅ 07/09/2026, 2 pendências |
+| JR07J | Apto Varandas 03 — **porta nº 07** | B | **até 5** (casal + beliche + cama auxiliar) ⬜ conferir | ✅ 07/09/2026, 1 pendência |
+| JR08J | Apto Varandas 04 — **porta nº 08** | B | **até 6** (casal + beliche + sofá-cama, os dois últimos com auxiliar) ⬜ conferir | ✅ 07/09/2026, 1 pendência |
 | JR09J | Apto Duplex Varandas 01 | C | até 8 | ⬜ |
 
 > **JR02J:** existe, mas está **incompleto** — Mateus, 07/09/2026. Não tem pasta no repositório e ficou fora da fila de manuais.
+
+## Por unidade — confirmado pelo Mateus em 07/09/2026
+
+| Unidade | Item | Valor |
+|---|---|---|
+| JR07J | Guarda-roupa | **Tem** — não aparece em nenhuma das três fotos do quarto |
+| JR07J | Lavar roupa | **Tem tanquinho**, além do tanque que aparece na foto 7 |
+| JR05J e JR08J | Lavar roupa | **Sem tanquinho** — ele é exclusivo do 07. O manual do 05 foi corrigido e o do 08 não menciona lavanderia |
 
 ## Operacional — confirmado em 07/09/2026
 
@@ -117,5 +125,9 @@ Caminho usado:
 | Horário da piscina | |
 | Churrasqueira precisa agendar | |
 | Onde deixar o lixo | |
-| Capacidade real dos studios | JR01J = 3 (confirmado). JR03J: o site diz "até 3" no título e "4 pessoas" no corpo; o beliche nas fotos indica 4. Conferir se os studios variam entre si. |
+| Capacidade real dos studios | **JR01J = 3** e **JR03J = 4** (confirmados pelo Mateus). Os studios variam entre si — o material genérico do tipo A ("até 4") não vale para todos. **JR04J ainda em aberto:** as fotos mostram 1 cama de casal + 1 de solteiro, ou seja 3; conferir se há cama extra guardada. |
+| Fogão no JR05J | **JR07J e JR08J têm fogão de piso, 4 bocas com forno** (fotos JR07J-2 e 5.png do 08) — é o padrão do tipo B. Só no **JR05J nenhuma foto mostra fogão**, e o manual do 05 segue com a pendência. Provavelmente ficou fora do enquadramento; conferir. |
+| ~~Numeração x nome comercial~~ | **Resolvido.** O nome comercial é sempre dois números atrás da porta: 05→"Varandas 01", 07→"Varandas 03", 08→"Varandas 04" (confirmado nas fotos das três). Os três manuais avisam o hóspede no passo 4 do check-in. |
+| Barra de apoio no box | JR01J e JR03J **têm**; **JR04J, JR05J, JR07J e JR08J não têm** (fotos JR04J-5 e 6, 11 do JR05J, 6 e 8 do JR07J, 12 e 13 do JR08J). Só falta o JR09J — os quatro manuais já avisam o hóspede. |
+| Camas auxiliares | JR07J e JR08J têm cama auxiliar embaixo do beliche, e o JR08J tem outra embaixo do sofá-cama. Se todas forem usadas o 08 dorme 7, mas o material diz "até 6". Definir o número oficial de cada um — os manuais estão com o campo tracejado. |
 

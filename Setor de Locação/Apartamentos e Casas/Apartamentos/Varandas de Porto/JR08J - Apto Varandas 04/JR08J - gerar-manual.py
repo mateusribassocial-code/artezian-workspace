@@ -1,26 +1,37 @@
 # -*- coding: utf-8 -*-
-"""Gera o Manual do Hospede do JR03J (Studio Varandas 03) — Varandas de Porto.
+"""Gera o Manual do Hospede do JR08J (Apto Varandas 04) — Varandas de Porto.
 
 Coordenada do condominio: -16.383751, -39.035304 (Rua Araray, 79m do BigStop).
 Ver "Varandas de Porto - Condominio.md" para como ela foi obtida.
 
 Fontes:
-  Descrição Varandas de Porto.txt          -> estrutura do condominio, tipo A
-  Studios_Varandas_ate 4 pessoas.txt       -> capacidade e equipamentos do tipo A
-  artezian.com.br/pt/apartment/JR03J       -> capacidade, camas, enxoval, banheiro
-  fotos da unidade                         -> beliche, numero 03 na parede, barra no box
+  Apartamentos_Varandas_ate 6 pessoas.txt  -> tipo B: quarto e sala, sofa-cama, beliche
+  Descrição Varandas de Porto.txt          -> estrutura do condominio
+  Varandas de Porto - Condominio.md        -> operacional das sete unidades
+  fotos da unidade                         -> numero 08 na porta, fogao Esmaltec 4 bocas com forno,
+                                              guarda-roupa grande, beliche e sofa-cama os dois com
+                                              cama auxiliar embaixo, ar-condicionado split no quarto,
+                                              vista da piscina pela porta (foto 3, fora da galeria:
+                                              a piscina fica na borda do quadro e some no corte da
+                                              grade — a vista ficou so no texto), box sem barra de
+                                              apoio, mesa de seis lugares (foto 8)
+  Mateus, 07/09/2026                       -> o tanquinho e exclusivo do JR07J
+
+Divergencia registrada no manual com .ph:
+  capacidade (o material do tipo B diz "ate 6" no topo e "ate 5" no detalhe; esta e a unidade
+  com mais camas do condominio — as auxiliares levam a 7 lugares se todas forem usadas)
 Rodar da raiz do workspace.
 """
 import io, os, base64
 from PIL import Image
 import segno
 
-BASE = "Setor de Locação/Apartamentos e Casas/Apartamentos/Varandas de Porto/JR03J - Studio Varandas 03"
+BASE = "Setor de Locação/Apartamentos e Casas/Apartamentos/Varandas de Porto/JR08J - Apto Varandas 04"
 SCAFFOLD = ".claude/skills/manual-hospede/assets/base-a4.html"
-SAIDA = "Setor de Locação/PDFS/JR03J - Manual do Hospede.html"
+SAIDA = "Setor de Locação/PDFS/JR08J - Manual do Hospede.html"
 
-NOME = "Studio Varandas 03"
-CODIGO = "JR03J"
+NOME = "Apto Varandas 04"
+CODIGO = "JR08J"
 WPP_FMT = "(73) 9937-3474"
 WPP_LINK = "557399373474"
 MAPS = "https://share.google/BFndo5AKzwBT2JUxF"
@@ -36,11 +47,12 @@ def datauri(nome, larg=1200, q=78):
 
 
 SELECAO = [
-    ("JR03J-1.png", "O studio, com cama de casal e beliche", True),
-    ("JR03J-4.png", "A janela dá para a área da piscina", False),
-    ("JR03J-3.png", "Cama de casal, com ar-condicionado", False),
-    ("3.png", "Cozinha compacta, com micro-ondas", False),
-    ("10.png", "Box com barra de apoio", False),
+    ("JR08J-1.png", "A sala e a cozinha, com o número 08 na porta", True),
+    ("5.png", "Fogão de quatro bocas e geladeira", False),
+    ("JR08J-5.png", "O quarto, com guarda-roupa, cama de casal e beliche", False),
+    ("7.png", "O sofá-cama da sala, com cama auxiliar embaixo", False),
+    ("8.png", "A mesa da sala, com seis lugares", False),
+    ("13.png", "Banheiro com box e bancada de granito", False),
 ]
 
 qr_svg = segno.make(MAPS, error="m").svg_inline(scale=4, border=2, dark="#264653")
@@ -79,7 +91,7 @@ def grupo(titulo, itens):
 CAPA = '''<header class="capa">
     <div class="capa-tag">Manual do hóspede</div>
     <h1 class="capa-titulo">%s</h1>
-    <div class="capa-sub">Studio · Varandas de Porto · Taperapuã, Porto Seguro</div>
+    <div class="capa-sub">Apartamento · Varandas de Porto · Taperapuã, Porto Seguro</div>
     <div class="capa-codigo">%s</div>
     <div class="capa-marca">
       <div class="capa-marca-nome">Artezian</div>
@@ -96,8 +108,8 @@ S01 = '''<section class="sec">
     <table class="tab">
       <tr><th>Endereço</th><td>Rua Araray, 55 — Paraíso dos Pataxós, Taperapuã<br>Porto Seguro, BA · CEP 45810-000</td></tr>
       <tr><th>Condomínio</th><td>Varandas de Porto</td></tr>
-      <tr><th>Unidade</th><td>Studio 03</td></tr>
-      <tr><th>Capacidade</th><td>Até 4 pessoas — 1 cama de casal e 1 beliche</td></tr>
+      <tr><th>Unidade</th><td><strong>Apartamento 08</strong> — é esse o número na porta</td></tr>
+      <tr><th>Capacidade</th><td>Até 6 pessoas <span class="ph">confirmar</span> — 1 cama de casal, 1 beliche e 1 sofá-cama, os dois últimos com cama auxiliar embaixo</td></tr>
       <tr><th>Estacionamento</th><td>Gratuito no condomínio — 3 vagas internas e 4 externas</td></tr>
       <tr><th>Praia</th><td>Taperapuã, 6 minutos a pé</td></tr>
       <tr><th>Plantão Artezian</th><td><a href="https://wa.me/%s">%s</a></td></tr>
@@ -126,12 +138,14 @@ S03 = '''<section class="sec">
       <li><strong>Chegue entre 14h e 22h.</strong> Antes das 14h a gente tenta liberar, mas depende da saída do hóspede anterior — não dá para garantir. Se o voo atrasar e você for chegar depois das 22h, avise o plantão.</li>
       <li><strong>Estacione no condomínio.</strong> São 3 vagas internas e 4 externas, sem custo, por ordem de chegada.</li>
       <li><strong>Retire a chave na portaria.</strong> A senha do Wi-Fi é entregue ali também.</li>
-      <li><strong>Seu studio é o 03.</strong> O número está pintado na parede, ao lado da TV.</li>
+      <li><strong>Procure o número 08 na porta.</strong> Você reservou como <em>Apto Varandas 04</em>, mas no condomínio a unidade é a <strong>08</strong> — é esse número que está na porta. Fica no pavimento de cima: da porta você vê a piscina.</li>
     </ol>
     <div class="aviso">Qualquer coisa fora do previsto, chame o plantão da Artezian no WhatsApp <strong>%s</strong>.</div>
   </section>''' % WPP_FMT
 
-S04 = '''<section class="sec">
+# quebra-antes: com 6 fotos (1 larga + 5) a grade nao cabe no resto da pagina 3 e as
+# legendas da ultima linha invadem o rodape fixo. Comecando em pagina limpa, tudo cabe.
+S04 = '''<section class="sec quebra-antes">
     <h2 class="sec-h"><span class="sec-n">04</span> O imóvel</h2>
     <div class="galeria">
       %s
@@ -142,23 +156,32 @@ S05 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">05</span> O que tem aqui</h2>
     <div class="col2">
       <div class="col-tem">
-        <h3 class="col-h">Está no studio</h3>
-        <div class="grupo"><h4>Dormir</h4><ul class="lista-check">
-          <li>Cômodo único, com uma cama de casal e um beliche</li>
-          <li>Ar-condicionado</li>
-          <li>Roupa de cama, cobertores, travesseiros e toalhas inclusos</li>
-          <li>Guarda-roupa, arara e varal</li>
+        <h3 class="col-h">Está no apartamento</h3>
+        <div class="grupo"><h4>Quarto</h4><ul class="lista-check">
+          <li>Quarto separado, com porta</li>
+          <li>Cama de casal e beliche</li>
+          <li>Cama auxiliar embaixo do beliche, com rodinhas</li>
+          <li>Ar-condicionado split</li>
+          <li>Guarda-roupa grande, com cabides e cobertores extras</li>
+          <li>Janela com veneziana e blackout</li>
+          <li>Roupa de cama, travesseiros e toalhas inclusos</li>
+        </ul></div>
+        <div class="grupo"><h4>Sala</h4><ul class="lista-check">
+          <li><strong>Sofá-cama com cama auxiliar embaixo</strong></li>
+          <li>Mesa com seis lugares e banquetas no balcão</li>
+          <li>TV</li>
+          <li>Ventilador de pé</li>
         </ul></div>
         <div class="grupo"><h4>Cozinha</h4><ul class="lista-check">
-          <li>Cozinha compacta, com fogão e micro-ondas</li>
-          <li>Geladeira</li>
-          <li>Panelas, louça e utensílios básicos</li>
+          <li><strong>Fogão de quatro bocas com forno</strong></li>
+          <li>Geladeira e micro-ondas</li>
+          <li>Liquidificador e garrafa térmica</li>
+          <li>Panelas, louça, copos e utensílios</li>
         </ul></div>
-        <div class="grupo"><h4>Banheiro e varanda</h4><ul class="lista-check">
+        <div class="grupo"><h4>Banheiro</h4><ul class="lista-check">
           <li>Banheiro com água quente</li>
-          <li><strong>Box com barra de apoio</strong></li>
-          <li>Janela com vista para a área da piscina</li>
-          <li>TV</li>
+          <li>Box de vidro e ducha higiênica</li>
+          <li>Armário com bancada de granito e espelho</li>
         </ul></div>
       </div>
       <div class="col-levar">
@@ -170,7 +193,7 @@ S05 = '''<section class="sec junto">
         </ul>
       </div>
     </div>
-    <div class="aviso"><strong>É um studio de cômodo único</strong> — a cama de casal e o beliche dividem o mesmo espaço, sem parede entre eles. Funciona bem para uma família; para dois casais, vale saber disso antes de reservar. A cozinha é compacta: resolve café da manhã e refeição simples, não um jantar para quatro.</div>
+    <div class="aviso"><strong>É a unidade com mais camas do condomínio</strong> — além da cama de casal e do beliche, o sofá-cama da sala e o próprio beliche têm cama auxiliar embaixo, é só puxar. <strong>O ar-condicionado é do quarto</strong>; na sala o que tem é ventilador de pé. <strong>O box não tem barra de apoio</strong>; se você precisa dela, avise o plantão antes da chegada.</div>
   </section>'''
 
 S06 = '''<section class="sec junto">
@@ -187,7 +210,7 @@ S06 = '''<section class="sec junto">
 S07 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">07</span> Área de lazer</h2>
     <table class="tab">
-      <tr><th>Piscina</th><td>Piscina com cascata</td></tr>
+      <tr><th>Piscina</th><td>Piscina com cascata — dá para ver da porta do apartamento</td></tr>
       <tr><th>Espreguiçadeiras</th><td>Guarda-sóis e espreguiçadeiras na área da piscina</td></tr>
       <tr><th>Churrasqueira</th><td>Área de churrasco com churrasqueira, de uso comum</td></tr>
       <tr><th>Ducha externa</th><td>Sim — para tirar a areia antes de entrar</td></tr>
@@ -246,7 +269,7 @@ S10 = '''<section class="sec">
 S11 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">11</span> Regras da casa e check-out</h2>
     <ul class="lista">
-      <li>Não é permitido fumar dentro do studio.</li>
+      <li>Não é permitido fumar dentro do apartamento.</li>
       <li>Festas e eventos não são permitidos — é um condomínio familiar e tranquilo.</li>
       <li><strong>Pets não são aceitos neste condomínio.</strong></li>
       <li>Crianças de 2 a 12 anos e bebês são bem-vindos — mas não há berço.</li>
@@ -255,7 +278,7 @@ S11 = '''<section class="sec junto">
     <ul class="lista-check">
       <li>Devolva a chave na portaria</li>
       <li>Feche as janelas e desligue o ar-condicionado</li>
-      <li>Confira o guarda-roupa, o varal e as tomadas</li>
+      <li>Confira o guarda-roupa, as camas auxiliares e as tomadas</li>
       <li>Avise o plantão que você já saiu</li>
     </ul>
   </section>'''

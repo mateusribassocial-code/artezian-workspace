@@ -278,12 +278,12 @@ S11 = '''<section class="sec junto">
     </ul>
     <h3 class="sub-h">Antes de sair, até as 12h</h3>
     <ul class="lista-check">
-      <li>Devolva as chaves ao proprietário <span class="ph">confirmar</span></li>
+      <li><strong>Combine o horário da saída com antecedência.</strong> O proprietário vai até a casa receber as chaves e conferir o imóvel — alguém do grupo precisa estar lá nesse momento</li>
       <li>Feche as janelas e desligue os ares-condicionados</li>
       <li>Apague bem a churrasqueira, se tiver usado</li>
       <li>Confira os seis quartos e os quatro banheiros — num grupo grande, sempre fica alguma coisa</li>
-      <li>Avise o plantão que vocês já saíram</li>
     </ul>
+    <div class="aviso">A conferência é rápida, mas acontece com vocês ainda na casa. <strong>Se o voo for cedo</strong>, avise o plantão com antecedência para combinar um horário que funcione para os dois lados.</div>
   </section>'''
 
 S12 = '''<section class="sec junto">

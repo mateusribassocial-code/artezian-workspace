@@ -12,13 +12,20 @@
 | | Apartamentos | Esta casa |
 |---|---|---|
 | Portaria | 24h nos três condomínios | **Não existe** |
-| Chave | Retirada e devolução na portaria | **O proprietário recebe o hóspede e entrega as chaves** (Mateus, 07/09/2026) |
+| Chave | Retirada e devolução na portaria | **O proprietário recebe na chegada e volta na saída** para conferir o imóvel (Mateus, 07/09/2026) |
 | Piscina | Do condomínio, com horário | **Privativa**, sem horário |
 | Churrasqueira | Coletiva, precisa agendar | **Privativa**, uso livre |
 | Estacionamento | 1 a 2 vagas | **Garagem para 6 carros** |
 | Silêncio | 22h às 6h | **23h às 6h** |
 
 A seção 07 do manual deixou de ser "Área de lazer" (do condomínio) e virou **"Área externa e piscina"**, com aviso de segurança próprio — a casa recebe grupo grande, quase sempre com criança, e não há salva-vidas.
+
+**A chegada e a saída viraram compromissos com hora marcada.** Sem portaria, o proprietário vai até a casa nas duas pontas: entrega as chaves no check-in e faz a conferência no check-out. Isso mudou dois pontos do manual:
+
+- O **passo 1 do check-in** deixou de ser "chegue entre 15h e 22h" e passou a ser "combine o horário da chegada com antecedência" — alguém precisa estar lá.
+- O **check-out** ganhou o aviso de que a conferência acontece com o grupo ainda na casa, com a orientação de combinar antes se o voo for cedo.
+
+> **Esse é o padrão a replicar nas outras quatro casas**, se o modelo de recepção for o mesmo.
 
 ---
 
@@ -132,7 +139,7 @@ Então o manual diz **"a energia está inclusa até um limite de consumo; só o 
 | **Onde dormem os 3 extras?** | 22 lugares em cama para capacidade 25 |
 | Número e unidade do limite de energia | ⬜ O manual **não imprime o número** — ver decisão abaixo |
 | ~~Retirada da chave~~ | ✅ **Recepção e entrega das chaves pelo proprietário** (Mateus, 07/09/2026) |
-| Devolução da chave | ⬜ O manual diz "devolva ao proprietário" com marca de conferência — é o desdobramento natural, mas não foi confirmado |
+| ~~Devolução da chave~~ | ✅ **O proprietário vai até a casa** receber as chaves e **conferir o imóvel** (Mateus, 07/09/2026) |
 | ~~Wi-Fi~~ | ✅ Rede **Tremura**, senha **act12345** (Mateus, 07/09/2026) |
 | ~~Voltagem~~ | ✅ **220V** (Mateus, 07/09/2026) |
 | Link do Google Maps | Para fechar a coordenada exata |

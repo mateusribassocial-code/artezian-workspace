@@ -104,7 +104,7 @@ S01 = '''<section class="sec">
     </div>
     <table class="tab">
       <tr><th>Endereço</th><td>Rua Piratinga, 33 — Taperapuã<br>Porto Seguro, BA · CEP 45810-000</td></tr>
-      <tr><th>Capacidade</th><td><span class="ph">confirmar</span></td></tr>
+      <tr><th>Capacidade</th><td>Até 25 pessoas</td></tr>
       <tr><th>Quartos</th><td>6 quartos, sendo 4 suítes — 4 deles no térreo</td></tr>
       <tr><th>Camas</th><td>5 de casal e 6 de solteiro</td></tr>
       <tr><th>Banheiros</th><td>4</td></tr>

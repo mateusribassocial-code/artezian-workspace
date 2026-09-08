@@ -54,17 +54,20 @@ A seção 07 do manual deixou de ser "Área de lazer" (do condomínio) e virou *
 
 ---
 
-## ⚠️ Capacidade — três números diferentes
+## ✅ Capacidade — unificada em 25
 
-| Fonte | Capacidade |
-|---|---|
-| `GF02J - Descricao_Tremura.txt` | até **25** pessoas |
-| Título da página do site | até **28** pessoas |
-| Corpo da página do site | **22** oficialmente |
+**Até 25 pessoas** (Mateus, 07/09/2026). O site publica dois números diferentes e ambos estão errados:
 
-As camas somam **5 de casal + 6 de solteiro = 16 lugares**. Nenhum dos três números fecha com isso, então provavelmente há colchões extras ou sofás-cama não listados.
+| Fonte | Dizia | |
+|---|---|---|
+| Mateus, 07/09/2026 | **25** | ✅ vale este |
+| `GF02J - Descricao_Tremura.txt` | 25 | ✅ já estava certo |
+| Título da página do site | 28 | ❌ corrigir |
+| Corpo da página do site | 22 | ❌ corrigir |
 
-O manual está com o campo **em branco**. É o dado mais importante da tabela da reserva — define quantas pessoas o grupo pode trazer.
+> ⬜ **As camas listadas somam 16 lugares** (5 de casal = 10, mais 6 de solteiro). Para chegar a 25 faltam **9 lugares** que nenhuma fonte descreve — colchões extras, sofás-cama, beliches não listados?
+>
+> Isso importa: um grupo de 25 que lê "5 camas de casal e 6 de solteiro" no manual vai contar 16 e perguntar onde dormem os outros nove. O manual hoje diz 25 na capacidade e lista as 16 camas — **precisa da terceira linha explicando o resto.**
 
 ## A casa
 | Dado | Valor |
@@ -96,7 +99,7 @@ O manual está com o campo **em branco**. É o dado mais importante da tabela da
 ## ⬜ Pendente
 | Item | |
 |---|---|
-| **Capacidade oficial** | 22, 25 ou 28? |
+| **Onde dormem as outras 9 pessoas?** | A capacidade é 25 mas as camas listadas somam 16. Colchões? Sofás-cama? |
 | **Retirada da chave** | Sem portaria, como o hóspede entra? Anfitrião, cofre, fechadura digital? |
 | **Devolução da chave** | |
 | Wi-Fi | Rede e senha |

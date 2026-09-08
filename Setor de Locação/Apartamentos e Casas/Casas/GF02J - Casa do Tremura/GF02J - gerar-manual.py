@@ -30,6 +30,8 @@ CODIGO = "GF02J"
 WPP_FMT = "(73) 9937-3474"
 WPP_LINK = "557399373474"
 MAPS = "https://www.google.com/maps/search/?api=1&query=Rua+Piratinga+33+Taperapua+Porto+Seguro+BA"
+WIFI_REDE = "Tremura"
+WIFI_SENHA = "act12345"
 
 
 def datauri(nome, larg=1200, q=78):
@@ -106,7 +108,7 @@ S01 = '''<section class="sec">
       <tr><th>Endereço</th><td>Rua Piratinga, 33 — Taperapuã<br>Porto Seguro, BA · CEP 45810-000</td></tr>
       <tr><th>Capacidade</th><td>Até 25 pessoas</td></tr>
       <tr><th>Quartos</th><td>6 quartos, sendo 4 suítes — 4 deles no térreo</td></tr>
-      <tr><th>Camas</th><td>5 de casal e 6 de solteiro</td></tr>
+      <tr><th>Camas</th><td>6 de casal, 9 de solteiro e 1 auxiliar — a distribuição por quarto está na seção 05</td></tr>
       <tr><th>Banheiros</th><td>4</td></tr>
       <tr><th>Garagem</th><td>Para até 6 carros, sem custo</td></tr>
       <tr><th>Praia</th><td>Taperapuã, 7 minutos a pé</td></tr>
@@ -153,11 +155,16 @@ S05 = '''<section class="sec junto">
     <div class="col2">
       <div class="col-tem">
         <h3 class="col-h">Está na casa</h3>
-        <div class="grupo"><h4>Dormir</h4><ul class="lista-check">
-          <li>6 quartos, sendo 4 suítes</li>
-          <li><strong>4 quartos ficam no térreo</strong></li>
-          <li>5 camas de casal e 6 de solteiro</li>
-          <li>Ar-condicionado nos quartos</li>
+        <div class="grupo"><h4>Os seis quartos</h4><ul class="lista-check">
+          <li><strong>Quarto 1</strong>, no térreo — casal e 1 solteiro</li>
+          <li><strong>Quarto 2</strong>, no térreo — casal e 2 solteiros</li>
+          <li><strong>Suíte 3</strong>, no térreo — casal e 1 solteiro</li>
+          <li><strong>Suíte 4</strong>, no térreo — casal e 1 solteiro</li>
+          <li><strong>Suíte 5</strong>, no andar de cima — casal e 2 solteiros</li>
+          <li><strong>Suíte 6</strong>, no andar de cima — casal, 2 solteiros e 1 cama auxiliar</li>
+        </ul></div>
+        <div class="grupo"><h4>Nos quartos</h4><ul class="lista-check">
+          <li>Ar-condicionado</li>
           <li>Roupa de cama, travesseiros e toalhas inclusos</li>
         </ul></div>
         <div class="grupo"><h4>Cozinha</h4><ul class="lista-check">
@@ -184,17 +191,20 @@ S05 = '''<section class="sec junto">
         </ul>
       </div>
     </div>
-    <div class="aviso"><strong>Quatro dos seis quartos ficam no térreo.</strong> Se alguém do grupo tem dificuldade com escada, dá para acomodar sem subir — vale combinar a divisão dos quartos antes de chegar, que num grupo grande é a primeira discussão da viagem.</div>
+    <div class="aviso"><strong>Quatro dos seis quartos ficam no térreo.</strong> Se alguém do grupo tem dificuldade com escada, dá para acomodar sem subir — vale combinar a divisão dos quartos antes de chegar, que num grupo grande é a primeira discussão da viagem.<br><br>Somando os seis quartos, são <strong>22 lugares em cama</strong>. Se o grupo for maior que isso, avise a gente com antecedência para organizarmos o complemento.</div>
   </section>'''
 
 S06 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">06</span> Wi-Fi e eletrônicos</h2>
     <div class="wifi">
-      <div class="wifi-item"><div class="wifi-l">Rede</div><div class="wifi-v"><span class="ph">preencher</span></div></div>
-      <div class="wifi-item"><div class="wifi-l">Senha</div><div class="wifi-v"><span class="ph">preencher</span></div></div>
+      <div class="wifi-item"><div class="wifi-l">Rede</div><div class="wifi-v">%s</div></div>
+      <div class="wifi-item"><div class="wifi-l">Senha</div><div class="wifi-v">%s</div></div>
     </div>
-    <div class="aviso"><strong>Confira a voltagem antes de ligar aparelhos trazidos de casa</strong> <span class="ph">confirmar</span>. Secador de cabelo e chapinha são os que queimam — a casa já tem secador, então talvez você nem precise levar o seu.</div>
-  </section>'''
+    <ul class="lista">
+      <li>Confira a voltagem antes de ligar aparelhos trazidos de casa <span class="ph">confirmar</span>. A casa já tem secador de cabelo, então talvez você nem precise levar o seu.</li>
+    </ul>
+    <div class="aviso"><strong>A energia elétrica está inclusa até um limite de consumo</strong> — acima de 200 <span class="ph">confirmar unidade</span>, o excedente é cobrado à parte.<br><br>Numa casa com ar-condicionado em seis quartos isso sobe rápido. A dica que resolve: <strong>desligue o ar dos quartos vazios</strong> e não deixe os aparelhos ligados quando o grupo sair para a praia.</div>
+  </section>''' % (WIFI_REDE, WIFI_SENHA)
 
 S07 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">07</span> Área externa e piscina</h2>

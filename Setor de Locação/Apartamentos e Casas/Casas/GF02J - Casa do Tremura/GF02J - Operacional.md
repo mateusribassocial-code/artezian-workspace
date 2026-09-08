@@ -65,16 +65,30 @@ A seção 07 do manual deixou de ser "Área de lazer" (do condomínio) e virou *
 | Título da página do site | 28 | ❌ corrigir |
 | Corpo da página do site | 22 | ❌ corrigir |
 
-> ⬜ **As camas listadas somam 16 lugares** (5 de casal = 10, mais 6 de solteiro). Para chegar a 25 faltam **9 lugares** que nenhuma fonte descreve — colchões extras, sofás-cama, beliches não listados?
+### Distribuição real das camas (Mateus, 07/09/2026)
+
+| # | Quarto | Andar | Camas | Lugares |
+|---|---|---|---|---|
+| 1 | Quarto | Térreo | casal + 1 solteiro | 3 |
+| 2 | Quarto | Térreo | casal + 2 solteiros | 4 |
+| 3 | **Suíte** | Térreo | casal + 1 solteiro | 3 |
+| 4 | **Suíte** | Térreo | casal + 1 solteiro | 3 |
+| 5 | **Suíte** | Cima | casal + 2 solteiros | 4 |
+| 6 | **Suíte** | Cima | casal + 2 solteiros + 1 auxiliar | 5 |
+| | | | **Total** | **22** |
+
+**Total de camas: 6 de casal, 9 de solteiro e 1 auxiliar.** Confere com "6 quartos, 4 suítes, 4 no térreo" da descrição.
+
+> ⚠️ **A descrição interna diz "5 camas de casal e 6 de solteiro" — está errada.** São 6 de casal e 9 de solteiro. Corrigir o `.txt`.
 >
-> Isso importa: um grupo de 25 que lê "5 camas de casal e 6 de solteiro" no manual vai contar 16 e perguntar onde dormem os outros nove. O manual hoje diz 25 na capacidade e lista as 16 camas — **precisa da terceira linha explicando o resto.**
+> ⬜ **22 lugares em cama para uma capacidade de 25.** Faltam 3. O "22 oficialmente" que o site publicava era, na verdade, a contagem de camas. O manual informa os 22 lugares e pede para o grupo avisar se for maior — mas vale definir como os 3 extras são acomodados.
 
 ## A casa
 | Dado | Valor |
 |---|---|
 | Quartos | 6, sendo **4 suítes** |
 | No térreo | **4 quartos** |
-| Camas | 5 de casal e 6 de solteiro |
+| Camas | **6 de casal, 9 de solteiro e 1 auxiliar** — 22 lugares |
 | Banheiros | 4 |
 | Garagem | Até 6 carros, sem custo |
 | Piscina | Privativa |
@@ -85,6 +99,14 @@ A seção 07 do manual deixou de ser "Área de lazer" (do condomínio) e virou *
 | TV | Smart TV com TV a cabo |
 | Roupa de cama e toalhas | Inclusas |
 | Itens básicos de banheiro | Inclusos |
+
+## Cobrança de energia (Mateus, 07/09/2026)
+
+**O consumo de energia é cobrado à parte acima de 200** ⬜ (unidade a confirmar).
+
+Entrou no manual como aviso destacado na seção de eletrônicos, **sem valor em reais** — a skill proíbe preço no manual, mas o hóspede precisa saber que existe a cobrança para não ser surpreendido no check-out. Acrescentei a orientação prática: desligar o ar dos quartos vazios e não deixar aparelhos ligados quando o grupo sai para a praia.
+
+> Numa casa com ar-condicionado em seis quartos e até 25 pessoas, esse limite é fácil de estourar. É a primeira unidade do portfólio com cobrança de consumo — se valer para as outras casas, o aviso deve ser replicado.
 
 ## Regras (do site)
 | Regra | Valor |
@@ -99,10 +121,11 @@ A seção 07 do manual deixou de ser "Área de lazer" (do condomínio) e virou *
 ## ⬜ Pendente
 | Item | |
 |---|---|
-| **Onde dormem as outras 9 pessoas?** | A capacidade é 25 mas as camas listadas somam 16. Colchões? Sofás-cama? |
+| **Onde dormem os 3 extras?** | 22 lugares em cama para capacidade 25 |
+| **Unidade do limite de energia** | O Mateus disse "acima de 200w". 200W é menos que um secador de cabelo — quase certamente são **200 kWh**. O manual está com a unidade tracejada. |
 | **Retirada da chave** | Sem portaria, como o hóspede entra? Anfitrião, cofre, fechadura digital? |
 | **Devolução da chave** | |
-| Wi-Fi | Rede e senha |
+| ~~Wi-Fi~~ | ✅ Rede **Tremura**, senha **act12345** (Mateus, 07/09/2026) |
 | Voltagem | 220V como os outros? |
 | Link do Google Maps | Para fechar a coordenada exata |
 | Manutenção da piscina | Há dia de limpeza? Se alguém vem à casa durante a estadia, o hóspede precisa saber |

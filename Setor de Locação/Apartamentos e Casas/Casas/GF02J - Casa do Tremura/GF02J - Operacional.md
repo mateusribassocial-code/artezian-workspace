@@ -109,7 +109,9 @@ A seção 07 do manual deixou de ser "Área de lazer" (do condomínio) e virou *
 
 ## Cobrança de energia (Mateus, 07/09/2026)
 
-**Política:** o consumo até 200 durante a estadia está incluso; só o excedente é cobrado (Mateus, 07/09/2026).
+**Política (Mateus, 07/09/2026):** o consumo até 200 durante a estadia está incluso. Acima disso, **é cobrada uma taxa** — não é um teto de uso nem há corte de energia, é só cobrança do excedente.
+
+> A primeira redação do manual falava em "limite de consumo", o que soava como restrição. Corrigido para deixar claro que o hóspede **usa à vontade** e paga só o que passar.
 
 ### Decisão: o número não vai no manual
 

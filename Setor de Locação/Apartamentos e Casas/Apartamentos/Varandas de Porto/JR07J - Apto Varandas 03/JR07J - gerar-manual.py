@@ -133,7 +133,7 @@ S03 = '''<section class="sec">
     <ol class="passos">
       <li><strong>Chegue entre 14h e 22h.</strong> Antes das 14h a gente tenta liberar, mas depende da saída do hóspede anterior — não dá para garantir. Se o voo atrasar e você for chegar depois das 22h, avise o plantão.</li>
       <li><strong>Estacione no condomínio.</strong> São 3 vagas internas e 4 externas, sem custo, por ordem de chegada.</li>
-      <li><strong>Retire a chave na portaria.</strong> A senha do Wi-Fi é entregue ali também.</li>
+      <li><strong>Retire a chave na portaria.</strong></li>
       <li><strong>Procure o número 07 na porta.</strong> Você reservou como <em>Apto Varandas 03</em>, mas no condomínio a unidade é a <strong>07</strong> — é esse número que está na porta.</li>
     </ol>
     <div class="aviso">Qualquer coisa fora do previsto, chame o plantão da Artezian no WhatsApp <strong>%s</strong>.</div>
@@ -196,10 +196,11 @@ S05 = '''<section class="sec junto">
 S06 = '''<section class="sec junto">
     <h2 class="sec-h"><span class="sec-n">06</span> Wi-Fi e eletrônicos</h2>
     <div class="wifi">
-      <div class="wifi-item"><div class="wifi-l">Wi-Fi</div><div class="wifi-v">Senha na portaria</div></div>
+      <div class="wifi-item"><div class="wifi-l">Rede</div><div class="wifi-v">Varandas de Porto</div></div>
+      <div class="wifi-item"><div class="wifi-l">Senha</div><div class="wifi-v">Bemvindo2026</div></div>
     </div>
     <ul class="lista">
-      <li>A senha do Wi-Fi é entregue na portaria, junto com a chave. Se esquecer de pegar na chegada, é só passar lá e pedir.</li>
+      <li>A rede é a mesma em todo o condomínio, então funciona também na piscina e na área de churrasco. Se não achar na lista, confira com a portaria.</li>
     </ul>
     <div class="aviso"><strong>As tomadas são 220V.</strong> Se você vem de Minas Gerais, do Espírito Santo ou de qualquer lugar onde a rede é 127V, confira a voltagem antes de ligar secador de cabelo, chapinha ou qualquer aparelho trazido de casa. Carregador de celular e notebook costumam ser bivolt, mas vale conferir na etiqueta.</div>
   </section>'''

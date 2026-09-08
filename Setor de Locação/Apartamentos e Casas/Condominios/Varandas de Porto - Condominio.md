@@ -123,11 +123,13 @@ Caminho usado:
 | Item | Valor |
 |---|---|
 | Retirada da chave | **Na portaria** |
-| Wi-Fi | **Senha entregue na portaria** — não há rede/senha por unidade impressa no manual |
+| Wi-Fi | Rede **Varandas de Porto**, senha **Bemvindo2026** (Mateus, 08/09/2026) — **uma rede para o condomínio inteiro**, igual nas sete unidades |
 | Voltagem | **220V** |
 | Devolução da chave no check-out | **Na portaria** |
 
-> Isso simplifica bastante os outros seis manuais: como o Wi-Fi é resolvido na portaria, **não é preciso levantar rede e senha unidade por unidade** — diferente do Mont Carmelo, onde cada apartamento tem a sua.
+> **Uma rede só para o condomínio todo** — diferente do Mont Carmelo, onde cada apartamento tem a sua (`APTO 6`, `Apto 9`...). Aqui rede e senha são as mesmas nas sete unidades, então uma troca de senha exige atualizar os sete manuais de uma vez.
+>
+> Como a rede cobre também a piscina e a área de churrasco, o manual menciona isso — é útil para quem quer ficar na área comum.
 
 ## ⬜ Ainda pendente
 | Item | |

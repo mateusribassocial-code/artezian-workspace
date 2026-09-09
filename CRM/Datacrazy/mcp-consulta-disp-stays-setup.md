@@ -55,10 +55,13 @@ Quando o período está indisponível — por ocupação real ou por `calculate-
 - **Automático (puxa ao vivo da API do Stays a cada chamada):** diária, disponibilidade real (`booking/reservations`), preço/taxas (`booking/calculate-price`), nome do imóvel e nº de quartos (`content/listings/{id}`). Mudar tarifa no painel do Stays já reflete na próxima pergunta do lead — não precisa mexer nesse bloco.
 - **Manual (hardcoded no bloco JS, não atualiza sozinho):**
   - `IMOVEIS` — mapa de apelido/nome digitado pelo lead → código do imóvel no Stays.
-  - `VIDEOS` — link de vídeo (Cloudinary) por código de imóvel.
-  - Precisa editar esse bloco sempre que um imóvel entrar/sair do catálogo, mudar de apelido, ou ganhar/trocar vídeo.
+  - Precisa editar esse bloco sempre que um imóvel entrar/sair do catálogo ou mudar de apelido.
 
-## Bloco JavaScript (versão atual — 2026-09-08)
+### Vídeo e fotos não saem daqui
+
+Este bloco responde **só** disponibilidade e preço. O envio de mídia é de outra automação, `midia-imovel.js` (fonte de dados `Api-request-1`), que grava `video_link` e `foto_1`..`foto_5`. Se a automação `MCP1-Stays` ainda tiver um bloco de Mensagem que envia `video_link`, ele precisa ser removido no painel do Datacrazy — este bloco não escreve mais nesse campo, então o que sobrasse ali seria um valor velho deixado pelo fluxo de mídia.
+
+## Bloco JavaScript (versão atual — 2026-09-09)
 
 ```js
 const IMOVEIS = {
@@ -75,24 +78,6 @@ const IMOVEIS = {
   "vp-07": "JR07J", "jr07j": "JR07J",
   "vp-08": "JR08J", "varandas 08": "JR08J", "jr08j": "JR08J",
   "vp-09": "JR09J", "varandas 09": "JR09J", "jr09j": "JR09J",
-};
-
-const V = "https://res.cloudinary.com/dwtylly4h/video/upload/";
-const VIDEOS = {
-  "DS03J": V+"v1782131150/DS03J.mp4_yjhh1w.mp4",
-  "DS04J": V+"v1782131320/DS04J_nymqap.mp4",
-  "DS05J": V+"v1782131463/DS05J.mp4_he2dn9.mp4",
-  "FL10J": V+"v1782131613/FL10J.mp4_qkygw7.mp4",
-  "GF02J": V+"v1782132258/GF02J_-_Casa_do_Tremura_yakxbl.mp4",
-  "GG08J": V+"v1782132227/GG08J_-_Casa_do_John_jtppev.mp4",
-  "HA03J": V+"v1782133893/HA03J.mp4_qy7e6t.mp4",
-  "JR01J": V+"v1782138866/JR01J_rybbdp.mp4",
-  "JR03J": V+"v1782131765/JR03.MP4_r5dbxm.mp4",
-  "JR04J": V+"v1782131837/JR04.MP4_hppquh.mp4",
-  "JR05J": V+"v1782133985/JR05.MP4_ndymhc.mp4",
-  "JR07J": V+"v1782131931/JR07.MP4_rtcrtr.mp4",
-  "JR08J": V+"v1782132012/JR08.MP4_i5wtp5.mp4",
-  "JR09J": V+"v1782131990/JR09.MP4_vskovc.mp4",
 };
 
 const BASE = "https://artezian.stays.net/external/v1";
@@ -186,13 +171,11 @@ const imovelId = resolveId(imovelRaw);
 const checkin  = normalizeData(checkinRaw);
 const checkout = normalizeData(checkoutRaw);
 const noites   = Math.round((new Date(checkout) - new Date(checkin)) / 86400000);
-const videoUrl = VIDEOS[imovelId] || "";
 
 // Datas inválidas iam virar URL quebrada (HTTP 400) ou noites <= 0 com diária
 // negativa. Barra antes de qualquer chamada.
 const DATA_OK = /^\d{4}-\d{2}-\d{2}$/;
 if (!DATA_OK.test(checkin) || !DATA_OK.test(checkout) || !(noites > 0)) {
-  await session.setAdditionalValue("video_link", "");
   await session.setAdditionalValue("resposta_stays",
     `Erro: datas inválidas (check-in "${checkinRaw}" → "${checkin}", check-out "${checkoutRaw}" → "${checkout}").`
   );
@@ -212,7 +195,6 @@ try {
   quartos = listing?._i_rooms ? `${listing._i_rooms} quartos` : "";
   idInterno = listing?._id || "";
 } catch (e) {
-  await session.setAdditionalValue("video_link", "");
   await session.setAdditionalValue("resposta_stays",
     `Erro ao consultar Stays (imóvel: "${imovelRaw}" → ${imovelId}): ${e.message}`
   );
@@ -222,7 +204,6 @@ try {
 // Sem o _id interno não dá pra cruzar com as reservas — e cotar sem cruzar é
 // exatamente o bug de "vaga que não existe". Aborta.
 if (!idInterno) {
-  await session.setAdditionalValue("video_link", "");
   await session.setAdditionalValue("resposta_stays",
     `Erro: não foi possível identificar o imóvel "${imovelRaw}" (${imovelId}) na Stays.`
   );
@@ -241,7 +222,6 @@ try {
     r => r._idlisting === idInterno && bloqueiaPeriodo(r, checkin, checkout)
   );
 } catch (e) {
-  await session.setAdditionalValue("video_link", "");
   await session.setAdditionalValue("resposta_stays",
     `Erro ao verificar disponibilidade (imóvel: "${imovelRaw}" → ${imovelId}, ${checkin} a ${checkout}): ${e.message}`
   );
@@ -249,7 +229,6 @@ try {
 }
 
 if (ocupado) {
-  await session.setAdditionalValue("video_link", "");
   await session.setAdditionalValue("resposta_stays", "Produto Indisponível");
   return;
 }
@@ -263,7 +242,6 @@ try {
     body: JSON.stringify({ listingIds: [imovelId], from: checkin, to: checkout, guests: hospedes })
   });
 } catch (e) {
-  await session.setAdditionalValue("video_link", "");
   await session.setAdditionalValue("resposta_stays",
     `Erro ao consultar Stays (imóvel: "${imovelRaw}" → ${imovelId}, ${checkin} a ${checkout}): ${e.message}`
   );
@@ -271,7 +249,6 @@ try {
 }
 
 if (!stays || !Array.isArray(stays) || stays.length === 0) {
-  await session.setAdditionalValue("video_link", "");
   await session.setAdditionalValue("resposta_stays", "Produto Indisponível");
   return;
 }
@@ -282,7 +259,6 @@ const fees   = item.fees || [];
 const taxas  = fees.reduce((s, f) => s + (f._mcval?.BRL || 0), 0);
 const diaria = noites > 0 ? Math.round((total - taxas) / noites) : 0;
 
-await session.setAdditionalValue("video_link", videoUrl);
 await session.setAdditionalValue("resposta_stays",
   `Imóvel: ${nome}${quartos ? ` · ${quartos}` : ""}\nCheck-in: ${checkin} → Check-out: ${checkout} (${noites} noites)\nHóspedes: ${hospedes}\nDiária: R$${diaria}\nTotal: R$${total}`
 );
@@ -295,6 +271,7 @@ await session.setAdditionalValue("resposta_stays",
 - **Nome de imóvel não reconhecido gera mensagem técnica.** Se o lead escreve um apelido fora do mapa `IMOVEIS`, o código cai no `content/listings/{nome}` → 404 → o lead recebe "Erro ao consultar Stays...". Falha fechada (não inventa vaga), mas a mensagem não é apresentável.
 
 ## Histórico de mudanças
+- **2026-09-09** — removidos do bloco o mapa `VIDEOS`, a constante `V` (base do Cloudinary), a variável `videoUrl` e as 8 gravações em `video_link`. A tool passou a responder exclusivamente disponibilidade e preço; mídia é responsabilidade do `midia-imovel.js`. Nenhuma mudança na lógica de disponibilidade — os 9 casos de teste ponta a ponta seguem passando.
 - **2026-09-08** — 3ª rodada de correção do bug de "vaga que não existe", depois que o problema continuou em produção. Quatro furos encontrados testando a API real:
   1. **Tipos de bloqueio faltando (causa principal).** A API aceita 6 tipos (`reserved, booked, contract, blocked, maintenance, canceled`) e o bloco só checava 3 — `contract` (temporada longa) e `maintenance` (manutenção) passavam batido e o imóvel era oferecido como vago. Mesma classe do bug de `blocked` corrigido em 23/08. Agora vão os 5 que ocupam; `canceled` segue de fora de propósito.
   2. **Truncagem sem paginação.** `limit=100` é o teto e a resposta corta em silêncio: a janela 01/09→31/12 tem 121 registros e voltava só 100, sumindo com o começo de setembro. Adicionada paginação por `skip`.

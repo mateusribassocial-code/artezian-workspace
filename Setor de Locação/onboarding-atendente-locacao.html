@@ -1,0 +1,698 @@
+<title>Guia do Fechamento Artezian</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --surface:#f7f5ef; --surface-2:#efe9dc; --ink:#2a2a2a; --muted:#6b665a; --line:#e6e0d2;
+  --gold:#c2a14e; --gold-ink:#8a6d22; --petrol:#264653; --on-petrol:#ffffff; --petrol-soft:#e7eff1;
+  --warn-bg:#fbf0d9; --warn-ink:#7a5410; --stop:#a63d2a; --stop-bg:#f9e9e4; --ok:#2f6b4f;
+  --sans:"Montserrat","Gotham","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#101a1d; --surface:#16242a; --surface-2:#1d2f36; --ink:#ebe7dd; --muted:#a39d8f; --line:#2a3b41;
+    --gold:#d2b465; --gold-ink:#dcc07a; --petrol:#3d7285; --on-petrol:#ffffff; --petrol-soft:#1b3139;
+    --warn-bg:#3a2e14; --warn-ink:#f0cf86; --stop:#e58b76; --stop-bg:#3a1f19; --ok:#7cc4a0;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101a1d; --surface:#16242a; --surface-2:#1d2f36; --ink:#ebe7dd; --muted:#a39d8f; --line:#2a3b41;
+  --gold:#d2b465; --gold-ink:#dcc07a; --petrol:#3d7285; --on-petrol:#ffffff; --petrol-soft:#1b3139;
+  --warn-bg:#3a2e14; --warn-ink:#f0cf86; --stop:#e58b76; --stop-bg:#3a1f19; --ok:#7cc4a0;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;margin:0;padding-inline:20px;padding-block:0 80px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.25}
+p{margin:0}
+code,.mono{font-family:var(--mono);font-size:.86em}
+a{color:var(--petrol)}
+:root[data-theme="dark"] a{color:var(--gold-ink)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) a{color:var(--gold-ink)}}
+a:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.layout{max-width:1080px;margin-inline:auto;display:grid;grid-template-columns:190px minmax(0,1fr);gap:56px}
+.toc{position:sticky;top:0;align-self:start;padding-block:40px;font-size:13px}
+.toc-brand{font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:var(--gold-ink);margin-bottom:20px}
+.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.toc a{display:block;padding:5px 0 5px 12px;border-left:2px solid var(--line);color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--ink);border-left-color:var(--gold)}
+main{max-width:740px;padding-block:40px 0;display:flex;flex-direction:column;gap:72px}
+
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink)}
+header.intro{display:flex;flex-direction:column;gap:18px;padding-bottom:8px}
+header.intro h1{font-size:clamp(28px,4.4vw,40px);font-weight:700;letter-spacing:-.01em}
+header.intro .lede{font-size:17px;max-width:62ch;color:var(--ink)}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-top:8px}
+.facts div{background:var(--bg);padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.facts dt{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.facts dd{margin:0;font-size:14px;font-weight:500}
+
+section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:16px}
+section > h2{font-size:24px;font-weight:700}
+.section-head{display:flex;flex-direction:column;gap:8px}
+.section-head p{color:var(--muted);max-width:62ch}
+h3{font-size:16px;font-weight:600}
+
+/* funil */
+.funnel{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.funnel li{background:var(--surface);padding:14px 12px;border-radius:4px;display:flex;flex-direction:column;gap:6px;font-size:13px;line-height:1.45}
+.funnel .stage{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.funnel strong{font-size:14px}
+.funnel li.you{background:var(--petrol);color:var(--on-petrol)}
+.funnel li.you .stage{color:var(--on-petrol);opacity:.75}
+.signal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.signal > div{display:flex;flex-direction:column;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:12px;background:var(--surface-2);padding:3px 8px;border-radius:3px;white-space:nowrap}
+
+/* mensagens */
+.msg{margin:0;background:var(--surface);border-radius:6px;padding:12px 16px 14px;display:flex;flex-direction:column;gap:6px;max-width:560px}
+.msg figcaption{font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:baseline}
+.msg figcaption code{color:var(--gold-ink);font-weight:500}
+.msg p{white-space:pre-line;font-size:14px}
+
+/* passos */
+.steps{list-style:none;margin:0;padding:0;counter-reset:step}
+.steps > li{counter-increment:step;display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;padding-block:24px;border-top:1px solid var(--line)}
+.steps > li:last-child{border-bottom:1px solid var(--line)}
+.steps > li::before{content:counter(step);font-family:var(--mono);font-size:22px;font-weight:500;color:var(--gold-ink);line-height:1.1}
+.step-body{display:flex;flex-direction:column;gap:12px;min-width:0}
+.step-body ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+.done{font-size:13px;color:var(--ok);font-weight:500}
+.done::before{content:"Pronto quando: ";font-weight:600}
+.why{font-size:13.5px;color:var(--muted);max-width:62ch}
+
+.badge{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:var(--warn-bg);color:var(--warn-ink);padding:1px 6px;border-radius:3px;vertical-align:1px;white-space:nowrap}
+
+/* tabelas */
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--surface);white-space:nowrap}
+td.code{font-family:var(--mono);font-size:12.5px;white-space:nowrap;color:var(--gold-ink)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.group-row td{background:var(--surface);font-size:12px;font-weight:600;color:var(--muted)}
+.yes{color:var(--ok);font-weight:600}
+.no{color:var(--stop);font-weight:600}
+.stays-fields td:first-child{font-weight:500;white-space:nowrap}
+
+/* linhas vermelhas */
+.redlines{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.redlines li{background:var(--bg);padding:14px 16px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.redlines strong{color:var(--stop)}
+.redlines span{color:var(--muted);font-size:13px}
+
+/* faq */
+.faq{display:flex;flex-direction:column}
+.faq details{border-top:1px solid var(--line)}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;padding:12px 0;display:flex;justify-content:space-between;gap:16px;align-items:baseline;list-style:none;font-weight:500}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .freq{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+.faq details > div{padding:0 0 16px;display:flex;flex-direction:column;gap:10px}
+
+.dates{display:flex;flex-wrap:wrap;gap:6px}
+.dates span{font-family:var(--mono);font-size:12px;border:1px solid var(--line);padding:4px 9px;border-radius:3px;font-variant-numeric:tabular-nums}
+.dates span b{font-family:var(--sans);font-weight:600;font-size:11px;color:var(--gold-ink);margin-left:6px}
+
+.sources{list-style:none;margin:0;padding:0;counter-reset:src;display:flex;flex-direction:column;gap:0}
+.sources li{counter-increment:src;display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;padding-block:12px;border-top:1px solid var(--line)}
+.sources li::before{content:counter(src);font-family:var(--mono);color:var(--gold-ink)}
+.sources li:last-child{border-bottom:1px solid var(--line)}
+.sources span{color:var(--muted);font-size:13.5px}
+
+.cadence{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.cadence > div{display:flex;flex-direction:column;gap:8px}
+.cadence .when{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--petrol);border-top:2px solid var(--petrol);padding-top:8px}
+:root[data-theme="dark"] .cadence .when{color:var(--gold-ink);border-top-color:var(--gold)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .cadence .when{color:var(--gold-ink);border-top-color:var(--gold)}}
+.cadence .msg p{font-size:13px}
+
+.tone{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.tone > div{display:flex;flex-direction:column;gap:8px}
+.tone .label-do{font-size:12px;font-weight:600;color:var(--ok)}
+.tone .label-dont{font-size:12px;font-weight:600;color:var(--stop)}
+.msg.dont{background:var(--stop-bg)}
+
+/* semana */
+.progress{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
+.bar{flex:1;height:6px;background:var(--surface-2);border-radius:3px;overflow:hidden;max-width:280px}
+.bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .25s}
+.week{display:flex;flex-direction:column;gap:22px}
+.day{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px}
+.day h3{font-size:13px;font-weight:600;color:var(--gold-ink);padding-top:2px}
+.day ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.day label{display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:14px}
+.day input{margin-top:5px;accent-color:var(--gold);width:15px;height:15px;flex:none}
+.day input:checked + span{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+
+.open{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.open li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px;padding-block:11px;border-top:1px solid var(--line);font-size:14px}
+.open li:last-child{border-bottom:1px solid var(--line)}
+.open li b{font-weight:600}
+.open li span{color:var(--muted);font-size:13.5px}
+
+footer{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+
+@media (max-width:960px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:0}
+  .toc{position:static;padding-block:24px 0;overflow-x:auto}
+  .toc ol{flex-direction:row;gap:0;white-space:nowrap}
+  .toc a{border-left:0;border-bottom:2px solid var(--line);padding:6px 12px}
+  main{padding-block:32px 0}
+}
+@media (max-width:640px){
+  .facts,.signal,.redlines,.cadence,.tone{grid-template-columns:minmax(0,1fr)}
+  .funnel{grid-template-columns:minmax(0,1fr)}
+  .day,.open li{grid-template-columns:minmax(0,1fr);gap:6px}
+  .steps > li{grid-template-columns:32px minmax(0,1fr);gap:10px}
+}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+
+<div class="layout">
+  <nav class="toc" aria-label="Seções">
+    <div class="toc-brand">Artezian · Locação</div>
+    <ol>
+      <li><a href="#funil">Onde você entra</a></li>
+      <li><a href="#fluxo">Fluxo da reserva</a></li>
+      <li><a href="#stays">Lançar na Stays</a></li>
+      <li><a href="#nunca">Linhas vermelhas</a></li>
+      <li><a href="#regras">Regras oficiais</a></li>
+      <li><a href="#duvidas">Dúvidas</a></li>
+      <li><a href="#imoveis">Cola por imóvel</a></li>
+      <li><a href="#followup">Follow-up e tom</a></li>
+      <li><a href="#semana">Primeira semana</a></li>
+      <li><a href="#aberto">Em definição</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="intro">
+      <span class="eyebrow">Onboarding · Atendimento de locação</span>
+      <h1>Do orçamento à reserva lançada</h1>
+      <p class="lede">A IA já descobriu as datas, apresentou os imóveis e mandou o preço. Você entra nesse ponto — o lead gostou do valor e quer reservar. Seu trabalho é coletar os dados, tirar as últimas dúvidas, fechar contrato e sinal, e deixar a reserva lançada na Stays sem nenhum campo faltando.</p>
+      <dl class="facts">
+        <div><dt>Você recebe</dt><dd>Lead com orçamento em mãos</dd></div>
+        <div><dt>Você entrega</dt><dd>Reserva na Stays + lead no Suporte</dd></div>
+        <div><dt>Ferramentas</dt><dd>Datacrazy · Stays · e-mail</dd></div>
+      </dl>
+    </header>
+
+    <!-- FUNIL -->
+    <section id="funil">
+      <div class="section-head">
+        <span class="eyebrow">Contexto</span>
+        <h2>Onde você entra no funil</h2>
+        <p>Toda conversa de locação chega pelo WhatsApp oficial e passa por dois agentes de IA antes de chegar em você.</p>
+      </div>
+      <ol class="funnel">
+        <li><span class="stage">Etapa 1</span><strong>Lead chega</strong>Instagram do João, site artezian.com.br ou anúncio.</li>
+        <li><span class="stage">Etapa 2 · IA</span><strong>Art Mendonça 2</strong>Pega datas e nº de hóspedes, apresenta 3 unidades.</li>
+        <li><span class="stage">Etapa 3 · IA</span><strong>Art Mendonça 3</strong>Consulta a Stays e manda o orçamento.</li>
+        <li class="you"><span class="stage">Etapa 4 · Você</span><strong>Fechamento</strong>Dados, dúvidas, contrato, sinal e lançamento.</li>
+        <li><span class="stage">Etapa 5</span><strong>Suporte</strong>WhatsApp de Suporte cuida da estadia.</li>
+      </ol>
+      <div class="signal">
+        <div>
+          <h3>Como você sabe que é a sua vez</h3>
+          <p>O lead aparece na etapa <b>Aguardando Atendimento</b> do Funil de Reservas, e a última mensagem da IA é:</p>
+          <figure class="msg"><figcaption>Art · transferência</figcaption><p>Deixa comigo ✅ vou chamar o atendente agora</p></figure>
+          <p class="why">Também caem com você: leads em <b>Sondagem</b> (“vou falar com o grupo”) e em <b>Em Atendimento</b> (dúvida que a IA não soube responder). Entre 20h e 07h a IA avisa que o atendimento volta às 09h — essa fila é a primeira coisa do dia.</p>
+        </div>
+        <div>
+          <h3>O que já vem preenchido no lead</h3>
+          <p>Leia antes de escrever. O lead já respondeu isso para a IA — perguntar de novo é o jeito mais rápido de parecer robô.</p>
+          <div class="chips">
+            <span class="chip">Data de Check-in</span>
+            <span class="chip">Data de Check-Out</span>
+            <span class="chip">Hospedes Total</span>
+            <span class="chip">Unidades Apresentadas</span>
+            <span class="chip">Unidade de Interesse</span>
+          </div>
+          <p class="why">Mais o histórico da conversa com o orçamento enviado. Os comentários do lead registram cada chamada da IA com data e hora.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLUXO -->
+    <section id="fluxo">
+      <div class="section-head">
+        <span class="eyebrow">O trabalho</span>
+        <h2>O fluxo da reserva, em ordem</h2>
+        <p>A ordem importa: vaga antes de dados, contrato antes de Pix, Pix na conta antes de “garantido”. Os códigos (<code>CF1</code>, <code>NG2</code>…) são os textos rápidos do Datacrazy — digite o código na caixa de mensagem para puxar o texto.</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <div class="step-body">
+            <h3>Assuma a conversa</h3>
+            <p>Leia o histórico e os campos do lead. Mova para <b>Em Atendimento</b> e se apresente já puxando o que ele escolheu — sem repetir pergunta.</p>
+            <figure class="msg"><figcaption>Apresentação</figcaption><p>Olá {Primeiro nome do lead}, tudo bem? Me chamo [SEU NOME], sou da equipe do João e vou cuidar da sua reserva a partir daqui 🤩</p></figure>
+            <p class="done">você sabe qual imóvel, datas, nº de pessoas e valor o lead recebeu.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <h3>Reconfirme vaga e valor na Stays</h3>
+            <p>O orçamento da IA pode ter horas ou dias. Abra o calendário do imóvel na Stays e confira se as datas continuam livres e se o valor bate. Se o preço da Stays for diferente do orçamento, vale o da Stays — avise o lead antes de seguir.</p>
+            <p class="why">A Stays alimenta Airbnb e site ao mesmo tempo. Uma data livre de manhã pode ser vendida em outro canal à tarde.</p>
+            <p class="done">datas livres no calendário e valor total conferido.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <h3>Confirme a vaga com o valor fechado</h3>
+            <p>Mande o resumo com total, sinal e saldo. O percentual de sinal muda por imóvel — está na <a href="#imoveis">cola por imóvel</a>.</p>
+            <figure class="msg"><figcaption><code>NG1</code> Orçamento enviado</figcaption><p>Fechei o orçamento aqui, {Primeiro nome do lead} ✅
+
+[IMÓVEL] — [CHECK-IN] a [CHECK-OUT]
+[N] noites · [N] pessoas
+
+Total: R$ [VALOR]
+• [30 ou 50]% no Pix pra garantir (contrato): R$ [ENTRADA]
+• Restante no check-in: R$ [SALDO]
+
+Posso segurar essas datas pra você?</p></figure>
+            <p class="done">o lead disse sim ao valor e à forma de pagamento.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <h3>Colete os dados do contrato</h3>
+            <figure class="msg"><figcaption><code>CF1</code> Vaga confirmada — próximos passos</figcaption><p>Vaga confirmada! 🤩
+
+Vou mandar os próximos passos:
+• Documento com foto
+• Comprovante de endereço (com CEP)
+• E-mail
+• Lista de hóspedes (só o nome, e avisa se tem criança)
+
+Assim que você mandar, eu já gero o contrato ✅</p></figure>
+            <p>Ao receber, confira quatro coisas antes de seguir:</p>
+            <ul>
+              <li>O responsável tem <b>18 anos ou mais</b> — é regra dos condomínios.</li>
+              <li>O nome do responsável é de quem vai <b>retirar a chave</b>: a portaria entrega mediante documento com foto, no nome da reserva.</li>
+              <li>Total de hóspedes, contando crianças, <b>não passa da capacidade</b>. Mont Carmelo e Varandas não têm berço.</li>
+              <li>Pet: só confirme se o imóvel está marcado como “sim” na cola.</li>
+            </ul>
+            <p class="done">documento, comprovante, e-mail e lista de hóspedes recebidos e conferidos.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <h3>Envie o contrato</h3>
+            <p>Gere o contrato de locação por temporada e envie por e-mail. <span class="badge">a confirmar</span> ferramenta e modelo usados para gerar o contrato.</p>
+            <figure class="msg"><figcaption><code>CF2</code> Dados recebidos → contrato a caminho</figcaption><p>Recebi tudo, {Primeiro nome do lead} ✅
+
+Tô gerando o contrato aqui e te mando por e-mail. Assim que você assinar, eu te passo a chave Pix da entrada.</p></figure>
+            <p class="why">A promessa ao lead é “contrato assinado antes de qualquer pagamento” — é o que responde a desconfiança de golpe. O prazo de 72h para desistência com reembolso integral começa na assinatura.</p>
+            <p class="done">contrato assinado pelo lead.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <h3>Receba o sinal</h3>
+            <figure class="msg"><figcaption><code>CF3</code> Chave Pix + prazo</figcaption><p>Contrato assinado ✅ Agora é só a entrada pra fechar tudo.
+
+Entrada: R$ [VALOR]
+Chave Pix: [CHAVE]
+Titular: [NOME DO TITULAR]
+
+Me manda o comprovante aqui quando fizer. As datas ficam garantidas assim que cair ☀️</p></figure>
+            <p>Comprovante não é pagamento. Só mande <code>CF4</code> (“Caiu aqui! Reserva garantida”) depois de ver o valor na conta. <span class="badge">a confirmar</span> chave Pix, titular e quem confere o extrato.</p>
+            <p class="done">valor do sinal confirmado na conta e <code>CF4</code> enviado.</p>
+          </div>
+        </li>
+        <li id="stays">
+          <div class="step-body">
+            <h3>Lance a reserva na Stays</h3>
+            <p>A integração da Stays com o Datacrazy é só de leitura — a reserva é criada à mão no painel <code>artezian.stays.net</code>. O caminho de cliques você aprende no dia 2, lançando uma reserva real junto com o Mateus. O que não pode faltar:</p>
+            <div class="table-scroll">
+              <table class="stays-fields">
+                <thead><tr><th>Campo</th><th>O que preencher</th></tr></thead>
+                <tbody>
+                  <tr><td>Imóvel</td><td>Pelo código — <code>DS03J</code>, <code>JR05J</code>… Nas Varandas, o nome comercial é diferente do número da porta.</td></tr>
+                  <tr><td>Datas</td><td>Check-in e check-out exatamente como no contrato.</td></tr>
+                  <tr><td>Hóspedes</td><td>Total, separando adultos e crianças.</td></tr>
+                  <tr><td>Titular</td><td>Nome completo, CPF, e-mail e WhatsApp do responsável.</td></tr>
+                  <tr><td>Valores</td><td>Total com taxa de limpeza, sinal pago (com data) e saldo.</td></tr>
+                  <tr><td>Pagamento</td><td>Forma (Pix à vista, Pix com sinal, cartão) e quando o saldo é pago.</td></tr>
+                  <tr><td>Origem</td><td>Direto — WhatsApp.</td></tr>
+                  <tr><td>Nota interna</td><td>Nome do lead no Datacrazy, pet, horário previsto de chegada, qualquer combinado fora do padrão.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p><b>Status.</b> A Stays tem pré-reserva e reserva confirmada, e as duas bloqueiam o calendário em todos os canais. Regra proposta: lançar como pré-reserva quando o contrato sai, e confirmar quando o sinal cair. <span class="badge">a confirmar</span> essa regra e o prazo da pré-reserva.</p>
+            <p class="why">Imóveis fora da Stays (Laureana, Moana, Euller, Isa, Jessilene, Condomínio do Max) são registrados no painel de Gestão de Hospedagens. Se chegar um lead para um deles, chame o Mateus antes de confirmar qualquer coisa.</p>
+            <p class="done">a reserva aparece no calendário da Stays com todos os campos acima.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <h3>Feche no CRM e passe para o Suporte</h3>
+            <p>Deixe um comentário no lead no padrão das automações — <code>[data] Reserva lançada na Stays — imóvel, datas, total, sinal, saldo</code> — mova a etapa <span class="badge">a confirmar</span> e envie o lead para o WhatsApp de Suporte.</p>
+            <figure class="msg"><figcaption><code>PV1</code> Transferência pro suporte</figcaption><p>Prontinho {Primeiro nome do lead}, agora todo o nosso contato vai ficar no *WhatsApp de Suporte* 📲
+
+Pode me mandar um "oi" lá? https://wa.me/5573999883075</p></figure>
+            <p class="done">comentário registrado, etapa movida e lead no Suporte.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- LINHAS VERMELHAS -->
+    <section id="nunca">
+      <div class="section-head">
+        <span class="eyebrow">Sem exceção</span>
+        <h2>Linhas vermelhas</h2>
+        <p>Cada uma já custou reserva, dinheiro ou avaliação em algum lugar. Na dúvida: “deixa eu confirmar e já te volto”.</p>
+      </div>
+      <ul class="redlines">
+        <li><strong>Confirmar vaga sem olhar a Stays</strong><span>Nem se a IA mandou o orçamento há 10 minutos.</span></li>
+        <li><strong>Dizer “caiu” pelo comprovante</strong><span>Garantido é quando o valor está na conta.</span></li>
+        <li><strong>Mandar Pix antes do contrato assinado</strong><span>A ordem é a nossa prova de que não é golpe.</span></li>
+        <li><strong>Passar da capacidade</strong><span>Nem “só uma criança a mais”. É regra de segurança e de condomínio.</span></li>
+        <li><strong>Garantir entrada cedo ou saída tarde</strong><span>Depende da reserva vizinha. Pode tentar, nunca prometer.</span></li>
+        <li><strong>Dar desconto além dos 5% do Pix</strong><span>Objeção de preço se resolve com alternativa (<code>NG8</code>), não com desconto.</span></li>
+        <li><strong>Inventar resposta</strong><span>Se não está neste guia nem na base, pergunte ao Mateus.</span></li>
+        <li><strong>Deixar a conversa morrer</strong><span>Toda conversa sem resposta ganha follow-up agendado.</span></li>
+      </ul>
+    </section>
+
+    <!-- REGRAS -->
+    <section id="regras">
+      <div class="section-head">
+        <span class="eyebrow">Decididas em 05/09/2026</span>
+        <h2>Regras oficiais</h2>
+        <p>Se algum material antigo disser diferente, vale esta tabela.</p>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Assunto</th><th>Regra</th></tr></thead>
+          <tbody>
+            <tr><td>Mínimo de diárias</td><td>3 em datas normais · 5 em feriados</td></tr>
+            <tr><td>Check-in / check-out</td><td>A partir das 15h · até as 12h. Exceções na cola por imóvel.</td></tr>
+            <tr><td>Desconto</td><td>5% no Pix à vista. Não existe outro.</td></tr>
+            <tr><td>Sinal</td><td>30% ou 50% via Pix, conforme o imóvel. Saldo no check-in. <span class="badge">a confirmar</span> parcelar o saldo em até 3x antes do check-in</td></tr>
+            <tr><td>Cartão</td><td>A equipe pratica até 12x com juros da máquina; a IA fala até 6x com 13%. <span class="badge">a confirmar</span></td></tr>
+            <tr><td>Cancelamento</td><td>Até 72h após assinar: reembolso integral · de 72h até 30 dias antes do check-in: retém 15% e devolve o resto em até 5 dias úteis · menos de 30 dias: sem reembolso · no-show: sem reembolso</td></tr>
+            <tr><td>Taxa de limpeza</td><td>R$ 150 (1 quarto) · R$ 200 (2 quartos ou mais) · casas têm valor próprio</td></tr>
+            <tr><td>Festas e eventos</td><td>Proibidos. Churrasco e reunião de família, sim.</td></tr>
+            <tr><td>Café da manhã</td><td>Não tem. Todos têm cozinha completa.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="section-head">
+        <h3>Feriados e alta até o Carnaval — mínimo de 5 diárias</h3>
+      </div>
+      <div class="dates">
+        <span>01/10–31/10<b>alta +30%</b></span>
+        <span>10/10–18/10</span>
+        <span>31/10–03/11</span>
+        <span>14/11–16/11</span>
+        <span>19/11–22/11</span>
+        <span>22/12–26/12<b>Natal</b></span>
+        <span>27/12–04/01<b>Réveillon</b></span>
+        <span>04/01–31/01/27<b>alta</b></span>
+        <span>05/02–09/02/27<b>Carnaval</b></span>
+        <span>09/02–14/02/27<b>Carnaporto</b></span>
+      </div>
+    </section>
+
+    <!-- DÚVIDAS -->
+    <section id="duvidas">
+      <div class="section-head">
+        <span class="eyebrow">Por frequência real</span>
+        <h2>As dúvidas que mais aparecem</h2>
+        <p>Contagem sobre 1.261 mensagens escritas por leads entre fevereiro e julho de 2026. Wi-fi, ar e piscina quase não aparecem; preço, localização e fotos somam 52 menções.</p>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>“Quanto fica no total?” <span class="freq">28 menções</span></summary>
+          <div>
+            <p>Nessa fase o lead já tem orçamento — ele quer o número fechado com taxas. Responda com <code>NG1</code>: total, sinal e saldo, sempre conferidos na Stays.</p>
+          </div>
+        </details>
+        <details>
+          <summary>“Fica perto da praia?” <span class="freq">15 menções</span></summary>
+          <div>
+            <figure class="msg"><figcaption><code>DV2</code> preencha distância e referência</figcaption><p>Fica sim! O [IMÓVEL] tá a [DISTÂNCIA] da praia de [PRAIA] 🏖️
+
+[REFERÊNCIA]</p></figure>
+            <p class="why">Medidas já levantadas: Mont Carmelo a 412 m da praia de Taperapuã (6 min a pé), Axé Moi a 452 m. Varandas de Porto a 392 m da praia (6 min), mercado BigStop a 79 m — mas Axé Moi e Tôa Tôa pedem carro.</p>
+          </div>
+        </details>
+        <details>
+          <summary>“Manda mais fotos?” <span class="freq">9 menções</span></summary>
+          <div>
+            <figure class="msg"><figcaption><code>DV3</code> cole o link do imóvel</figcaption><p>Claro, {Primeiro nome do lead}! Aqui tem vídeo e todas as fotos do [IMÓVEL] 👇
+
+artezian.com.br/pt/apartment/[CÓDIGO]
+
+Se quiser ver algum cômodo específico me fala que eu mando ☀️</p></figure>
+          </div>
+        </details>
+        <details>
+          <summary>“Como funciona o pagamento?” <span class="freq">8 menções</span></summary>
+          <div>
+            <p>Use <code>DV4</code>. Se perguntar de desconto, <code>DV5</code>; juros no cartão, <code>DV6</code>. Enquanto a regra do cartão não fecha, fale o que está no texto rápido e, se o lead citar “6x com 13%”, chame o Mateus.</p>
+          </div>
+        </details>
+        <details>
+          <summary>“Aceita pet?” <span class="freq">5 menções</span></summary>
+          <div>
+            <p>Só diga sim onde a cola marca <span class="yes">sim</span>. Onde marca “confirmar”, responda “deixa eu confirmar com o proprietário” e pergunte ao Mateus. As fichas dos condomínios e a base de conhecimento ainda discordam em alguns imóveis.</p>
+          </div>
+        </details>
+        <details>
+          <summary>“Como sei que vocês são de confiança?” <span class="freq">1 menção — rara, mas fatal</span></summary>
+          <div>
+            <figure class="msg"><figcaption><code>DV13</code></figcaption><p>Pergunta justa, {Primeiro nome do lead} — e boa que você perguntou 👊
+
+Somos a Artezian, gestora de temporada aqui de Porto Seguro. Superhost com nota 4.9, o João tem 95 mil seguidores no @ojoaomendonca e a gente faz contrato de locação por temporada em todas as reservas — assinado antes de qualquer pagamento.
+
+Site: artezian.com.br</p></figure>
+          </div>
+        </details>
+        <details>
+          <summary>“Posso cancelar?”</summary>
+          <div><p>Use <code>DV15</code> — as quatro regras do contrato, na tabela de regras oficiais. Mudança de data depende de disponibilidade; quanto antes o lead avisar, melhor.</p></div>
+        </details>
+        <details>
+          <summary>“Posso chegar mais cedo / sair mais tarde?”</summary>
+          <div><p>Use <code>DV12</code>. A gente tenta, mas depende da reserva anterior ou seguinte — nunca garantir antes.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <!-- IMÓVEIS -->
+    <section id="imoveis">
+      <div class="section-head">
+        <span class="eyebrow">Catálogo ativo na Stays</span>
+        <h2>Cola por imóvel</h2>
+        <p>O que muda de um imóvel para outro na hora de fechar. “Confirmar” quer dizer que os materiais discordam — pergunte antes de responder ao lead.</p>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Código</th><th>Imóvel</th><th>Cap.</th><th>Sinal</th><th>Chegada e chave</th><th>Pet</th></tr></thead>
+          <tbody>
+            <tr class="group-row"><td colspan="6">Residencial Mont Carmelo · Taperapuã · portaria 24h · check-in 15h–22h · roupa de cama e toalhas inclusas</td></tr>
+            <tr><td class="code">DS03J</td><td>Studio do João</td><td class="num">5</td><td class="num">50%</td><td>Chave na portaria</td><td class="yes">sim, pequeno</td></tr>
+            <tr><td class="code">DS04J</td><td>Flat da Mari</td><td class="num">5</td><td class="num">30%</td><td>Chave na portaria · térreo</td><td>confirmar</td></tr>
+            <tr><td class="code">DS05J</td><td>Apto do Emanoel</td><td class="num">8</td><td class="num">50%</td><td>Chave na portaria · quarto no térreo</td><td>confirmar</td></tr>
+            <tr class="group-row"><td colspan="6">Varandas de Porto · Taperapuã · check-in 14h–22h · chave na portaria · roupa de cama inclusa · sem berço</td></tr>
+            <tr><td class="code">JR01J</td><td>Studio 01</td><td class="num">3</td><td class="num">confirmar</td><td>Portaria</td><td class="no">não</td></tr>
+            <tr><td class="code">JR03J</td><td>Studio 03</td><td class="num">4</td><td class="num">confirmar</td><td>Portaria</td><td class="no">não</td></tr>
+            <tr><td class="code">JR04J</td><td>Studio 04</td><td class="num">3 · confirmar</td><td class="num">confirmar</td><td>Portaria</td><td class="no">não</td></tr>
+            <tr><td class="code">JR05J</td><td>Porta 05 · “Varandas 01”</td><td class="num">5 · confirmar</td><td class="num">confirmar</td><td>Portaria</td><td class="no">não</td></tr>
+            <tr><td class="code">JR07J</td><td>Porta 07 · “Varandas 03”</td><td class="num">5 · confirmar</td><td class="num">confirmar</td><td>Portaria</td><td class="no">não</td></tr>
+            <tr><td class="code">JR08J</td><td>Porta 08 · “Varandas 04”</td><td class="num">6 · confirmar</td><td class="num">confirmar</td><td>Portaria</td><td class="no">não</td></tr>
+            <tr><td class="code">JR09J</td><td>Apto 09</td><td class="num">8</td><td class="num">confirmar</td><td>Escada externa — não serve para cadeirante</td><td class="no">não</td></tr>
+            <tr class="group-row"><td colspan="6">Apartamentos avulsos</td></tr>
+            <tr><td class="code">FL10J</td><td>Apto do Reinaldo · Moradas de Israel, Taperapuã</td><td class="num">10 ou 11 · confirmar</td><td class="num">30%</td><td>Portaria 24h, chave com documento do responsável</td><td>confirmar</td></tr>
+            <tr><td class="code">GC01J</td><td>Apto do Reinaldo · Jerusalém II, Coroa Vermelha</td><td class="num">10 a 12 · confirmar</td><td class="num">50%</td><td>Portaria 24h, check-in 15h–22h</td><td>confirmar</td></tr>
+            <tr><td class="code">HA03J</td><td>Flat da Joyce · Taperapuã</td><td class="num">8</td><td class="num">30%</td><td>Sem portaria: campainha eletrônica, a partir das 14h. Chegada após 22h precisa ser avisada.</td><td class="no">não</td></tr>
+            <tr class="group-row"><td colspan="6">Casas · aparecem como ocultas na Stays — confirmar se estão à venda</td></tr>
+            <tr><td class="code">GF02J</td><td>Casa do Tremura · Taperapuã</td><td class="num">25</td><td class="num">30%</td><td>O proprietário entrega a chave: horário de chegada e saída combinado antes</td><td class="yes">sim</td></tr>
+            <tr><td class="code">GG08J</td><td>Casa do John · Porto Seguro</td><td class="num">25 ou 31 · confirmar</td><td class="num">30%</td><td>O caseiro mora na casa e recebe o grupo, 15h–22h</td><td class="yes">sim</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="why">Todos os imóveis mapeados são 220V — vale avisar lead de BH e ES, onde o padrão é 127V. Detalhes de cada unidade estão nos arquivos Operacional e Condomínio da pasta do Setor de Locação.</p>
+    </section>
+
+    <!-- FONTES -->
+    <section id="fontes">
+      <div class="section-head">
+        <span class="eyebrow">Quando duas fontes discordam</span>
+        <h2>Qual informação vale</h2>
+      </div>
+      <ol class="sources">
+        <li><div><b>Stays</b><br><span>Preço e disponibilidade. Manda sobre qualquer tabela, orçamento da IA ou material impresso.</span></div></li>
+        <li><div><b>Regras oficiais deste guia</b><br><span>Desconto, mínimo de diárias, cancelamento — decididas em 05/09/2026.</span></div></li>
+        <li><div><b>Operacional e Condomínio de cada imóvel</b><br><span>Chave, portaria, horários, pet, voltagem. Confirmados com o Mateus em setembro de 2026.</span></div></li>
+        <li><div><b>Base de conhecimento da IA e textos rápidos</b><br><span>Respostas prontas e descrição dos imóveis. Parte está desatualizada — se conflitar com os itens acima, perca para eles.</span></div></li>
+      </ol>
+    </section>
+
+    <!-- FOLLOW-UP E TOM -->
+    <section id="followup">
+      <div class="section-head">
+        <span class="eyebrow">Onde a receita escapa</span>
+        <h2>Follow-up e tom de voz</h2>
+        <p>De 1.725 conversas analisadas, 85% terminaram com a gente falando por último — o lead sumiu e ninguém voltou. O gargalo não é responder dúvida, é retomar e fechar.</p>
+      </div>
+      <div class="cadence">
+        <div>
+          <span class="when">24h sem resposta</span>
+          <figure class="msg"><figcaption><code>NG4</code></figcaption><p>{Primeiro nome do lead}, e aí — o que achou das opções? ☀️
+
+Se ficou alguma dúvida ou se você quer que eu procure outra coisa, me fala que eu ajusto.</p></figure>
+        </div>
+        <div>
+          <span class="when">3 dias</span>
+          <figure class="msg"><figcaption><code>NG5</code></figcaption><p>Oi {Primeiro nome do lead}! Ainda tô com essas datas separadas aqui pra você 👀
+
+Mas nessa época elas costumam sair rápido. Segue de pé ou prefere que eu libere?</p></figure>
+        </div>
+        <div>
+          <span class="when">Última tentativa</span>
+          <figure class="msg"><figcaption><code>NG6</code></figcaption><p>{Primeiro nome do lead}, vou parar de te encher 😄
+
+Se mudar de ideia ou quiser pra outra data, é só me chamar aqui que eu monto tudo de novo. Fica à vontade 💙</p></figure>
+        </div>
+      </div>
+      <p class="why">“Vou falar com o grupo” → <code>NG7</code>, que manda o resumo pronto para ser encaminhado. “Ficou caro” → <code>NG8</code>, que oferece outro imóvel, uma noite a menos ou outra data.</p>
+
+      <div class="section-head">
+        <h3>Como a Artezian soa no WhatsApp</h3>
+        <p>Parceiro que resolve, não vendedor. Frases de 1 a 3 linhas, primeiro nome do lead, “vc” e “tá” naturais. Emojis da casa: ☀️ 💙 ✅ 🤩. Se o texto ficou longo, quebre em duas mensagens.</p>
+      </div>
+      <div class="tone">
+        <div>
+          <span class="label-do">Assim</span>
+          <figure class="msg"><figcaption>Confirmação</figcaption><p>Confirmado, temos vaga! ✅
+
+Me manda seu e-mail que eu já te envio o contrato.</p></figure>
+        </div>
+        <div>
+          <span class="label-dont">Assim não</span>
+          <figure class="msg dont"><figcaption>Confirmação</figcaption><p>Prezado cliente, gostaria de informar que a unidade encontra-se disponível para o período solicitado. Solicitamos o envio do seu endereço eletrônico para prosseguirmos.</p></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEMANA -->
+    <section id="semana">
+      <div class="section-head">
+        <span class="eyebrow">Trilha de entrada</span>
+        <h2>Primeira semana</h2>
+        <p>Marque conforme avança. O progresso fica salvo neste navegador.</p>
+        <div class="progress"><div class="bar"><i id="bar-fill"></i></div><span id="bar-label">0 de 0</span></div>
+      </div>
+      <div class="week">
+        <div class="day">
+          <h3>Antes do dia 1</h3>
+          <ul>
+            <li><label><input type="checkbox" id="w-acesso-datacrazy"><span>Usuário no Datacrazy com acesso à instância WhatsApp – Locação – API Oficial</span></label></li>
+            <li><label><input type="checkbox" id="w-acesso-stays"><span>Usuário no painel artezian.stays.net com permissão para criar reserva</span></label></li>
+            <li><label><input type="checkbox" id="w-acesso-email"><span>E-mail de envio de contratos configurado</span></label></li>
+            <li><label><input type="checkbox" id="w-acesso-suporte"><span>Número do WhatsApp de Suporte salvo e testado</span></label></li>
+          </ul>
+        </div>
+        <div class="day">
+          <h3>Dia 1 · Ler</h3>
+          <ul>
+            <li><label><input type="checkbox" id="w-d1-guia"><span>Ler este guia inteiro</span></label></li>
+            <li><label><input type="checkbox" id="w-d1-textos"><span>Abrir os textos rápidos no Datacrazy e testar os códigos NG, CF e DV</span></label></li>
+            <li><label><input type="checkbox" id="w-d1-conversas"><span>Ler 10 conversas que viraram reserva e 5 que morreram depois do orçamento</span></label></li>
+          </ul>
+        </div>
+        <div class="day">
+          <h3>Dia 2 · Acompanhar</h3>
+          <ul>
+            <li><label><input type="checkbox" id="w-d2-stays"><span>Lançar uma reserva real na Stays ao lado do Mateus e anotar o caminho de cliques</span></label></li>
+            <li><label><input type="checkbox" id="w-d2-contrato"><span>Gerar e enviar um contrato acompanhado</span></label></li>
+            <li><label><input type="checkbox" id="w-d2-calendario"><span>Conferir disponibilidade de 3 imóveis direto no calendário da Stays</span></label></li>
+          </ul>
+        </div>
+        <div class="day">
+          <h3>Dia 3 · Simular</h3>
+          <ul>
+            <li><label><input type="checkbox" id="w-d3-pet"><span>Lead pede para levar cachorro no Flat da Mari</span></label></li>
+            <li><label><input type="checkbox" id="w-d3-grupo"><span>Grupo de 12 pessoas quer o FL10J</span></label></li>
+            <li><label><input type="checkbox" id="w-d3-cartao"><span>Lead quer parcelar tudo no cartão</span></label></li>
+            <li><label><input type="checkbox" id="w-d3-comprovante"><span>Lead manda comprovante de Pix que ainda não caiu</span></label></li>
+            <li><label><input type="checkbox" id="w-d3-sumiu"><span>Lead some depois de receber o contrato</span></label></li>
+          </ul>
+        </div>
+        <div class="day">
+          <h3>Dia 4 · Com revisão</h3>
+          <ul>
+            <li><label><input type="checkbox" id="w-d4-revisao"><span>Atender a fila; o Mateus revisa antes de enviar contrato e antes de lançar na Stays</span></label></li>
+          </ul>
+        </div>
+        <div class="day">
+          <h3>Dia 5 · Sozinho</h3>
+          <ul>
+            <li><label><input type="checkbox" id="w-d5-autonomo"><span>Atender a fila do começo ao fim</span></label></li>
+            <li><label><input type="checkbox" id="w-d5-conferencia"><span>No fim do dia, conferir cada reserva do dia: Stays × Datacrazy × contrato</span></label></li>
+            <li><label><input type="checkbox" id="w-d5-meta"><span>Checkpoint da semana: nenhuma reserva lançada com campo faltando</span></label></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EM DEFINIÇÃO -->
+    <section id="aberto">
+      <div class="section-head">
+        <span class="eyebrow">Ainda sem regra fechada</span>
+        <h2>Em definição</h2>
+        <p>Até virar regra, esses pontos não se improvisam — pergunte ao Mateus.</p>
+      </div>
+      <ul class="open">
+        <li><b>Parcelamento no cartão</b><span>12x com juros da máquina (equipe) ou 6x com 13% (IA).</span></li>
+        <li><b>Saldo da reserva</b><span>Pago no check-in, ou em até 3x quitado antes do check-in.</span></li>
+        <li><b>Contrato e Pix</b><span>Ferramenta que gera o contrato, chave Pix, titular e quem confere o extrato.</span></li>
+        <li><b>Pré-reserva na Stays</b><span>Lançar ao enviar o contrato? Com quanto tempo de validade?</span></li>
+        <li><b>Pet</b><span>DS04J, DS05J, FL10J e GC01J: base de conhecimento diz não, ficha do condomínio diz sim.</span></li>
+        <li><b>Capacidade</b><span>FL10J, GC01J, Casa do John e as unidades JR04J a JR08J têm números divergentes.</span></li>
+        <li><b>Sinal nas Varandas de Porto</b><span>30% ou 50%.</span></li>
+        <li><b>Casas ocultas e imóveis fora da Stays</b><span>Tremura e John aparecem ocultas; Laureana, Moana, Euller, Isa, Jessilene e Max saíram do catálogo. Estão à venda?</span></li>
+        <li><b>Rotina</b><span>Horário de trabalho, tempo máximo de resposta e etapa final do lead no Datacrazy.</span></li>
+      </ul>
+    </section>
+
+    <footer>Artezian Real Estate Atelie · Setor de Locação · versão de 11/09/2026. Fontes: base de conhecimento do Art, textos rápidos de locação, fichas operacionais e de condomínio, integração Datacrazy × Stays.</footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var KEY = 'artezian-onboarding-semana';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.week input[type="checkbox"]'));
+  var fill = document.getElementById('bar-fill');
+  var label = document.getElementById('bar-label');
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { saved = {}; }
+  function render(){
+    var done = boxes.filter(function(b){ return b.checked; }).length;
+    fill.style.width = (boxes.length ? (done / boxes.length) * 100 : 0) + '%';
+    label.textContent = done + ' de ' + boxes.length;
+  }
+  boxes.forEach(function(b){
+    if (saved[b.id]) b.checked = true;
+    b.addEventListener('change', function(){
+      saved[b.id] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+      render();
+    });
+  });
+  render();
+})();
+</script>

@@ -7,22 +7,32 @@
 // refazendo a busca de ocupação da conta inteira. Em janela de Réveillon isso
 // estourava o timeout do agente ("a busca demorou mais que o esperado").
 // Aqui a ocupação é buscada UMA vez e reaproveitada pra todos os imóveis.
+//
+// Pré-requisito: campos adicionais `resposta_stays` e `erro_stays` (escopo
+// Conversa). `resposta_stays` vai pro lead; `erro_stays` guarda o detalhe
+// técnico da última falha e nunca é enviado.
 
-const IMOVEIS = {
-  "studio joão": "DS03J", "studio do joão": "DS03J", "ds03j": "DS03J",
-  "flat da mari": "DS04J", "flat mari": "DS04J", "ds04j": "DS04J",
-  "apartamento emanoel": "DS05J", "apto emanoel": "DS05J", "ds05j": "DS05J",
-  "apto do reinaldo mi": "FL10J", "apto reinaldo": "FL10J", "fl10j": "FL10J",
-  "apartamento do reinaldo ji": "GC01J", "gc01j": "GC01J",
-  "flat da joyce": "HA03J", "flat joyce": "HA03J", "ha03j": "HA03J",
-  "casa do tremura": "GF02J", "casa tremura": "GF02J", "gf02j": "GF02J",
-  "casa do john": "GG08J", "casa john": "GG08J", "gg08j": "GG08J",
-  "vp-01": "JR01J", "jr01j": "JR01J", "vp-03": "JR03J", "jr03j": "JR03J",
-  "vp-04": "JR04J", "jr04j": "JR04J", "vp-05": "JR05J", "jr05j": "JR05J",
-  "vp-07": "JR07J", "jr07j": "JR07J",
-  "vp-08": "JR08J", "varandas 08": "JR08J", "jr08j": "JR08J",
-  "vp-09": "JR09J", "varandas 09": "JR09J", "jr09j": "JR09J",
-};
+// Códigos da Stays que podem ser cotados. Código fora desta lista não é cotado
+// — JR02J e JR06J ficam de fora por estarem "hidden" na Stays.
+const CODIGOS = [
+  "DS03J", "DS04J", "DS05J", "FL10J", "GC01J", "HA03J", "GF02J", "GG08J",
+  "JR01J", "JR03J", "JR04J", "JR05J", "JR07J", "JR08J", "JR09J",
+];
+
+// Apelido -> código, comparado por trecho de palavras inteiras no nome já
+// normalizado (sem acento, sem pontuação). Vale o primeiro que aparecer, por
+// isso os dois apartamentos do Reinaldo só resolvem com o local junto:
+// "Apartamento do Reinaldo" sozinho é ambíguo e não é cotado.
+const APELIDOS = [
+  ["reinaldo coroa", "GC01J"], ["reinaldo ji", "GC01J"],
+  ["reinaldo taperapua", "FL10J"], ["reinaldo mi", "FL10J"],
+  ["studio do joao", "DS03J"], ["studio joao", "DS03J"],
+  ["flat da mari", "DS04J"], ["flat mari", "DS04J"],
+  ["emanoel", "DS05J"],
+  ["joyce", "HA03J"],
+  ["tremura", "GF02J"],
+  ["john", "GG08J"],
+];
 
 const BASE = "https://artezian.stays.net/external/v1";
 const AUTH = "Basic NWI1YmU2NTY6ZmU0OGU3MzA=";
@@ -40,9 +50,47 @@ const MARGEM_DIAS = 3;
 // calculate-price); o teto existe pra não voltar ao timeout.
 const MAX_IMOVEIS = 5;
 
+// O que o lead recebe em qualquer falha técnica. O detalhe vai pra `erro_stays`
+// — erro cru da API (JSON, HTTP 400) nunca chega no WhatsApp.
+const MSG_FALHA = "Não consegui puxar os valores dessas datas agora. Alguém da equipe vai te passar a cotação por aqui 💙";
+
+// Troca acento manualmente: String.normalize depende de ICU, que o sandbox
+// pode não ter.
+function normalizar(s) {
+  return String(s || "")
+    .toLowerCase()
+    .replace(/[áàâãä]/g, "a").replace(/[éèêë]/g, "e").replace(/[íìîï]/g, "i")
+    .replace(/[óòôõö]/g, "o").replace(/[úùûü]/g, "u").replace(/ç/g, "c")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+// Devolve o código da Stays ou "" se não reconhecer. Nunca devolve o texto cru:
+// a API só aceita código e responde 400 pra qualquer outra coisa.
 function resolveId(nome) {
-  const chave = String(nome || "").toLowerCase().trim();
-  return IMOVEIS[chave] || String(nome || "").trim();
+  const texto = normalizar(nome);
+  if (!texto) return "";
+
+  // 1) Código escrito direto: "DS03J", "jr05j".
+  const codigos = texto.toUpperCase().match(/\b[A-Z]{2}\d{2}[A-Z]\b/g) || [];
+  for (const c of codigos) {
+    if (CODIGOS.indexOf(c) !== -1) return c;
+  }
+
+  // 2) Varandas de Porto, como a base do agente escreve: "VP-05 (AP05)",
+  // "AP05", "vp 5", "Varandas de Porto 05".
+  const vp = texto.match(/\b(?:vp|ap|varandas(?: de porto)?)\s*(\d{1,2})\b/);
+  if (vp) {
+    const c = `JR${("0" + vp[1]).slice(-2)}J`;
+    return CODIGOS.indexOf(c) !== -1 ? c : "";
+  }
+
+  // 3) Apelidos.
+  const alvo = ` ${texto} `;
+  for (const [apelido, codigo] of APELIDOS) {
+    if (alvo.indexOf(` ${apelido} `) !== -1) return codigo;
+  }
+  return "";
 }
 
 // O formato aceito pro parâmetro Array do Datacrazy não está confirmado
@@ -100,6 +148,17 @@ function fmtBRL(v) {
 
 function plural(n, um, muitos) {
   return `${n} ${n === 1 ? um : muitos}`;
+}
+
+async function registrarErro(detalhe) {
+  try {
+    await session.setAdditionalValue("erro_stays", detalhe);
+  } catch (e) {}
+}
+
+async function falhar(detalhe) {
+  await registrarErro(detalhe);
+  await session.setAdditionalValue("resposta_stays", MSG_FALHA);
 }
 
 async function staysFetch(url, options) {
@@ -166,24 +225,30 @@ const noites   = Math.round((new Date(checkout) - new Date(checkin)) / 86400000)
 // negativa. Barra antes de qualquer chamada.
 const DATA_OK = /^\d{4}-\d{2}-\d{2}$/;
 if (!DATA_OK.test(checkin) || !DATA_OK.test(checkout) || !(noites > 0)) {
-  await session.setAdditionalValue("resposta_stays",
-    `Erro: datas inválidas (check-in "${checkinRaw}" → "${checkin}", check-out "${checkoutRaw}" → "${checkout}").`
-  );
+  await falhar(`datas inválidas: check-in "${checkinRaw}" → "${checkin}", check-out "${checkoutRaw}" → "${checkout}"`);
   return;
 }
 
-// Resolve apelidos -> códigos, remove vazios e duplicados, aplica o teto.
+// Resolve nomes -> códigos, remove duplicados, aplica o teto. Nome não
+// reconhecido não vai pra API: fica registrado em `erros`.
 const alvos = [];
+const erros = [];
 for (const bruto of parseImoveis(imoveisRaw)) {
-  const id = resolveId(bruto);
-  if (id && alvos.indexOf(id) === -1) alvos.push(id);
+  const nome = String(bruto || "").trim();
+  if (!nome) continue;
+  const id = resolveId(nome);
+  if (!id) {
+    erros.push(`"${nome}": imóvel não reconhecido`);
+    continue;
+  }
+  if (alvos.indexOf(id) === -1) alvos.push(id);
   if (alvos.length >= MAX_IMOVEIS) break;
 }
 
 if (alvos.length === 0) {
-  await session.setAdditionalValue("resposta_stays",
-    `Erro: nenhum imóvel informado na consulta (recebido: "${imoveisRaw}").`
-  );
+  await falhar(erros.length > 0
+    ? erros.join(" | ")
+    : `nenhum imóvel informado (recebido: ${JSON.stringify(imoveisRaw)})`);
   return;
 }
 
@@ -198,9 +263,7 @@ try {
     addDias(checkout, MARGEM_DIAS)
   );
 } catch (e) {
-  await session.setAdditionalValue("resposta_stays",
-    `Erro ao verificar disponibilidade (${checkin} a ${checkout}): ${e.message}`
-  );
+  await falhar(`verificar disponibilidade (${checkin} a ${checkout}): ${e.message}`);
   return;
 }
 
@@ -208,7 +271,6 @@ try {
 // calculate-price NÃO olha o calendário — devolve total mesmo com o imóvel
 // reservado ou bloqueado. Por isso o cruzamento vem antes.
 const cotados = [];
-const erros = [];
 
 for (const imovelId of alvos) {
   try {
@@ -257,6 +319,9 @@ for (const imovelId of alvos) {
   }
 }
 
+// Sempre regrava: sem erro, limpa o que tiver sobrado de uma chamada anterior.
+await registrarErro(erros.join(" | "));
+
 // 3) Uma única mensagem, com todos os imóveis que deu pra cotar.
 if (cotados.length > 0) {
   const cabecalho =
@@ -274,9 +339,7 @@ if (cotados.length > 0) {
 } else if (erros.length > 0) {
   // Falha técnica NUNCA vira "Produto Indisponível": uma queda da API faria o
   // lead desistir de uma data que na verdade está vaga.
-  await session.setAdditionalValue("resposta_stays",
-    `Erro ao consultar Stays (${checkin} a ${checkout}): ${erros.join(" | ")}`
-  );
+  await session.setAdditionalValue("resposta_stays", MSG_FALHA);
 } else {
   await session.setAdditionalValue("resposta_stays", "Produto Indisponível");
 }

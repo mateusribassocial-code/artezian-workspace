@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Planejamento de Diárias — Artezian</title>
+<style>
+  @page {
+    size: A4;
+    margin: 16mm 14mm 20mm 14mm;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #2a2a2a;
+    font-size: 10.5pt;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .cover {
+    text-align: left;
+    padding-bottom: 10mm;
+    border-bottom: 3px solid #c2a14e;
+    margin-bottom: 8mm;
+  }
+  .cover .kicker {
+    color: #c2a14e;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 9pt;
+    margin-bottom: 2mm;
+  }
+  h1 {
+    font-size: 22pt;
+    margin: 0 0 4mm 0;
+    color: #264653;
+    font-weight: 800;
+  }
+  .meta {
+    font-size: 10pt;
+    color: #555;
+  }
+  .meta b { color: #2a2a2a; }
+  h2 {
+    font-size: 14pt;
+    color: #ffffff;
+    background: #264653;
+    padding: 3mm 5mm;
+    border-radius: 6px;
+    margin: 10mm 0 5mm 0;
+    page-break-after: avoid;
+  }
+  h2.first { margin-top: 0; }
+  h3 {
+    font-size: 11pt;
+    color: #264653;
+    margin: 4mm 0 2mm 0;
+    page-break-after: avoid;
+  }
+  p { margin: 2mm 0; }
+  .section { page-break-inside: avoid; }
+  .findings {
+    counter-reset: finding;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .findings li {
+    counter-increment: finding;
+    position: relative;
+    padding: 3mm 5mm 3mm 12mm;
+    margin-bottom: 3mm;
+    background: #faf6ec;
+    border-left: 4px solid #c2a14e;
+    border-radius: 4px;
+    page-break-inside: avoid;
+    font-size: 10pt;
+  }
+  .findings li::before {
+    content: counter(finding);
+    position: absolute;
+    left: 4mm;
+    top: 3mm;
+    width: 5.5mm;
+    height: 5.5mm;
+    background: #c2a14e;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 5.5mm;
+    font-weight: 700;
+    font-size: 9pt;
+  }
+  .findings li.critical {
+    background: #fdf1ee;
+    border-left-color: #b3492f;
+  }
+  .findings li.critical::before {
+    background: #b3492f;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 3mm 0 5mm 0;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  th {
+    background: #264653;
+    color: #fff;
+    text-align: left;
+    padding: 2.2mm 2.5mm;
+    font-weight: 600;
+  }
+  td {
+    padding: 2mm 2.5mm;
+    border-bottom: 1px solid #e4e0d4;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #faf8f2; }
+  td.num, th.num { text-align: right; white-space: nowrap; }
+  .tag {
+    display: inline-block;
+    background: #c2a14e;
+    color: #fff;
+    font-size: 7.5pt;
+    padding: 0.5mm 2mm;
+    border-radius: 3px;
+    margin-left: 2mm;
+    font-weight: 700;
+  }
+  .tag.alert { background: #b3492f; }
+  .note {
+    font-size: 9pt;
+    color: #444;
+    background: #f3f1ea;
+    border-radius: 4px;
+    padding: 2.5mm 4mm;
+    margin: 2mm 0 5mm 0;
+  }
+  .market-ref {
+    font-size: 9pt;
+    color: #264653;
+    margin: -1mm 0 3mm 0;
+    font-style: italic;
+  }
+  .steps {
+    margin: 0;
+    padding-left: 5mm;
+  }
+  .steps li { margin-bottom: 2mm; }
+  .sources {
+    font-size: 8pt;
+    color: #777;
+    margin-top: 2mm;
+  }
+  .sources a { color: #264653; }
+  .footer-note {
+    font-size: 8pt;
+    color: #999;
+    text-align: center;
+    margin-top: 10mm;
+    border-top: 1px solid #e4e0d4;
+    padding-top: 3mm;
+  }
+  strong { color: #264653; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="kicker">Artezian Real Estate Atelie · Setor de Locação</div>
+  <h1>Planejamento de Diárias</h1>
+  <div class="meta">
+    <b>Data do planejamento:</b> 14/09/2026 &nbsp;·&nbsp;
+    <b>Cobertura:</b> Mont Carmelo, Varandas de Porto, Casas e Apartamentos avulsos (18 unidades) &nbsp;·&nbsp;
+    <b>Base:</b> dados reais PriceLabs + calendário de feriados 2026–2027
+  </div>
+  <p class="meta" style="margin-top:3mm;">Objetivo: tabela de diárias competitiva para uso direto no cadastro de preços da Stays, com foco em manter ocupação nos períodos de baixa temporada.</p>
+</div>
+
+<h2 class="first">Achados críticos — ler antes de implementar</h2>
+<ol class="findings">
+  <li class="critical"><strong>Cobertura do PriceLabs é parcial: só 2 das 18 unidades estão mapeadas.</strong> Flat da Mari (Mont Carmelo) e Studio Varandas 03 (Varandas de Porto) têm motor de precificação dinâmica e dados de mercado em tempo real. As outras 16 usam proxy calibrado por essas duas. Mapear as 16 restantes no PriceLabs é o próximo passo pra sair do manual.</li>
+  <li class="critical"><strong>Studio Varandas 03 vendendo abaixo do próprio piso do algoritmo.</strong> Praticado hoje: R$150/noite em baixa. O piso do PriceLabs é R$170; o P25 real de mercado (1 quarto, 145 comparáveis) é R$267. A diária está ~44% abaixo do que o mercado aceita pagar mesmo no low end — não é competitividade, é receita perdida sem ganho de reserva.</li>
+  <li class="critical"><strong>Studio Varandas 03 tem 48 datas bloqueadas entre 30/dez/2026 e 13/jan/2027</strong> — exatamente Réveillon (mercado +50,4%) mais o início de Janeiro. Confirmar com o proprietário se é uso pessoal; se não for, é a maior perda de receita identificável no calendário atual.</li>
+  <li><strong>Flat da Mari está superando o mercado em ocupação</strong> — 47% vs 25% em setembro, 26% vs 19% em outubro. PriceLabs sinaliza "outperforming": espaço pra subir preço em fins de semana e picos, não pra baixar mais.</li>
+  <li><strong>Em baixa temporada ampla (jun/ago) as duas unidades mapeadas já vendem abaixo do mercado da região</strong> — bom sinal de competitividade; mantido nas outras 16 unidades sem desconto extra inventado.</li>
+</ol>
+
+<h2>Metodologia</h2>
+<p><strong>Mont Carmelo e Varandas de Porto:</strong> preços calibrados pelos percentis reais de mercado do PriceLabs (por número de quartos, comparáveis do próprio bairro), usando Flat da Mari e Studio Varandas 03 como referência de cada condomínio.</p>
+<p><strong>Casas e apartamentos avulsos:</strong> sem comparável direto no PriceLabs (Market Research desabilitado nesta conta). Usei os valores-base já praticados pela Artezian, aplicando o mesmo calendário de picos regional e separando a baixa temporada em dia de semana / fim de semana.</p>
+<div class="note">
+  <strong>Janelas de pico confirmadas pelo PriceLabs</strong> (região Taperapuã/Coroa Vermelha):
+  Réveillon (27/28 dez–1/2 jan) mercado +40% a +50% · Carnaval (5–10 fev) +35% a +39% ·
+  Semana Santa (23–27 mar) +18% a +22% · Semana de 10–16 out (Nossa Sra Aparecida) ocupação +26% a +28%.
+</div>
+
+<h2>Calendário de feriados e datas especiais (set/2026 – set/2027)</h2>
+<p>Cada linha aponta qual faixa de preço das tabelas por unidade usar nessas datas. Datas móveis (Carnaval, Páscoa, Corpus Christi) mudam todo ano — reconferir na revisão anual.</p>
+<table>
+<thead><tr><th style="width:16%">Data(s)</th><th style="width:34%">Evento</th><th style="width:25%">Mont Carmelo / Varandas de Porto</th><th style="width:25%">Casas / Apartamentos avulsos</th></tr></thead>
+<tbody>
+<tr><td>10 a 16/out/2026</td><td>N. Sra Aparecida (seg 12/out) + fim de semana — pico de ocupação PriceLabs +26% a 28%</td><td>Sem. 10–16 out</td><td>Baixa (fds) +15%</td></tr>
+<tr><td>31/out a 02/nov/2026</td><td>Finados (seg 02/nov) — praticado real já sobe pra faixa de feriado</td><td>Carnaval/Semana Santa</td><td>Feriados/Semana Santa</td></tr>
+<tr><td>20 a 22/nov/2026</td><td>Consciência Negra (sex 20/nov) — ponte curta de 3 dias</td><td>Média +15%</td><td>Baixa (fds) +15%</td></tr>
+<tr><td>24 a 27/dez/2026</td><td>Véspera e Natal (sex 25/dez) — ponte curta</td><td>Média +15%</td><td>Baixa (fds) +15%</td></tr>
+<tr><td>28/dez/2026 a 02/jan/2027</td><td>Réveillon — pico do ano (mercado +40% a 50%)</td><td>Réveillon</td><td>Réveillon</td></tr>
+<tr><td>03 a 31/jan/2027</td><td>Alta temporada de Janeiro</td><td>Janeiro/Alta</td><td>Janeiro/Alta</td></tr>
+<tr><td>05 a 09/fev/2027</td><td>Carnaval (seg/ter 8–9/fev; mercado +35% a 39%)</td><td>Carnaval/Semana Santa</td><td>Carnaval</td></tr>
+<tr><td>10 a 12/fev/2027</td><td>Carnaporto Axé Moi — carnaval fora de época, evento próprio de Porto Seguro</td><td>Carnaporto</td><td>Carnaval (mesmo peso)</td></tr>
+<tr><td>22 a 27/mar/2027</td><td>Semana Santa (Páscoa 28/mar; mercado +18% a 22%)</td><td>Carnaval/Semana Santa</td><td>Feriados/Semana Santa</td></tr>
+<tr><td>21/abr/2027</td><td>Tiradentes (quarta, feriado seco, sem ponte)</td><td>Média</td><td>Baixa (fds)</td></tr>
+<tr><td>01/mai/2027 (sáb)</td><td>Dia do Trabalho</td><td>Média</td><td>Baixa (fds)</td></tr>
+<tr><td>27 a 30/mai/2027</td><td>Corpus Christi (qui 27/mai, ponte tradicional pra praia)</td><td>Carnaval/Semana Santa</td><td>Feriados/Semana Santa</td></tr>
+<tr><td>30/jun/2027</td><td>Aniversário de Porto Seguro (feriado municipal, quarta, em plena baixa)</td><td>Sem alteração</td><td>Sem alteração</td></tr>
+</tbody>
+</table>
+<p class="note">Efeito baixo/nulo, sem ajuste: Dia do Servidor Público (28/out/2026, facultativo), Proclamação da República (15/nov/2026, cai num domingo) e Independência (07/set/2027, terça isolada).</p>
+<div class="sources">
+  Fontes do calendário de feriados: <a href="https://www.porto-seguro-bahia.com/E27580-CarnaPorto_Axe_Moi_2027_na_Arena_Axe_Moi">CarnaPorto Axé Moi 2027</a> ·
+  <a href="https://www.feriadosmunicipais.com.br/bahia/porto-seguro">Feriados municipais de Porto Seguro-BA</a> ·
+  <a href="https://www.brasilemfolhas.com.br/2026/09/calendario-nacional-tem-cinco-feriados-entre-outubro-e-dezembro/">Feriados out–dez/2026</a> ·
+  <a href="https://www.anbima.com.br/feriados/fer_nacionais/2027.asp">Feriados nacionais 2027 — Anbima</a>
+</div>
+
+<h2>Mont Carmelo <span style="font-weight:400;font-size:10pt;">— 3 unidades</span></h2>
+<p class="market-ref">Mercado local (PriceLabs, via Flat da Mari): 1 quarto — P25 R$231 / P50 R$314 / P75 R$387 / P90 R$500 (80 comparáveis). 2 quartos — P25 R$333 / P50 R$418 / P75 R$553 / P90 R$718 (241 comparáveis).</p>
+<table>
+<thead><tr>
+<th>Unidade</th><th>Categoria</th><th class="num">Baixa</th><th class="num">Média</th><th class="num">Sem. 10–16 out</th><th class="num">Carnaporto</th><th class="num">Carnaval / Sem. Santa</th><th class="num">Janeiro/Alta</th><th class="num">Réveillon</th>
+</tr></thead>
+<tbody>
+<tr><td>DS03J — Studio do João <span class="meta">(até 5 pax)</span></td><td>Studio</td><td class="num">R$220</td><td class="num">R$260</td><td class="num">R$300</td><td class="num">R$340</td><td class="num">R$400</td><td class="num">R$580</td><td class="num">R$720</td></tr>
+<tr><td>DS04J — Flat da Mari <span class="meta">(até 5 pax)</span><span class="tag">PriceLabs</span></td><td>1 quarto</td><td class="num">R$280</td><td class="num">R$320</td><td class="num">R$370</td><td class="num">R$390</td><td class="num">R$460</td><td class="num">R$620</td><td class="num">R$800</td></tr>
+<tr><td>DS05J — Apto do Emanoel <span class="meta">(até 8 pax)</span></td><td>2 quartos</td><td class="num">R$360</td><td class="num">R$430</td><td class="num">R$480</td><td class="num">R$520</td><td class="num">R$620</td><td class="num">R$900</td><td class="num">R$1.150</td></tr>
+</tbody>
+</table>
+<p class="note">Emanoel: o valor de "baixa" na base de conhecimento antiga era R$500 — quase o P50 do mercado (R$418). Baixar pra R$350–380 (perto do P25) tende a preencher mais diárias sem afetar as janelas de alta, onde já é competitivo.</p>
+
+<h2>Varandas de Porto <span style="font-weight:400;font-size:10pt;">— 7 unidades</span></h2>
+<p class="market-ref">Mercado local (PriceLabs, via Studio Varandas 03): 1 quarto — P25 R$267 / P50 R$309 / P75 R$368 / P90 R$447 (145 comparáveis). 2 quartos — P25 R$350 / P50 R$449 / P75 R$538 / P90 R$689 (172 comparáveis). Categoria "Studio" tem só 3 comparáveis — amostra pequena, usei 1 quarto com desconto.</p>
+<table>
+<thead><tr>
+<th>Unidade</th><th>Categoria</th><th class="num">Baixa</th><th class="num">Média</th><th class="num">Sem. 10–16 out</th><th class="num">Carnaporto</th><th class="num">Feriados/Carnaval</th><th class="num">Janeiro/Alta</th><th class="num">Réveillon</th>
+</tr></thead>
+<tbody>
+<tr><td>JR01J / JR04J — Studios <span class="meta">(até 4 pax)</span></td><td>Studio</td><td class="num">R$200</td><td class="num">R$240</td><td class="num">R$280</td><td class="num">R$400</td><td class="num">R$480</td><td class="num">R$600</td><td class="num">R$980</td></tr>
+<tr><td>JR03J — Studio Varandas 03 <span class="meta">(até 4 pax)</span><span class="tag alert">Corrigir: R$150 → tabela</span></td><td>Studio</td><td class="num">R$200</td><td class="num">R$240</td><td class="num">R$280</td><td class="num">R$400</td><td class="num">R$480</td><td class="num">R$600</td><td class="num">R$980</td></tr>
+<tr><td>JR05J / JR08J — Apto 1 quarto <span class="meta">(até 5–6 pax)</span></td><td>1 quarto</td><td class="num">R$280</td><td class="num">R$320</td><td class="num">R$350</td><td class="num">R$490</td><td class="num">R$600</td><td class="num">R$660</td><td class="num">R$1.150</td></tr>
+<tr><td>JR07J — Apto Varandas 03 <span class="meta">(até 5–6 pax)</span><span class="tag">PriceLabs</span></td><td>1 quarto</td><td class="num">R$280</td><td class="num">R$320</td><td class="num">R$350</td><td class="num">R$490</td><td class="num">R$600</td><td class="num">R$660</td><td class="num">R$1.150</td></tr>
+<tr><td>JR09J — Apto Duplex Varandas 01 <span class="meta">(até 8 pax)</span></td><td>2 quartos</td><td class="num">R$390</td><td class="num">R$460</td><td class="num">R$510</td><td class="num">R$780</td><td class="num">R$1.000</td><td class="num">R$1.200</td><td class="num">R$1.650</td></tr>
+</tbody>
+</table>
+<p class="note"><strong>Ação imediata:</strong> subir o praticado do Studio Varandas 03 (JR03J) de R$150 pra pelo menos R$200 em baixa, e revisar o bloqueio de 30/dez a 13/jan.</p>
+
+<h2>Casas <span style="font-weight:400;font-size:10pt;">— 5 unidades (Taperapuã e Arraial d'Ajuda)</span></h2>
+<p class="market-ref">Sem comparável direto no PriceLabs. Baseado nos valores já praticados pela Artezian, com baixa temporada dividida em dia de semana / fim de semana e Réveillon acima do "Alta" genérico.</p>
+<table>
+<thead><tr>
+<th>Unidade</th><th>Capacidade</th><th>Localização</th><th class="num">Baixa (seg–qui)</th><th class="num">Baixa (fds)</th><th class="num">Feriados/Sem. Santa</th><th class="num">Carnaval</th><th class="num">Janeiro/Alta</th><th class="num">Réveillon</th>
+</tr></thead>
+<tbody>
+<tr><td>GF02J — Casa do Tremura</td><td>6 qtos, até 25 pax</td><td>Taperapuã, 300m do mar</td><td class="num">R$1.400</td><td class="num">R$1.600</td><td class="num">R$2.500</td><td class="num">R$2.900</td><td class="num">R$3.000</td><td class="num">R$3.800</td></tr>
+<tr><td>GF04J — Casa da Laureana</td><td>4 dorm., até 13 pax</td><td>Arraial d'Ajuda, vista mar</td><td class="num">R$1.600</td><td class="num">R$1.800</td><td class="num">R$2.500</td><td class="num">R$2.900</td><td class="num">R$3.000</td><td class="num">R$3.800</td></tr>
+<tr><td>GF06J — Casa da Moana</td><td>5 qtos</td><td>Taperapuã</td><td class="num">R$1.350</td><td class="num">R$1.500</td><td class="num">R$2.500</td><td class="num">R$2.900</td><td class="num">R$3.000</td><td class="num">R$3.800</td></tr>
+<tr><td>GG06J — Casa do Euller</td><td>9 qtos, até 50 pax</td><td>Taperapuã, 1,5km do mar</td><td class="num">R$2.200</td><td class="num">R$2.500</td><td class="num">R$3.500</td><td class="num">R$4.000</td><td class="num">R$3.500</td><td class="num">R$4.800</td></tr>
+<tr><td>GG08J — Casa do John</td><td>5 qtos, até 25 pax</td><td>Taperapuã, 600m do mar</td><td class="num">R$1.600</td><td class="num">R$1.800</td><td class="num">R$2.200</td><td class="num">R$2.600</td><td class="num">R$2.700</td><td class="num">R$3.400</td></tr>
+</tbody>
+</table>
+
+<h2>Apartamentos individuais <span style="font-weight:400;font-size:10pt;">— 3 unidades</span></h2>
+<table>
+<thead><tr>
+<th>Unidade</th><th>Capacidade</th><th>Localização</th><th class="num">Baixa (seg–qui)</th><th class="num">Baixa (fds)</th><th class="num">Feriados</th><th class="num">Carnaval</th><th class="num">Janeiro/Alta</th><th class="num">Réveillon</th>
+</tr></thead>
+<tbody>
+<tr><td>FL10J — Apto do Reinaldo</td><td>3 suítes, até 11 pax</td><td>Taperapuã (condomínio)</td><td class="num">R$690</td><td class="num">R$790</td><td class="num">R$1.200</td><td class="num">R$1.450</td><td class="num">R$1.700</td><td class="num">R$2.100</td></tr>
+<tr><td>GC01J — Apto do Zé Coroa</td><td>3 qtos, até 11 pax</td><td>Coroa Vermelha, Praia do Mutá</td><td class="num">R$690</td><td class="num">R$790</td><td class="num">R$1.100</td><td class="num">R$1.350</td><td class="num">R$1.650</td><td class="num">R$2.050</td></tr>
+<tr><td>HA03J — Apto da Joyce</td><td>2 suítes + 1 qto, até 8 pax</td><td>Taperapuã</td><td class="num">R$590</td><td class="num">R$690</td><td class="num">R$900</td><td class="num">R$1.050</td><td class="num">R$1.200</td><td class="num">R$1.500</td></tr>
+</tbody>
+</table>
+
+<h2>Próximos passos</h2>
+<ol class="steps">
+  <li>Corrigir a diária praticada do Studio Varandas 03 (JR03J) no calendário da Stays — está abaixo do piso do PriceLabs.</li>
+  <li>Confirmar com o proprietário se o bloqueio de 30/dez/2026 a 13/jan/2027 no Studio Varandas 03 é intencional; se não for, liberar.</li>
+  <li>Mapear as 16 unidades restantes no PriceLabs pra elas terem motor de precificação dinâmica próprio.</li>
+  <li>Pedir liberação do Market Research do PriceLabs (desabilitado nesta conta) pra comparáveis reais de casas e apartamentos avulsos.</li>
+  <li>Revisar esta tabela a cada 4–6 semanas.</li>
+  <li>Todo início de ano, reconferir as datas móveis (Carnaval, Semana Santa, Corpus Christi, Carnaporto) antes de aplicar as faixas.</li>
+</ol>
+
+<div class="footer-note">Artezian Real Estate Atelie — Planejamento de Diárias — gerado em 14/09/2026 a partir de dados PriceLabs + base de conhecimento interna</div>
+
+</body>
+</html>

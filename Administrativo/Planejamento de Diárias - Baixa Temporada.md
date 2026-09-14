@@ -31,15 +31,45 @@
 
 ---
 
+## Calendário de feriados e datas especiais (set/2026 – set/2027)
+
+Datas reais de feriados nacionais e do calendário regional de Porto Seguro, já cruzadas com as janelas de pico que o PriceLabs confirmou. Cada linha aponta qual faixa de preço das tabelas abaixo usar. Datas móveis (Carnaval, Páscoa/Semana Santa, Corpus Christi) mudam todo ano — confirmar de novo na revisão anual.
+
+| Data(s) | Evento | Mont Carmelo / Varandas de Porto | Casas / Apartamentos avulsos |
+|---|---|---|---|
+| 10 a 16/out/2026 | Feriado de N. Sra Aparecida (seg 12/out) + fim de semana — pico de ocupação confirmado no PriceLabs (+26% a 28%) | Sem. 10–16 out | Baixa (fds) + 15% |
+| 31/out a 02/nov/2026 | Finados (feriado seg 02/nov) — a diária praticada nas duas unidades mapeadas já sobe pra faixa de feriado nesse período | Carnaval/Semana Santa · Feriados/Carnaval | Feriados/Semana Santa · Feriados |
+| 20 a 22/nov/2026 | Consciência Negra (feriado sex 20/nov) — ponte curta de 3 dias | Média/Shoulder · Média **+15%** | Baixa (fds) **+15%** |
+| 24 a 27/dez/2026 | Véspera e Natal (feriado sex 25/dez) — ponte curta | Média/Shoulder · Média **+15%** | Baixa (fds) **+15%** |
+| 28/dez/2026 a 02/jan/2027 | Réveillon — pico do ano (mercado +40% a 50%) | Réveillon | Réveillon |
+| 03 a 31/jan/2027 | Alta temporada de Janeiro | Janeiro/Alta | Janeiro/Alta |
+| 05 a 09/fev/2027 | Carnaval (feriado seg/ter 8–9/fev; mercado +35% a 39%) | Carnaval/Semana Santa · Feriados/Carnaval | Carnaval |
+| 10 a 12/fev/2027 | Carnaporto Axé Moi — carnaval fora de época, evento próprio de Porto Seguro logo após o Carnaval oficial | Carnaporto | Carnaval (mesmo peso — evento atrai público de fora da região) |
+| 22 a 27/mar/2027 | Semana Santa (Páscoa 28/mar; mercado +18% a 22%) | Carnaval/Semana Santa · Feriados/Carnaval | Feriados/Semana Santa |
+| 21/abr/2027 | Tiradentes (quarta-feira, feriado seco, sem ponte) | Média/Shoulder · Média | Baixa (fds) |
+| 01/mai/2027 (sábado) | Dia do Trabalho | Média/Shoulder · Média | Baixa (fds) |
+| 27 a 30/mai/2027 | Corpus Christi (feriado qui 27/mai, ponte tradicional pra praia) | Carnaval/Semana Santa · Feriados/Carnaval | Feriados/Semana Santa · Feriados |
+| 30/jun/2027 | Aniversário de Porto Seguro (feriado municipal, quarta-feira, em plena baixa temporada) | Sem alteração — impacto é local, não turístico | Sem alteração |
+
+Datas com efeito baixo ou nulo, sem ajuste de preço: Dia do Servidor Público (28/out/2026, ponto facultativo), Proclamação da República (15/nov/2026, cai num domingo — sem ponte) e Independência (07/set/2027, terça isolada, sem ponte natural).
+
+Sources:
+- [CarnaPorto Axé Moi 2027 na Arena Axé Moi](https://www.porto-seguro-bahia.com/E27580-CarnaPorto_Axe_Moi_2027_na_Arena_Axe_Moi)
+- [Feriados municipais de Porto Seguro-BA](https://www.feriadosmunicipais.com.br/bahia/porto-seguro)
+- [Calendário nacional tem cinco feriados entre outubro e dezembro — Brasil em Folhas](https://www.brasilemfolhas.com.br/2026/09/calendario-nacional-tem-cinco-feriados-entre-outubro-e-dezembro/)
+- [Feriados nacionais para o ano de 2027 — Anbima](https://www.anbima.com.br/feriados/fer_nacionais/2027.asp)
+
+---
+
 ## Mont Carmelo (3 unidades)
 
 Mercado local (PriceLabs, via Flat da Mari): 1 quarto — P25 R$231 / P50 R$314 / P75 R$387 / P90 R$500 (80 comparáveis). 2 quartos — P25 R$333 / P50 R$418 / P75 R$553 / P90 R$718 (241 comparáveis).
 
-| Unidade | Categoria | Baixa | Média/Shoulder | Sem. 10–16 out | Carnaval/Semana Santa | Janeiro/Alta | Réveillon |
-|---|---|---|---|---|---|---|---|
-| DS03J — Studio do João (até 5 pax) | Studio | R$220 | R$260 | R$300 | R$400 | R$580 | R$720 |
-| DS04J — Flat da Mari (até 5 pax) — **já no PriceLabs, praticado R$285, supera mercado** | 1 quarto | R$280 | R$320 | R$370 | R$460 | R$620 | R$800 |
-| DS05J — Apartamento do Emanoel (até 8 pax) | 2 quartos | R$360 | R$430 | R$480 | R$620 | R$900 | R$1.150 |
+| Unidade | Categoria | Baixa | Média/Shoulder | Sem. 10–16 out | Carnaporto | Carnaval/Semana Santa | Janeiro/Alta | Réveillon |
+|---|---|---|---|---|---|---|---|---|
+| DS03J — Studio do João (até 5 pax) | Studio | R$220 | R$260 | R$300 | R$340 | R$400 | R$580 | R$720 |
+| DS04J — Flat da Mari (até 5 pax) — **já no PriceLabs, praticado R$285, supera mercado** | 1 quarto | R$280 | R$320 | R$370 | R$390 | R$460 | R$620 | R$800 |
+| DS05J — Apartamento do Emanoel (até 8 pax) | 2 quartos | R$360 | R$430 | R$480 | R$520 | R$620 | R$900 | R$1.150 |
 
 Nota sobre o Emanoel: o valor de "baixa temporada" hoje na base de conhecimento é R$500 — quase o P50 do mercado (R$418) para uma unidade que precisa competir justamente nos dias de menor procura. Baixando para R$350–380 (perto do P25) tende a preencher mais diárias sem sacrificar as janelas de alta, onde ele já é competitivo.
 
@@ -92,3 +122,4 @@ Sem comparável direto no PriceLabs. Baseado nos valores já praticados pela Art
 3. Mapear as 16 unidades restantes no PriceLabs (as outras de Mont Carmelo e Varandas de Porto, as 5 casas e os 3 apartamentos avulsos) para elas passarem a ter motor de precificação dinâmica e dados de mercado próprios, em vez de depender deste planejamento manual.
 4. Pedir liberação do recurso de Market Research do PriceLabs (hoje desabilitado nesta conta) para conseguir comparáveis reais de casas de 4+ quartos e apartamentos fora dos dois condomínios.
 5. Revisar esta tabela a cada 4–6 semanas — os percentis de mercado do PriceLabs mudam com a oferta da região.
+6. Todo início de ano, reconferir as datas móveis do calendário de feriados (Carnaval, Semana Santa, Corpus Christi e Carnaporto mudam de data a cada ano) antes de aplicar as faixas de preço.

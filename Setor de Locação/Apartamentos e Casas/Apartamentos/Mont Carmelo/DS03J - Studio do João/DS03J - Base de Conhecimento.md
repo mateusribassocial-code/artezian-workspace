@@ -83,3 +83,4 @@ https://youtu.be/bcQ10tzSVzM
 Outras unidades da Artezian no mesmo condomínio:
 - **DS04J - Flat da Mari:** até 5 pessoas, 1 suíte
 - **DS05J - Apartamento do Emanoel:** até 8 pessoas, 2 suítes
+- **DS10J - Apartamento do Marcos:** até 5 pessoas, 1 suíte

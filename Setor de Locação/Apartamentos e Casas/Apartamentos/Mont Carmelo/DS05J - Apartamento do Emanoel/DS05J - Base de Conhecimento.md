@@ -87,3 +87,4 @@ https://www.instagram.com/p/C9QQmv0P4dc/
 Outras unidades da Artezian no mesmo condomínio:
 - **DS03J - Studio do João:** até 5 pessoas, studio de cômodo único
 - **DS04J - Flat da Mari:** até 5 pessoas, 1 suíte
+- **DS10J - Apartamento do Marcos:** até 5 pessoas, 1 suíte

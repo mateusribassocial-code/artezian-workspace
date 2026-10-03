@@ -1,7 +1,7 @@
 # Código: DS10J - Apartamento do Marcos
 
 > Base de conhecimento do imóvel para o atendimento (ART e equipe).
-> Atualizada em 03/10/2026. Fontes: cadastro na Stays (03/10/2026), fotos da unidade e dados do Residencial Mont Carmelo (iguais aos do DS04J).
+> Atualizada em 03/10/2026. Fontes: site artezian.com.br/DS10J, cadastro na Stays (03/10/2026), fotos da unidade e dados do Residencial Mont Carmelo (iguais aos do DS04J).
 > Regra de uso: informação marcada com 🔒 só é enviada **depois da reserva confirmada** (sinal pago).
 
 ---
@@ -44,8 +44,9 @@ Até 5 pessoas
 
 ## 3. O que tem no apartamento
 
-**Dormir:** ar-condicionado e cortina blackout na suíte, bancada com pia e nichos de apoio no quarto. Roupa de cama, cobertores, travesseiros e toalhas de banho inclusos.
+**Dormir:** ar-condicionado, ventilador de teto e cortina blackout na suíte, bancada com pia e nichos de apoio no quarto. Roupa de cama, cobertores, travesseiros e toalhas de banho inclusos.
 **Sala:** ar-condicionado, sofá-cama com cama auxiliar, TV e mesa redonda com 4 cadeiras.
+**Outros:** Wi-Fi.
 **Cozinha:** cozinha conjugada com a sala, com geladeira, micro-ondas, air fryer, pia com bancada de granito e armários.
 **Banheiro:** água quente, box de vidro e ducha higiênica.
 

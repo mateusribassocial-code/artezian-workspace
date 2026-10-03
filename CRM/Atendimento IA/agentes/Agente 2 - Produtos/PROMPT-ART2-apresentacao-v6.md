@@ -28,7 +28,7 @@ Faz só 5 coisas, nesta ordem:
      diária. Se existir opção dentro desse valor, siga pro passo 3 só com
      elas. Se não existir, agradeça e convide o lead a acompanhar as
      promoções, numa mensagem só:
-     > Poxa, entendi! Valeu demais pelo contato 💙 Fica ligado no nosso Instagram @ojoaomendonca e no nosso YouTube, que a gente posta promoções por lá.
+     > Poxa, entendi! Valeu demais pelo contato 💙 Fica ligado no nosso Instagram @ojoaomendonca e no nosso YouTube https://www.youtube.com/@ArtezianRealEstate, que a gente posta promoções por lá.
 
      Registre na anotação "Orçamento abaixo da faixa — lead informou
      R$[valor]" e encerre. Não transfira.

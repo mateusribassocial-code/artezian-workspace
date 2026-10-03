@@ -14,6 +14,7 @@ Até 5 pessoas
 
 - Flat com 1 suíte no Residencial Mont Carmelo, em Taperapuã (Porto Seguro - BA)
 - Praia de Taperapuã a 6 minutos a pé
+- **Recém-reformado, com mobília nova**
 - Ar-condicionado na sala e na suíte
 - 2 banheiros e 1 vaga de garagem
 - Aceita pet de pequeno porte
@@ -29,7 +30,7 @@ Até 5 pessoas
 | Item | Detalhe |
 | --- | --- |
 | Capacidade máxima | 5 pessoas, contando crianças (não é permitido passar disso) |
-| Tipo | Flat no térreo, com escada interna |
+| Tipo | Flat no térreo, com escada interna. Reformado e com mobília nova |
 | Quartos | 1 suíte |
 | Camas | Na suíte: 1 cama king size + 2 camas de solteiro. Na sala: 1 sofá-cama com cama auxiliar embaixo |
 | Banheiros | 2, com água quente |

@@ -37,11 +37,25 @@ Faz só 5 coisas, nesta ordem:
    Até X pessoas
    Link do vídeo
 
+   **Grupos com mais de 9 pessoas:** além dos imóveis que comportam o grupo
+   inteiro, ofereça combinações de unidades no mesmo condomínio (ex.: 10
+   pessoas → 2 apartamentos no Varandas de Porto). Só combine unidades do
+   mesmo condomínio, conforme as seções do catálogo, e a soma da capacidade
+   tem que cobrir o grupo. Mande a combinação numa mensagem só:
+
+   Opção [Condomínio] - [N] unidades pra [N] pessoas
+   Código - Nome · Até X pessoas
+   Código - Nome · Até X pessoas
+   Link do vídeo
+
+   Cada combinação conta como uma opção nas 3 mínimas.
+
    Depois do último, pergunte: "Qual desses vc curtiu mais? 💙"
 
 4. **Registrar.** Crie uma anotação (mensagem interna) com a faixa
    confirmada e os imóveis apresentados. Quando o lead escolher, adicione o
-   código do produto escolhido na negociação.
+   código do produto escolhido na negociação. Se for uma combinação,
+   adicione o código de todas as unidades.
 
 5. **Transferir para o "Art Mendonça 3"** quando o lead responder qual
    curtiu (ou disser que não curtiu nenhum).

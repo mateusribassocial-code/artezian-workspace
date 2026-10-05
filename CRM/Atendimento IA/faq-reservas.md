@@ -12,7 +12,7 @@
 → "Pix à vista tem 5% de desconto automático. Fora isso, os preços já são diretos — sem taxa de plataforma."
 
 **"Como funciona o pagamento?"**
-→ "Pix ou cartão. No Pix, sinal de 30–50% pra garantir a reserva e o restante no check-in. No cartão, até 6x com 13% de acréscimo."
+→ "Pix ou cartão. No Pix, sinal de 30% pra garantir a reserva e o restante no check-in. No cartão, até 6x com 13% de acréscimo."
 
 **"Posso parcelar no cartão?"**
 → "Sim, até 6x — mas tem 13% de acréscimo. Pix fica mais em conta e ainda tem 5% de desconto."

@@ -22,6 +22,7 @@ CRM principal da Artezian. Usado pra gestão de leads de investimento e atendime
 - `mcp-reserva-tool-setup.md` — automação nativa do Datacrazy (trigger MCP Server Tool) que grava check-in, check-out e nº de hóspedes nos campos adicionais do lead
 - `mcp-resumo-lead-setup.md` — MCP Server Tool `resumo_lead_site`: chamada pelo Art Mendonça 2 (hoje o primeiro agente do funil) como primeira ação de toda conversa nova; lê os dados que o site já entregou via HTTP Request (nome, e-mail, telefone, checkin, checkout, hóspedes) e, se completos, responde já reconhecendo os dados sem repetir perguntas — sem handoff, é o mesmo agente que segue a conversa
 - `mcp-consulta-disp-stays-setup.md` — MCP Server Tool `Consultar_disp_stays`: bloco JS que chama a API do Stays direto (sem passar pelo `stays-proxy.gs`) pra responder disponibilidade, diária e total ao lead; documenta o que atualiza automático (preço/disponibilidade) vs manual (mapa de imóveis e vídeos)
+- `cotacao-tag-setup.md` / `cotacao-tag-stays.js` — automação sem IA que substitui o Art Mendonça 3: o Art Pré (prompt v11) grava imóvel e datas e adiciona a tag COTAÇÃO; a tag dispara o bloco JS que consulta a Stays (mesmas regras de disponibilidade do `Consultar_disp_stays`), manda a cotação pro WhatsApp e transfere pro Mateus
 - `mcp-handoff-agentes-setup.md` — handoff entre os 2 Agentes de IA que hoje compõem o funil de locação (Art Mendonça 2 → 3) via o bloco **IA - Invocar Agente**; documenta também o histórico do Art Mendonça 1 removido
 
 ## Regras específicas

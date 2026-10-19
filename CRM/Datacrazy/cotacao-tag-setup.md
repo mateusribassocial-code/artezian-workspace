@@ -66,12 +66,17 @@ O JS devolve `status` no datasource `Javascript-1`:
 | status | O que o lead recebe |
 |---|---|
 | `cotado` | Período, e pra cada imóvel livre: nome, diária e total. Se algum dos escolhidos estiver ocupado, uma linha avisando. Fecha com "O Mateus segue com vc daqui pra fechar 💙". |
-| `indisponivel` | "Poxa, [imóvel] já tá reservado de DD/MM a DD/MM 😕 O Mateus vai ver com vc outras opções pra essas datas 💙". Só sai quando **todos** os imóveis foram conferidos e estão ocupados. |
+| `alternativas` | O imóvel escolhido está ocupado: "Poxa, [imóvel] já tá reservado nessas datas 😕", o período, "Mas essas tão livres:" e até 3 outros imóveis livres pro mesmo nº de pessoas (ver seção abaixo), com diária e total. Fecha com a passagem pro Mateus. |
+| `indisponivel` | "Poxa, [imóvel] já tá reservado de DD/MM a DD/MM 😕 O Mateus vai ver com vc outras opções pra essas datas 💙". Sai quando **todos** os escolhidos estão ocupados e não há nenhum outro imóvel livre pro grupo, ou quando `Hospede-Total` está vazio e não dá pra buscar alternativas. |
 | `falha` | "Vou pedir pro Mateus te passar os valores certinhos dessas datas, ele já segue com vc por aqui 💙". Cobre API fora, data faltando ou no passado, imóvel fora da Stays (HA02J, GF04J, GF06J) e regra de preço que não cobre o período. O motivo fica em `erro_stays`. |
 
-### Sem imóvel escolhido: cotação por hóspedes e datas
+### Sem imóvel escolhido, ou escolhido ocupado: cotação por hóspedes e datas
 
-Se `Imovel-Cotacao` chegar vazio, o JS não falha. Ele percorre a `TABELA` (mesma ordem de prioridade e capacidade da tabela do Art Pré), pega só os imóveis que comportam o grupo e cota os **3 primeiros livres** nas datas. Evita repetir condomínio enquanto houver opção de outro, a mesma regra da apresentação.
+A mesma busca roda em dois casos:
+- `Imovel-Cotacao` chegou vazio (status `cotado`).
+- Todos os imóveis escolhidos estão ocupados nas datas (status `alternativas`). A busca deixa de fora os escolhidos. Se um escolhido estiver livre e outro ocupado, cota só o livre e não busca alternativas.
+
+Como funciona: Ele percorre a `TABELA` (mesma ordem de prioridade e capacidade da tabela do Art Pré), pega só os imóveis que comportam o grupo e cota os **3 primeiros livres** nas datas. Evita repetir condomínio enquanto houver opção de outro, a mesma regra da apresentação.
 
 - Mensagem: período, "Essas tão livres nessas datas:", os blocos com diária e total, e a passagem pro Mateus. Imóvel ocupado não aparece.
 - Nenhum livre: "Poxa, de DD/MM a DD/MM não tenho vaga pra N pessoas 😕 O Mateus vai ver com vc outras possibilidades 💙" (`indisponivel`).
@@ -119,7 +124,8 @@ Com um lead de teste (o próprio WhatsApp do Mateus):
 4. Repetir com uma data em que o imóvel está reservado (deve sair a mensagem de "já tá reservado").
 5. Repetir com `Imovel-Cotacao` = `GF04J` (deve sair a mensagem de falha e `erro_stays` preenchido).
 6. Repetir com `Imovel-Cotacao` **vazio** e hóspedes = 2: devem vir até 3 imóveis livres de condomínios diferentes. Conferir os valores no painel da Stays.
-7. Teste ponta a ponta: conversar com o Art Pré do zero até escolher um imóvel, e conferir se ele pergunta as datas e põe a tag sozinho.
+7. Repetir com um imóvel **ocupado** nas datas e hóspedes preenchido: deve vir o aviso de reservado e outros imóveis livres pro grupo, sem o escolhido.
+8. Teste ponta a ponta: conversar com o Art Pré do zero até escolher um imóvel, e conferir se ele pergunta as datas e põe a tag sozinho.
 
 ---
 

@@ -356,24 +356,12 @@ async function cotacao(dados) {
   const cabecalho = `📅 ${periodo} · ${plural(noites, "noite", "noites")} · ${plural(hospedes, "pessoa", "pessoas")}`;
   const bloco = c => `*${c.nome}*\n💰 Diária ${fmtBRL(c.diaria)}\n*Total: ${fmtBRL(c.total)}*`;
 
-  // Modo sugestão: o lead não escolheu imóvel. Percorre a TABELA na ordem de
-  // prioridade, só imóveis que comportam o grupo, e cota os primeiros livres,
-  // evitando repetir condomínio enquanto houver opção de outro (mesma regra
-  // da apresentação do Art Pré). Imóvel ocupado não aparece na mensagem.
-  async function sugerir() {
-    // Sem hóspedes não dá pra filtrar capacidade: chutar 2 ofereceria studio
-    // pra grupo grande.
-    if (!hospedesInformado) {
-      erros.push(`sem imóvel e sem nº de hóspedes (recebido: ${JSON.stringify(dados.hospedes)})`);
-      return concluir("falha", MSG_FALHA);
-    }
-    const candidatos = TABELA.filter(t => t[2] >= hospedes);
-    if (candidatos.length === 0) {
-      erros.push(`nenhum imóvel da TABELA comporta ${hospedes} pessoas`);
-      return concluir("falha", MSG_FALHA);
-    }
-    if (!(await carregarOcupacao())) return concluir("falha", MSG_FALHA);
-
+  // Percorre a TABELA na ordem de prioridade, só imóveis que comportam o grupo
+  // e fora de `excluir`, e cota os primeiros livres, evitando repetir
+  // condomínio enquanto houver opção de outro (mesma regra da apresentação do
+  // Art Pré). Imóvel ocupado não aparece. Exige a ocupação já carregada.
+  async function buscarSugestoes(excluir) {
+    const candidatos = TABELA.filter(t => t[2] >= hospedes && excluir.indexOf(t[0]) === -1);
     const cotados = [];
     const condominios = [];
     const adiados = [];
@@ -390,11 +378,31 @@ async function cotacao(dados) {
       if (cotados.length >= MAX_SUGESTOES) break;
       await tentar(t);
     }
+    return cotados;
+  }
+
+  const livres = n => n === 1 ? `Essa tá livre nessas datas:` : `Essas tão livres nessas datas:`;
+
+  // Modo sugestão: o lead não escolheu imóvel.
+  async function sugerir() {
+    // Sem hóspedes não dá pra filtrar capacidade: chutar 2 ofereceria studio
+    // pra grupo grande.
+    if (!hospedesInformado) {
+      erros.push(`sem imóvel e sem nº de hóspedes (recebido: ${JSON.stringify(dados.hospedes)})`);
+      return concluir("falha", MSG_FALHA);
+    }
+    if (!TABELA.some(t => t[2] >= hospedes)) {
+      erros.push(`nenhum imóvel da TABELA comporta ${hospedes} pessoas`);
+      return concluir("falha", MSG_FALHA);
+    }
+    if (!(await carregarOcupacao())) return concluir("falha", MSG_FALHA);
+
+    const cotados = await buscarSugestoes([]);
 
     if (cotados.length > 0) {
       return concluir("cotado", [
         cabecalho,
-        cotados.length === 1 ? `Essa tá livre nessas datas:` : `Essas tão livres nessas datas:`,
+        livres(cotados.length),
         ...cotados.map(bloco),
         PASSAGEM,
       ].join("\n\n"));
@@ -436,8 +444,27 @@ async function cotacao(dados) {
   // estão ocupados — falha técnica nunca vira indisponível, senão o lead
   // desiste de uma data que pode estar vaga.
   if (erros.length === 0 && ocupados.length > 0) {
+    const reservado = `${listaNomes(ocupados)} já ${ocupados.length === 1 ? "tá reservado" : "tão reservados"}`;
+
+    // Escolhido(s) ocupado(s): oferece os outros imóveis livres nas mesmas
+    // datas que comportam o grupo. Se a busca não achar nenhum (ou falhar no
+    // meio), o lead recebe só o aviso de reservado — que é verdade — e o
+    // Mateus segue com outras opções.
+    if (hospedesInformado) {
+      const alternativas = await buscarSugestoes(alvos);
+      if (alternativas.length > 0) {
+        return concluir("alternativas", [
+          `Poxa, ${reservado} nessas datas 😕`,
+          cabecalho,
+          alternativas.length === 1 ? `Mas essa tá livre:` : `Mas essas tão livres:`,
+          ...alternativas.map(bloco),
+          PASSAGEM,
+        ].join("\n\n"));
+      }
+    }
+
     return concluir("indisponivel",
-      `Poxa, ${listaNomes(ocupados)} já ${ocupados.length === 1 ? "tá reservado" : "tão reservados"} de ${fmtBR(checkin)} a ${fmtBR(checkout)} 😕\n\n` +
+      `Poxa, ${reservado} de ${fmtBR(checkin)} a ${fmtBR(checkout)} 😕\n\n` +
       `O Mateus vai ver com vc outras opções pra essas datas 💙`);
   }
   return concluir("falha", MSG_FALHA);

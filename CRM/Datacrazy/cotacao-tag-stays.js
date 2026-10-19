@@ -263,7 +263,11 @@ async function cotacao(dados) {
     try { await session.setAdditionalValue("erro_stays", erros.join(" | ")); } catch (e) {}
     try { await session.setAdditionalValue("Imovel-Cotacao", ""); } catch (e) {}
     await session.setAdditionalValue("resposta_cotacao", mensagem);
-    return { status: status, imovel: String(dados.imovel || "") || "sugestão por hóspedes e datas" };
+    return {
+      status: status,
+      imovel: String(dados.imovel || "") || "sugestão por hóspedes e datas",
+      erro: erros.join(" | ") || "nenhum",
+    };
   }
 
   const checkin  = normalizeData(dados.checkin);
@@ -484,5 +488,5 @@ return Promise.all([
   return Promise.resolve(session.setAdditionalValue("erro_stays", `falha geral: ${e && e.message}`))
     .catch(function () {})
     .then(function () { return session.setAdditionalValue("resposta_cotacao", MSG_FALHA); })
-    .then(function () { return { status: "falha" }; });
+    .then(function () { return { status: "falha", imovel: "não lido", erro: `falha geral: ${e && e.message}` }; });
 });

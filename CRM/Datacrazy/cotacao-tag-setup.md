@@ -57,9 +57,22 @@ Automações → Nova automação → nome **"Cotação por tag"**.
 | 4 | **Mensagem** (texto) | `{resposta_cotacao}`, ou selecionar o campo adicional pelo dropdown. **Rota de erro** (`errorNextBlockId`) → bloco 4b. |
 | 4b | Notificação (`send-notification-action`) | Pra Mateus: "Cotação de {leadName} não foi enviada pelo WhatsApp. Ver erro_stays." Depois segue pro bloco 5. |
 | 5 | **Remover tag** (`remove-tag-action`) | `COTAÇÃO`. Remover em **todos** os caminhos, senão uma nova cotação pro mesmo lead não dispara. |
-| 6 | **Anotação** (`add-lead-comment-action`) | `Cotação automática: {status\|[Javascript-1]status} — Imóvel: {imovel\|[Javascript-1]imovel} — Erro: {erro_stays}`. O imóvel vem do datasource, não do campo: o JS limpa `Imovel-Cotacao` depois de cada cotação. |
+| 6 | **Anotação** (`add-lead-comment-action`) | Texto no Passo 1b abaixo. Os três valores vêm do retorno do bloco JS, não dos campos: o JS limpa `Imovel-Cotacao` depois de cada cotação. |
 | 7 | **Adicionar atendente no negócio** (`add-attendant-on-business-action`) | Mateus Ribas |
 | 8 | **Trocar atendente da conversa** (`change-conversation-attendant-action`) | Mateus Ribas. Os blocos 7 e 8 vão **sempre juntos** (regra do framework): só um deles deixa CRM e chat inconsistentes. |
+
+### Passo 1b — Texto da anotação (bloco 6)
+
+O bloco JavaScript termina com `return { status, imovel, erro }`. O Datacrazy expõe esse retorno como uma fonte de dados com o nome do bloco (normalmente `Javascript-1`; confira o nome que aparece no bloco JS do teu fluxo). No bloco **Anotação**, cole:
+
+```
+Cotação automática: {Status|[Javascript-1]status} — Imóvel: {Imóvel|[Javascript-1]imovel} — Erro: {Erro|[Javascript-1]erro}
+```
+
+- A sintaxe é `{rótulo|[fonte]campo}`. O rótulo antes da barra é só o nome que aparece no editor; o que vale é o que vem depois.
+- Se o bloco JS tiver outro nome (ex.: `Javascript-2`), troque nas três variáveis.
+- Se o editor tiver o seletor de variáveis, dá pra inserir por ele: fonte do bloco JS → `status`, `imovel`, `erro`.
+- Exemplo de anotação gerada: `Cotação automática: alternativas — Imóvel: HA03J — Erro: nenhum`.
 
 O JS devolve `status` no datasource `Javascript-1`:
 

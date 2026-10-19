@@ -3,7 +3,8 @@
 //        Mensagem {resposta_cotacao} -> remove tag -> transfere pro Mateus
 //
 // Sem agente de IA na cotação: o Art Pré-Atendimento grava imóvel, datas e
-// hóspedes nos campos adicionais e adiciona a tag. Daqui pra frente é código —
+// hóspedes nos campos adicionais e adiciona a tag. Sem imóvel escolhido, cota
+// até 3 imóveis livres que comportam o grupo (ordem da TABELA do Art Pré). Daqui pra frente é código —
 // valor nenhum passa por LLM, então não tem como sair diária inventada.
 //
 // A lógica de Stays (ocupação, buffer de faxina, paginação, falha que fecha)
@@ -50,6 +51,27 @@ const NOMES = {
   JR07J: "Varandas de Porto VP-07", JR08J: "Varandas de Porto VP-08",
   JR09J: "Varandas de Porto VP-09",
 };
+
+// Usada quando o lead não escolheu imóvel: ordem de prioridade, condomínio e
+// capacidade ("até") iguais à TABELA do Art Pré. Só imóveis cotáveis na Stays.
+// Imóvel novo na TABELA = adicionar aqui também.
+const TABELA = [
+  ["JR01J", "Varandas de Porto", 3],
+  ["JR03J", "Varandas de Porto", 4],
+  ["JR05J", "Varandas de Porto", 5],
+  ["DS04J", "Mont Carmelo", 5],
+  ["DS03J", "Mont Carmelo", 5],
+  ["JR09J", "Varandas de Porto", 8],
+  ["HA03J", "independente", 8],
+  ["DS05J", "Mont Carmelo", 8],
+  ["FL10J", "independente", 10],
+  ["GC01J", "independente", 12],
+  ["GF02J", "independente", 27],
+  ["GG08J", "independente", 28],
+];
+
+// Quantas opções mandar quando o lead não escolheu imóvel.
+const MAX_SUGESTOES = 3;
 
 // Os campos adicionais aparecem com dois nomes no histórico do projeto
 // ("Data de Check-in" confirmado em produção no resumo_lead_site; "Data-Check-in"
@@ -234,15 +256,20 @@ function lerCampo(nomes) {
 async function cotacao(dados) {
   const erros = [];
 
+  // Limpa Imovel-Cotacao a cada cotação: senão um pedido novo sem imóvel
+  // escolhido reaproveitaria o imóvel da cotação anterior em vez de sugerir.
+  // O que foi pedido segue no datasource (`imovel`) pra anotação do lead.
   async function concluir(status, mensagem) {
     try { await session.setAdditionalValue("erro_stays", erros.join(" | ")); } catch (e) {}
+    try { await session.setAdditionalValue("Imovel-Cotacao", ""); } catch (e) {}
     await session.setAdditionalValue("resposta_cotacao", mensagem);
-    return { status: status };
+    return { status: status, imovel: String(dados.imovel || "") || "sugestão por hóspedes e datas" };
   }
 
   const checkin  = normalizeData(dados.checkin);
   const checkout = normalizeData(dados.checkout);
-  const hospedes = parseInt(dados.hospedes) || 2;
+  const hospedesInformado = parseInt(dados.hospedes) > 0;
+  const hospedes = hospedesInformado ? parseInt(dados.hospedes) : 2;
 
   // Datas faltando ou ilegíveis: não chama a API. O Art Pré deveria ter
   // coletado — se chegou aqui sem, o Mateus resolve.
@@ -259,6 +286,9 @@ async function cotacao(dados) {
     return concluir("falha", MSG_FALHA);
   }
 
+  // Sem imóvel escolhido: cota pelos hóspedes e datas (modo sugestão).
+  const semImovel = parseImoveis(dados.imovel).every(x => !String(x || "").trim());
+
   const alvos = [];
   for (const bruto of parseImoveis(dados.imovel)) {
     const nome = String(bruto || "").trim();
@@ -272,27 +302,23 @@ async function cotacao(dados) {
     if (alvos.length >= MAX_IMOVEIS) break;
   }
 
-  if (alvos.length === 0) {
-    if (erros.length === 0) erros.push(`campo Imovel-Cotacao vazio (recebido: ${JSON.stringify(dados.imovel)})`);
-    return concluir("falha", MSG_FALHA);
-  }
-
   // 1) Ocupação da janela — UMA chamada, reaproveitada por todos os imóveis.
   // Se falhar, aborta: nunca cota sem ter conferido o calendário.
   let registros;
-  try {
-    registros = await buscarOcupacao(addDias(checkin, -MARGEM_DIAS), addDias(checkout, MARGEM_DIAS));
-  } catch (e) {
-    erros.push(`verificar disponibilidade (${checkin} a ${checkout}): ${e.message}`);
-    return concluir("falha", MSG_FALHA);
+  async function carregarOcupacao() {
+    try {
+      registros = await buscarOcupacao(addDias(checkin, -MARGEM_DIAS), addDias(checkout, MARGEM_DIAS));
+      return true;
+    } catch (e) {
+      erros.push(`verificar disponibilidade (${checkin} a ${checkout}): ${e.message}`);
+      return false;
+    }
   }
 
-  // 2) Por imóvel: identifica, cruza com a ocupação e só então cota.
+  // Identifica o imóvel, cruza com a ocupação e só então cota.
   // calculate-price NÃO olha o calendário — só chamar depois de conferir.
-  const cotados = [];
-  const ocupados = [];
-
-  for (const imovelId of alvos) {
+  // Devolve o bloco cotado, "ocupado", ou null quando deu erro (já registrado).
+  async function cotarImovel(imovelId) {
     const nome = NOMES[imovelId] || imovelId;
     try {
       const listing = await staysFetch(`${BASE}/content/listings/${imovelId}`, {
@@ -301,10 +327,8 @@ async function cotacao(dados) {
       const idInterno = listing && listing._id ? listing._id : "";
       if (!idInterno) throw new Error("imóvel sem _id interno na Stays");
 
-      const ocupado = registros.some(r => r._idlisting === idInterno && bloqueiaPeriodo(r, checkin, checkout));
-      if (ocupado) {
-        ocupados.push(nome);
-        continue;
+      if (registros.some(r => r._idlisting === idInterno && bloqueiaPeriodo(r, checkin, checkout))) {
+        return "ocupado";
       }
 
       const stays = await staysFetch(`${BASE}/booking/calculate-price`, {
@@ -320,21 +344,87 @@ async function cotacao(dados) {
       if (!(total > 0)) throw new Error(`calculate-price sem valor pra ${checkin} a ${checkout}`);
 
       const taxas = (item.fees || []).reduce((s, f) => s + ((f._mcval && f._mcval.BRL) || 0), 0);
-      cotados.push({ nome: nome, total: total, diaria: Math.round((total - taxas) / noites) });
+      return { nome: nome, total: total, diaria: Math.round((total - taxas) / noites) };
     } catch (e) {
       // Erro num imóvel derruba só aquele imóvel; os outros seguem.
       erros.push(`${imovelId}: ${e.message}`);
+      return null;
     }
   }
 
   const periodo = `${fmtBR(checkin)} → ${fmtBR(checkout)}`;
+  const cabecalho = `📅 ${periodo} · ${plural(noites, "noite", "noites")} · ${plural(hospedes, "pessoa", "pessoas")}`;
+  const bloco = c => `*${c.nome}*\n💰 Diária ${fmtBRL(c.diaria)}\n*Total: ${fmtBRL(c.total)}*`;
+
+  // Modo sugestão: o lead não escolheu imóvel. Percorre a TABELA na ordem de
+  // prioridade, só imóveis que comportam o grupo, e cota os primeiros livres,
+  // evitando repetir condomínio enquanto houver opção de outro (mesma regra
+  // da apresentação do Art Pré). Imóvel ocupado não aparece na mensagem.
+  async function sugerir() {
+    // Sem hóspedes não dá pra filtrar capacidade: chutar 2 ofereceria studio
+    // pra grupo grande.
+    if (!hospedesInformado) {
+      erros.push(`sem imóvel e sem nº de hóspedes (recebido: ${JSON.stringify(dados.hospedes)})`);
+      return concluir("falha", MSG_FALHA);
+    }
+    const candidatos = TABELA.filter(t => t[2] >= hospedes);
+    if (candidatos.length === 0) {
+      erros.push(`nenhum imóvel da TABELA comporta ${hospedes} pessoas`);
+      return concluir("falha", MSG_FALHA);
+    }
+    if (!(await carregarOcupacao())) return concluir("falha", MSG_FALHA);
+
+    const cotados = [];
+    const condominios = [];
+    const adiados = [];
+    async function tentar(t) {
+      const r = await cotarImovel(t[0]);
+      if (r && r !== "ocupado") { cotados.push(r); condominios.push(t[1]); }
+    }
+    for (const t of candidatos) {
+      if (cotados.length >= MAX_SUGESTOES) break;
+      if (t[1] !== "independente" && condominios.indexOf(t[1]) !== -1) { adiados.push(t); continue; }
+      await tentar(t);
+    }
+    for (const t of adiados) {
+      if (cotados.length >= MAX_SUGESTOES) break;
+      await tentar(t);
+    }
+
+    if (cotados.length > 0) {
+      return concluir("cotado", [
+        cabecalho,
+        cotados.length === 1 ? `Essa tá livre nessas datas:` : `Essas tão livres nessas datas:`,
+        ...cotados.map(bloco),
+        PASSAGEM,
+      ].join("\n\n"));
+    }
+    // Só diz "sem vaga" se todos os candidatos foram conferidos sem erro.
+    if (erros.length === 0) {
+      return concluir("indisponivel",
+        `Poxa, de ${fmtBR(checkin)} a ${fmtBR(checkout)} não tenho vaga pra ${plural(hospedes, "pessoa", "pessoas")} 😕\n\n` +
+        `O Mateus vai ver com vc outras possibilidades 💙`);
+    }
+    return concluir("falha", MSG_FALHA);
+  }
+
+  if (semImovel) return sugerir();
+  if (alvos.length === 0) return concluir("falha", MSG_FALHA);
+  if (!(await carregarOcupacao())) return concluir("falha", MSG_FALHA);
+
+  const cotados = [];
+  const ocupados = [];
+  for (const imovelId of alvos) {
+    const r = await cotarImovel(imovelId);
+    if (r === "ocupado") ocupados.push(NOMES[imovelId] || imovelId);
+    else if (r) cotados.push(r);
+  }
+
   const linhas = [];
 
   if (cotados.length > 0) {
-    linhas.push(`📅 ${periodo} · ${plural(noites, "noite", "noites")} · ${plural(hospedes, "pessoa", "pessoas")}`);
-    for (const c of cotados) {
-      linhas.push(`*${c.nome}*\n💰 Diária ${fmtBRL(c.diaria)}\n*Total: ${fmtBRL(c.total)}*`);
-    }
+    linhas.push(cabecalho);
+    for (const c of cotados) linhas.push(bloco(c));
     if (ocupados.length > 0) {
       linhas.push(`${listaNomes(ocupados)} já ${ocupados.length === 1 ? "tá reservado" : "tão reservados"} nessas datas.`);
     }

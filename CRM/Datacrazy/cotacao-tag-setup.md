@@ -57,7 +57,7 @@ Automações → Nova automação → nome **"Cotação por tag"**.
 | 4 | **Mensagem** (texto) | `{resposta_cotacao}`, ou selecionar o campo adicional pelo dropdown. **Rota de erro** (`errorNextBlockId`) → bloco 4b. |
 | 4b | Notificação (`send-notification-action`) | Pra Mateus: "Cotação de {leadName} não foi enviada pelo WhatsApp. Ver erro_stays." Depois segue pro bloco 5. |
 | 5 | **Remover tag** (`remove-tag-action`) | `COTAÇÃO`. Remover em **todos** os caminhos, senão uma nova cotação pro mesmo lead não dispara. |
-| 6 | **Anotação** (`add-lead-comment-action`) | `Cotação automática: {status\|[Javascript-1]status} — Imóvel: {Imovel-Cotacao} — Erro: {erro_stays}` |
+| 6 | **Anotação** (`add-lead-comment-action`) | `Cotação automática: {status\|[Javascript-1]status} — Imóvel: {imovel\|[Javascript-1]imovel} — Erro: {erro_stays}`. O imóvel vem do datasource, não do campo: o JS limpa `Imovel-Cotacao` depois de cada cotação. |
 | 7 | **Adicionar atendente no negócio** (`add-attendant-on-business-action`) | Mateus Ribas |
 | 8 | **Trocar atendente da conversa** (`change-conversation-attendant-action`) | Mateus Ribas. Os blocos 7 e 8 vão **sempre juntos** (regra do framework): só um deles deixa CRM e chat inconsistentes. |
 
@@ -68,6 +68,17 @@ O JS devolve `status` no datasource `Javascript-1`:
 | `cotado` | Período, e pra cada imóvel livre: nome, diária e total. Se algum dos escolhidos estiver ocupado, uma linha avisando. Fecha com "O Mateus segue com vc daqui pra fechar 💙". |
 | `indisponivel` | "Poxa, [imóvel] já tá reservado de DD/MM a DD/MM 😕 O Mateus vai ver com vc outras opções pra essas datas 💙". Só sai quando **todos** os imóveis foram conferidos e estão ocupados. |
 | `falha` | "Vou pedir pro Mateus te passar os valores certinhos dessas datas, ele já segue com vc por aqui 💙". Cobre API fora, data faltando ou no passado, imóvel fora da Stays (HA02J, GF04J, GF06J) e regra de preço que não cobre o período. O motivo fica em `erro_stays`. |
+
+### Sem imóvel escolhido: cotação por hóspedes e datas
+
+Se `Imovel-Cotacao` chegar vazio, o JS não falha. Ele percorre a `TABELA` (mesma ordem de prioridade e capacidade da tabela do Art Pré), pega só os imóveis que comportam o grupo e cota os **3 primeiros livres** nas datas. Evita repetir condomínio enquanto houver opção de outro, a mesma regra da apresentação.
+
+- Mensagem: período, "Essas tão livres nessas datas:", os blocos com diária e total, e a passagem pro Mateus. Imóvel ocupado não aparece.
+- Nenhum livre: "Poxa, de DD/MM a DD/MM não tenho vaga pra N pessoas 😕 O Mateus vai ver com vc outras possibilidades 💙" (`indisponivel`).
+- Sem `Hospede-Total`, ou grupo maior que todos os imóveis (hoje, mais de 28): `falha`. Não dá pra chutar a capacidade.
+- Custo: cada imóvel conferido gera 1 chamada de listing, mais 1 de preço se estiver livre. No pior caso (tudo ocupado pra 2 pessoas) são 12 imóveis, então 13 chamadas com a de ocupação.
+
+`TABELA`, `CODIGOS`, `APELIDOS` e `NOMES` no topo do JS precisam acompanhar a TABELA do prompt.
 
 Falha técnica **nunca** vira "sem vaga": uma queda da API faria o lead desistir de uma data que pode estar livre.
 
@@ -107,7 +118,8 @@ Com um lead de teste (o próprio WhatsApp do Mateus):
    - [ ] A conversa e o negócio ficaram com o Mateus, e o Art Pré parou de responder.
 4. Repetir com uma data em que o imóvel está reservado (deve sair a mensagem de "já tá reservado").
 5. Repetir com `Imovel-Cotacao` = `GF04J` (deve sair a mensagem de falha e `erro_stays` preenchido).
-6. Teste ponta a ponta: conversar com o Art Pré do zero até escolher um imóvel, e conferir se ele pergunta as datas e põe a tag sozinho.
+6. Repetir com `Imovel-Cotacao` **vazio** e hóspedes = 2: devem vir até 3 imóveis livres de condomínios diferentes. Conferir os valores no painel da Stays.
+7. Teste ponta a ponta: conversar com o Art Pré do zero até escolher um imóvel, e conferir se ele pergunta as datas e põe a tag sozinho.
 
 ---
 
@@ -116,4 +128,5 @@ Com um lead de teste (o próprio WhatsApp do Mateus):
 - **`await` nos campos:** o JS lê os campos com `.then()`, porque `await session.getAdditionalValue` quebrou no `resumo_lead_site`. Se der erro no bloco, ver o histórico em `mcp-resumo-lead-setup.md`.
 - **Escopo do `setAdditionalValue` com gatilho de tag:** no MCP1-Stays a sessão era a Conversa. Com gatilho de tag a sessão é o Lead. Confirmar que `resposta_cotacao` grava e que o bloco de Mensagem acha a conversa do lead pra enviar.
 - **Troca de atendente desliga o agente?** Confirmar que, com a conversa transferida pro Mateus, o Art Pré para de responder. Se não parar, adicionar a ação de desativar a IA na conversa antes do bloco 7.
-- **Mapa de imóveis manual:** `CODIGOS`, `APELIDOS` e `NOMES` no JS precisam acompanhar a TABELA do prompt. Imóvel novo na Stays = adicionar nos três.
+- **Mapa de imóveis manual:** `TABELA`, `CODIGOS`, `APELIDOS` e `NOMES` no JS precisam acompanhar a TABELA do prompt. Imóvel novo na Stays = adicionar nos quatro.
+- **`setAdditionalValue("Imovel-Cotacao", "")` limpa o campo?** Confirmar no teste que o campo fica vazio depois da cotação (e não com o texto antigo).

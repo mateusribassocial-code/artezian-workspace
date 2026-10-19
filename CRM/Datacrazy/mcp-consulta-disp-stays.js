@@ -50,15 +50,6 @@ const MARGEM_DIAS = 3;
 // calculate-price); o teto existe pra não voltar ao timeout.
 const MAX_IMOVEIS = 5;
 
-// Datas alternativas: quando o imóvel está ocupado no período pedido, procura
-// o mesmo nº de noites deslocado até JANELA_ALT_DIAS pra trás e pra frente, e
-// cota a opção mais próxima de cada lado. A ocupação dessa janela maior vem na
-// MESMA chamada de reservations (só alarga o from/to). Cada alternativa custa
-// 1 calculate-price, por isso só os MAX_ALT_IMOVEIS primeiros ocupados ganham
-// alternativa — o teto existe pra não voltar ao timeout.
-const JANELA_ALT_DIAS = 7;
-const MAX_ALT_IMOVEIS = 2;
-
 // O que o lead recebe em qualquer falha técnica. O detalhe vai pra `erro_stays`
 // — erro cru da API (JSON, HTTP 400) nunca chega no WhatsApp.
 const MSG_FALHA = "Não consegui puxar os valores dessas datas agora. Alguém da equipe vai te passar a cotação por aqui 💙";
@@ -264,12 +255,13 @@ if (alvos.length === 0) {
 // 1) Ocupação da janela — UMA chamada, reaproveitada por todos os imóveis.
 // O endpoint devolve as reservas da conta inteira; o filtro por imóvel é feito
 // abaixo, no JS. Se essa chamada falhar, aborta: nunca cota sem ter conferido
-// o calendário. A janela já cobre as datas alternativas (±JANELA_ALT_DIAS).
+// o calendário. Só as datas pedidas pelo lead são cotadas — sem datas
+// alternativas.
 let registros;
 try {
   registros = await buscarOcupacao(
-    addDias(checkin, -(JANELA_ALT_DIAS + MARGEM_DIAS)),
-    addDias(checkout, JANELA_ALT_DIAS + MARGEM_DIAS)
+    addDias(checkin, -MARGEM_DIAS),
+    addDias(checkout, MARGEM_DIAS)
   );
 } catch (e) {
   await falhar(`verificar disponibilidade (${checkin} a ${checkout}): ${e.message}`);
@@ -299,7 +291,6 @@ async function cotar(imovelId, ci, co) {
 
 // 2) Por imóvel: identifica, cruza com a ocupação e só então cota.
 const cotados = [];
-const ocupados = [];
 
 for (const imovelId of alvos) {
   try {
@@ -316,10 +307,8 @@ for (const imovelId of alvos) {
     const nQuartos = listing && listing._i_rooms;
     const quartos = nQuartos ? plural(nQuartos, "quarto", "quartos") : "";
 
-    if (!livre(idInterno, checkin, checkout)) {
-      ocupados.push({ imovelId: imovelId, idInterno: idInterno, nome: nome, quartos: quartos });
-      continue;
-    }
+    // Ocupado nas datas pedidas: fica de fora da resposta.
+    if (!livre(idInterno, checkin, checkout)) continue;
 
     const preco = await cotar(imovelId, checkin, checkout);
     if (!preco) continue;
@@ -330,38 +319,10 @@ for (const imovelId of alvos) {
   }
 }
 
-// 2b) Datas alternativas pros ocupados: mesmo nº de noites, a opção livre mais
-// próxima antes e a mais próxima depois. Antes nunca começa no passado (BRT).
-const hoje = new Date(Date.now() - 3 * 3600000).toISOString().slice(0, 10);
-const alternativas = [];
-
-for (const o of ocupados.slice(0, MAX_ALT_IMOVEIS)) {
-  try {
-    const opcoes = [];
-    for (const sentido of [-1, 1]) {
-      for (let k = 1; k <= JANELA_ALT_DIAS; k++) {
-        const ci = addDias(checkin, sentido * k);
-        const co = addDias(checkout, sentido * k);
-        if (ci < hoje) break;
-        if (!livre(o.idInterno, ci, co)) continue;
-        const preco = await cotar(o.imovelId, ci, co);
-        if (preco) opcoes.push({ checkin: ci, checkout: co, total: preco.total, diaria: preco.diaria });
-        break;
-      }
-    }
-    if (opcoes.length > 0) alternativas.push({ nome: o.nome, quartos: o.quartos, opcoes: opcoes });
-  } catch (e) {
-    erros.push(`${o.imovelId} (datas alternativas): ${e.message}`);
-  }
-}
-
 // Sempre regrava: sem erro, limpa o que tiver sobrado de uma chamada anterior.
 await registrarErro(erros.join(" | "));
 
-// 3) Uma única mensagem: primeiro o que deu pra cotar nas datas pedidas,
-// depois as datas mais próximas dos imóveis que estavam ocupados.
-const partes = [];
-
+// 3) Uma única mensagem, só com os imóveis livres nas datas pedidas.
 if (cotados.length > 0) {
   const cabecalho =
     `📅 ${fmtBR(checkin)} → ${fmtBR(checkout)} · ` +
@@ -373,23 +334,7 @@ if (cotados.length > 0) {
     `💰 Diária ${fmtBRL(c.diaria)}\n` +
     `*Total: ${fmtBRL(c.total)}*`
   );
-  partes.push(`${cabecalho}\n\n${blocos.join("\n\n")}`);
-}
-
-for (const a of alternativas) {
-  const blocos = a.opcoes.map(op =>
-    `📅 ${fmtBR(op.checkin)} → ${fmtBR(op.checkout)} · ${plural(noites, "noite", "noites")}\n` +
-    `💰 Diária ${fmtBRL(op.diaria)}\n` +
-    `*Total: ${fmtBRL(op.total)}*`
-  );
-  partes.push(
-    `Pra ${fmtBR(checkin).slice(0, 5)} → ${fmtBR(checkout).slice(0, 5)} o *${String(a.nome).toUpperCase()}* não tem vaga. ` +
-    `As datas mais próximas que encontrei:\n\n${blocos.join("\n\n")}`
-  );
-}
-
-if (partes.length > 0) {
-  await session.setAdditionalValue("resposta_stays", partes.join("\n\n"));
+  await session.setAdditionalValue("resposta_stays", `${cabecalho}\n\n${blocos.join("\n\n")}`);
 } else if (erros.length > 0) {
   // Falha técnica NUNCA vira "Produto Indisponível": uma queda da API faria o
   // lead desistir de uma data que na verdade está vaga.
